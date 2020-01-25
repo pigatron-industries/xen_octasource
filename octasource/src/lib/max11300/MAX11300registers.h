@@ -7,7 +7,7 @@
 #define MAX_INT				0x01
 #define MAX_ADCST			0x02
 #define MAX_ADCST_LEN		2
-#define MAX_ADCST_L			0x02	
+#define MAX_ADCST_L			0x02
 #define MAX_ADCST_H			0x03
 #define MAX_DACOI			0x04
 #define MAX_DACOI_LEN		2
@@ -65,7 +65,7 @@
 // GPIO data registers
 #define MAX_GPIDAT			0x0b
 #define MAX_GPIDAT_LEN		2
-#define MAX_GPIDAT_L		0x0b	
+#define MAX_GPIDAT_L		0x0b
 #define MAX_GPIDAT_H		0x0c
 #define MAX_GPODAT			0x0d
 #define MAX_GPODAT_LEN		2
@@ -132,11 +132,11 @@
 #define MAX_TMPINT_AVAIL	0x06
 #define MAX_TMPINT_LO		0x07
 #define MAX_TMPINT_HI		0x08
-#define MAX_DACOI			0x05
+//#define MAX_DACOI			0x05
 #define MAX_GPIDM			0x04
 #define MAX_GPIDR			0x03
 #define MAX_ADCDM			0x02
-#define MAX_ADCDR			0x01	
+#define MAX_ADCDR			0x01
 #define MAX_ADCFLAG			0x00
 #define MAX_VMON_MASK		0x8000
 #define MAX_TMPEXT2_MASK	0x7000
@@ -146,11 +146,11 @@
 #define MAX_GPIDM_MASK		0x0010
 #define MAX_GPIDR_MASK		0x0008
 #define MAX_ADCDM_MASK		0x0004
-#define MAX_ADCDR_MASK		0x0002	
+#define MAX_ADCDR_MASK		0x0002
 #define MAX_ADCFLAG_MASK	0x0001
 
 // Device Control register fields
-#define MAX_RESET			0x0f			
+#define MAX_RESET			0x0f
 #define MAX_BRST			0x0e
 #define MAX_LPEN			0x0d
 #define MAX_RS_CANCEL		0x0c
@@ -164,11 +164,11 @@
 #define MAX_ADCCONV			0x04
 #define MAX_ADCCONV_0		0x04
 #define MAX_ADCCONV_1		0x05
-#define MAX_DACCTL			0x02	
+#define MAX_DACCTL			0x02
 #define MAX_DACCTL_0		0x02
 #define MAX_DACCTL_1		0x03
 #define MAX_ADCCTL			0x00
-#define MAX_ADCCTL_0		0x00	
+#define MAX_ADCCTL_0		0x00
 #define MAX_ADCCTL_1		0x01
 #define MAX_TMPCTL_MASK		0x0700
 #define MAX_ADCCONV_MASK	0x0030
@@ -229,7 +229,7 @@
 #define MAX_GPIMD_13_1		0x0b
 #define MAX_GPIMD_12		0x08
 #define MAX_GPIMD_12_0		0x08
-#define MAX_GPIMD_12_1		0x09 
+#define MAX_GPIMD_12_1		0x09
 #define MAX_GPIMD_11		0x06
 #define MAX_GPIMD_11_0		0x06
 #define MAX_GPIMD_11_1		0x07
@@ -261,7 +261,7 @@
 #define MAX_TMPEXT2MONCFG_1			0x05
 #define MAX_TMPEXT1MONCFG			0x02
 #define MAX_TMPEXT1MONCFG_0			0x02
-#define MAX_TMPEXT1MONCFG_1			0x03	
+#define MAX_TMPEXT1MONCFG_1			0x03
 #define MAX_TMPINTMONCFG			0x00
 #define MAX_TMPINTMONCFG_0			0x00
 #define MAX_TMPINTMONCFG_1			0x01
@@ -272,14 +272,14 @@
 // Port configuration register fields
 #define MAX_FUNCID					0x0c
 #define MAX_FUNCPRM					0x00
-#define MAX_FUNCPRM_ASSOC			0x00	
+#define MAX_FUNCPRM_ASSOC			0x00
 #define MAX_FUNCPRM_AVG				0x05
 #define MAX_FUNCPRM_RANGE			0x08
 #define MAX_FUNCPRM_AVR				0x0b
 #define MAX_FUNCPRM_INV				0x0b
 #define MAX_FUNCID_MASK				0xf000
 #define MAX_FUNCPRM_MASK			0x0fff
-#define MAX_FUNCPRM_ASSOC_MASK		0x001f	
+#define MAX_FUNCPRM_ASSOC_MASK		0x001f
 #define MAX_FUNCPRM_AVG_MASK		0x00e0
 #define MAX_FUNCPRM_RANGE_MASK		0x0700
 #define MAX_FUNCPRM_AVR_MASK		0x0800
@@ -290,11 +290,11 @@
 #define MAX_FUNCID_GPI				0x1000
 #define MAX_FUNCID_LVL_TRANS_BI		0x2000
 #define MAX_FUNCID_GPO				0x3000
-#define MAX_FUNCID_GPO_LVL_TRANS	0x4000		
+#define MAX_FUNCID_GPO_LVL_TRANS	0x4000
 #define MAX_FUNCID_DAC				0x5000
 #define MAX_FUNCID_DAC_ADCMON		0x6000
 #define MAX_FUNCID_ADC				0x7000
-#define MAX_FUNCID_ADC_DIFF_POS		0x8000	
+#define MAX_FUNCID_ADC_DIFF_POS		0x8000
 #define MAX_FUNCID_ADC_DIFF_NEG		0x9000
 #define MAX_FUNCID_ADC_DAC_NEG		0xa000
 #define MAX_FUNCID_GPI_SWITCH		0xb000

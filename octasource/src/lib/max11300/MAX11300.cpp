@@ -131,7 +131,6 @@ uint16_t MAX11300::getPinThreshold(uint8_t pin) {
 
 bool MAX11300::setDigitalInputMode(uint8_t pin, GPImode_t mode) {
 		uint8_t gpiAddress, gpiOffset;
-		uint16_t gpimdRegister;
 		if (pin > 15) {
 				gpiAddress = MAX_GPIMD_16_19;
 				gpiOffset = 2*(pin - 16);
