@@ -1,11 +1,11 @@
 
-#include "CvOutput.h"
+#include "CvInputOutput.h"
 
 
 #define FACTOR (MAX_VALUE / (MAX_VOLTAGE - MIN_VOLTAGE))
 
 
-CvOutput::CvOutput(SPIClass* spiClass, uint8_t convertPin, uint8_t* selectPins, uint8_t devices) :
+CvInputOutput::CvInputOutput(SPIClass* spiClass, uint8_t convertPin, uint8_t* selectPins, uint8_t devices) :
         _spiClass(spiClass),
         _selectPins(selectPins),
         _convertPin(convertPin),
@@ -21,7 +21,7 @@ CvOutput::CvOutput(SPIClass* spiClass, uint8_t convertPin, uint8_t* selectPins, 
     }
 }
 
-void CvOutput::setValue(uint8_t index, uint16_t value) {
+void CvInputOutput::setValue(uint8_t index, uint16_t value) {
     uint8_t device = index / 20;
     uint8_t devicePin = index % 20;
     Serial.println("cvOutput::setValue");
@@ -30,7 +30,7 @@ void CvOutput::setValue(uint8_t index, uint16_t value) {
     _max11300[device]->writeAnalogPin(devicePin, value);
 }
 
-void CvOutput::setVoltage(uint8_t index, float voltage) {
+void CvInputOutput::setVoltage(uint8_t index, float voltage) {
     Serial.println("cvOutput::setVoltage");
     Serial.println(index);
     Serial.println(voltage);

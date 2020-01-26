@@ -1,5 +1,5 @@
-#ifndef CvOutput_h
-#define CvOutput_h
+#ifndef CvInputOutput_h
+#define CvInputOutput_h
 
 #include <inttypes.h>
 #include "../lib/max11300/MAX11300.h"
@@ -10,7 +10,7 @@
 #define MAX_VALUE 4095
 
 
-class CvOutput {
+class CvInputOutput {
 
 public:
     /**
@@ -19,7 +19,7 @@ public:
      * selectPins - list of pins connected to select each MAX11300 device.
      * devices - Number of MAX11300 dvices connected.
      */
-    CvOutput(SPIClass* spi, uint8_t convertPin, uint8_t* selectPins, uint8_t devices);
+    CvInputOutput(SPIClass* spi, uint8_t convertPin, uint8_t* selectPins, uint8_t devices);
 
     /**
      * Only uses the first 12-bits of value to set the output.
