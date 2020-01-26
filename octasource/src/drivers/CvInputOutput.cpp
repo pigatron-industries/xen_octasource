@@ -28,6 +28,8 @@ CvInputOutput::CvInputOutput(SPIClass* spiClass, uint8_t convertPin, uint8_t sel
     _max11300->writeAnalogPin(5, MAX_VALUE/2);
     _max11300->writeAnalogPin(6, MAX_VALUE/2);
     _max11300->writeAnalogPin(7, MAX_VALUE/2);
+
+    _max11300->setDACmode(ImmediateUpdate);
 }
 
 void CvInputOutput::setValue(uint8_t index, uint16_t value) {

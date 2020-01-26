@@ -41,6 +41,12 @@ enum ADCmode_t {
 	ADCmodeNONE = 		0xffff
 };
 
+enum DACmode_t {
+	SequentialUpdate = 		MAX_DAC_SEQUENTIAL,
+	ImmediateUpdate  = 		MAX_DAC_IMMEDIATE,
+	DACmodeNONE = 		0xffff
+};
+
 enum GPImode_t {
 	GPIneither	= 		0x0,
 	GPIpositive	= 		0x1,
@@ -192,6 +198,7 @@ class MAX11300 {
 		 *
 		 */
 		bool setADCmode (ADCmode_t mode);
+		bool setDACmode (DACmode_t mode);
 		ADCmode_t getADCmode (void);
 		bool burstAnalogRead (uint16_t* samples, uint8_t size);
 		bool burstAnalogWrite (uint16_t* samples, uint8_t size);

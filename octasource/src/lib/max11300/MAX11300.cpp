@@ -308,6 +308,10 @@ double MAX11300::readExternalTemp2 (void) {
 		return convertTemp(readRegister(MAX_TMPEXT2DAT));
 }
 
+bool MAX11300::setDACmode (DACmode_t mode) {
+		return readModifyWriteRegister(MAX_DEVCTL, MAX_DACCTL_MASK, (uint16_t)(mode));
+}
+
 bool MAX11300::setADCmode (ADCmode_t mode) {
 		return readModifyWriteRegister(MAX_DEVCTL, MAX_ADCCTL_MASK, (uint16_t)(mode));
 }
