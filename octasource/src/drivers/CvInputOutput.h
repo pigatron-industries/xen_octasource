@@ -19,7 +19,7 @@ public:
      * selectPins - list of pins connected to select each MAX11300 device.
      * devices - Number of MAX11300 dvices connected.
      */
-    CvInputOutput(SPIClass* spi, uint8_t convertPin, uint8_t* selectPins, uint8_t devices);
+    CvInputOutput(SPIClass* spi, uint8_t convertPin, uint8_t selectPin);
 
     /**
      * Only uses the first 12-bits of value to set the output.
@@ -34,11 +34,10 @@ public:
     void setVoltage(uint8_t index, float voltage);
 
 private:
-    MAX11300** _max11300;
+    MAX11300* _max11300;
     SPIClass* _spiClass;
-    uint8_t* _selectPins;
+    uint8_t _selectPin;
     uint8_t _convertPin;
-    uint8_t _devices;
 
 };
 

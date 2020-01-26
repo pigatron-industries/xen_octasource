@@ -12,5 +12,8 @@ void OutputUpdateTask::init() {
 }
 
 void OutputUpdateTask::execute() {
-    _cvInputOutput.setVoltage(0, 0);
+    //while(true) {
+        _cvInputOutput.setVoltage(0, 0);
+        _cvInputOutput.setVoltage(0, 5);
+    //  }
 }

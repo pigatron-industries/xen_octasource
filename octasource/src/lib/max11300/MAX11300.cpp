@@ -15,7 +15,7 @@ MAX11300::MAX11300(SPIClass *spi, uint8_t convertPin, uint8_t selectPin) {
 		pinMode(_select, OUTPUT);
 		digitalWrite(_convertPin, HIGH);
 		digitalWrite(_select, HIGH);
-		_spiMode = new SPISettings(10000000L, MSBFIRST, SPI_MODE0);
+		_spiMode = new SPISettings(20000000L, MSBFIRST, SPI_MODE0);
 		_spi->begin();
 		setDefaults();
 }
@@ -30,7 +30,7 @@ MAX11300::MAX11300(SPIClass *spi, uint8_t convertPin, uint8_t selectPin, uint8_t
 		pinMode(_select, OUTPUT);
 		digitalWrite(_convertPin, HIGH);
 		digitalWrite(_select, HIGH);
-		_spiMode = new SPISettings(10000000L, MSBFIRST, SPI_MODE0);
+		_spiMode = new SPISettings(20000000L, MSBFIRST, SPI_MODE0);
 		_spi->begin();
 		_spi->usingInterrupt(_interrupt);
 		setDefaults();
@@ -412,7 +412,7 @@ bool MAX11300::writeRegister (uint8_t address, uint16_t value) {
 bool MAX11300::writeRegister (uint8_t address, uint16_t * values, uint8_t size) {
 		_spi->beginTransaction(*_spiMode);
 		digitalWrite(_select, LOW);
-		_spi->transfer((address << 1)); //stick a 0 on lsb to signify read mode
+		_spi->transfer((address << 1)); //stick a 0 on lsb to signify write mode
 		for (uint8_t i = 0; i < size; i++) {
 				_spi->transfer((uint8_t)((values[i] >> 8) & 0xff));
 				_spi->transfer((uint8_t)(values[i] & 0xff));

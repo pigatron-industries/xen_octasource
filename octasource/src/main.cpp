@@ -8,8 +8,7 @@
 
 
 // hardware
-uint8_t cvSelectPins[CV_DEVICES] = CV_SELECT_PINS;
-CvInputOutput cvInputOutput = CvInputOutput(&SPI, CV_CNVT_PIN, cvSelectPins, CV_DEVICES);
+CvInputOutput cvInputOutput = CvInputOutput(&SPI, CV_CNVT_PIN, CV_SELECT_PIN);
 
 OutputUpdateTask outputUpdateTask = OutputUpdateTask(cvInputOutput);
 
