@@ -20,8 +20,6 @@ protected:
 	unsigned long getInterval() { return interval; }
   void setInterval(unsigned long _interval) { interval = _interval; }
 
-private:
-
 	unsigned long time;               // start time of currently executing iteration
 	unsigned long interval;           // wait time interval until next execution
 	unsigned long lastExecutionTime;  // previous time of execution

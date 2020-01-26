@@ -20,6 +20,9 @@ public:
 private:
     CvInputOutput& _cvInputOutput;
 
+    float position;
+    uint16_t samples;
+
 };
 
 #endif
