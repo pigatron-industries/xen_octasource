@@ -3,6 +3,8 @@
 
 #include <inttypes.h>
 
+#define MAX_POSITION 1000000
+
 
 class RampWave {
 

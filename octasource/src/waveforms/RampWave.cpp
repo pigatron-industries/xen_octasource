@@ -7,5 +7,5 @@ RampWave::RampWave() {
 
 
 float RampWave::getValue(float position) {
-    return (position - 0.5) * 10;
+    return (position - MAX_POSITION/2)*2;
 }

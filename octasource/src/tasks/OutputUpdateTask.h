@@ -5,6 +5,7 @@
 
 #include "../lib/Task.h"
 #include "../drivers/CvInputOutput.h"
+#include "../waveforms/RampWave.h"
 
 
 class OutputUpdateTask : public Task {
@@ -20,8 +21,9 @@ public:
 private:
     CvInputOutput& _cvInputOutput;
 
+    RampWave _rampWave;
+
     float position;
-    uint16_t samples;
 
 };
 
