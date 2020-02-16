@@ -4,13 +4,13 @@
 
 #include "lib/TaskManager.h"
 #include "drivers/CvInputOutput.h"
-#include "tasks/OutputUpdateTask.h"
+#include "tasks/Oscillator.h"
 
 
 // hardware
 CvInputOutput cvInputOutput = CvInputOutput(&SPI, CV_CNVT_PIN, CV_SELECT_PIN);
 
-OutputUpdateTask outputUpdateTask = OutputUpdateTask(cvInputOutput);
+Oscillator oscillator1 = Oscillator(cvInputOutput);
 
 
 void bootstrap() {
@@ -21,7 +21,7 @@ void bootstrap() {
     Serial.println("=========================================");
     Serial.println();
 
-    Task* tasks[] = {&outputUpdateTask};
+    Task* tasks[] = {&oscillator1};
     TaskManager taskManager(tasks, 1);
     taskManager.run();
 }

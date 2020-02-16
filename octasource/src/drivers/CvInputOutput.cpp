@@ -11,23 +11,23 @@ CvInputOutput::CvInputOutput(SPIClass* spiClass, uint8_t convertPin, uint8_t sel
         _convertPin(convertPin) {
     _max11300 = new MAX11300(spiClass, convertPin, selectPin);
 
-    _max11300->setPinModeAnalogOut(0, DACNegative5to5);
-    _max11300->setPinModeAnalogOut(1, DACNegative5to5);
-    _max11300->setPinModeAnalogOut(2, DACNegative5to5);
-    _max11300->setPinModeAnalogOut(3, DACNegative5to5);
-    _max11300->setPinModeAnalogOut(4, DACNegative5to5);
-    _max11300->setPinModeAnalogOut(5, DACNegative5to5);
-    _max11300->setPinModeAnalogOut(6, DACNegative5to5);
-    _max11300->setPinModeAnalogOut(7, DACNegative5to5);
+    _max11300->setPinModeAnalogOut(12, DACNegative5to5);
+    _max11300->setPinModeAnalogOut(13, DACNegative5to5);
+    _max11300->setPinModeAnalogOut(14, DACNegative5to5);
+    _max11300->setPinModeAnalogOut(15, DACNegative5to5);
+    _max11300->setPinModeAnalogOut(16, DACNegative5to5);
+    _max11300->setPinModeAnalogOut(17, DACNegative5to5);
+    _max11300->setPinModeAnalogOut(18, DACNegative5to5);
+    _max11300->setPinModeAnalogOut(19, DACNegative5to5);
 
-    _max11300->writeAnalogPin(0, MAX_VALUE/2);
-    _max11300->writeAnalogPin(1, MAX_VALUE/2);
-    _max11300->writeAnalogPin(2, MAX_VALUE/2);
-    _max11300->writeAnalogPin(3, MAX_VALUE/2);
-    _max11300->writeAnalogPin(4, MAX_VALUE/2);
-    _max11300->writeAnalogPin(5, MAX_VALUE/2);
-    _max11300->writeAnalogPin(6, MAX_VALUE/2);
-    _max11300->writeAnalogPin(7, MAX_VALUE/2);
+    _max11300->writeAnalogPin(12, MAX_VALUE/2);
+    _max11300->writeAnalogPin(13, MAX_VALUE/2);
+    _max11300->writeAnalogPin(14, MAX_VALUE/2);
+    _max11300->writeAnalogPin(15, MAX_VALUE/2);
+    _max11300->writeAnalogPin(16, MAX_VALUE/2);
+    _max11300->writeAnalogPin(17, MAX_VALUE/2);
+    _max11300->writeAnalogPin(18, MAX_VALUE/2);
+    _max11300->writeAnalogPin(19, MAX_VALUE/2);
 
     _max11300->setDACmode(ImmediateUpdate);
 }

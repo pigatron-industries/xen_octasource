@@ -1,5 +1,5 @@
-#ifndef OutputUpdateTask_h
-#define OutputUpdateTask_h
+#ifndef Oscillator_h
+#define Oscillator_h
 
 #include <inttypes.h>
 
@@ -8,18 +8,18 @@
 #include "../waveforms/RampWave.h"
 
 
-class OutputUpdateTask : public Task {
+class Oscillator : public Task {
 
 public:
-    OutputUpdateTask(CvInputOutput& cvInputOutput);
+    Oscillator(CvInputOutput& cvInputOutput);
     void init();
     void execute();
 
-    void trigger(uint8_t index);
-    void sendData();
+    void setFrequencyHz(float frequencyHz);
 
 private:
     CvInputOutput& _cvInputOutput;
+    float _frequencyHz;
 
     RampWave _rampWave;
 
