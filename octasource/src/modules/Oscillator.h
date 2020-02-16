@@ -8,23 +8,19 @@
 #include "../waveforms/RampWave.h"
 
 
-class Oscillator : public Task {
+class Oscillator {
 
 public:
-    Oscillator(CvInputOutput& cvInputOutput);
-    void init();
-    void execute();
+    Oscillator();
+    float execute(unsigned long timeDiff);
 
     void setFrequencyHz(float frequencyHz);
 
 private:
-    CvInputOutput& _cvInputOutput;
     float _frequencyHz;
+    float _position;
 
     RampWave _rampWave;
-
-    float position;
-
 };
 
 #endif
