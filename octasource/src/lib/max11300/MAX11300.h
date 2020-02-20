@@ -141,6 +141,7 @@ class MAX11300 {
 		bool setPinMode(uint8_t pin, pinMode_t mode, uint8_t differentialPin);
 
 		bool setPinModeAnalogOut(uint8_t pin, DACRange_t range);
+		bool setPinModeAnalogIn(uint8_t pin, ADCRange_t range);
 
 		/**
 		 * Read the mode of the given pin

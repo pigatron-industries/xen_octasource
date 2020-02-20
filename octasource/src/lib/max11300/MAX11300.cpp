@@ -103,6 +103,12 @@ bool MAX11300::setPinModeAnalogOut(uint8_t pin, DACRange_t range) {
 		return false;
 }
 
+bool MAX11300::setPinModeAnalogIn(uint8_t pin, ADCRange_t range) {
+		uint16_t configuration = MAX_FUNCID_ADC | range;
+		if (writeRegister((MAX_FUNC_BASE + pin), configuration)) return true;
+		return false;
+}
+
 pinMode_t MAX11300::getPinMode(uint8_t pin) {
 		uint16_t conf = readRegister(MAX_FUNC_BASE + pin);
 		conf &= MAX_FUNCID_MASK;
