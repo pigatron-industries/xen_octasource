@@ -21,10 +21,14 @@ public:
      */
     CvInputOutput(SPIClass* spi, uint8_t convertPin, uint8_t selectPin);
 
+    void setPinModeAnalogOut(uint8_t index);
+		void setPinModeAnalogIn(uint8_t index);
+
     /**
      * Only uses the first 12-bits of value to set the output.
      */
     void setValue(uint8_t index, uint16_t value);
+    uint16_t getValue(uint8_t index);
 
     /**
      * Voltage can be 0 to 10.
@@ -32,6 +36,7 @@ public:
      * mapped to voltage ranges -10v>0v -5v>5v 0v>10v
      */
     void setVoltage(uint8_t index, float voltage);
+    float getVoltage(uint8_t index);
 
 private:
     MAX11300* _max11300;
