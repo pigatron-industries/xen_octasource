@@ -18,4 +18,5 @@ void InputTask::init() {
 }
 
 void InputTask::execute() {
+    float rateVoltage = _cvInputOutput.getVoltage(RATE_POT_PIN);
 }
