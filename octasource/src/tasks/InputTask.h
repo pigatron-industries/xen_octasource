@@ -6,6 +6,13 @@
 #include "../lib/Task.h"
 #include "../drivers/CvInputOutput.h"
 
+#define RATE_POT_PIN 0
+#define RATE_CV_PIN 1
+#define WAVE_POT_PIN 2
+#define WAVE_CV_PIN 3
+#define LENGTH_POT_PIN 4
+#define LENGTH_CV_PIN 5
+#define TRIGGER_PIN 6
 
 class InputTask : public Task {
 

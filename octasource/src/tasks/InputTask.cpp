@@ -8,14 +8,13 @@ InputTask::InputTask(CvInputOutput& cvInputOutput) :
 
 void InputTask::init() {
     Task::init();
-    _cvInputOutput.setPinModeAnalogIn(0);
-    _cvInputOutput.setPinModeAnalogIn(1);
-    _cvInputOutput.setPinModeAnalogIn(2);
-    _cvInputOutput.setPinModeAnalogIn(3);
-    _cvInputOutput.setPinModeAnalogIn(4);
-    _cvInputOutput.setPinModeAnalogIn(5);
-    _cvInputOutput.setPinModeAnalogIn(6);
-    _cvInputOutput.setPinModeAnalogIn(7);
+    _cvInputOutput.setPinModeAnalogIn(RATE_POT_PIN);
+    _cvInputOutput.setPinModeAnalogIn(RATE_CV_PIN);
+    _cvInputOutput.setPinModeAnalogIn(WAVE_POT_PIN);
+    _cvInputOutput.setPinModeAnalogIn(WAVE_CV_PIN);
+    _cvInputOutput.setPinModeAnalogIn(LENGTH_POT_PIN);
+    _cvInputOutput.setPinModeAnalogIn(LENGTH_CV_PIN);
+    _cvInputOutput.setPinModeAnalogIn(TRIGGER_PIN);
 }
 
 void InputTask::execute() {

@@ -2,22 +2,15 @@
 
 #include <Arduino.h>
 
-#define AMP_SCALE 5
-
 OutputTask::OutputTask(CvInputOutput& cvInputOutput) :
     _cvInputOutput(cvInputOutput) {
 }
 
 void OutputTask::init() {
     Task::init();
-    _cvInputOutput.setPinModeAnalogOut(12);
-    _cvInputOutput.setPinModeAnalogOut(13);
-    _cvInputOutput.setPinModeAnalogOut(14);
-    _cvInputOutput.setPinModeAnalogOut(15);
-    _cvInputOutput.setPinModeAnalogOut(16);
-    _cvInputOutput.setPinModeAnalogOut(17);
-    _cvInputOutput.setPinModeAnalogOut(18);
-    _cvInputOutput.setPinModeAnalogOut(19);
+    for(uint8_t i = 0; i < OUTPUT_PINS; i++) {
+        _cvInputOutput.setPinModeAnalogOut(OUTPUT_PIN_START+i);
+    }
 }
 
 void OutputTask::execute() {
