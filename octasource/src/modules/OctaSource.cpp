@@ -12,5 +12,9 @@ void OctaSource::setFrequencyHz(float frequencyHz) {
 }
 
 void OctaSource::execute(unsigned long timeDiff) {
-    _oscillator1.execute(timeDiff);
+    _output = _oscillator1.execute(timeDiff);
+}
+
+float OctaSource::getOutput() {
+    return _output;
 }

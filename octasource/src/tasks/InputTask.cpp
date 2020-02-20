@@ -2,8 +2,9 @@
 
 #include <Arduino.h>
 
-InputTask::InputTask(CvInputOutput& cvInputOutput) :
-    _cvInputOutput(cvInputOutput) {
+InputTask::InputTask(CvInputOutput& cvInputOutput, OctaSource& octasource) :
+    _cvInputOutput(cvInputOutput),
+    _octasource(octasource) {
 }
 
 void InputTask::init() {
@@ -19,4 +20,7 @@ void InputTask::init() {
 
 void InputTask::execute() {
     float rateVoltage = _cvInputOutput.getVoltage(RATE_POT_PIN);
+    //TODO convert rate voltage to frequency
+    float frequency = rateVoltage;
+    _octasource.setFrequencyHz(frequency);
 }

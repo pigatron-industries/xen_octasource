@@ -4,6 +4,7 @@
 
 #include "lib/TaskManager.h"
 #include "drivers/CvInputOutput.h"
+#include "modules/OctaSource.h"
 #include "tasks/InputTask.h"
 #include "tasks/OutputTask.h"
 
@@ -11,8 +12,9 @@
 // hardware
 CvInputOutput cvInputOutput = CvInputOutput(&SPI, CV_CNVT_PIN, CV_SELECT_PIN);
 
-InputTask inputTask = InputTask(cvInputOutput);
-OutputTask outputTask = OutputTask(cvInputOutput);
+OctaSource octasource  = OctaSource();
+InputTask inputTask = InputTask(cvInputOutput, octasource);
+OutputTask outputTask = OutputTask(cvInputOutput, octasource);
 
 
 void bootstrap() {

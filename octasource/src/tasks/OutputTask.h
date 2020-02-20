@@ -6,7 +6,7 @@
 #include "../lib/Task.h"
 #include "../drivers/CvInputOutput.h"
 #include "../waveforms/RampWave.h"
-#include "../modules/Oscillator.h"
+#include "../modules/OctaSource.h"
 
 #define OUTPUT_PIN_START 12
 #define OUTPUT_PINS 8
@@ -14,14 +14,13 @@
 class OutputTask : public Task {
 
 public:
-    OutputTask(CvInputOutput& cvInputOutput);
+    OutputTask(CvInputOutput& cvInputOutput, OctaSource& octasource);
     void init();
     void execute();
 
 private:
     CvInputOutput& _cvInputOutput;
-    Oscillator _oscillator1;
-
+    OctaSource& _octasource;
 
 };
 

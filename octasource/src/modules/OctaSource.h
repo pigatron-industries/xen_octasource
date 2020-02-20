@@ -11,13 +11,14 @@ class OctaSource {
 public:
     OctaSource();
     void execute(unsigned long timeDiff);
+    float getOutput();
 
     void setFrequencyHz(float frequencyHz);
 
 private:
     Oscillator _oscillator1;
 
-    //TODO add more oscillators
+    float _output;
 
 };
 

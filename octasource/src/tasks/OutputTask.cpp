@@ -2,8 +2,9 @@
 
 #include <Arduino.h>
 
-OutputTask::OutputTask(CvInputOutput& cvInputOutput) :
-    _cvInputOutput(cvInputOutput) {
+OutputTask::OutputTask(CvInputOutput& cvInputOutput, OctaSource& octasource) :
+    _cvInputOutput(cvInputOutput),
+    _octasource(octasource) {
 }
 
 void OutputTask::init() {
@@ -14,6 +15,8 @@ void OutputTask::init() {
 }
 
 void OutputTask::execute() {
-    float voltage = _oscillator1.execute(lastExecutionDiff);
+    _octasource.execute(lastExecutionDiff);
+    float voltage = _octasource.getOutput();
+
     _cvInputOutput.setVoltage(12, voltage);
 }

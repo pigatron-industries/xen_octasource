@@ -5,6 +5,7 @@
 
 #include "../lib/Task.h"
 #include "../drivers/CvInputOutput.h"
+#include "../modules/OctaSource.h"
 
 #define RATE_POT_PIN 0
 #define RATE_CV_PIN 1
@@ -17,13 +18,13 @@
 class InputTask : public Task {
 
 public:
-    InputTask(CvInputOutput& cvInputOutput);
+    InputTask(CvInputOutput& cvInputOutput, OctaSource& octasource);
     void init();
     void execute();
 
 private:
     CvInputOutput& _cvInputOutput;
-
+    OctaSource& _octasource;
 
 };
 
