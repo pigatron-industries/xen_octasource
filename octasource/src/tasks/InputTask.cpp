@@ -4,7 +4,7 @@
 #include <math.h>
 
 #define RATE_EXP_START_FREQ 0.1
-#define RATE_EXP_MULT 3
+#define RATE_EXP_MULT 4
 
 InputTask::InputTask(CvInputOutput& cvInputOutput, OctaSource& octasource) :
     _cvInputOutput(cvInputOutput),
@@ -27,10 +27,6 @@ void InputTask::execute() {
     float rateVoltage = _cvInputOutput.getVoltage(RATE_POT_PIN);
     rateVoltage = _ratePotCalibration.getCalibratedValue(rateVoltage);
     float rateFrequency = rateVoltageToFrequency(rateVoltage);
-    Serial.println("rateVoltage");
-    Serial.println(rateVoltage);
-    Serial.println("rateFrequency");
-    Serial.println(rateFrequency);
     _octasource.setFrequencyHz(rateFrequency);
 }
 

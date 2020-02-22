@@ -13,6 +13,10 @@ void Oscillator::setFrequencyHz(float frequencyHz) {
     _frequencyHz = frequencyHz;
 }
 
+void Oscillator::setPosition(float position) {
+    _position = position;
+}
+
 float Oscillator::execute(unsigned long timeDiff) {
 
     // update position

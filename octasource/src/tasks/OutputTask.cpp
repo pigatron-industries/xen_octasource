@@ -16,7 +16,9 @@ void OutputTask::init() {
 
 void OutputTask::execute() {
     _octasource.execute(lastExecutionDiff);
-    float voltage = _octasource.getOutput(0);
 
-    _cvInputOutput.setVoltage(12, voltage);
+    for(int i = 0; i < OUTPUT_PINS; i++) {
+        float voltage = _octasource.getOutput(i);
+        _cvInputOutput.setVoltage(OUTPUT_PIN_START+i, voltage);
+    }
 }

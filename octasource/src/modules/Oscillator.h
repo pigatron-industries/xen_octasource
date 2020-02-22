@@ -15,6 +15,7 @@ public:
     float execute(unsigned long timeDiff);
 
     void setFrequencyHz(float frequencyHz);
+    void setPosition(float position);
 
 private:
     float _frequencyHz;
