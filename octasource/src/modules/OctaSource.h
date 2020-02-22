@@ -5,20 +5,20 @@
 
 #include "Oscillator.h"
 
+#define OSCILLATOR_COUNT 8
 
 class OctaSource {
 
 public:
     OctaSource();
     void execute(unsigned long timeDiff);
-    float getOutput();
+    float getOutput(uint8_t index);
 
     void setFrequencyHz(float frequencyHz);
 
 private:
-    Oscillator _oscillator1;
-
-    float _output;
+    Oscillator _oscillators[OSCILLATOR_COUNT];
+    float _outputs[OSCILLATOR_COUNT];
 
 };
 

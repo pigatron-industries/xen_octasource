@@ -16,7 +16,7 @@ void OutputTask::init() {
 
 void OutputTask::execute() {
     _octasource.execute(lastExecutionDiff);
-    float voltage = _octasource.getOutput();
+    float voltage = _octasource.getOutput(0);
 
     _cvInputOutput.setVoltage(12, voltage);
 }
