@@ -4,7 +4,7 @@
 #include <math.h>
 
 #define RATE_EXP_START_FREQ 0.1
-#define RATE_EXP_MULT 4
+#define RATE_EXP_MULT 10
 
 InputTask::InputTask(CvInputOutput& cvInputOutput, OctaSource& octasource) :
     _cvInputOutput(cvInputOutput),

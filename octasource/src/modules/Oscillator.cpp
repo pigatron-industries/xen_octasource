@@ -27,7 +27,8 @@ float Oscillator::execute(unsigned long timeDiff) {
         _position += MAX_POSITION;
     }
 
-    float value = _rampWave.getValue(_position);
+    //float value = _rampWave.getValue(_position);
+    float value = _triangleWave.getValue(_position);
 
     float voltage = value / MAX_POSITION*AMP_SCALE;
     return voltage;

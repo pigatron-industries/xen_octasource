@@ -1,15 +1,15 @@
-#ifndef RampWave_h
-#define RampWave_h
+#ifndef TriangleWave_h
+#define TriangleWave_h
 
 #include <inttypes.h>
 
 #define MAX_POSITION 1000000
 
 
-class RampWave {
+class TriangleWave {
 
 public:
-    RampWave();
+    TriangleWave();
     float getValue(float position);
 
 private:

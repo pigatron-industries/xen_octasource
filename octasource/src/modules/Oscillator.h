@@ -6,6 +6,7 @@
 #include "../lib/Task.h"
 #include "../drivers/CvInputOutput.h"
 #include "../waveforms/RampWave.h"
+#include "../waveforms/TriangleWave.h"
 
 
 class Oscillator {
@@ -22,6 +23,7 @@ private:
     float _position;
 
     RampWave _rampWave;
+    TriangleWave _triangleWave;
 };
 
 #endif
