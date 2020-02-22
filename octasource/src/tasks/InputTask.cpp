@@ -8,7 +8,8 @@
 
 InputTask::InputTask(CvInputOutput& cvInputOutput, OctaSource& octasource) :
     _cvInputOutput(cvInputOutput),
-    _octasource(octasource) {
+    _octasource(octasource),
+    _ratePotCalibration(-2.90, 3.67) {
 }
 
 void InputTask::init() {
@@ -24,7 +25,13 @@ void InputTask::init() {
 
 void InputTask::execute() {
     float rateVoltage = _cvInputOutput.getVoltage(RATE_POT_PIN);
-    _octasource.setFrequencyHz(rateVoltageToFrequency(rateVoltage));
+    rateVoltage = _ratePotCalibration.getCalibratedValue(rateVoltage);
+    float rateFrequency = rateVoltageToFrequency(rateVoltage);
+    Serial.println("rateVoltage");
+    Serial.println(rateVoltage);
+    Serial.println("rateFrequency");
+    Serial.println(rateFrequency);
+    _octasource.setFrequencyHz(rateFrequency);
 }
 
 float InputTask::rateVoltageToFrequency(float voltage) {
@@ -33,6 +40,6 @@ float InputTask::rateVoltageToFrequency(float voltage) {
     } else if(voltage > 1) {
         return RATE_EXP_START_FREQ * pow(RATE_EXP_MULT, voltage-1);
     } else {
-        return -RATE_EXP_START_FREQ * pow(RATE_EXP_MULT, 1-voltage);
+        return -RATE_EXP_START_FREQ * pow(RATE_EXP_MULT, -1-voltage);
     }
 }

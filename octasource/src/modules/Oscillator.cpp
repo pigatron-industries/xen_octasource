@@ -11,7 +11,6 @@ Oscillator::Oscillator() {
 
 void Oscillator::setFrequencyHz(float frequencyHz) {
     _frequencyHz = frequencyHz;
-    Serial.println(_frequencyHz);
 }
 
 float Oscillator::execute(unsigned long timeDiff) {

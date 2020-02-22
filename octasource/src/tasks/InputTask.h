@@ -5,7 +5,9 @@
 
 #include "../lib/Task.h"
 #include "../drivers/CvInputOutput.h"
+#include "../drivers/PotCalibration.h"
 #include "../modules/OctaSource.h"
+
 
 #define RATE_POT_PIN 0
 #define RATE_CV_PIN 1
@@ -25,6 +27,8 @@ public:
 private:
     CvInputOutput& _cvInputOutput;
     OctaSource& _octasource;
+
+    PotCalibration _ratePotCalibration;
 
     float rateVoltageToFrequency(float voltage);
 
