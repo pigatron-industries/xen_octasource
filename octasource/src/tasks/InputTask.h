@@ -26,6 +26,8 @@ private:
     CvInputOutput& _cvInputOutput;
     OctaSource& _octasource;
 
+    float rateVoltageToFrequency(float voltage);
+
 };
 
 #endif

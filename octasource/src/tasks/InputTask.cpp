@@ -1,6 +1,10 @@
 #include "InputTask.h"
 
 #include <Arduino.h>
+#include <math.h>
+
+#define RATE_EXP_START_FREQ 0.1
+#define RATE_EXP_MULT 3
 
 InputTask::InputTask(CvInputOutput& cvInputOutput, OctaSource& octasource) :
     _cvInputOutput(cvInputOutput),
@@ -20,7 +24,15 @@ void InputTask::init() {
 
 void InputTask::execute() {
     float rateVoltage = _cvInputOutput.getVoltage(RATE_POT_PIN);
-    //TODO convert rate voltage to frequency
-    float frequency = rateVoltage;
-    _octasource.setFrequencyHz(frequency);
+    _octasource.setFrequencyHz(rateVoltageToFrequency(rateVoltage));
+}
+
+float InputTask::rateVoltageToFrequency(float voltage) {
+    if(voltage <= 1 && voltage >= -1) {
+        return RATE_EXP_START_FREQ * voltage;
+    } else if(voltage > 1) {
+        return RATE_EXP_START_FREQ * pow(RATE_EXP_MULT, voltage-1);
+    } else {
+        return -RATE_EXP_START_FREQ * pow(RATE_EXP_MULT, 1-voltage);
+    }
 }
