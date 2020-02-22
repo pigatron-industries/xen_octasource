@@ -11,6 +11,7 @@ CvInputOutput::CvInputOutput(SPIClass* spiClass, uint8_t convertPin, uint8_t sel
         _convertPin(convertPin) {
     _max11300 = new MAX11300(spiClass, convertPin, selectPin);
     _max11300->setDACmode(ImmediateUpdate);
+    _max11300->setADCmode(ContinuousSweep);
 }
 
 void CvInputOutput::setPinModeAnalogOut(uint8_t index) {
@@ -38,7 +39,7 @@ void CvInputOutput::setVoltage(uint8_t index, float voltage) {
 
 float CvInputOutput::getVoltage(uint8_t index) {
     uint16_t value = getValue(index);
-    float absVoltage = value / FACTOR;
+    float absVoltage = float(value) / FACTOR;
     float voltage = absVoltage + MIN_VOLTAGE;
     return voltage;
 }

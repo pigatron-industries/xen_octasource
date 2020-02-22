@@ -6,11 +6,12 @@
 
 Oscillator::Oscillator() {
       _position = 0;
-      _frequencyHz = 100;
+      _frequencyHz = 1;
 }
 
 void Oscillator::setFrequencyHz(float frequencyHz) {
     _frequencyHz = frequencyHz;
+    Serial.println(_frequencyHz);
 }
 
 float Oscillator::execute(unsigned long timeDiff) {
@@ -19,6 +20,8 @@ float Oscillator::execute(unsigned long timeDiff) {
     _position += (timeDiff * _frequencyHz);
     if(_position > MAX_POSITION) {
         _position -= MAX_POSITION;
+    } else if (_position < 0) {
+        _position += MAX_POSITION;
     }
 
     float value = _rampWave.getValue(_position);
