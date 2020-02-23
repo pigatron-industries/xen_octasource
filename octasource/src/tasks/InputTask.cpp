@@ -4,13 +4,14 @@
 #include <math.h>
 
 #define RATE_EXP_START_FREQ 0.1
-#define RATE_EXP_MULT 10
+#define RATE_EXP_MULT 4
 
 InputTask::InputTask(CvInputOutput& cvInputOutput, OctaSource& octasource) :
     _cvInputOutput(cvInputOutput),
     _octasource(octasource),
     _ratePotCalibration(-2.90, 3.67, -5, 5),
-    _amplitudePotCalibration(-3.07, 3.72, 0, 5) {
+    _amplitudePotCalibration(-3.07, 3.72, 0, 5),
+    _wavePotCalibration(-3.13, 3.83, 0, 4) {
 }
 
 void InputTask::init() {
@@ -33,6 +34,10 @@ void InputTask::execute() {
     float amplitude = _cvInputOutput.getVoltage(LENGTH_POT_PIN);
     amplitude = _amplitudePotCalibration.getCalibratedValue(amplitude);
     _octasource.setAmplitude(amplitude);
+
+    float wave = _cvInputOutput.getVoltage(WAVE_POT_PIN);
+    wave = _wavePotCalibration.getCalibratedValue(wave);
+    _octasource.setWave(wave);
 }
 
 float InputTask::rateVoltageToFrequency(float voltage) {

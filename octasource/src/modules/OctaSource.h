@@ -16,6 +16,7 @@ public:
 
     void setFrequencyHz(float frequencyHz);
     void setAmplitude(float amplitude);
+    void setWave(float wave);
 
 private:
     Oscillator _oscillators[OSCILLATOR_COUNT];

@@ -30,6 +30,7 @@ private:
 
     PotCalibration _ratePotCalibration;
     PotCalibration _amplitudePotCalibration;
+    PotCalibration _wavePotCalibration;
 
     float rateVoltageToFrequency(float voltage);
 
