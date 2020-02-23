@@ -10,7 +10,7 @@ InputTask::InputTask(CvInputOutput& cvInputOutput, OctaSource& octasource) :
     _cvInputOutput(cvInputOutput),
     _octasource(octasource),
     _ratePotCalibration(-2.90, 3.67, -5, 5),
-    _amplitudePotCalibration(-5, 5, 0, 5) {
+    _amplitudePotCalibration(-3.07, 3.72, 0, 5) {
 }
 
 void InputTask::init() {
