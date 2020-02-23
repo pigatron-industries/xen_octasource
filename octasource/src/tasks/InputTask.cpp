@@ -9,7 +9,8 @@
 InputTask::InputTask(CvInputOutput& cvInputOutput, OctaSource& octasource) :
     _cvInputOutput(cvInputOutput),
     _octasource(octasource),
-    _ratePotCalibration(-2.90, 3.67) {
+    _ratePotCalibration(-2.90, 3.67, -5, 5),
+    _amplitudePotCalibration(-5, 5, 0, 5) {
 }
 
 void InputTask::init() {
@@ -28,6 +29,10 @@ void InputTask::execute() {
     rateVoltage = _ratePotCalibration.getCalibratedValue(rateVoltage);
     float rateFrequency = rateVoltageToFrequency(rateVoltage);
     _octasource.setFrequencyHz(rateFrequency);
+
+    float amplitude = _cvInputOutput.getVoltage(LENGTH_POT_PIN);
+    amplitude = _amplitudePotCalibration.getCalibratedValue(amplitude);
+    _octasource.setAmplitude(amplitude);
 }
 
 float InputTask::rateVoltageToFrequency(float voltage) {

@@ -2,15 +2,20 @@
 
 #include <Arduino.h>
 
-#define AMP_SCALE 5
+#define MAX_AMPLITUDE 5
 
 Oscillator::Oscillator() {
       _position = 0;
       _frequencyHz = 1;
+      _amplitude = MAX_AMPLITUDE;
 }
 
 void Oscillator::setFrequencyHz(float frequencyHz) {
     _frequencyHz = frequencyHz;
+}
+
+void Oscillator::setAmplitude(float amplitude) {
+    _amplitude = amplitude;
 }
 
 void Oscillator::setPosition(float position) {
@@ -28,8 +33,9 @@ float Oscillator::execute(unsigned long timeDiff) {
     }
 
     //float value = _rampWave.getValue(_position);
-    float value = _triangleWave.getValue(_position);
+    //float value = _triangleWave.getValue(_position);
+    float value = _sineWave.getValue(_position);
 
-    float voltage = value / MAX_POSITION*AMP_SCALE;
+    float voltage = value / MAX_POSITION * _amplitude;
     return voltage;
 }

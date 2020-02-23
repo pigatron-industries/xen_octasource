@@ -29,6 +29,7 @@ private:
     OctaSource& _octasource;
 
     PotCalibration _ratePotCalibration;
+    PotCalibration _amplitudePotCalibration;
 
     float rateVoltageToFrequency(float voltage);
 

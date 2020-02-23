@@ -15,6 +15,7 @@ public:
     float getOutput(uint8_t index);
 
     void setFrequencyHz(float frequencyHz);
+    void setAmplitude(float amplitude);
 
 private:
     Oscillator _oscillators[OSCILLATOR_COUNT];

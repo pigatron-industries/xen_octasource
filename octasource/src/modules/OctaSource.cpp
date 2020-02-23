@@ -21,6 +21,12 @@ void OctaSource::setFrequencyHz(float frequencyHz) {
     }
 }
 
+void OctaSource::setAmplitude(float amplitude) {
+    for(int i = 0; i < OSCILLATOR_COUNT; i++) {
+        _oscillators[i].setAmplitude(amplitude);
+    }
+}
+
 void OctaSource::execute(unsigned long timeDiff) {
     for(int i = 0; i < OSCILLATOR_COUNT; i++) {
         _outputs[i] = _oscillators[i].execute(timeDiff);

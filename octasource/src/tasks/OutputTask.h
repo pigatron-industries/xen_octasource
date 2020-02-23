@@ -9,7 +9,6 @@
 #include "../modules/OctaSource.h"
 
 #define OUTPUT_PIN_START 12
-#define OUTPUT_PINS 8
 
 class OutputTask : public Task {
 

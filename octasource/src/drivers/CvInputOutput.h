@@ -21,6 +21,8 @@ public:
      */
     CvInputOutput(SPIClass* spi, uint8_t convertPin, uint8_t selectPin);
 
+    void init();
+
     void setPinModeAnalogOut(uint8_t index);
 		void setPinModeAnalogIn(uint8_t index);
 

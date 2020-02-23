@@ -10,6 +10,10 @@ CvInputOutput::CvInputOutput(SPIClass* spiClass, uint8_t convertPin, uint8_t sel
         _selectPin(selectPin),
         _convertPin(convertPin) {
     _max11300 = new MAX11300(spiClass, convertPin, selectPin);
+    init();
+}
+
+void CvInputOutput::init() {
     _max11300->setDACmode(ImmediateUpdate);
     _max11300->setADCmode(ContinuousSweep);
 }

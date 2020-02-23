@@ -2,17 +2,17 @@
 
 #include <Arduino.h>
 
-#define VIRTUAL_MIN -5
-#define VIRTUAL_MAX 5
 
-PotCalibration::PotCalibration(float realMin, float realMax) :
+PotCalibration::PotCalibration(float realMin, float realMax, float virtualMin, float virtualMax) :
     _realMin(realMin),
-    _realMax(realMax) {
+    _realMax(realMax),
+    _virtualMin(virtualMin),
+    _virtualMax(virtualMax) {
 }
 
 float PotCalibration::getCalibratedValue(float realValue) {
     float realRange = _realMax - _realMin;
-    float virtualRange = VIRTUAL_MAX - VIRTUAL_MIN;
-    float virtualValue = (((realValue - _realMin) * virtualRange) / realRange) + VIRTUAL_MIN;
+    float virtualRange = _virtualMax - _virtualMin;
+    float virtualValue = (((realValue - _realMin) * virtualRange) / realRange) + _virtualMin;
     return virtualValue;
 }
