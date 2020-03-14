@@ -17,12 +17,6 @@ void AbstractInputTask::setPotCalibration(uint8_t modeSwitchPin, uint8_t* potCal
     }
 }
 
-void AbstractInputTask::setPotCalibration(uint8_t modeSwitchPin, PotCalibration* potCalibration, uint8_t potCalibrationSize) {
-    _modeSwitchPin = modeSwitchPin;
-    _potCalibrationSize = potCalibrationSize;
-    _potCalibration = potCalibration;
-}
-
 void AbstractInputTask::init() {
     Task::init();
 
@@ -40,4 +34,16 @@ void AbstractInputTask::init() {
 }
 
 void AbstractInputTask::execute() {
+}
+
+float AbstractInputTask::getCalibratedValue(uint8_t pin) {
+    float voltage = _cvInputOutput.getVoltage(pin);
+
+    for(uint8_t i = 0; i < _potCalibrationSize; i++) {
+        if(_potCalibration[i].getPin() == pin) {
+            return _potCalibration[i].getCalibratedValue(voltage);
+        }
+    }
+
+    return voltage;
 }

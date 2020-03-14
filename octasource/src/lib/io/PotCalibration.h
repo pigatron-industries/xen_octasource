@@ -11,12 +11,16 @@ public:
     PotCalibration(uint8_t pin, float realMin, float realMax, float virtualMin, float virtualMax);
     float getCalibratedValue(float realValue);
 
+    uint8_t getPin() {
+        return _pin;
+    }
+
 private:
-  uint8_t _pin;
-  float _realMin;
-  float _realMax;
-  float _virtualMin;
-  float _virtualMax;
+    uint8_t _pin;
+    float _realMin;
+    float _realMax;
+    float _virtualMin;
+    float _virtualMax;
 
 };
 
