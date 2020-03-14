@@ -3,7 +3,7 @@
 
 #include <inttypes.h>
 
-#include "../lib/Task.h"
+#include "../lib/task/Task.h"
 #include "../drivers/CvInputOutput.h"
 #include "../drivers/PotCalibration.h"
 #include "../modules/OctaSource.h"

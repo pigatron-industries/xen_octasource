@@ -3,7 +3,6 @@
 
 #include <inttypes.h>
 
-#include "../lib/Task.h"
 #include "../drivers/CvInputOutput.h"
 #include "../waveforms/RampWave.h"
 #include "../waveforms/TriangleWave.h"

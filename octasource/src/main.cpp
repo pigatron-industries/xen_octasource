@@ -2,7 +2,7 @@
 
 #include "hwconfig.h"
 
-#include "lib/TaskManager.h"
+#include "lib/task/TaskManager.h"
 #include "drivers/CvInputOutput.h"
 #include "modules/OctaSource.h"
 #include "tasks/InputTask.h"
