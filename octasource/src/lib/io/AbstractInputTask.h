@@ -11,7 +11,7 @@ class AbstractInputTask : public Task {
 
 public:
     AbstractInputTask(CvInputOutput& cvInputOutput);
-    void setPotCalibration(uint8_t modeSwitchPin, uint8_t* potCalibrationPins, uint8_t potCalibrationSize);
+    void setPotCalibration(uint8_t modeSwitchPin, uint8_t potCalibrationSize);
     void init();
 
     float getCalibratedValue(uint8_t pin);
