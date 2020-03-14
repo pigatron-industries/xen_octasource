@@ -3,7 +3,7 @@
 
 #include <inttypes.h>
 
-#include "../lib/task/Task.h"
+#include "../lib/task/AbstractInputTask.h"
 #include "../drivers/CvInputOutput.h"
 #include "../drivers/PotCalibration.h"
 #include "../modules/OctaSource.h"
@@ -20,7 +20,7 @@
 #define MODE_SWITCH_PIN 0
 
 
-class InputTask : public Task {
+class InputTask : public AbstractInputTask {
 
 public:
     InputTask(CvInputOutput& cvInputOutput, OctaSource& octasource);
@@ -28,7 +28,6 @@ public:
     void execute();
 
 private:
-    CvInputOutput& _cvInputOutput;
     OctaSource& _octasource;
 
     PotCalibration _ratePotCalibration;

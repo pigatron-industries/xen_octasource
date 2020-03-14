@@ -7,7 +7,7 @@
 #define RATE_EXP_MULT 4
 
 InputTask::InputTask(CvInputOutput& cvInputOutput, OctaSource& octasource) :
-    _cvInputOutput(cvInputOutput),
+    AbstractInputTask(cvInputOutput),
     _octasource(octasource),
     _ratePotCalibration(-2.90, 3.67, -5, 5),
     _amplitudePotCalibration(-3.07, 3.72, 0, 5),
@@ -16,7 +16,7 @@ InputTask::InputTask(CvInputOutput& cvInputOutput, OctaSource& octasource) :
 }
 
 void InputTask::init() {
-    Task::init();
+    AbstractInputTask::init();
     _cvInputOutput.setPinModeAnalogIn(RATE_POT_PIN);
     _cvInputOutput.setPinModeAnalogIn(RATE_CV_PIN);
     _cvInputOutput.setPinModeAnalogIn(WAVE_POT_PIN);
