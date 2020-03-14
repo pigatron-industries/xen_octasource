@@ -7,7 +7,7 @@
 #define RATE_EXP_MULT 4
 
 InputTask::InputTask(CvInputOutput& cvInputOutput, OctaSource& octasource) :
-    AbstractInputTask(cvInputOutput),
+    AbstractInputTask(cvInputOutput, MODE_SWITCH_PIN),
     _octasource(octasource),
     _ratePotCalibration(-2.90, 3.67, -5, 5),
     _amplitudePotCalibration(-3.07, 3.72, 0, 5),
@@ -24,13 +24,6 @@ void InputTask::init() {
     _cvInputOutput.setPinModeAnalogIn(LENGTH_POT_PIN);
     _cvInputOutput.setPinModeAnalogIn(LENGTH_CV_PIN);
     _cvInputOutput.setPinModeAnalogIn(TRIGGER_PIN);
-
-    pinMode(MODE_SWITCH_PIN, INPUT_PULLUP);
-    digitalWrite(MODE_SWITCH_PIN, HIGH);
-    if(digitalRead(MODE_SWITCH_PIN) == LOW) {
-        Serial.println("Calibration Mode Started.");
-        _calibrationMode = true;
-    }
 }
 
 void InputTask::execute() {

@@ -10,7 +10,7 @@
 class AbstractInputTask : public Task {
 
 public:
-    AbstractInputTask(CvInputOutput& cvInputOutput);
+    AbstractInputTask(CvInputOutput& cvInputOutput, uint8_t modeSwitchPin);
     void init();
     void execute();
 
@@ -18,6 +18,7 @@ protected:
     CvInputOutput& _cvInputOutput;
 
     bool _calibrationMode;
+    uint8_t _modeSwitchPin;
 
 };
 
