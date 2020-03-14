@@ -2,6 +2,9 @@
 
 #include <Arduino.h>
 
+PotCalibration::PotCalibration() :
+    PotCalibration(-5, 5, -5, 5) {
+}
 
 PotCalibration::PotCalibration(float realMin, float realMax, float virtualMin, float virtualMax) :
     _realMin(realMin),

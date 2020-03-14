@@ -3,9 +3,7 @@
 
 #include <inttypes.h>
 
-#include "../lib/task/AbstractInputTask.h"
-#include "../drivers/CvInputOutput.h"
-#include "../drivers/PotCalibration.h"
+#include "../lib/io/AbstractInputTask.h"
 #include "../modules/OctaSource.h"
 
 
@@ -18,6 +16,8 @@
 #define TRIGGER_PIN 6
 
 #define MODE_SWITCH_PIN 0
+
+#define CALIBRATED_POT_SIZE 3
 
 
 class InputTask : public AbstractInputTask {

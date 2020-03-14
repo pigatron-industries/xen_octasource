@@ -7,6 +7,7 @@
 class PotCalibration {
 
 public:
+    PotCalibration();
     PotCalibration(float realMin, float realMax, float virtualMin, float virtualMax);
     float getCalibratedValue(float realValue);
 
