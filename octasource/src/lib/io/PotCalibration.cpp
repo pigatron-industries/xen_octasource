@@ -3,10 +3,11 @@
 #include <Arduino.h>
 
 PotCalibration::PotCalibration() :
-    PotCalibration(-5, 5, -5, 5) {
+    PotCalibration(0, 0, 0, 0, 0) {
 }
 
-PotCalibration::PotCalibration(float realMin, float realMax, float virtualMin, float virtualMax) :
+PotCalibration::PotCalibration(uint8_t pin, float realMin, float realMax, float virtualMin, float virtualMax) :
+    _pin(pin),
     _realMin(realMin),
     _realMax(realMax),
     _virtualMin(virtualMin),

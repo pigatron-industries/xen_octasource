@@ -8,10 +8,11 @@ class PotCalibration {
 
 public:
     PotCalibration();
-    PotCalibration(float realMin, float realMax, float virtualMin, float virtualMax);
+    PotCalibration(uint8_t pin, float realMin, float realMax, float virtualMin, float virtualMax);
     float getCalibratedValue(float realValue);
 
 private:
+  uint8_t _pin;
   float _realMin;
   float _realMax;
   float _virtualMin;

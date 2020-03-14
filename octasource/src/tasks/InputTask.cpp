@@ -7,11 +7,11 @@
 #define RATE_EXP_MULT 4
 
 InputTask::InputTask(CvInputOutput& cvInputOutput, OctaSource& octasource) :
-    AbstractInputTask(cvInputOutput, MODE_SWITCH_PIN, CALIBRATED_POT_SIZE),
+    AbstractInputTask(cvInputOutput),
     _octasource(octasource),
-    _ratePotCalibration(-2.90, 3.67, -5, 5),
-    _amplitudePotCalibration(-3.07, 3.72, 0, 5),
-    _wavePotCalibration(-3.13, 3.83, 0, 4) {
+    _ratePotCalibration(0, -2.90, 3.67, -5, 5),
+    _amplitudePotCalibration(0, -3.07, 3.72, 0, 5),
+    _wavePotCalibration(0, -3.13, 3.83, 0, 4) {
       _calibrationMode = false;
 }
 
