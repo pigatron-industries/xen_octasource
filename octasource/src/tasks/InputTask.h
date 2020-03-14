@@ -18,6 +18,7 @@
 #define MODE_SWITCH_PIN 0
 
 #define CALIBRATED_POT_SIZE 3
+#define CALIBRATED_POT_PINS {RATE_POT_PIN, WAVE_POT_PIN, LENGTH_POT_PIN}
 
 
 class InputTask : public AbstractInputTask {
