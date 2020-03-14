@@ -6,6 +6,10 @@ PotCalibration::PotCalibration() :
     PotCalibration(0, 0, 0, 0, 0) {
 }
 
+PotCalibration::PotCalibration(uint8_t pin, float virtualMin, float virtualMax) :
+    PotCalibration(pin, virtualMin, virtualMax, virtualMin, virtualMax) {
+}
+
 PotCalibration::PotCalibration(uint8_t pin, float realMin, float realMax, float virtualMin, float virtualMax) :
     _pin(pin),
     _realMin(realMin),
