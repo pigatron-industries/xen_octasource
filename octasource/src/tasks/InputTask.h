@@ -17,6 +17,9 @@
 #define LENGTH_CV_PIN 5
 #define TRIGGER_PIN 6
 
+#define MODE_SWITCH_PIN 0
+
+
 class InputTask : public Task {
 
 public:
@@ -31,6 +34,8 @@ private:
     PotCalibration _ratePotCalibration;
     PotCalibration _amplitudePotCalibration;
     PotCalibration _wavePotCalibration;
+
+    bool _calibrationMode;
 
     float rateVoltageToFrequency(float voltage);
 
