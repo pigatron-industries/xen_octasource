@@ -21,8 +21,7 @@ Each output is double the frequency of the previous output.
 
 ### 3 Uncorrelated
 
-(NOT YET IMPLEMENTED)
-A range of frequency outputs that are uncorrelated to each other.
+A range of frequency outputs that are uncorrelated to each other. In this case multiplied by an irrational number, Pi.
 
 ---
 
