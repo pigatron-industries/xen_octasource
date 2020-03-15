@@ -18,9 +18,8 @@ InputTask::InputTask(CvInputOutput& cvInputOutput, OctaSource& octasource) :
       _potCalibration[1] = PotCalibration(LENGTH_POT_PIN, 0, 5);
       _potCalibration[2] = PotCalibration(WAVE_POT_PIN, 0, 4);
 
-      // _potCalibration[0] = PotCalibration(RATE_POT_PIN, -2.90, 3.67, -5, 5);
-      // _potCalibration[1] = PotCalibration(LENGTH_POT_PIN, -3.07, 3.72, 0, 5);
-      // _potCalibration[2] = PotCalibration(WAVE_POT_PIN, -3.13, 3.83, 0, 4);
+      //TODO reload mode from EEPROM
+      _octasource.setMode(modePhased);
 }
 
 void InputTask::init() {

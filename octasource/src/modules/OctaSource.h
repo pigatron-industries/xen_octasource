@@ -7,10 +7,18 @@
 
 #define OSCILLATOR_COUNT 8
 
+enum OctasourceMode_t {
+  	modePhased,
+    modeMultiplied,
+    modeUncorrelated,
+};
+
+
 class OctaSource {
 
 public:
     OctaSource();
+    void setMode(OctasourceMode_t mode);
     void execute(unsigned long timeDiff);
     float getOutput(uint8_t index);
 
@@ -21,6 +29,17 @@ public:
 private:
     Oscillator _oscillators[OSCILLATOR_COUNT];
     float _outputs[OSCILLATOR_COUNT];
+
+    OctasourceMode_t _mode;
+
+    void setFrequencyAll(float frequencyHz);
+    void setFrequencyMultipliedMode(float frequencyHz);
+
+    void matchPhases();
+    void phasedModeInit();
+
+
+
 
 };
 
