@@ -1,4 +1,5 @@
 #include "OutputTask.h"
+#include "../hwconfig.h"
 
 #include <Arduino.h>
 

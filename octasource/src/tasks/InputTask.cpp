@@ -1,4 +1,5 @@
 #include "InputTask.h"
+#include "../hwconfig.h"
 #include "../lib/util.h"
 
 #include <Arduino.h>
@@ -12,7 +13,7 @@ InputTask::InputTask(CvInputOutput& cvInputOutput, OctaSource& octasource) :
     AbstractInputTask(cvInputOutput),
     _octasource(octasource) {
       _calibrationMode = false;
-      AbstractInputTask::setPotCalibration(MODE_SWITCH_PIN, CALIBRATED_POT_SIZE);
+      AbstractInputTask::setPotCalibration(MODE_SWITCH_PIN, CALIBRATED_POT_SIZE, OUTPUT_CV_PIN_START);
       _potCalibration[0] = PotCalibration(RATE_POT_PIN, -5, 5);
       _potCalibration[1] = PotCalibration(LENGTH_POT_PIN, 0, 5);
       _potCalibration[2] = PotCalibration(WAVE_POT_PIN, 0, 4);

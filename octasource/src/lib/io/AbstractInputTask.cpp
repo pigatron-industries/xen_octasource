@@ -11,9 +11,10 @@ AbstractInputTask::AbstractInputTask(CvInputOutput& cvInputOutput) :
     _calibrationMode = 0;
 }
 
-void AbstractInputTask::setPotCalibration(uint8_t modeSwitchPin, uint8_t potCalibrationSize) {
+void AbstractInputTask::setPotCalibration(uint8_t modeSwitchPin, uint8_t potCalibrationSize, uint8_t displayLedPin) {
     _modeSwitchPin = modeSwitchPin;
     _potCalibrationSize = potCalibrationSize;
+    _displayLedPin = displayLedPin;
     _potCalibration = new PotCalibration[_potCalibrationSize];
 }
 
@@ -22,17 +23,7 @@ void AbstractInputTask::init() {
     pinMode(_modeSwitchPin, INPUT_PULLUP);
     digitalWrite(_modeSwitchPin, HIGH);
 
-    // load pot calibration
-    int address = 0;
-    float realMin, realMax;
-    for(uint8_t i = 0; i < _potCalibrationSize; i++) {
-        EEPROM.get(address, realMin);
-        address += sizeof(float);
-        EEPROM.get(address, realMax);
-        address += sizeof(float);
-        _potCalibration[i].setRealMin(realMin);
-        _potCalibration[i].setRealMax(realMax);
-    }
+    loadCalibration();
 
     // Check for calibration mode
     if(digitalRead(_modeSwitchPin) == LOW) {
@@ -55,14 +46,14 @@ float AbstractInputTask::getCalibratedValue(uint8_t pin) {
 }
 
 void AbstractInputTask::doCalibrationSequence() {
-    _cvInputOutput.setPinModeAnalogOut(OUTPUT_CV_PIN_START);
-    _cvInputOutput.setVoltage(OUTPUT_CV_PIN_START, -5.0);
+    _cvInputOutput.setPinModeAnalogOut(_displayLedPin);
+    _cvInputOutput.setVoltage(_displayLedPin, -5.0);
     Serial.println("Calibration mode started.");
     Serial.println("Release mode switch...");
 
     while (digitalRead(_modeSwitchPin) == LOW) {}
 
-    _cvInputOutput.setVoltage(OUTPUT_CV_PIN_START, -5.0);
+    _cvInputOutput.setVoltage(_displayLedPin, -5.0);
     Serial.println("Turn all pots left, then press mode switch...");
     delay(100);
     while (digitalRead(_modeSwitchPin) == HIGH) {}
@@ -75,7 +66,7 @@ void AbstractInputTask::doCalibrationSequence() {
         _potCalibration[i].setRealMin(voltage);
     }
 
-    _cvInputOutput.setVoltage(OUTPUT_CV_PIN_START, 5.0);
+    _cvInputOutput.setVoltage(_displayLedPin, 5.0);
     Serial.println("Turn all pots right, then press mode switch...");
     delay(100);
     while (digitalRead(_modeSwitchPin) == HIGH) {}
@@ -89,8 +80,23 @@ void AbstractInputTask::doCalibrationSequence() {
     }
 
     Serial.println("Calibration finished.");
+    saveCalibration();
+}
 
-    //save calibration
+void AbstractInputTask::loadCalibration() {
+    int address = 0;
+    float realMin, realMax;
+    for(uint8_t i = 0; i < _potCalibrationSize; i++) {
+        EEPROM.get(address, realMin);
+        address += sizeof(float);
+        EEPROM.get(address, realMax);
+        address += sizeof(float);
+        _potCalibration[i].setRealMin(realMin);
+        _potCalibration[i].setRealMax(realMax);
+    }
+}
+
+void AbstractInputTask::saveCalibration() {
     int address = 0;
     for(uint8_t i = 0; i < _potCalibrationSize; i++) {
         EEPROM.put(address, _potCalibration[i].getRealMin());
