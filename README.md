@@ -7,7 +7,11 @@ Uses [PJRC Teensy 4.0](https://www.pjrc.com/teensy-4-0/) and [MikroElektronika P
 
 ## Modes
 
+There are various modes which can be cycled through by pressing the mode switch.
 
+### Phased
+
+Each output wave is phase shifted by 45 degrees.
 
 
 ## Calibration
