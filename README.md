@@ -17,7 +17,6 @@ Each output wave is the same frequency but phase shifted by 45 degrees.
 
 ### 2 Multiplied
 
-(NOT YET IMPLEMENTED)
 Each output is double the frequency of the previous output.
 
 ### 3 Uncorrelated
