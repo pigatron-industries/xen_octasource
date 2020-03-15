@@ -21,9 +21,9 @@ Each output is double the frequency of the previous output.
 
 A range of frequency outputs that are uncorrelated to each other.
 
-## Extended Output (NOT YET IMPLEMENTED)
+## Synchronising Multiple Modules (NOT YET IMPLEMENTED)
 
-
+The number of outputs can be extended by attaching another Octasource module. The 2 modules can be synchronised with each other.
 
 ## Calibration
 
