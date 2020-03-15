@@ -8,3 +8,6 @@
 #define CV_CNVT_PIN 15
 
 #define SERIAL_BAUD 115200
+
+
+#define OUTPUT_CV_PIN_START 12

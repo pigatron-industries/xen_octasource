@@ -16,6 +16,14 @@ public:
         return _pin;
     }
 
+    float getRealMin() {
+        return _realMin;
+    }
+
+    float getRealMax() {
+        return _realMax;
+    }
+
     void setRealMin(float realMin) {
         _realMin = realMin;
     }

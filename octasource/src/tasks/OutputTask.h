@@ -3,12 +3,12 @@
 
 #include <inttypes.h>
 
+#include "../hwconfig.h"
+
 #include "../lib/task/Task.h"
 #include "../drivers/CvInputOutput.h"
 #include "../waveforms/RampWave.h"
 #include "../modules/OctaSource.h"
-
-#define OUTPUT_PIN_START 12
 
 class OutputTask : public Task {
 

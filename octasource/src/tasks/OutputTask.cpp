@@ -10,7 +10,7 @@ OutputTask::OutputTask(CvInputOutput& cvInputOutput, OctaSource& octasource) :
 void OutputTask::init() {
     Task::init();
     for(uint8_t i = 0; i < OSCILLATOR_COUNT; i++) {
-        _cvInputOutput.setPinModeAnalogOut(OUTPUT_PIN_START+i);
+        _cvInputOutput.setPinModeAnalogOut(OUTPUT_CV_PIN_START+i);
     }
 }
 
@@ -23,6 +23,6 @@ void OutputTask::execute() {
 
     for(int i = 0; i < OSCILLATOR_COUNT; i++) {
         float voltage = _octasource.getOutput(i);
-        _cvInputOutput.setVoltage(OUTPUT_PIN_START+i, voltage);
+        _cvInputOutput.setVoltage(OUTPUT_CV_PIN_START+i, voltage);
     }
 }
