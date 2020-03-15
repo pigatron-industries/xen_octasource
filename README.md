@@ -9,9 +9,20 @@ Uses [PJRC Teensy 4.0](https://www.pjrc.com/teensy-4-0/) and [MikroElektronika P
 
 There are various modes which can be cycled through by pressing the mode switch.
 
-### Phased
+### 1 Phased
 
-Each output wave is phase shifted by 45 degrees.
+Each output wave is the same frequency but phase shifted by 45 degrees.
+
+### 2 Multiplied (NOT YET IMPLEMENTED)
+
+Each output is double the frequency of the previous output.
+
+### 3 Uncorrelated (NOT YET IMPLEMENTED)
+
+A range of frequency outputs that are uncorrelated to each other.
+
+## Extended Output (NOT YET IMPLEMENTED)
+
 
 
 ## Calibration
