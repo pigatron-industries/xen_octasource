@@ -1,6 +1,8 @@
 #ifndef InputTask_h
 #define InputTask_h
 
+#include <Bounce.h>
+
 #include <inttypes.h>
 
 #include "../lib/io/AbstractInputTask.h"
@@ -29,6 +31,7 @@ public:
 
 private:
     OctaSource& _octasource;
+    Bounce _modeSwitch;
 
     float rateVoltageToFrequency(float voltage);
 

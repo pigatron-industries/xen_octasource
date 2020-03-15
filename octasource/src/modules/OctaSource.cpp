@@ -8,6 +8,16 @@ OctaSource::OctaSource() {
     setMode(modePhased);
 }
 
+void OctaSource::cycleMode() {
+    switch(_mode) {
+        case modePhased:
+            setMode(modeMultiplied);
+            break;
+        default:
+            setMode(modePhased);
+    }
+}
+
 void OctaSource::setMode(OctasourceMode_t mode) {
     _mode = mode;
     switch(_mode) {

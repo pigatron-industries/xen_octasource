@@ -19,6 +19,8 @@ class OctaSource {
 public:
     OctaSource();
     void setMode(OctasourceMode_t mode);
+    void cycleMode();
+    
     void execute(unsigned long timeDiff);
     float getOutput(uint8_t index);
 

@@ -11,7 +11,8 @@
 
 InputTask::InputTask(CvInputOutput& cvInputOutput, OctaSource& octasource) :
     AbstractInputTask(cvInputOutput),
-    _octasource(octasource) {
+    _octasource(octasource),
+    _modeSwitch(MODE_SWITCH_PIN, 100) {
       _calibrationMode = false;
       AbstractInputTask::setPotCalibration(MODE_SWITCH_PIN, CALIBRATED_POT_SIZE, OUTPUT_CV_PIN_START);
       _potCalibration[0] = PotCalibration(RATE_POT_PIN, -5, 5);
@@ -34,6 +35,13 @@ void InputTask::init() {
 }
 
 void InputTask::execute() {
+    if(_modeSwitch.update()) {
+        if(_modeSwitch.fallingEdge()) {
+            delay(500);
+            _octasource.cycleMode();
+        }
+    }
+
     float rateVoltage = getCalibratedValue(RATE_POT_PIN);
     float rateFrequency = rateVoltageToFrequency(rateVoltage);
     _octasource.setFrequencyHz(rateFrequency);
