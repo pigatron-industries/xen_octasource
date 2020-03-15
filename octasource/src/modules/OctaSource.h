@@ -20,7 +20,7 @@ public:
     OctaSource();
     void setMode(OctasourceMode_t mode);
     void cycleMode();
-    
+
     void execute(unsigned long timeDiff);
     float getOutput(uint8_t index);
 
@@ -36,9 +36,11 @@ private:
 
     void setFrequencyAll(float frequencyHz);
     void setFrequencyMultipliedMode(float frequencyHz);
+    void setFrequencyUncorrelatedMode(float frequencyHz);
 
-    void matchPhases();
-    void phasedModeInit();
+    void initPhaseAll();
+    void initPhasedMode();
+    void initUncorrelatedMode();
 
 
 

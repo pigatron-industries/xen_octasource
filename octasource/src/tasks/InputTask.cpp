@@ -20,7 +20,7 @@ InputTask::InputTask(CvInputOutput& cvInputOutput, OctaSource& octasource) :
       _potCalibration[2] = PotCalibration(WAVE_POT_PIN, 0, 4);
 
       //TODO reload mode from EEPROM
-      _octasource.setMode(modePhased);
+      _octasource.setMode(modeUncorrelated);
 }
 
 void InputTask::init() {
