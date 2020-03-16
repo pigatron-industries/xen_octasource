@@ -1,7 +1,7 @@
 #ifndef InputTask_h
 #define InputTask_h
 
-#include <Bounce.h>
+#include <Bounce2.h>
 
 #include <inttypes.h>
 
@@ -34,6 +34,7 @@ private:
     Bounce _modeSwitch;
 
     float rateVoltageToFrequency(float voltage);
+    void switchMode();
 
 };
 

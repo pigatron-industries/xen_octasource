@@ -8,9 +8,9 @@
 #define OSCILLATOR_COUNT 8
 
 enum OctasourceMode_t {
-  	modePhased,
-    modeMultiplied,
-    modeUncorrelated,
+  	modePhased = 0,
+    modeMultiplied = 1,
+    modeUncorrelated = 2,
 };
 
 
@@ -27,6 +27,10 @@ public:
     void setFrequencyHz(float frequencyHz);
     void setAmplitude(float amplitude);
     void setWave(float wave);
+
+    OctasourceMode_t getMode() {
+        return _mode;
+    }
 
 private:
     Oscillator _oscillators[OSCILLATOR_COUNT];
