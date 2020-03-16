@@ -63,12 +63,17 @@ void InputTask::switchMode() {
     _octasource.cycleMode();
 
     // Indicate new mode
+    for(int i = 0; i < OSCILLATOR_COUNT; i++) {
+        _cvInputOutput.setVoltage(OUTPUT_CV_PIN_START+i, 0);
+    }
     OctasourceMode_t modeNum = _octasource.getMode();
     long startTime = millis();
     long time = millis();
     while(time - startTime < 500) {
         _cvInputOutput.setVoltage(OUTPUT_CV_PIN_START+modeNum, 3);
+        delay(1);
         _cvInputOutput.setVoltage(OUTPUT_CV_PIN_START+modeNum, -3);
+        delay(1);
         time = millis();
     }
 }
