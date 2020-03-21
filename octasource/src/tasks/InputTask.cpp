@@ -38,7 +38,7 @@ void InputTask::execute() {
         }
     }
 
-    float rateVoltage = getCalibratedValue(RATE_POT_PIN);
+    float rateVoltage = getCalibratedValue(RATE_POT_PIN) + getCalibratedValue(RATE_CV_PIN);
     float rateFrequency = rateVoltageToFrequency(rateVoltage);
     _octasource.setFrequencyHz(rateFrequency);
 
