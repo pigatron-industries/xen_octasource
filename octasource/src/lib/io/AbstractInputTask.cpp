@@ -32,6 +32,9 @@ void AbstractInputTask::init() {
 
 }
 
+float AbstractInputTask::getValue(uint8_t pin) {
+    return _cvInputOutput.getVoltage(pin);
+}
 
 float AbstractInputTask::getCalibratedValue(uint8_t pin) {
     float voltage = _cvInputOutput.getVoltage(pin);

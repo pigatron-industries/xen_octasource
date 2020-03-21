@@ -14,6 +14,7 @@ public:
     void setPotCalibration(uint8_t modeSwitchPin, uint8_t potCalibrationSize, uint8_t displayLedPin);
     void init();
 
+    float getValue(uint8_t pin);
     float getCalibratedValue(uint8_t pin);
 
 protected:
