@@ -1,9 +1,14 @@
 
 # OctaSource
 
-8 output low frequency oscillator.
+8 output low frequency oscillator, with various modes to created related low frequency control voltages for synthesizers.
 
 Uses [PJRC Teensy 4.0](https://www.pjrc.com/teensy-4-0/) and [MikroElektronika PIXI Click](https://www.mikroe.com/pixi-click) for IO.
+
+### Prototype
+
+<img src="images/octasource_prototype_032020_1.jpg" height="500" /> <img src="images/octasource_prototype_032020_2.jpg" height="500" />
+
 
 ---
 
