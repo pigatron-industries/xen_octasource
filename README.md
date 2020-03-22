@@ -31,14 +31,18 @@ There are various modes which can be cycled through by pressing the mode switch.
 ### 1 Phased
 
 Each output wave is the same frequency but phase shifted by 45 degrees.
+* Trigger: Will reset the phases back to initial values.
 
 ### 2 Multiplied
 
 Each output is double the frequency of the previous output.
+* Trigger: Will reset the phases back to initial values.
 
 ### 3 Uncorrelated
 
 A range of frequency outputs that are uncorrelated to each other. In this case multiplied by an irrational number, Pi.
+* Trigger: This mode starts off each wave at a completely random phase. When a trigger is received the phases are re-randomised, so can be used to create almost completely random voltages.
+
 
 ---
 
