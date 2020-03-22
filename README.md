@@ -50,7 +50,7 @@ The number of outputs can be extended by attaching another Octasource module. Th
 
 ## Calibration
 
-Hold down mode switch while powering on. The top LED with light up red.
+Hold down mode switch while powering on. The top LED will light up red.
 
 Release the mode switch, and turn all potentiometers to the leftmost position.
 
