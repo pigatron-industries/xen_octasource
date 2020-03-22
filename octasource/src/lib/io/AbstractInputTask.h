@@ -6,6 +6,7 @@
 #include "../task/Task.h"
 #include "../../drivers/CvInputOutput.h"
 #include "PotCalibration.h"
+#include "GateInput.h"
 
 class AbstractInputTask : public Task {
 

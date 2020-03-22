@@ -27,6 +27,7 @@ public:
     void setFrequencyHz(float frequencyHz);
     void setAmplitude(float amplitude);
     void setWave(float wave);
+    void trigger();
 
     OctasourceMode_t getMode() {
         return _mode;

@@ -5,6 +5,10 @@
 
 Uses [PJRC Teensy 4.0](https://www.pjrc.com/teensy-4-0/) and [MikroElektronika PIXI Click](https://www.mikroe.com/pixi-click) for IO.
 
+## Prototype
+
+![Octasource Prototype](ocatsource_prototype_032020.jpg)
+
 ---
 
 ## Modes

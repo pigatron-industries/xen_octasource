@@ -27,7 +27,7 @@ void InputTask::init() {
     _cvInputOutput.setPinModeAnalogIn(WAVE_CV_PIN);
     _cvInputOutput.setPinModeAnalogIn(LENGTH_POT_PIN);
     _cvInputOutput.setPinModeAnalogIn(LENGTH_CV_PIN);
-    _cvInputOutput.setPinModeAnalogIn(TRIGGER_PIN);
+    _cvInputOutput.setPinModeAnalogIn(TRIGGER_IN_PIN);
     AbstractInputTask::init();
 }
 
@@ -35,6 +35,12 @@ void InputTask::execute() {
     if(_modeSwitch.update()) {
         if(_modeSwitch.fallingEdge()) {
             switchMode();
+        }
+    }
+    
+    if(_trigger.update(getValue(TRIGGER_IN_PIN))) {
+        if(_trigger.risingEdge()) {
+            _octasource.trigger();
         }
     }
 

@@ -15,7 +15,7 @@
 #define WAVE_CV_PIN 3
 #define LENGTH_POT_PIN 4
 #define LENGTH_CV_PIN 5
-#define TRIGGER_PIN 6
+#define TRIGGER_IN_PIN 6
 
 #define MODE_SWITCH_PIN 0
 
@@ -32,6 +32,7 @@ public:
 private:
     OctaSource& _octasource;
     Bounce _modeSwitch;
+    GateInput _trigger;
 
     float rateVoltageToFrequency(float voltage);
     void switchMode();

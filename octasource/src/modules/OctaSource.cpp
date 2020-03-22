@@ -61,6 +61,10 @@ void OctaSource::setWave(float wave) {
     }
 }
 
+void OctaSource::trigger() {
+    setMode(_mode); // re-initialise current mode
+}
+
 void OctaSource::execute(unsigned long timeDiff) {
     for(int i = 0; i < OSCILLATOR_COUNT; i++) {
         _outputs[i] = _oscillators[i].execute(timeDiff);
@@ -89,7 +93,7 @@ void OctaSource::setFrequencyUncorrelatedMode(float frequencyHz) {
     float freq = frequencyHz;
     for(int i = 0; i < OSCILLATOR_COUNT; i++) {
         _oscillators[i].setFrequencyHz(freq);
-        freq /= M_PI; //An irrational number 
+        freq /= M_PI; //An irrational number
     }
 }
 
