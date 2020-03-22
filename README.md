@@ -6,6 +6,7 @@
 Uses [PJRC Teensy 4.0](https://www.pjrc.com/teensy-4-0/) and [MikroElektronika PIXI Click](https://www.mikroe.com/pixi-click) for IO.
 
 ### Features
+* Requires a +12V/0V/-12V bipolar power supply.
 * Output voltage range is -5V to 5V by default. (The MAX11300 IC used can also output a range of 0 to 10V, this is changeable in code)
 * Rate control - Can can go backwards as well as forwards.
 * Wave control - Changes the waveshape of the output between ramp, triangle, since and square.
