@@ -17,6 +17,9 @@ void OctaSource::cycleMode() {
         case modeMultiplied:
             setMode(modeUncorrelated);
             break;
+        case modeUncorrelated:
+            setMode(modeBurst);
+            break;
         default:
             setMode(modePhased);
     }
@@ -26,6 +29,7 @@ void OctaSource::setMode(OctasourceMode_t mode) {
     _mode = mode;
     switch(_mode) {
         case modePhased:
+        case modeBurst:
             initPhasedMode();
             break;
         case modeUncorrelated:
@@ -69,6 +73,8 @@ void OctaSource::execute(unsigned long timeDiff) {
     for(int i = 0; i < OSCILLATOR_COUNT; i++) {
         _outputs[i] = _oscillators[i].execute(timeDiff);
     }
+
+    //TODO burst mode, dampen oscillators until trigger point
 }
 
 float OctaSource::getOutput(uint8_t index) {

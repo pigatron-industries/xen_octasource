@@ -11,6 +11,7 @@ enum OctasourceMode_t {
   	modePhased = 0,
     modeMultiplied = 1,
     modeUncorrelated = 2,
+    modeBurst = 3
 };
 
 
