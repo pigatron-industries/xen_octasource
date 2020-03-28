@@ -8,17 +8,6 @@
 #include "../lib/io/AbstractInputTask.h"
 #include "../modules/OctaSource.h"
 
-
-#define RATE_POT_PIN 0
-#define RATE_CV_PIN 1
-#define WAVE_POT_PIN 2
-#define WAVE_CV_PIN 3
-#define LENGTH_POT_PIN 4
-#define LENGTH_CV_PIN 5
-#define TRIGGER_IN_PIN 6
-
-#define MODE_SWITCH_PIN 0
-
 #define CALIBRATED_POT_SIZE 3
 
 
