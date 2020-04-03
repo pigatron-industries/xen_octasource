@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="8.5.2">
+<eagle version="9.5.0">
 <drawing>
 <settings>
-<setting alwaysvectorfont="yes"/>
+<setting alwaysvectorfont="no"/>
 <setting verticaltext="up"/>
 </settings>
 <grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="no" altdistance="0.01" altunitdist="inch" altunit="inch"/>
@@ -543,8 +543,8 @@ type 0207, grid 7.5 mm</description>
 <part name="LENGTH_JCK" library="controls" deviceset="WQP-PJ301M-12_JACK" device=""/>
 <part name="SUPPLY2" library="supply" deviceset="GND" device=""/>
 <part name="GND" library="connectors" deviceset="HEADER/MALE/01" device=""/>
-<part name="R1" library="resistors" deviceset="RESISTOR" device="RESISTOR/UPRIGHT/7.5" value="75k"/>
-<part name="R2" library="resistors" deviceset="RESISTOR" device="RESISTOR/UPRIGHT/7.5" value="75k"/>
+<part name="R1" library="resistors" deviceset="RESISTOR" device="RESISTOR/UPRIGHT/7.5" value="39k"/>
+<part name="R2" library="resistors" deviceset="RESISTOR" device="RESISTOR/UPRIGHT/7.5" value="39k"/>
 <part name="SUPPLY1" library="supply" deviceset="+12V" device=""/>
 <part name="SUPPLY3" library="supply" deviceset="-12V" device=""/>
 <part name="+12V" library="connectors" deviceset="HEADER/MALE/01" device=""/>
@@ -556,13 +556,13 @@ type 0207, grid 7.5 mm</description>
 <part name="RATE_POT" library="connectors" deviceset="HEADER/MALE/01" device=""/>
 <part name="SUPPLY8" library="supply" deviceset="GND" device=""/>
 <part name="RATE_CV" library="connectors" deviceset="HEADER/MALE/01" device=""/>
-<part name="R3" library="resistors" deviceset="RESISTOR" device="RESISTOR/UPRIGHT/7.5" value="75k"/>
-<part name="R4" library="resistors" deviceset="RESISTOR" device="RESISTOR/UPRIGHT/7.5" value="75k"/>
+<part name="R3" library="resistors" deviceset="RESISTOR" device="RESISTOR/UPRIGHT/7.5" value="39k"/>
+<part name="R4" library="resistors" deviceset="RESISTOR" device="RESISTOR/UPRIGHT/7.5" value="39k"/>
 <part name="SUPPLY9" library="supply" deviceset="+12V" device=""/>
 <part name="SUPPLY10" library="supply" deviceset="-12V" device=""/>
 <part name="WAVE_POT" library="connectors" deviceset="HEADER/MALE/01" device=""/>
-<part name="R5" library="resistors" deviceset="RESISTOR" device="RESISTOR/UPRIGHT/7.5" value="75k"/>
-<part name="R6" library="resistors" deviceset="RESISTOR" device="RESISTOR/UPRIGHT/7.5" value="75k"/>
+<part name="R5" library="resistors" deviceset="RESISTOR" device="RESISTOR/UPRIGHT/7.5" value="39k"/>
+<part name="R6" library="resistors" deviceset="RESISTOR" device="RESISTOR/UPRIGHT/7.5" value="39k"/>
 <part name="SUPPLY11" library="supply" deviceset="-12V" device=""/>
 <part name="SUPPLY12" library="supply" deviceset="+12V" device=""/>
 <part name="LENGTH_POT" library="connectors" deviceset="HEADER/MALE/01" device=""/>
@@ -604,103 +604,319 @@ type 0207, grid 7.5 mm</description>
 <plain>
 </plain>
 <instances>
-<instance part="U$1" gate="G$1" x="83.82" y="68.58"/>
-<instance part="U$2" gate="G$1" x="83.82" y="53.34"/>
-<instance part="U$3" gate="G$1" x="83.82" y="38.1"/>
-<instance part="U$4" gate="G$1" x="83.82" y="22.86"/>
-<instance part="U$5" gate="G$1" x="83.82" y="7.62"/>
-<instance part="U$6" gate="G$1" x="83.82" y="-7.62"/>
-<instance part="U$7" gate="G$1" x="83.82" y="-22.86"/>
-<instance part="U$8" gate="G$1" x="83.82" y="-38.1"/>
-<instance part="LEDB_1" gate="HEADER" x="137.16" y="68.58" rot="R180"/>
-<instance part="LEDR_1" gate="HEADER" x="137.16" y="63.5" rot="R180"/>
-<instance part="LEDC_1" gate="HEADER" x="137.16" y="66.04" rot="R180"/>
-<instance part="LEDB_2" gate="HEADER" x="137.16" y="58.42" rot="R180"/>
-<instance part="LEDC_2" gate="HEADER" x="137.16" y="55.88" rot="R180"/>
-<instance part="LEDR_2" gate="HEADER" x="137.16" y="53.34" rot="R180"/>
-<instance part="LEDB_3" gate="HEADER" x="137.16" y="48.26" rot="R180"/>
-<instance part="LEDR_3" gate="HEADER" x="137.16" y="43.18" rot="R180"/>
-<instance part="LEDC_3" gate="HEADER" x="137.16" y="45.72" rot="R180"/>
-<instance part="LEDB_4" gate="HEADER" x="137.16" y="38.1" rot="R180"/>
-<instance part="LEDC_4" gate="HEADER" x="137.16" y="35.56" rot="R180"/>
-<instance part="LEDR_4" gate="HEADER" x="137.16" y="33.02" rot="R180"/>
-<instance part="LEDB_5" gate="HEADER" x="137.16" y="27.94" rot="R180"/>
-<instance part="LEDR_5" gate="HEADER" x="137.16" y="22.86" rot="R180"/>
-<instance part="LEDC_5" gate="HEADER" x="137.16" y="25.4" rot="R180"/>
-<instance part="LEDB_6" gate="HEADER" x="137.16" y="17.78" rot="R180"/>
-<instance part="LEDC_6" gate="HEADER" x="137.16" y="15.24" rot="R180"/>
-<instance part="LEDR_6" gate="HEADER" x="137.16" y="12.7" rot="R180"/>
-<instance part="LEDB_7" gate="HEADER" x="137.16" y="7.62" rot="R180"/>
-<instance part="LEDR_7" gate="HEADER" x="137.16" y="2.54" rot="R180"/>
-<instance part="LEDC_7" gate="HEADER" x="137.16" y="5.08" rot="R180"/>
-<instance part="LEDB_8" gate="HEADER" x="137.16" y="-2.54" rot="R180"/>
-<instance part="LEDC_8" gate="HEADER" x="137.16" y="-5.08" rot="R180"/>
-<instance part="LEDR_8" gate="HEADER" x="137.16" y="-7.62" rot="R180"/>
-<instance part="RATE" gate="G$1" x="-45.72" y="43.18"/>
-<instance part="RATE_JCK" gate="G$1" x="-43.18" y="-12.7" rot="MR0"/>
-<instance part="TRIGGER_JCK" gate="G$1" x="-2.54" y="-45.72" rot="MR0"/>
-<instance part="WAVE" gate="G$1" x="-2.54" y="43.18"/>
-<instance part="WAVE_JCK" gate="G$1" x="-2.54" y="-12.7" rot="MR0"/>
-<instance part="LENGTH" gate="G$1" x="35.56" y="43.18"/>
-<instance part="GATE_JCK" gate="G$1" x="-43.18" y="-45.72" rot="MR0"/>
-<instance part="LENGTH_JCK" gate="G$1" x="38.1" y="-12.7" rot="MR0"/>
-<instance part="SUPPLY2" gate="GND" x="-20.32" y="91.44"/>
-<instance part="GND" gate="HEADER" x="-33.02" y="93.98"/>
-<instance part="R1" gate="G$1" x="-45.72" y="55.88" rot="R90"/>
-<instance part="R2" gate="G$1" x="-45.72" y="30.48" rot="R90"/>
-<instance part="SUPPLY1" gate="+12V" x="-27.94" y="99.06"/>
-<instance part="SUPPLY3" gate="G$1" x="-27.94" y="88.9"/>
-<instance part="+12V" gate="HEADER" x="-33.02" y="96.52"/>
-<instance part="-12V" gate="HEADER" x="-33.02" y="91.44"/>
-<instance part="SUPPLY4" gate="G$1" x="-45.72" y="22.86"/>
-<instance part="SUPPLY5" gate="+12V" x="-45.72" y="63.5"/>
-<instance part="SUPPLY6" gate="GND" x="60.96" y="-48.26"/>
-<instance part="SUPPLY7" gate="GND" x="116.84" y="-17.78"/>
-<instance part="RATE_POT" gate="HEADER" x="-38.1" y="43.18" rot="R180"/>
-<instance part="SUPPLY8" gate="GND" x="-35.56" y="-22.86"/>
-<instance part="RATE_CV" gate="HEADER" x="-35.56" y="-10.16" rot="R180"/>
-<instance part="R3" gate="G$1" x="-2.54" y="30.48" rot="R90"/>
-<instance part="R4" gate="G$1" x="-2.54" y="55.88" rot="R90"/>
-<instance part="SUPPLY9" gate="+12V" x="-2.54" y="63.5"/>
-<instance part="SUPPLY10" gate="G$1" x="-2.54" y="22.86"/>
-<instance part="WAVE_POT" gate="HEADER" x="5.08" y="43.18" rot="R180"/>
-<instance part="R5" gate="G$1" x="35.56" y="55.88" rot="R90"/>
-<instance part="R6" gate="G$1" x="35.56" y="30.48" rot="R90"/>
-<instance part="SUPPLY11" gate="G$1" x="35.56" y="22.86"/>
-<instance part="SUPPLY12" gate="+12V" x="35.56" y="63.5"/>
-<instance part="LENGTH_POT" gate="HEADER" x="43.18" y="43.18" rot="R180"/>
-<instance part="SUPPLY13" gate="GND" x="5.08" y="-22.86"/>
-<instance part="WAVE_CV" gate="HEADER" x="5.08" y="-10.16" rot="R180"/>
-<instance part="SUPPLY14" gate="GND" x="45.72" y="-22.86"/>
-<instance part="LENGTH_CV" gate="HEADER" x="45.72" y="-10.16" rot="R180"/>
-<instance part="GATE_OUT" gate="HEADER" x="-35.56" y="-43.18" rot="R180"/>
-<instance part="TRIG_IN" gate="HEADER" x="5.08" y="-43.18" rot="R180"/>
-<instance part="SUPPLY15" gate="GND" x="-35.56" y="-55.88"/>
-<instance part="SUPPLY16" gate="GND" x="5.08" y="-55.88"/>
-<instance part="OUT1" gate="HEADER" x="76.2" y="71.12"/>
-<instance part="OUT2" gate="HEADER" x="76.2" y="55.88"/>
-<instance part="OUT3" gate="HEADER" x="76.2" y="40.64"/>
-<instance part="OUT4" gate="HEADER" x="76.2" y="25.4"/>
-<instance part="OUT5" gate="HEADER" x="76.2" y="10.16"/>
-<instance part="OUT6" gate="HEADER" x="76.2" y="-5.08"/>
-<instance part="OUT7" gate="HEADER" x="76.2" y="-20.32"/>
-<instance part="OUT8" gate="HEADER" x="76.2" y="-35.56"/>
-<instance part="LEDB1" gate="HEADER" x="132.08" y="68.58"/>
-<instance part="LEDB2" gate="HEADER" x="132.08" y="58.42"/>
-<instance part="LEDB3" gate="HEADER" x="132.08" y="48.26"/>
-<instance part="LEDB4" gate="HEADER" x="132.08" y="38.1"/>
-<instance part="LEDB5" gate="HEADER" x="132.08" y="27.94"/>
-<instance part="LEDB6" gate="HEADER" x="132.08" y="17.78"/>
-<instance part="LEDB7" gate="HEADER" x="132.08" y="7.62"/>
-<instance part="LEDB8" gate="HEADER" x="132.08" y="-2.54"/>
-<instance part="LEDR1" gate="HEADER" x="132.08" y="63.5"/>
-<instance part="LEDR2" gate="HEADER" x="132.08" y="53.34"/>
-<instance part="LEDR3" gate="HEADER" x="132.08" y="43.18"/>
-<instance part="LEDR4" gate="HEADER" x="132.08" y="33.02"/>
-<instance part="LEDR5" gate="HEADER" x="132.08" y="22.86"/>
-<instance part="LEDR6" gate="HEADER" x="132.08" y="12.7"/>
-<instance part="LEDR7" gate="HEADER" x="132.08" y="2.54"/>
-<instance part="LEDR8" gate="HEADER" x="132.08" y="-7.62"/>
+<instance part="U$1" gate="G$1" x="83.82" y="68.58" smashed="yes">
+<attribute name="NAME" x="81.28" y="72.644" size="1.778" layer="95"/>
+<attribute name="VALUE" x="81.28" y="62.484" size="1.778" layer="96"/>
+</instance>
+<instance part="U$2" gate="G$1" x="83.82" y="53.34" smashed="yes">
+<attribute name="NAME" x="81.28" y="57.404" size="1.778" layer="95"/>
+<attribute name="VALUE" x="81.28" y="47.244" size="1.778" layer="96"/>
+</instance>
+<instance part="U$3" gate="G$1" x="83.82" y="38.1" smashed="yes">
+<attribute name="NAME" x="81.28" y="42.164" size="1.778" layer="95"/>
+<attribute name="VALUE" x="81.28" y="32.004" size="1.778" layer="96"/>
+</instance>
+<instance part="U$4" gate="G$1" x="83.82" y="22.86" smashed="yes">
+<attribute name="NAME" x="81.28" y="26.924" size="1.778" layer="95"/>
+<attribute name="VALUE" x="81.28" y="16.764" size="1.778" layer="96"/>
+</instance>
+<instance part="U$5" gate="G$1" x="83.82" y="7.62" smashed="yes">
+<attribute name="NAME" x="81.28" y="11.684" size="1.778" layer="95"/>
+<attribute name="VALUE" x="81.28" y="1.524" size="1.778" layer="96"/>
+</instance>
+<instance part="U$6" gate="G$1" x="83.82" y="-7.62" smashed="yes">
+<attribute name="NAME" x="81.28" y="-3.556" size="1.778" layer="95"/>
+<attribute name="VALUE" x="81.28" y="-13.716" size="1.778" layer="96"/>
+</instance>
+<instance part="U$7" gate="G$1" x="83.82" y="-22.86" smashed="yes">
+<attribute name="NAME" x="81.28" y="-18.796" size="1.778" layer="95"/>
+<attribute name="VALUE" x="81.28" y="-28.956" size="1.778" layer="96"/>
+</instance>
+<instance part="U$8" gate="G$1" x="83.82" y="-38.1" smashed="yes">
+<attribute name="NAME" x="81.28" y="-34.036" size="1.778" layer="95"/>
+<attribute name="VALUE" x="81.28" y="-44.196" size="1.778" layer="96"/>
+</instance>
+<instance part="LEDB_1" gate="HEADER" x="137.16" y="68.58" smashed="yes" rot="R180">
+<attribute name="NAME" x="150.876" y="69.596" size="1.778" layer="96" rot="R180"/>
+</instance>
+<instance part="LEDR_1" gate="HEADER" x="137.16" y="63.5" smashed="yes" rot="R180">
+<attribute name="NAME" x="150.876" y="64.516" size="1.778" layer="96" rot="R180"/>
+</instance>
+<instance part="LEDC_1" gate="HEADER" x="137.16" y="66.04" smashed="yes" rot="R180">
+<attribute name="NAME" x="150.876" y="67.056" size="1.778" layer="96" rot="R180"/>
+</instance>
+<instance part="LEDB_2" gate="HEADER" x="137.16" y="58.42" smashed="yes" rot="R180">
+<attribute name="NAME" x="150.876" y="59.436" size="1.778" layer="96" rot="R180"/>
+</instance>
+<instance part="LEDC_2" gate="HEADER" x="137.16" y="55.88" smashed="yes" rot="R180">
+<attribute name="NAME" x="150.876" y="56.896" size="1.778" layer="96" rot="R180"/>
+</instance>
+<instance part="LEDR_2" gate="HEADER" x="137.16" y="53.34" smashed="yes" rot="R180">
+<attribute name="NAME" x="150.876" y="54.356" size="1.778" layer="96" rot="R180"/>
+</instance>
+<instance part="LEDB_3" gate="HEADER" x="137.16" y="48.26" smashed="yes" rot="R180">
+<attribute name="NAME" x="150.876" y="49.276" size="1.778" layer="96" rot="R180"/>
+</instance>
+<instance part="LEDR_3" gate="HEADER" x="137.16" y="43.18" smashed="yes" rot="R180">
+<attribute name="NAME" x="150.876" y="44.196" size="1.778" layer="96" rot="R180"/>
+</instance>
+<instance part="LEDC_3" gate="HEADER" x="137.16" y="45.72" smashed="yes" rot="R180">
+<attribute name="NAME" x="150.876" y="46.736" size="1.778" layer="96" rot="R180"/>
+</instance>
+<instance part="LEDB_4" gate="HEADER" x="137.16" y="38.1" smashed="yes" rot="R180">
+<attribute name="NAME" x="150.876" y="39.116" size="1.778" layer="96" rot="R180"/>
+</instance>
+<instance part="LEDC_4" gate="HEADER" x="137.16" y="35.56" smashed="yes" rot="R180">
+<attribute name="NAME" x="150.876" y="36.576" size="1.778" layer="96" rot="R180"/>
+</instance>
+<instance part="LEDR_4" gate="HEADER" x="137.16" y="33.02" smashed="yes" rot="R180">
+<attribute name="NAME" x="150.876" y="34.036" size="1.778" layer="96" rot="R180"/>
+</instance>
+<instance part="LEDB_5" gate="HEADER" x="137.16" y="27.94" smashed="yes" rot="R180">
+<attribute name="NAME" x="150.876" y="28.956" size="1.778" layer="96" rot="R180"/>
+</instance>
+<instance part="LEDR_5" gate="HEADER" x="137.16" y="22.86" smashed="yes" rot="R180">
+<attribute name="NAME" x="150.876" y="23.876" size="1.778" layer="96" rot="R180"/>
+</instance>
+<instance part="LEDC_5" gate="HEADER" x="137.16" y="25.4" smashed="yes" rot="R180">
+<attribute name="NAME" x="150.876" y="26.416" size="1.778" layer="96" rot="R180"/>
+</instance>
+<instance part="LEDB_6" gate="HEADER" x="137.16" y="17.78" smashed="yes" rot="R180">
+<attribute name="NAME" x="150.876" y="18.796" size="1.778" layer="96" rot="R180"/>
+</instance>
+<instance part="LEDC_6" gate="HEADER" x="137.16" y="15.24" smashed="yes" rot="R180">
+<attribute name="NAME" x="150.876" y="16.256" size="1.778" layer="96" rot="R180"/>
+</instance>
+<instance part="LEDR_6" gate="HEADER" x="137.16" y="12.7" smashed="yes" rot="R180">
+<attribute name="NAME" x="150.876" y="13.716" size="1.778" layer="96" rot="R180"/>
+</instance>
+<instance part="LEDB_7" gate="HEADER" x="137.16" y="7.62" smashed="yes" rot="R180">
+<attribute name="NAME" x="150.876" y="8.636" size="1.778" layer="96" rot="R180"/>
+</instance>
+<instance part="LEDR_7" gate="HEADER" x="137.16" y="2.54" smashed="yes" rot="R180">
+<attribute name="NAME" x="150.876" y="3.556" size="1.778" layer="96" rot="R180"/>
+</instance>
+<instance part="LEDC_7" gate="HEADER" x="137.16" y="5.08" smashed="yes" rot="R180">
+<attribute name="NAME" x="150.876" y="6.096" size="1.778" layer="96" rot="R180"/>
+</instance>
+<instance part="LEDB_8" gate="HEADER" x="137.16" y="-2.54" smashed="yes" rot="R180">
+<attribute name="NAME" x="150.876" y="-1.524" size="1.778" layer="96" rot="R180"/>
+</instance>
+<instance part="LEDC_8" gate="HEADER" x="137.16" y="-5.08" smashed="yes" rot="R180">
+<attribute name="NAME" x="150.876" y="-4.064" size="1.778" layer="96" rot="R180"/>
+</instance>
+<instance part="LEDR_8" gate="HEADER" x="137.16" y="-7.62" smashed="yes" rot="R180">
+<attribute name="NAME" x="150.876" y="-6.604" size="1.778" layer="96" rot="R180"/>
+</instance>
+<instance part="RATE" gate="G$1" x="-45.72" y="43.18" smashed="yes">
+<attribute name="NAME" x="-50.8" y="40.64" size="1.778" layer="95" rot="R90"/>
+<attribute name="VALUE" x="-48.26" y="40.64" size="1.778" layer="96" rot="R90"/>
+</instance>
+<instance part="RATE_JCK" gate="G$1" x="-43.18" y="-12.7" smashed="yes" rot="MR0">
+<attribute name="NAME" x="-40.64" y="-8.636" size="1.778" layer="95" rot="MR0"/>
+<attribute name="VALUE" x="-40.64" y="-18.796" size="1.778" layer="96" rot="MR0"/>
+</instance>
+<instance part="TRIGGER_JCK" gate="G$1" x="-2.54" y="-45.72" smashed="yes" rot="MR0">
+<attribute name="NAME" x="0" y="-41.656" size="1.778" layer="95" rot="MR0"/>
+<attribute name="VALUE" x="0" y="-51.816" size="1.778" layer="96" rot="MR0"/>
+</instance>
+<instance part="WAVE" gate="G$1" x="-2.54" y="43.18" smashed="yes">
+<attribute name="NAME" x="-7.62" y="40.64" size="1.778" layer="95" rot="R90"/>
+<attribute name="VALUE" x="-5.08" y="40.64" size="1.778" layer="96" rot="R90"/>
+</instance>
+<instance part="WAVE_JCK" gate="G$1" x="-2.54" y="-12.7" smashed="yes" rot="MR0">
+<attribute name="NAME" x="0" y="-8.636" size="1.778" layer="95" rot="MR0"/>
+<attribute name="VALUE" x="0" y="-18.796" size="1.778" layer="96" rot="MR0"/>
+</instance>
+<instance part="LENGTH" gate="G$1" x="35.56" y="43.18" smashed="yes">
+<attribute name="NAME" x="30.48" y="40.64" size="1.778" layer="95" rot="R90"/>
+<attribute name="VALUE" x="33.02" y="40.64" size="1.778" layer="96" rot="R90"/>
+</instance>
+<instance part="GATE_JCK" gate="G$1" x="-43.18" y="-45.72" smashed="yes" rot="MR0">
+<attribute name="NAME" x="-40.64" y="-41.656" size="1.778" layer="95" rot="MR0"/>
+<attribute name="VALUE" x="-40.64" y="-51.816" size="1.778" layer="96" rot="MR0"/>
+</instance>
+<instance part="LENGTH_JCK" gate="G$1" x="38.1" y="-12.7" smashed="yes" rot="MR0">
+<attribute name="NAME" x="40.64" y="-8.636" size="1.778" layer="95" rot="MR0"/>
+<attribute name="VALUE" x="40.64" y="-18.796" size="1.778" layer="96" rot="MR0"/>
+</instance>
+<instance part="SUPPLY2" gate="GND" x="-20.32" y="91.44" smashed="yes">
+<attribute name="VALUE" x="-24.765" y="86.741" size="1.778" layer="96"/>
+</instance>
+<instance part="GND" gate="HEADER" x="-33.02" y="93.98" smashed="yes">
+<attribute name="NAME" x="-46.736" y="92.964" size="1.778" layer="96"/>
+</instance>
+<instance part="R1" gate="G$1" x="-45.72" y="55.88" smashed="yes" rot="R90">
+<attribute name="NAME" x="-47.2186" y="52.07" size="1.778" layer="95" rot="R90"/>
+<attribute name="VALUE" x="-42.418" y="52.07" size="1.778" layer="96" rot="R90"/>
+</instance>
+<instance part="R2" gate="G$1" x="-45.72" y="30.48" smashed="yes" rot="R90">
+<attribute name="NAME" x="-47.2186" y="26.67" size="1.778" layer="95" rot="R90"/>
+<attribute name="VALUE" x="-42.418" y="26.67" size="1.778" layer="96" rot="R90"/>
+</instance>
+<instance part="SUPPLY1" gate="+12V" x="-27.94" y="99.06" smashed="yes">
+<attribute name="VALUE" x="-30.48" y="102.235" size="1.778" layer="96"/>
+</instance>
+<instance part="SUPPLY3" gate="G$1" x="-27.94" y="88.9" smashed="yes">
+<attribute name="VALUE" x="-31.115" y="84.201" size="1.778" layer="96"/>
+</instance>
+<instance part="+12V" gate="HEADER" x="-33.02" y="96.52" smashed="yes">
+<attribute name="NAME" x="-46.736" y="95.504" size="1.778" layer="96"/>
+</instance>
+<instance part="-12V" gate="HEADER" x="-33.02" y="91.44" smashed="yes">
+<attribute name="NAME" x="-46.736" y="90.424" size="1.778" layer="96"/>
+</instance>
+<instance part="SUPPLY4" gate="G$1" x="-45.72" y="22.86" smashed="yes">
+<attribute name="VALUE" x="-48.895" y="18.161" size="1.778" layer="96"/>
+</instance>
+<instance part="SUPPLY5" gate="+12V" x="-45.72" y="63.5" smashed="yes">
+<attribute name="VALUE" x="-48.26" y="66.675" size="1.778" layer="96"/>
+</instance>
+<instance part="SUPPLY6" gate="GND" x="60.96" y="-48.26" smashed="yes">
+<attribute name="VALUE" x="56.515" y="-52.959" size="1.778" layer="96"/>
+</instance>
+<instance part="SUPPLY7" gate="GND" x="116.84" y="-17.78" smashed="yes">
+<attribute name="VALUE" x="112.395" y="-22.479" size="1.778" layer="96"/>
+</instance>
+<instance part="RATE_POT" gate="HEADER" x="-38.1" y="43.18" smashed="yes" rot="R180">
+<attribute name="NAME" x="-24.384" y="44.196" size="1.778" layer="96" rot="R180"/>
+</instance>
+<instance part="SUPPLY8" gate="GND" x="-35.56" y="-22.86" smashed="yes">
+<attribute name="VALUE" x="-40.005" y="-27.559" size="1.778" layer="96"/>
+</instance>
+<instance part="RATE_CV" gate="HEADER" x="-35.56" y="-10.16" smashed="yes" rot="R180">
+<attribute name="NAME" x="-21.844" y="-9.144" size="1.778" layer="96" rot="R180"/>
+</instance>
+<instance part="R3" gate="G$1" x="-2.54" y="30.48" smashed="yes" rot="R90">
+<attribute name="NAME" x="-4.0386" y="26.67" size="1.778" layer="95" rot="R90"/>
+<attribute name="VALUE" x="0.762" y="26.67" size="1.778" layer="96" rot="R90"/>
+</instance>
+<instance part="R4" gate="G$1" x="-2.54" y="55.88" smashed="yes" rot="R90">
+<attribute name="NAME" x="-4.0386" y="52.07" size="1.778" layer="95" rot="R90"/>
+<attribute name="VALUE" x="0.762" y="52.07" size="1.778" layer="96" rot="R90"/>
+</instance>
+<instance part="SUPPLY9" gate="+12V" x="-2.54" y="63.5" smashed="yes">
+<attribute name="VALUE" x="-5.08" y="66.675" size="1.778" layer="96"/>
+</instance>
+<instance part="SUPPLY10" gate="G$1" x="-2.54" y="22.86" smashed="yes">
+<attribute name="VALUE" x="-5.715" y="18.161" size="1.778" layer="96"/>
+</instance>
+<instance part="WAVE_POT" gate="HEADER" x="5.08" y="43.18" smashed="yes" rot="R180">
+<attribute name="NAME" x="18.796" y="44.196" size="1.778" layer="96" rot="R180"/>
+</instance>
+<instance part="R5" gate="G$1" x="35.56" y="55.88" smashed="yes" rot="R90">
+<attribute name="NAME" x="34.0614" y="52.07" size="1.778" layer="95" rot="R90"/>
+<attribute name="VALUE" x="38.862" y="52.07" size="1.778" layer="96" rot="R90"/>
+</instance>
+<instance part="R6" gate="G$1" x="35.56" y="30.48" smashed="yes" rot="R90">
+<attribute name="NAME" x="34.0614" y="26.67" size="1.778" layer="95" rot="R90"/>
+<attribute name="VALUE" x="38.862" y="26.67" size="1.778" layer="96" rot="R90"/>
+</instance>
+<instance part="SUPPLY11" gate="G$1" x="35.56" y="22.86" smashed="yes">
+<attribute name="VALUE" x="32.385" y="18.161" size="1.778" layer="96"/>
+</instance>
+<instance part="SUPPLY12" gate="+12V" x="35.56" y="63.5" smashed="yes">
+<attribute name="VALUE" x="33.02" y="66.675" size="1.778" layer="96"/>
+</instance>
+<instance part="LENGTH_POT" gate="HEADER" x="43.18" y="43.18" smashed="yes" rot="R180">
+<attribute name="NAME" x="56.896" y="44.196" size="1.778" layer="96" rot="R180"/>
+</instance>
+<instance part="SUPPLY13" gate="GND" x="5.08" y="-22.86" smashed="yes">
+<attribute name="VALUE" x="0.635" y="-27.559" size="1.778" layer="96"/>
+</instance>
+<instance part="WAVE_CV" gate="HEADER" x="5.08" y="-10.16" smashed="yes" rot="R180">
+<attribute name="NAME" x="18.796" y="-9.144" size="1.778" layer="96" rot="R180"/>
+</instance>
+<instance part="SUPPLY14" gate="GND" x="45.72" y="-22.86" smashed="yes">
+<attribute name="VALUE" x="41.275" y="-27.559" size="1.778" layer="96"/>
+</instance>
+<instance part="LENGTH_CV" gate="HEADER" x="45.72" y="-10.16" smashed="yes" rot="R180">
+<attribute name="NAME" x="59.436" y="-9.144" size="1.778" layer="96" rot="R180"/>
+</instance>
+<instance part="GATE_OUT" gate="HEADER" x="-35.56" y="-43.18" smashed="yes" rot="R180">
+<attribute name="NAME" x="-21.844" y="-42.164" size="1.778" layer="96" rot="R180"/>
+</instance>
+<instance part="TRIG_IN" gate="HEADER" x="5.08" y="-43.18" smashed="yes" rot="R180">
+<attribute name="NAME" x="18.796" y="-42.164" size="1.778" layer="96" rot="R180"/>
+</instance>
+<instance part="SUPPLY15" gate="GND" x="-35.56" y="-55.88" smashed="yes">
+<attribute name="VALUE" x="-40.005" y="-60.579" size="1.778" layer="96"/>
+</instance>
+<instance part="SUPPLY16" gate="GND" x="5.08" y="-55.88" smashed="yes">
+<attribute name="VALUE" x="0.635" y="-60.579" size="1.778" layer="96"/>
+</instance>
+<instance part="OUT1" gate="HEADER" x="76.2" y="71.12" smashed="yes">
+<attribute name="NAME" x="62.484" y="70.104" size="1.778" layer="96"/>
+</instance>
+<instance part="OUT2" gate="HEADER" x="76.2" y="55.88" smashed="yes">
+<attribute name="NAME" x="62.484" y="54.864" size="1.778" layer="96"/>
+</instance>
+<instance part="OUT3" gate="HEADER" x="76.2" y="40.64" smashed="yes">
+<attribute name="NAME" x="62.484" y="39.624" size="1.778" layer="96"/>
+</instance>
+<instance part="OUT4" gate="HEADER" x="76.2" y="25.4" smashed="yes">
+<attribute name="NAME" x="62.484" y="24.384" size="1.778" layer="96"/>
+</instance>
+<instance part="OUT5" gate="HEADER" x="76.2" y="10.16" smashed="yes">
+<attribute name="NAME" x="62.484" y="9.144" size="1.778" layer="96"/>
+</instance>
+<instance part="OUT6" gate="HEADER" x="76.2" y="-5.08" smashed="yes">
+<attribute name="NAME" x="62.484" y="-6.096" size="1.778" layer="96"/>
+</instance>
+<instance part="OUT7" gate="HEADER" x="76.2" y="-20.32" smashed="yes">
+<attribute name="NAME" x="62.484" y="-21.336" size="1.778" layer="96"/>
+</instance>
+<instance part="OUT8" gate="HEADER" x="76.2" y="-35.56" smashed="yes">
+<attribute name="NAME" x="62.484" y="-36.576" size="1.778" layer="96"/>
+</instance>
+<instance part="LEDB1" gate="HEADER" x="132.08" y="68.58" smashed="yes">
+<attribute name="NAME" x="118.364" y="67.564" size="1.778" layer="96"/>
+</instance>
+<instance part="LEDB2" gate="HEADER" x="132.08" y="58.42" smashed="yes">
+<attribute name="NAME" x="118.364" y="57.404" size="1.778" layer="96"/>
+</instance>
+<instance part="LEDB3" gate="HEADER" x="132.08" y="48.26" smashed="yes">
+<attribute name="NAME" x="118.364" y="47.244" size="1.778" layer="96"/>
+</instance>
+<instance part="LEDB4" gate="HEADER" x="132.08" y="38.1" smashed="yes">
+<attribute name="NAME" x="118.364" y="37.084" size="1.778" layer="96"/>
+</instance>
+<instance part="LEDB5" gate="HEADER" x="132.08" y="27.94" smashed="yes">
+<attribute name="NAME" x="118.364" y="26.924" size="1.778" layer="96"/>
+</instance>
+<instance part="LEDB6" gate="HEADER" x="132.08" y="17.78" smashed="yes">
+<attribute name="NAME" x="118.364" y="16.764" size="1.778" layer="96"/>
+</instance>
+<instance part="LEDB7" gate="HEADER" x="132.08" y="7.62" smashed="yes">
+<attribute name="NAME" x="118.364" y="6.604" size="1.778" layer="96"/>
+</instance>
+<instance part="LEDB8" gate="HEADER" x="132.08" y="-2.54" smashed="yes">
+<attribute name="NAME" x="118.364" y="-3.556" size="1.778" layer="96"/>
+</instance>
+<instance part="LEDR1" gate="HEADER" x="132.08" y="63.5" smashed="yes">
+<attribute name="NAME" x="118.364" y="62.484" size="1.778" layer="96"/>
+</instance>
+<instance part="LEDR2" gate="HEADER" x="132.08" y="53.34" smashed="yes">
+<attribute name="NAME" x="118.364" y="52.324" size="1.778" layer="96"/>
+</instance>
+<instance part="LEDR3" gate="HEADER" x="132.08" y="43.18" smashed="yes">
+<attribute name="NAME" x="118.364" y="42.164" size="1.778" layer="96"/>
+</instance>
+<instance part="LEDR4" gate="HEADER" x="132.08" y="33.02" smashed="yes">
+<attribute name="NAME" x="118.364" y="32.004" size="1.778" layer="96"/>
+</instance>
+<instance part="LEDR5" gate="HEADER" x="132.08" y="22.86" smashed="yes">
+<attribute name="NAME" x="118.364" y="21.844" size="1.778" layer="96"/>
+</instance>
+<instance part="LEDR6" gate="HEADER" x="132.08" y="12.7" smashed="yes">
+<attribute name="NAME" x="118.364" y="11.684" size="1.778" layer="96"/>
+</instance>
+<instance part="LEDR7" gate="HEADER" x="132.08" y="2.54" smashed="yes">
+<attribute name="NAME" x="118.364" y="1.524" size="1.778" layer="96"/>
+</instance>
+<instance part="LEDR8" gate="HEADER" x="132.08" y="-7.62" smashed="yes">
+<attribute name="NAME" x="118.364" y="-8.636" size="1.778" layer="96"/>
+</instance>
 </instances>
 <busses>
 </busses>
