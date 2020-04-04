@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="8.5.2">
+<eagle version="9.5.0">
 <drawing>
 <settings>
-<setting alwaysvectorfont="yes"/>
+<setting alwaysvectorfont="no"/>
 <setting keepoldvectorfont="yes"/>
 <setting verticaltext="up"/>
 </settings>
@@ -391,6 +391,9 @@ einem neuen Namen ab.</description>
 <param name="checkRestrict" value="1"/>
 <param name="checkStop" value="0"/>
 <param name="checkValues" value="0"/>
+<param name="checkNames" value="1"/>
+<param name="checkWireStubs" value="1"/>
+<param name="checkPolygonWidth" value="0"/>
 <param name="useDiameter" value="13"/>
 <param name="maxErrors" value="50"/>
 </designrules>
@@ -491,14 +494,30 @@ einem neuen Namen ab.</description>
 </pass>
 </autorouter>
 <elements>
-<element name="U$1" library="controls" package="WQP-PJ301M-12_JACK" value="WQP-PJ301M-12_JACK" x="34.925" y="54.61" rot="R180"/>
-<element name="U$2" library="controls" package="WQP-PJ301M-12_JACK" value="WQP-PJ301M-12_JACK" x="51.1175" y="47.9425" rot="R135"/>
-<element name="U$3" library="controls" package="WQP-PJ301M-12_JACK" value="WQP-PJ301M-12_JACK" x="57.785" y="31.75" rot="R90"/>
-<element name="U$4" library="controls" package="WQP-PJ301M-12_JACK" value="WQP-PJ301M-12_JACK" x="51.1175" y="15.5575" rot="R45"/>
-<element name="U$5" library="controls" package="WQP-PJ301M-12_JACK" value="WQP-PJ301M-12_JACK" x="34.925" y="8.89"/>
-<element name="U$6" library="controls" package="WQP-PJ301M-12_JACK" value="WQP-PJ301M-12_JACK" x="18.7325" y="15.5575" rot="R315"/>
-<element name="U$7" library="controls" package="WQP-PJ301M-12_JACK" value="WQP-PJ301M-12_JACK" x="12.065" y="31.75" rot="R270"/>
-<element name="U$8" library="controls" package="WQP-PJ301M-12_JACK" value="WQP-PJ301M-12_JACK" x="18.7325" y="47.9425" rot="R225"/>
+<element name="U$1" library="controls" package="WQP-PJ301M-12_JACK" value="WQP-PJ301M-12_JACK" x="34.925" y="54.61" smashed="yes" rot="R180">
+<attribute name="NAME" x="39.6748" y="59.0804" size="1.27" layer="21" rot="R270"/>
+</element>
+<element name="U$2" library="controls" package="WQP-PJ301M-12_JACK" value="WQP-PJ301M-12_JACK" x="51.1175" y="47.9425" smashed="yes" rot="R135">
+<attribute name="NAME" x="57.637165625" y="47.74493125" size="1.27" layer="21" rot="R225"/>
+</element>
+<element name="U$3" library="controls" package="WQP-PJ301M-12_JACK" value="WQP-PJ301M-12_JACK" x="57.785" y="31.75" smashed="yes" rot="R90">
+<attribute name="NAME" x="62.2554" y="27.0002" size="1.27" layer="21" rot="R180"/>
+</element>
+<element name="U$4" library="controls" package="WQP-PJ301M-12_JACK" value="WQP-PJ301M-12_JACK" x="51.1175" y="15.5575" smashed="yes" rot="R45">
+<attribute name="NAME" x="50.91993125" y="9.03783125" size="1.27" layer="21" rot="R135"/>
+</element>
+<element name="U$5" library="controls" package="WQP-PJ301M-12_JACK" value="WQP-PJ301M-12_JACK" x="34.925" y="8.89" smashed="yes">
+<attribute name="NAME" x="30.1752" y="4.4196" size="1.27" layer="21" rot="R90"/>
+</element>
+<element name="U$6" library="controls" package="WQP-PJ301M-12_JACK" value="WQP-PJ301M-12_JACK" x="18.7325" y="15.5575" smashed="yes" rot="R315">
+<attribute name="NAME" x="12.21283125" y="15.755065625" size="1.27" layer="21" rot="R45"/>
+</element>
+<element name="U$7" library="controls" package="WQP-PJ301M-12_JACK" value="WQP-PJ301M-12_JACK" x="12.065" y="31.75" smashed="yes" rot="R270">
+<attribute name="NAME" x="7.5946" y="36.4998" size="1.27" layer="21"/>
+</element>
+<element name="U$8" library="controls" package="WQP-PJ301M-12_JACK" value="WQP-PJ301M-12_JACK" x="18.7325" y="47.9425" smashed="yes" rot="R225">
+<attribute name="NAME" x="18.930065625" y="54.462165625" size="1.27" layer="21" rot="R315"/>
+</element>
 <element name="LEDB_1" library="connectors" package="HEADER/MALE/01" value="HEADER/MALE/01" x="32.385" y="42.545" smashed="yes" rot="R90"/>
 <element name="LEDR_1" library="connectors" package="HEADER/MALE/01" value="HEADER/MALE/01" x="37.465" y="42.545" smashed="yes" rot="R90"/>
 <element name="LEDC_1" library="connectors" package="HEADER/MALE/01" value="HEADER/MALE/01" x="34.925" y="42.545" smashed="yes" rot="R90"/>
@@ -523,61 +542,168 @@ einem neuen Namen ab.</description>
 <element name="LEDB_8" library="connectors" package="HEADER/MALE/01" value="HEADER/MALE/01" x="25.50895" y="37.57395" smashed="yes" rot="R135"/>
 <element name="LEDC_8" library="connectors" package="HEADER/MALE/01" value="HEADER/MALE/01" x="27.305003125" y="39.36999375" smashed="yes" rot="R135"/>
 <element name="LEDR_8" library="connectors" package="HEADER/MALE/01" value="HEADER/MALE/01" x="29.101053125" y="41.166053125" smashed="yes" rot="R135"/>
-<element name="RATE" library="controls" package="9MM_SNAP-IN_POT" value="50k" x="34.925" y="93.98"/>
-<element name="RATE_JCK" library="controls" package="WQP-PJ301M-12_JACK" value="WQP-PJ301M-12_JACK" x="34.925" y="71.12"/>
-<element name="TRIGGER_JCK" library="controls" package="WQP-PJ301M-12_JACK" value="WQP-PJ301M-12_JACK" x="12.065" y="71.12"/>
-<element name="WAVE" library="controls" package="9MM_SNAP-IN_POT" value="100k" x="12.7" y="86.36"/>
-<element name="WAVE_JCK" library="controls" package="WQP-PJ301M-12_JACK" value="WQP-PJ301M-12_JACK" x="23.495" y="71.12"/>
-<element name="U$9" library="mechanical" package="STANDOFF/3.0" value="" x="3.81" y="3.81"/>
-<element name="U$10" library="mechanical" package="STANDOFF/3.0" value="" x="66.04" y="3.81"/>
-<element name="U$11" library="mechanical" package="STANDOFF/3.0" value="" x="3.81" y="96.52"/>
-<element name="U$12" library="mechanical" package="STANDOFF/3.0" value="" x="66.04" y="96.52"/>
-<element name="LENGTH" library="controls" package="9MM_SNAP-IN_POT" value="100k" x="57.15" y="86.36"/>
-<element name="GATE_JCK" library="controls" package="WQP-PJ301M-12_JACK" value="WQP-PJ301M-12_JACK" x="57.785" y="71.12"/>
-<element name="LENGTH_JCK" library="controls" package="WQP-PJ301M-12_JACK" value="WQP-PJ301M-12_JACK" x="46.355" y="71.12"/>
-<element name="GND" library="connectors" package="HEADER/MALE/01" value="HEADER/MALE/01" x="1.27" y="71.12" rot="MR180"/>
-<element name="R1" library="resistors" package="RESISTOR/7.5" value="75k" x="42.545" y="90.805" rot="R90"/>
-<element name="R2" library="resistors" package="RESISTOR/7.5" value="75k" x="27.305" y="90.805" rot="R270"/>
-<element name="+12V" library="connectors" package="HEADER/MALE/01" value="HEADER/MALE/01" x="1.27" y="73.66" rot="MR180"/>
-<element name="-12V" library="connectors" package="HEADER/MALE/01" value="HEADER/MALE/01" x="1.27" y="68.58" rot="MR180"/>
-<element name="RATE_POT" library="connectors" package="HEADER/MALE/01" value="HEADER/MALE/01" x="1.27" y="45.72" rot="MR180"/>
-<element name="RATE_CV" library="connectors" package="HEADER/MALE/01" value="HEADER/MALE/01" x="1.27" y="43.18" rot="MR180"/>
-<element name="R3" library="resistors" package="RESISTOR/7.5" value="75k" x="5.08" y="83.185" rot="R270"/>
-<element name="R4" library="resistors" package="RESISTOR/7.5" value="75k" x="20.32" y="83.185" rot="R90"/>
-<element name="WAVE_POT" library="connectors" package="HEADER/MALE/01" value="HEADER/MALE/01" x="1.27" y="50.8" rot="MR180"/>
-<element name="R5" library="resistors" package="RESISTOR/7.5" value="75k" x="64.77" y="83.185" rot="R90"/>
-<element name="R6" library="resistors" package="RESISTOR/7.5" value="75k" x="49.53" y="83.185" rot="R270"/>
-<element name="LENGTH_POT" library="connectors" package="HEADER/MALE/01" value="HEADER/MALE/01" x="1.27" y="40.64" rot="MR180"/>
-<element name="WAVE_CV" library="connectors" package="HEADER/MALE/01" value="HEADER/MALE/01" x="1.27" y="48.26" rot="MR180"/>
-<element name="LENGTH_CV" library="connectors" package="HEADER/MALE/01" value="HEADER/MALE/01" x="1.27" y="38.1" rot="MR180"/>
-<element name="GATE_OUT" library="connectors" package="HEADER/MALE/01" value="HEADER/MALE/01" x="1.27" y="35.56" rot="MR180"/>
-<element name="TRIG_IN" library="connectors" package="HEADER/MALE/01" value="HEADER/MALE/01" x="1.27" y="53.34" rot="MR180"/>
-<element name="OUT1" library="connectors" package="HEADER/MALE/01" value="HEADER/MALE/01" x="68.58" y="53.34" rot="MR0"/>
-<element name="OUT2" library="connectors" package="HEADER/MALE/01" value="HEADER/MALE/01" x="68.58" y="50.8" rot="MR0"/>
-<element name="OUT3" library="connectors" package="HEADER/MALE/01" value="HEADER/MALE/01" x="68.58" y="48.26" rot="MR0"/>
-<element name="OUT4" library="connectors" package="HEADER/MALE/01" value="HEADER/MALE/01" x="68.58" y="45.72" rot="MR0"/>
-<element name="OUT5" library="connectors" package="HEADER/MALE/01" value="HEADER/MALE/01" x="68.58" y="43.18" rot="MR0"/>
-<element name="OUT6" library="connectors" package="HEADER/MALE/01" value="HEADER/MALE/01" x="68.58" y="40.64" rot="MR0"/>
-<element name="OUT7" library="connectors" package="HEADER/MALE/01" value="HEADER/MALE/01" x="68.58" y="38.1" rot="MR0"/>
-<element name="OUT8" library="connectors" package="HEADER/MALE/01" value="HEADER/MALE/01" x="68.58" y="35.56" rot="MR0"/>
-<element name="LEDB1" library="connectors" package="HEADER/MALE/01" value="HEADER/MALE/01" x="68.58" y="27.94" rot="MR0"/>
-<element name="LEDB2" library="connectors" package="HEADER/MALE/01" value="HEADER/MALE/01" x="68.58" y="22.86" rot="MR0"/>
-<element name="LEDB3" library="connectors" package="HEADER/MALE/01" value="HEADER/MALE/01" x="68.58" y="17.78" rot="MR0"/>
-<element name="LEDB4" library="connectors" package="HEADER/MALE/01" value="HEADER/MALE/01" x="68.58" y="12.7" rot="MR0"/>
-<element name="LEDB5" library="connectors" package="HEADER/MALE/01" value="HEADER/MALE/01" x="1.27" y="10.16" rot="MR180"/>
-<element name="LEDB6" library="connectors" package="HEADER/MALE/01" value="HEADER/MALE/01" x="1.27" y="15.24" rot="MR180"/>
-<element name="LEDB7" library="connectors" package="HEADER/MALE/01" value="HEADER/MALE/01" x="1.27" y="20.32" rot="MR180"/>
-<element name="LEDB8" library="connectors" package="HEADER/MALE/01" value="HEADER/MALE/01" x="1.27" y="25.4" rot="MR180"/>
-<element name="LEDR1" library="connectors" package="HEADER/MALE/01" value="HEADER/MALE/01" x="68.58" y="25.4" rot="MR0"/>
-<element name="LEDR2" library="connectors" package="HEADER/MALE/01" value="HEADER/MALE/01" x="68.58" y="20.32" rot="MR0"/>
-<element name="LEDR3" library="connectors" package="HEADER/MALE/01" value="HEADER/MALE/01" x="68.58" y="15.24" rot="MR0"/>
-<element name="LEDR4" library="connectors" package="HEADER/MALE/01" value="HEADER/MALE/01" x="68.58" y="10.16" rot="MR0"/>
-<element name="LEDR5" library="connectors" package="HEADER/MALE/01" value="HEADER/MALE/01" x="1.27" y="12.7" rot="MR180"/>
-<element name="LEDR6" library="connectors" package="HEADER/MALE/01" value="HEADER/MALE/01" x="1.27" y="17.78" rot="MR180"/>
-<element name="LEDR7" library="connectors" package="HEADER/MALE/01" value="HEADER/MALE/01" x="1.27" y="22.86" rot="MR180"/>
-<element name="LEDR8" library="connectors" package="HEADER/MALE/01" value="HEADER/MALE/01" x="1.27" y="27.94" rot="MR180"/>
-<element name="U$13" library="mechanical" package="PIGATRON-LOGO" value="" x="35.56" y="82.55"/>
-<element name="U$14" library="mechanical" package="PIGATRON-LOGO" value="" x="33.9725" y="82.55" rot="MR0"/>
+<element name="RATE" library="controls" package="9MM_SNAP-IN_POT" value="50k" x="34.925" y="93.98" smashed="yes">
+<attribute name="NAME" x="31.115" y="96.52" size="1.0668" layer="25"/>
+<attribute name="VALUE" x="31.115" y="90.17" size="1.27" layer="27"/>
+</element>
+<element name="RATE_JCK" library="controls" package="WQP-PJ301M-12_JACK" value="WQP-PJ301M-12_JACK" x="34.925" y="71.12" smashed="yes">
+<attribute name="NAME" x="30.1752" y="66.6496" size="1.27" layer="21" rot="R90"/>
+</element>
+<element name="TRIGGER_JCK" library="controls" package="WQP-PJ301M-12_JACK" value="WQP-PJ301M-12_JACK" x="12.065" y="71.12" smashed="yes">
+<attribute name="NAME" x="7.3152" y="66.6496" size="1.27" layer="21" rot="R90"/>
+</element>
+<element name="WAVE" library="controls" package="9MM_SNAP-IN_POT" value="100k" x="12.7" y="86.36" smashed="yes">
+<attribute name="NAME" x="8.89" y="88.9" size="1.0668" layer="25"/>
+<attribute name="VALUE" x="8.89" y="82.55" size="1.27" layer="27"/>
+</element>
+<element name="WAVE_JCK" library="controls" package="WQP-PJ301M-12_JACK" value="WQP-PJ301M-12_JACK" x="23.495" y="71.12" smashed="yes">
+<attribute name="NAME" x="18.7452" y="66.6496" size="1.27" layer="21" rot="R90"/>
+</element>
+<element name="U$9" library="mechanical" package="STANDOFF/3.0" value="" x="3.81" y="3.81" smashed="yes"/>
+<element name="U$10" library="mechanical" package="STANDOFF/3.0" value="" x="66.04" y="3.81" smashed="yes"/>
+<element name="U$11" library="mechanical" package="STANDOFF/3.0" value="" x="3.81" y="96.52" smashed="yes"/>
+<element name="U$12" library="mechanical" package="STANDOFF/3.0" value="" x="66.04" y="96.52" smashed="yes"/>
+<element name="LENGTH" library="controls" package="9MM_SNAP-IN_POT" value="100k" x="57.15" y="86.36" smashed="yes">
+<attribute name="NAME" x="53.34" y="88.9" size="1.0668" layer="25"/>
+<attribute name="VALUE" x="53.34" y="82.55" size="1.27" layer="27"/>
+</element>
+<element name="GATE_JCK" library="controls" package="WQP-PJ301M-12_JACK" value="WQP-PJ301M-12_JACK" x="57.785" y="71.12" smashed="yes">
+<attribute name="NAME" x="53.0352" y="66.6496" size="1.27" layer="21" rot="R90"/>
+</element>
+<element name="LENGTH_JCK" library="controls" package="WQP-PJ301M-12_JACK" value="WQP-PJ301M-12_JACK" x="46.355" y="71.12" smashed="yes">
+<attribute name="NAME" x="41.6052" y="66.6496" size="1.27" layer="21" rot="R90"/>
+</element>
+<element name="GND" library="connectors" package="HEADER/MALE/01" value="HEADER/MALE/01" x="1.27" y="71.12" smashed="yes" rot="MR180">
+<attribute name="NAME" x="3.175" y="71.374" size="1.27" layer="26" ratio="10" rot="MR180"/>
+</element>
+<element name="R1" library="resistors" package="RESISTOR/7.5" value="39k" x="42.545" y="90.805" smashed="yes" rot="R90">
+<attribute name="NAME" x="43.053" y="88.265" size="1.27" layer="25" ratio="10" rot="R90"/>
+<attribute name="VALUE" x="41.1988" y="87.884" size="1.27" layer="27" ratio="10" rot="R90"/>
+</element>
+<element name="R2" library="resistors" package="RESISTOR/7.5" value="39k" x="27.305" y="90.805" smashed="yes" rot="R270">
+<attribute name="NAME" x="26.797" y="93.345" size="1.27" layer="25" ratio="10" rot="R270"/>
+<attribute name="VALUE" x="28.6512" y="93.726" size="1.27" layer="27" ratio="10" rot="R270"/>
+</element>
+<element name="+12V" library="connectors" package="HEADER/MALE/01" value="HEADER/MALE/01" x="1.27" y="73.66" smashed="yes" rot="MR180">
+<attribute name="NAME" x="3.175" y="73.914" size="1.27" layer="26" ratio="10" rot="MR180"/>
+</element>
+<element name="-12V" library="connectors" package="HEADER/MALE/01" value="HEADER/MALE/01" x="1.27" y="68.58" smashed="yes" rot="MR180">
+<attribute name="NAME" x="3.175" y="68.834" size="1.27" layer="26" ratio="10" rot="MR180"/>
+</element>
+<element name="RATE_POT" library="connectors" package="HEADER/MALE/01" value="HEADER/MALE/01" x="1.27" y="45.72" smashed="yes" rot="MR180">
+<attribute name="NAME" x="3.175" y="45.974" size="1.27" layer="26" ratio="10" rot="MR180"/>
+</element>
+<element name="RATE_CV" library="connectors" package="HEADER/MALE/01" value="HEADER/MALE/01" x="1.27" y="43.18" smashed="yes" rot="MR180">
+<attribute name="NAME" x="3.175" y="43.434" size="1.27" layer="26" ratio="10" rot="MR180"/>
+</element>
+<element name="R3" library="resistors" package="RESISTOR/7.5" value="39k" x="5.08" y="83.185" smashed="yes" rot="R270">
+<attribute name="NAME" x="4.572" y="85.725" size="1.27" layer="25" ratio="10" rot="R270"/>
+<attribute name="VALUE" x="6.4262" y="86.106" size="1.27" layer="27" ratio="10" rot="R270"/>
+</element>
+<element name="R4" library="resistors" package="RESISTOR/7.5" value="39k" x="20.32" y="83.185" smashed="yes" rot="R90">
+<attribute name="NAME" x="20.828" y="80.645" size="1.27" layer="25" ratio="10" rot="R90"/>
+<attribute name="VALUE" x="18.9738" y="80.264" size="1.27" layer="27" ratio="10" rot="R90"/>
+</element>
+<element name="WAVE_POT" library="connectors" package="HEADER/MALE/01" value="HEADER/MALE/01" x="1.27" y="50.8" smashed="yes" rot="MR180">
+<attribute name="NAME" x="3.175" y="51.054" size="1.27" layer="26" ratio="10" rot="MR180"/>
+</element>
+<element name="R5" library="resistors" package="RESISTOR/7.5" value="39k" x="64.77" y="83.185" smashed="yes" rot="R90">
+<attribute name="NAME" x="65.278" y="80.645" size="1.27" layer="25" ratio="10" rot="R90"/>
+<attribute name="VALUE" x="63.4238" y="80.264" size="1.27" layer="27" ratio="10" rot="R90"/>
+</element>
+<element name="R6" library="resistors" package="RESISTOR/7.5" value="39k" x="49.53" y="83.185" smashed="yes" rot="R270">
+<attribute name="NAME" x="49.022" y="85.725" size="1.27" layer="25" ratio="10" rot="R270"/>
+<attribute name="VALUE" x="50.8762" y="86.106" size="1.27" layer="27" ratio="10" rot="R270"/>
+</element>
+<element name="LENGTH_POT" library="connectors" package="HEADER/MALE/01" value="HEADER/MALE/01" x="1.27" y="40.64" smashed="yes" rot="MR180">
+<attribute name="NAME" x="3.175" y="40.894" size="1.27" layer="26" ratio="10" rot="MR180"/>
+</element>
+<element name="WAVE_CV" library="connectors" package="HEADER/MALE/01" value="HEADER/MALE/01" x="1.27" y="48.26" smashed="yes" rot="MR180">
+<attribute name="NAME" x="3.175" y="48.514" size="1.27" layer="26" ratio="10" rot="MR180"/>
+</element>
+<element name="LENGTH_CV" library="connectors" package="HEADER/MALE/01" value="HEADER/MALE/01" x="1.27" y="38.1" smashed="yes" rot="MR180">
+<attribute name="NAME" x="3.175" y="38.354" size="1.27" layer="26" ratio="10" rot="MR180"/>
+</element>
+<element name="GATE_OUT" library="connectors" package="HEADER/MALE/01" value="HEADER/MALE/01" x="1.27" y="35.56" smashed="yes" rot="MR180">
+<attribute name="NAME" x="3.175" y="35.814" size="1.27" layer="26" ratio="10" rot="MR180"/>
+</element>
+<element name="TRIG_IN" library="connectors" package="HEADER/MALE/01" value="HEADER/MALE/01" x="1.27" y="53.34" smashed="yes" rot="MR180">
+<attribute name="NAME" x="3.175" y="53.594" size="1.27" layer="26" ratio="10" rot="MR180"/>
+</element>
+<element name="OUT1" library="connectors" package="HEADER/MALE/01" value="HEADER/MALE/01" x="68.58" y="53.34" smashed="yes" rot="MR0">
+<attribute name="NAME" x="66.675" y="53.086" size="1.27" layer="26" ratio="10" rot="MR0"/>
+</element>
+<element name="OUT2" library="connectors" package="HEADER/MALE/01" value="HEADER/MALE/01" x="68.58" y="50.8" smashed="yes" rot="MR0">
+<attribute name="NAME" x="66.675" y="50.546" size="1.27" layer="26" ratio="10" rot="MR0"/>
+</element>
+<element name="OUT3" library="connectors" package="HEADER/MALE/01" value="HEADER/MALE/01" x="68.58" y="48.26" smashed="yes" rot="MR0">
+<attribute name="NAME" x="66.675" y="48.006" size="1.27" layer="26" ratio="10" rot="MR0"/>
+</element>
+<element name="OUT4" library="connectors" package="HEADER/MALE/01" value="HEADER/MALE/01" x="68.58" y="45.72" smashed="yes" rot="MR0">
+<attribute name="NAME" x="66.675" y="45.466" size="1.27" layer="26" ratio="10" rot="MR0"/>
+</element>
+<element name="OUT5" library="connectors" package="HEADER/MALE/01" value="HEADER/MALE/01" x="68.58" y="43.18" smashed="yes" rot="MR0">
+<attribute name="NAME" x="66.675" y="42.926" size="1.27" layer="26" ratio="10" rot="MR0"/>
+</element>
+<element name="OUT6" library="connectors" package="HEADER/MALE/01" value="HEADER/MALE/01" x="68.58" y="40.64" smashed="yes" rot="MR0">
+<attribute name="NAME" x="66.675" y="40.386" size="1.27" layer="26" ratio="10" rot="MR0"/>
+</element>
+<element name="OUT7" library="connectors" package="HEADER/MALE/01" value="HEADER/MALE/01" x="68.58" y="38.1" smashed="yes" rot="MR0">
+<attribute name="NAME" x="66.675" y="37.846" size="1.27" layer="26" ratio="10" rot="MR0"/>
+</element>
+<element name="OUT8" library="connectors" package="HEADER/MALE/01" value="HEADER/MALE/01" x="68.58" y="35.56" smashed="yes" rot="MR0">
+<attribute name="NAME" x="66.675" y="35.306" size="1.27" layer="26" ratio="10" rot="MR0"/>
+</element>
+<element name="LEDB1" library="connectors" package="HEADER/MALE/01" value="HEADER/MALE/01" x="68.58" y="27.94" smashed="yes" rot="MR0">
+<attribute name="NAME" x="66.675" y="27.686" size="1.27" layer="26" ratio="10" rot="MR0"/>
+</element>
+<element name="LEDB2" library="connectors" package="HEADER/MALE/01" value="HEADER/MALE/01" x="68.58" y="22.86" smashed="yes" rot="MR0">
+<attribute name="NAME" x="66.675" y="22.606" size="1.27" layer="26" ratio="10" rot="MR0"/>
+</element>
+<element name="LEDB3" library="connectors" package="HEADER/MALE/01" value="HEADER/MALE/01" x="68.58" y="17.78" smashed="yes" rot="MR0">
+<attribute name="NAME" x="66.675" y="17.526" size="1.27" layer="26" ratio="10" rot="MR0"/>
+</element>
+<element name="LEDB4" library="connectors" package="HEADER/MALE/01" value="HEADER/MALE/01" x="68.58" y="12.7" smashed="yes" rot="MR0">
+<attribute name="NAME" x="66.675" y="12.446" size="1.27" layer="26" ratio="10" rot="MR0"/>
+</element>
+<element name="LEDB5" library="connectors" package="HEADER/MALE/01" value="HEADER/MALE/01" x="1.27" y="10.16" smashed="yes" rot="MR180">
+<attribute name="NAME" x="3.175" y="10.414" size="1.27" layer="26" ratio="10" rot="MR180"/>
+</element>
+<element name="LEDB6" library="connectors" package="HEADER/MALE/01" value="HEADER/MALE/01" x="1.27" y="15.24" smashed="yes" rot="MR180">
+<attribute name="NAME" x="3.175" y="15.494" size="1.27" layer="26" ratio="10" rot="MR180"/>
+</element>
+<element name="LEDB7" library="connectors" package="HEADER/MALE/01" value="HEADER/MALE/01" x="1.27" y="20.32" smashed="yes" rot="MR180">
+<attribute name="NAME" x="3.175" y="20.574" size="1.27" layer="26" ratio="10" rot="MR180"/>
+</element>
+<element name="LEDB8" library="connectors" package="HEADER/MALE/01" value="HEADER/MALE/01" x="1.27" y="25.4" smashed="yes" rot="MR180">
+<attribute name="NAME" x="3.175" y="25.654" size="1.27" layer="26" ratio="10" rot="MR180"/>
+</element>
+<element name="LEDR1" library="connectors" package="HEADER/MALE/01" value="HEADER/MALE/01" x="68.58" y="25.4" smashed="yes" rot="MR0">
+<attribute name="NAME" x="66.675" y="25.146" size="1.27" layer="26" ratio="10" rot="MR0"/>
+</element>
+<element name="LEDR2" library="connectors" package="HEADER/MALE/01" value="HEADER/MALE/01" x="68.58" y="20.32" smashed="yes" rot="MR0">
+<attribute name="NAME" x="66.675" y="20.066" size="1.27" layer="26" ratio="10" rot="MR0"/>
+</element>
+<element name="LEDR3" library="connectors" package="HEADER/MALE/01" value="HEADER/MALE/01" x="68.58" y="15.24" smashed="yes" rot="MR0">
+<attribute name="NAME" x="66.675" y="14.986" size="1.27" layer="26" ratio="10" rot="MR0"/>
+</element>
+<element name="LEDR4" library="connectors" package="HEADER/MALE/01" value="HEADER/MALE/01" x="68.58" y="10.16" smashed="yes" rot="MR0">
+<attribute name="NAME" x="66.675" y="9.906" size="1.27" layer="26" ratio="10" rot="MR0"/>
+</element>
+<element name="LEDR5" library="connectors" package="HEADER/MALE/01" value="HEADER/MALE/01" x="1.27" y="12.7" smashed="yes" rot="MR180">
+<attribute name="NAME" x="3.175" y="12.954" size="1.27" layer="26" ratio="10" rot="MR180"/>
+</element>
+<element name="LEDR6" library="connectors" package="HEADER/MALE/01" value="HEADER/MALE/01" x="1.27" y="17.78" smashed="yes" rot="MR180">
+<attribute name="NAME" x="3.175" y="18.034" size="1.27" layer="26" ratio="10" rot="MR180"/>
+</element>
+<element name="LEDR7" library="connectors" package="HEADER/MALE/01" value="HEADER/MALE/01" x="1.27" y="22.86" smashed="yes" rot="MR180">
+<attribute name="NAME" x="3.175" y="23.114" size="1.27" layer="26" ratio="10" rot="MR180"/>
+</element>
+<element name="LEDR8" library="connectors" package="HEADER/MALE/01" value="HEADER/MALE/01" x="1.27" y="27.94" smashed="yes" rot="MR180">
+<attribute name="NAME" x="3.175" y="28.194" size="1.27" layer="26" ratio="10" rot="MR180"/>
+</element>
+<element name="U$13" library="mechanical" package="PIGATRON-LOGO" value="" x="35.56" y="82.55" smashed="yes"/>
+<element name="U$14" library="mechanical" package="PIGATRON-LOGO" value="" x="33.9725" y="82.55" smashed="yes" rot="MR0"/>
 </elements>
 <signals>
 <signal name="PE">
@@ -1018,6 +1144,13 @@ einem neuen Namen ab.</description>
 <wire x1="12.065" y1="75.565" x2="12.065" y2="76.12" width="0.3048" layer="1"/>
 </signal>
 </signals>
+<mfgpreviewcolors>
+<mfgpreviewcolor name="soldermaskcolor" color="0xC8008000"/>
+<mfgpreviewcolor name="silkscreencolor" color="0xFFFEFEFE"/>
+<mfgpreviewcolor name="backgroundcolor" color="0xFF282828"/>
+<mfgpreviewcolor name="coppercolor" color="0xFFFFBF00"/>
+<mfgpreviewcolor name="substratecolor" color="0xFF786E46"/>
+</mfgpreviewcolors>
 </board>
 </drawing>
 </eagle>
