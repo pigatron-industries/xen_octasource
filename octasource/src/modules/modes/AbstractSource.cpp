@@ -14,6 +14,7 @@ float AbstractSource::getOutput(uint8_t index) {
 void AbstractSource::init() {
     for(int i = 0; i < OSCILLATOR_COUNT; i++) {
         _oscillators[i].setPosition(0);
+        _oscillators[i].setCycle(true);
     }
 }
 

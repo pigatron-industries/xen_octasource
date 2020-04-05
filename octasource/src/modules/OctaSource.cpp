@@ -3,6 +3,7 @@
 #include "modes/PhasedSource.h"
 #include "modes/MultipliedSource.h"
 #include "modes/UncorrelatedSource.h"
+#include "modes/BurstSource.h"
 
 #define AMP_SCALE 5
 
@@ -11,6 +12,7 @@ OctaSource::OctaSource() {
     _source[0] = new PhasedSource();
     _source[1] = new MultipliedSource();
     _source[2] = new UncorrelatedSource();
+    _source[3] = new BurstSource();
     initMode();
 }
 

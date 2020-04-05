@@ -6,14 +6,7 @@
 #include "generators/Oscillator.h"
 #include "modes/AbstractSource.h"
 
-#define MODE_COUNT 3
-
-enum OctasourceMode_t {
-  	modePhased = 0,
-    modeMultiplied = 1,
-    modeUncorrelated = 2,
-    modeBurst = 3
-};
+#define MODE_COUNT 4
 
 
 class OctaSource {

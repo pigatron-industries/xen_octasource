@@ -19,6 +19,7 @@ public:
     void setAmplitude(float amplitude);
     void setWave(float wave);
     void setPosition(float position);
+    void setCycle(bool cycle);
 
 private:
     float _frequencyHz;
@@ -26,10 +27,15 @@ private:
     float _wave;
     float _position;
 
+    bool _cycle;
+
     RampWave _rampWave;
     TriangleWave _triangleWave;
     SineWave _sineWave;
     SquareWave _squareWave;
+
+
+    void updatePosition(unsigned long timeDiff);
 };
 
 #endif

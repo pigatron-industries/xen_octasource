@@ -9,6 +9,7 @@ Oscillator::Oscillator() {
       _frequencyHz = 1;
       _wave = 0;
       _amplitude = MAX_AMPLITUDE;
+      _cycle = true;
 }
 
 void Oscillator::setFrequencyHz(float frequencyHz) {
@@ -27,14 +28,15 @@ void Oscillator::setPosition(float position) {
     _position = position;
 }
 
-float Oscillator::execute(unsigned long timeDiff) {
+void Oscillator::setCycle(bool cycle) {
+    _cycle = cycle;
+}
 
-    // update position
-    _position += (timeDiff * _frequencyHz);
-    if(_position > MAX_POSITION) {
-        _position -= MAX_POSITION;
-    } else if (_position < 0) {
-        _position += MAX_POSITION;
+float Oscillator::execute(unsigned long timeDiff) {
+    updatePosition(timeDiff);
+
+    if(!_cycle && (_position < 0 || _position > MAX_POSITION)) {
+        return 0;
     }
 
     float value = 0;
@@ -50,4 +52,17 @@ float Oscillator::execute(unsigned long timeDiff) {
 
     float voltage = value / MAX_POSITION * _amplitude;
     return voltage;
+}
+
+void Oscillator::updatePosition(unsigned long timeDiff) {
+    float newPos = _position + (timeDiff * _frequencyHz);
+    if(_cycle) {
+        if(newPos > MAX_POSITION) {
+            newPos -= MAX_POSITION;
+        } else if (newPos < 0) {
+            newPos += MAX_POSITION;
+        }
+    }
+
+    _position = newPos;
 }
