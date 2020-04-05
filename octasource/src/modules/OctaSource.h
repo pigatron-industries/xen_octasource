@@ -3,7 +3,7 @@
 
 #include <inttypes.h>
 
-#include "Oscillator.h"
+#include "generators/Oscillator.h"
 
 #define OSCILLATOR_COUNT 8
 

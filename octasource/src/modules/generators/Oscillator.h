@@ -3,11 +3,10 @@
 
 #include <inttypes.h>
 
-#include "../drivers/CvInputOutput.h"
-#include "../waveforms/RampWave.h"
-#include "../waveforms/TriangleWave.h"
-#include "../waveforms/SineWave.h"
-#include "../waveforms/SquareWave.h"
+#include "waveforms/RampWave.h"
+#include "waveforms/TriangleWave.h"
+#include "waveforms/SineWave.h"
+#include "waveforms/SquareWave.h"
 
 
 class Oscillator {

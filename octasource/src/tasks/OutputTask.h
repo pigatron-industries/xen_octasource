@@ -5,7 +5,6 @@
 
 #include "../lib/task/Task.h"
 #include "../drivers/CvInputOutput.h"
-#include "../waveforms/RampWave.h"
 #include "../modules/OctaSource.h"
 
 class OutputTask : public Task {
