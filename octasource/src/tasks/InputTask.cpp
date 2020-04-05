@@ -37,7 +37,7 @@ void InputTask::execute() {
             switchMode();
         }
     }
-    
+
     if(_trigger.update(getValue(TRIGGER_IN_PIN))) {
         if(_trigger.risingEdge()) {
             _octasource.trigger();
@@ -72,7 +72,7 @@ void InputTask::switchMode() {
     for(int i = 0; i < OSCILLATOR_COUNT; i++) {
         _cvInputOutput.setVoltage(OUTPUT_CV_PIN_START+i, 0);
     }
-    OctasourceMode_t modeNum = _octasource.getMode();
+    uint8_t modeNum = _octasource.getMode();
     long startTime = millis();
     long time = millis();
     while(time - startTime < 500) {

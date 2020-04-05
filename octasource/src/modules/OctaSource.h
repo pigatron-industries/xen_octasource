@@ -4,8 +4,9 @@
 #include <inttypes.h>
 
 #include "generators/Oscillator.h"
+#include "modes/AbstractSource.h"
 
-#define OSCILLATOR_COUNT 8
+#define MODE_COUNT 3
 
 enum OctasourceMode_t {
   	modePhased = 0,
@@ -19,8 +20,8 @@ class OctaSource {
 
 public:
     OctaSource();
-    void setMode(OctasourceMode_t mode);
     void cycleMode();
+
 
     void execute(unsigned long timeDiff);
     float getOutput(uint8_t index);
@@ -30,23 +31,30 @@ public:
     void setWave(float wave);
     void trigger();
 
-    OctasourceMode_t getMode() {
+    uint8_t getMode() {
         return _mode;
     }
 
 private:
-    Oscillator _oscillators[OSCILLATOR_COUNT];
-    float _outputs[OSCILLATOR_COUNT];
 
-    OctasourceMode_t _mode;
+    AbstractSource* _source[MODE_COUNT];
+    uint8_t _mode;
 
-    void setFrequencyAll(float frequencyHz);
-    void setFrequencyMultipliedMode(float frequencyHz);
-    void setFrequencyUncorrelatedMode(float frequencyHz);
+    void initMode();
 
-    void initPhaseAll();
-    void initPhasedMode();
-    void initUncorrelatedMode();
+
+
+
+    // Oscillator _oscillators[OSCILLATOR_COUNT];
+    // float _outputs[OSCILLATOR_COUNT];
+    //
+    // void setFrequencyAll(float frequencyHz);
+    // void setFrequencyMultipliedMode(float frequencyHz);
+    // void setFrequencyUncorrelatedMode(float frequencyHz);
+    //
+    // void initPhaseAll();
+    // void initPhasedMode();
+    // void initUncorrelatedMode();
 
 
 
