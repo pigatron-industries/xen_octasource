@@ -38,6 +38,9 @@ uint16_t CvInputOutput::getValue(uint8_t index) {
 void CvInputOutput::setVoltage(uint8_t index, float voltage) {
     float absVoltage = voltage - MIN_VOLTAGE;
     float value = absVoltage * FACTOR;
+    if(value > MAX_VALUE) {
+        value = MAX_VALUE;
+    }
     setValue(index, (uint16_t)value);
 }
 
