@@ -19,6 +19,7 @@
 
 #define OUTPUT_CV_PIN_START 10
 #define OUTPUT_GATE 2
+#define OUTPUT_GATE_TIME 10000
 
 // Other config
 #define SERIAL_BAUD 115200

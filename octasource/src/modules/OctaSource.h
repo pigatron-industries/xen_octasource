@@ -15,9 +15,10 @@ public:
     OctaSource();
     void cycleMode();
 
-
     void execute(unsigned long timeDiff);
+
     float getOutput(uint8_t index);
+    bool getTriggerOut();
 
     void setFrequencyHz(float frequencyHz);
     void setAmplitude(float amplitude);

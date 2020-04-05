@@ -33,6 +33,11 @@ void Oscillator::setCycle(bool cycle) {
 }
 
 float Oscillator::execute(unsigned long timeDiff) {
+    // reset trigger
+    if(_trigger) {
+        _trigger = false;
+    }
+
     updatePosition(timeDiff);
 
     if(!_cycle && (_position < 0 || _position > MAX_POSITION)) {
@@ -59,8 +64,15 @@ void Oscillator::updatePosition(unsigned long timeDiff) {
     if(_cycle) {
         if(newPos > MAX_POSITION) {
             newPos -= MAX_POSITION;
+            _trigger = true;
         } else if (newPos < 0) {
             newPos += MAX_POSITION;
+            _trigger = true;
+        }
+    } else {
+        // trigger on 0 crossing
+        if(_position <= 0 && newPos > 0) {
+            _trigger = true;
         }
     }
 

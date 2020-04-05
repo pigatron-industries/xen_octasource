@@ -11,6 +11,16 @@ float AbstractSource::getOutput(uint8_t index) {
     return _outputs[index];
 }
 
+bool AbstractSource::getTriggerOut() {
+    for(int i = 0; i < OSCILLATOR_COUNT; i++) {
+        bool trigger = _oscillators[i].getTriggerOut();
+        if(trigger) {
+            return true;
+        }
+    }
+    return false;
+}
+
 void AbstractSource::init() {
     for(int i = 0; i < OSCILLATOR_COUNT; i++) {
         _oscillators[i].setPosition(0);

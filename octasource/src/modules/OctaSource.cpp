@@ -51,3 +51,7 @@ void OctaSource::execute(unsigned long timeDiff) {
 float OctaSource::getOutput(uint8_t index) {
     return _source[_mode]->getOutput(index);
 }
+
+bool OctaSource::getTriggerOut() {
+    return _source[_mode]->getTriggerOut();
+}

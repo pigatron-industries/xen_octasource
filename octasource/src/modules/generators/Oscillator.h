@@ -21,7 +21,16 @@ public:
     void setPosition(float position);
     void setCycle(bool cycle);
 
+    float getVoltage() {
+        return _voltage;
+    }
+
+    float getTriggerOut() {
+        return _trigger;
+    }
+
 private:
+    // controls
     float _frequencyHz;
     float _amplitude;
     float _wave;
@@ -29,6 +38,11 @@ private:
 
     bool _cycle;
 
+    // outputs
+    float _voltage;
+    bool _trigger;
+
+    // waves
     RampWave _rampWave;
     TriangleWave _triangleWave;
     SineWave _sineWave;

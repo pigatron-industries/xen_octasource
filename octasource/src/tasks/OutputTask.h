@@ -4,6 +4,7 @@
 #include <inttypes.h>
 
 #include "../lib/task/Task.h"
+#include "../lib/io/Timer.h"
 #include "../drivers/CvInputOutput.h"
 #include "../modules/OctaSource.h"
 
@@ -17,6 +18,8 @@ public:
 private:
     CvInputOutput& _cvInputOutput;
     OctaSource& _octasource;
+
+    Timer _triggerTimer;
 
 };
 

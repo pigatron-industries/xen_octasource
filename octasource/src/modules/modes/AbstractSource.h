@@ -12,6 +12,7 @@ class AbstractSource {
 public:
     void execute(unsigned long timeDiff);
     float getOutput(uint8_t index);
+    bool getTriggerOut();
 
     virtual void init();
     virtual void setFrequencyHz(float frequencyHz);
