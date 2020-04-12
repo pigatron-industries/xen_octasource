@@ -8,12 +8,15 @@
 #define RATE_EXP_START_FREQ 0.1
 #define RATE_EXP_MULT 4
 
+#define TRANSMIT_TIME 10000
+
 
 InputTask::InputTask(CvInputOutput& cvInputOutput, OctaSource& octasource) :
   AbstractInputTask(cvInputOutput),
   _octasource(octasource),
   _modeSwitch(MODE_SWITCH_PIN, 100) {
     _calibrationMode = false;
+    _slaveMode = false;
     AbstractInputTask::setPotCalibration(MODE_SWITCH_PIN, CALIBRATED_POT_SIZE, OUTPUT_CV_PIN_START);
     _potCalibration[0] = PotCalibration(RATE_POT_PIN, -5, 5);
     _potCalibration[1] = PotCalibration(LENGTH_POT_PIN, 0, 5);
@@ -21,6 +24,7 @@ InputTask::InputTask(CvInputOutput& cvInputOutput, OctaSource& octasource) :
 }
 
 void InputTask::init() {
+    Serial2.begin(SERIAL_BAUD);
     _cvInputOutput.setPinModeAnalogIn(RATE_POT_PIN);
     _cvInputOutput.setPinModeAnalogIn(RATE_CV_PIN);
     _cvInputOutput.setPinModeAnalogIn(WAVE_POT_PIN);
@@ -33,9 +37,15 @@ void InputTask::init() {
 
 void InputTask::execute() {
     if(_modeSwitch.update()) {
-        if(_modeSwitch.fallingEdge()) {
+        if(_modeSwitch.rose() && _modeSwitch.previousDuration() >= 3000) {
+            switchSlaveMode();
+        }
+        if(_modeSwitch.rose() && _modeSwitch.previousDuration() < 3000) {
             switchMode();
         }
+    }
+    if(_modeSwitch.read() == LOW && _modeSwitch.duration() >= 3000) {
+        return; //TODO indicate mode switch somehow
     }
 
     if(_trigger.update(getValue(TRIGGER_IN_PIN))) {
@@ -44,9 +54,17 @@ void InputTask::execute() {
         }
     }
 
-    float rateVoltage = getCalibratedValue(RATE_POT_PIN) + getValue(RATE_CV_PIN);
-    float rateFrequency = rateVoltageToFrequency(rateVoltage);
-    _octasource.setFrequencyHz(rateFrequency);
+    if(!_slaveMode) {
+        float rateVoltage = getCalibratedValue(RATE_POT_PIN) + getValue(RATE_CV_PIN);
+        float rateFrequency = rateVoltageToFrequency(rateVoltage);
+        _octasource.setFrequencyHz(rateFrequency);
+        sendData(rateFrequency);
+    } else {
+        float rateFrequency = receiveData();
+        if(rateFrequency != 0) {
+            _octasource.setFrequencyHz(rateFrequency);
+        }
+    }
 
     float amplitude = getCalibratedValue(LENGTH_POT_PIN);
     _octasource.setAmplitude(amplitude);
@@ -67,6 +85,8 @@ float InputTask::rateVoltageToFrequency(float voltage) {
 
 void InputTask::switchMode() {
     _octasource.cycleMode();
+    Serial.print("Mode Switch: ");
+    Serial.println(_octasource.getMode());
 
     // Indicate new mode
     for(int i = 0; i < OSCILLATOR_COUNT; i++) {
@@ -82,4 +102,52 @@ void InputTask::switchMode() {
         delay(1);
         time = millis();
     }
+}
+
+void InputTask::switchSlaveMode() {
+    _slaveMode = !_slaveMode;
+    Serial.print("Mode Switch Slave: ");
+    Serial.println(_slaveMode);
+}
+
+void InputTask::sendData(float frequency) {
+    if(_transmitTimer.isStopped()) {
+        union {
+            byte asBytes[4];
+            float asFloat;
+        } data;
+        data.asFloat = frequency;
+        Serial2.print('f');
+        Serial2.write(data.asBytes[0]);
+        Serial2.write(data.asBytes[1]);
+        Serial2.write(data.asBytes[2]);
+        Serial2.write(data.asBytes[3]);
+
+        _transmitTimer.start(TRANSMIT_TIME);
+    }
+}
+
+byte getByte() {
+    while(!Serial2.available()){}
+    return Serial2.read();
+}
+
+float InputTask::receiveData() {
+    if(Serial2.available()) {
+        byte b = getByte();
+        Serial.println(b);
+        if(b == 'f') {
+            union {
+                byte asBytes[4];
+                float asFloat;
+            } data;
+            data.asBytes[0] = getByte();
+            data.asBytes[1] = getByte();
+            data.asBytes[2] = getByte();
+            data.asBytes[3] = getByte();
+            return data.asFloat;
+        }
+    }
+
+    return 0;
 }

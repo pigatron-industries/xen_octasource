@@ -14,7 +14,7 @@ CvInputOutput::CvInputOutput(SPIClass* spiClass, uint8_t convertPin, uint8_t sel
 }
 
 void CvInputOutput::init() {
-    _max11300->setDACmode(ImmediateUpdate);
+    _max11300->setDACmode(SequentialUpdate);
     _max11300->setADCmode(ContinuousSweep);
 }
 
