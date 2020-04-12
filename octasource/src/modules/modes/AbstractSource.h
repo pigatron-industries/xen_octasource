@@ -18,7 +18,11 @@ public:
     virtual void setFrequencyHz(float frequencyHz);
     virtual void setAmplitude(float amplitude);
     virtual void setWave(float wave);
+    virtual void setPosition(float position);
     virtual void trigger();
+
+    float getFrequencyHz();
+    float getPosition();
 
 protected:
     Oscillator _oscillators[OSCILLATOR_COUNT];

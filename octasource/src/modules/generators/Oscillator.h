@@ -29,6 +29,14 @@ public:
         return _trigger;
     }
 
+    float getFrequencyHz() {
+        return _frequencyHz;
+    }
+
+    float getPosition() {
+        return _position;
+    }
+
 private:
     // controls
     float _frequencyHz;

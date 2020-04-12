@@ -46,6 +46,20 @@ void AbstractSource::setWave(float wave) {
     }
 }
 
+void AbstractSource::setPosition(float position) {
+    for(int i = 0; i < OSCILLATOR_COUNT; i++) {
+        _oscillators[i].setPosition(position);
+    }
+}
+
 void AbstractSource::trigger() {
     init();
+}
+
+float AbstractSource::getFrequencyHz() {
+    return _oscillators[0].getFrequencyHz();
+}
+
+float AbstractSource::getPosition() {
+    return _oscillators[0].getPosition();
 }

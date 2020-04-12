@@ -11,6 +11,7 @@ class PhasedSource : public AbstractSource {
 public:
     void init();
     void trigger();
+    void setPosition(float position);
 
 };
 

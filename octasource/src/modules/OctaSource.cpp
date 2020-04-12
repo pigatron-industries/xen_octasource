@@ -40,6 +40,10 @@ void OctaSource::setWave(float wave) {
     _source[_mode]->setWave(wave);
 }
 
+void OctaSource::setPosition(float position) {
+    _source[_mode]->setPosition(position);
+}
+
 void OctaSource::trigger() {
     _source[_mode]->trigger();
 }
@@ -54,4 +58,12 @@ float OctaSource::getOutput(uint8_t index) {
 
 bool OctaSource::getTriggerOut() {
     return _source[_mode]->getTriggerOut();
+}
+
+float OctaSource::getFrequencyHz() {
+    return _source[_mode]->getFrequencyHz();
+}
+
+float OctaSource::getPosition() {
+    return _source[_mode]->getPosition();
 }

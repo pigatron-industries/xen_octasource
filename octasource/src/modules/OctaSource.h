@@ -23,7 +23,11 @@ public:
     void setFrequencyHz(float frequencyHz);
     void setAmplitude(float amplitude);
     void setWave(float wave);
+    void setPosition(float position);
     void trigger();
+
+    float getFrequencyHz();
+    float getPosition();
 
     uint8_t getMode() {
         return _mode;
@@ -35,23 +39,6 @@ private:
     uint8_t _mode;
 
     void initMode();
-
-
-
-
-    // Oscillator _oscillators[OSCILLATOR_COUNT];
-    // float _outputs[OSCILLATOR_COUNT];
-    //
-    // void setFrequencyAll(float frequencyHz);
-    // void setFrequencyMultipliedMode(float frequencyHz);
-    // void setFrequencyUncorrelatedMode(float frequencyHz);
-    //
-    // void initPhaseAll();
-    // void initPhasedMode();
-    // void initUncorrelatedMode();
-
-
-
 
 };
 
