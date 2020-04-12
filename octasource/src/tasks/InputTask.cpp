@@ -1,6 +1,7 @@
 #include "InputTask.h"
 #include "../hwconfig.h"
 #include "../lib/util.h"
+#include "../lib/io/SerialUtil.h"
 
 #include <Arduino.h>
 #include <math.h>
@@ -112,24 +113,10 @@ void InputTask::switchSlaveMode() {
 
 void InputTask::sendData(float frequency) {
     if(_transmitTimer.isStopped()) {
-        union {
-            byte asBytes[4];
-            float asFloat;
-        } data;
-        data.asFloat = frequency;
         Serial2.print('f');
-        Serial2.write(data.asBytes[0]);
-        Serial2.write(data.asBytes[1]);
-        Serial2.write(data.asBytes[2]);
-        Serial2.write(data.asBytes[3]);
-
+        writeFloat(Serial2, frequency);
         _transmitTimer.start(TRANSMIT_TIME);
     }
-}
-
-byte getByte() {
-    while(!Serial2.available()){}
-    return Serial2.read();
 }
 
 float InputTask::receiveData() {
@@ -137,15 +124,7 @@ float InputTask::receiveData() {
         byte b = getByte();
         Serial.println(b);
         if(b == 'f') {
-            union {
-                byte asBytes[4];
-                float asFloat;
-            } data;
-            data.asBytes[0] = getByte();
-            data.asBytes[1] = getByte();
-            data.asBytes[2] = getByte();
-            data.asBytes[3] = getByte();
-            return data.asFloat;
+            return readFloat(Serial2);
         }
     }
 
