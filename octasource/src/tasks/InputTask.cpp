@@ -59,12 +59,9 @@ void InputTask::execute() {
         float rateVoltage = getCalibratedValue(RATE_POT_PIN) + getValue(RATE_CV_PIN);
         float rateFrequency = rateVoltageToFrequency(rateVoltage);
         _octasource.setFrequencyHz(rateFrequency);
-        sendData(rateFrequency);
+        sendData();
     } else {
-        float rateFrequency = receiveData();
-        if(rateFrequency != 0) {
-            _octasource.setFrequencyHz(rateFrequency);
-        }
+        receiveData();
     }
 
     float amplitude = getCalibratedValue(LENGTH_POT_PIN);
@@ -111,10 +108,11 @@ void InputTask::switchSlaveMode() {
     Serial.println(_slaveMode);
 }
 
-void InputTask::sendData(float frequency) {
+void InputTask::sendData() {
     if(_transmitTimer.isStopped()) {
         Serial2.print('f');
-        writeFloat(Serial2, frequency);
+        writeFloat(Serial2, _octasource.getFrequencyHz());
+        writeFloat(Serial2, _octasource.getPosition());
         _transmitTimer.start(TRANSMIT_TIME);
     }
 }
@@ -124,7 +122,8 @@ float InputTask::receiveData() {
         byte b = getByte();
         Serial.println(b);
         if(b == 'f') {
-            return readFloat(Serial2);
+            _octasource.setFrequencyHz(readFloat(Serial2));
+            _octasource.setPosition(readFloat(Serial2));
         }
     }
 

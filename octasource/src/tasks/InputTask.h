@@ -30,7 +30,7 @@ private:
     void switchMode();
     void switchSlaveMode();
 
-    void sendData(float frequency);
+    void sendData();
     float receiveData();
 
 };
