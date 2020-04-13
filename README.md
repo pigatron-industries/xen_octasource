@@ -48,8 +48,10 @@ A range of frequency outputs that are uncorrelated to each other. In this case m
 
 ## Synchronising Multiple Modules
 
-(NOT YET IMPLEMENTED)
-The number of outputs can be extended by attaching another Octasource module. The 2 modules can be synchronised with each other.
+2 Octasource modules can be synchronised with each other. The 2 modules serial ports must be connected together by attaching a wire from pin 8 (TX) on the first module to pin 7 (RX) on the second module, and vice versa. Once they are connected one of modules can be put into slave mode by holding down the mode switch for more than 3 seconds, then releasing it.
+
+After doing this the frequency control on the master module will also affect the slave module.
+
 
 ---
 
