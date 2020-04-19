@@ -4,6 +4,7 @@
 #include "modes/MultipliedSource.h"
 #include "modes/UncorrelatedSource.h"
 #include "modes/BurstSource.h"
+#include "modes/BoidSource.h"
 
 #define AMP_SCALE 5
 
@@ -13,6 +14,7 @@ OctaSource::OctaSource() {
     _source[1] = new MultipliedSource();
     _source[2] = new UncorrelatedSource();
     _source[3] = new BurstSource();
+    _source[4] = new BoidSource();
     initMode();
 }
 
@@ -42,6 +44,10 @@ void OctaSource::setWave(float wave) {
 
 void OctaSource::setPosition(float position) {
     _source[_mode]->setPosition(position);
+}
+
+void OctaSource::setTriggerValue(float value) {
+    _source[_mode]->setTriggerValue(value);
 }
 
 void OctaSource::trigger() {

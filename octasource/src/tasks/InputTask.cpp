@@ -49,7 +49,9 @@ void InputTask::execute() {
         return; //TODO indicate mode switch somehow
     }
 
-    if(_trigger.update(getValue(TRIGGER_IN_PIN))) {
+    float triggerValue = getValue(TRIGGER_IN_PIN);
+    _octasource.setTriggerValue(triggerValue);
+    if(_trigger.update(triggerValue)) {
         if(_trigger.risingEdge()) {
             _octasource.trigger();
         }

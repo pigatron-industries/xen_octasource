@@ -6,7 +6,7 @@
 #include "generators/Oscillator.h"
 #include "modes/AbstractSource.h"
 
-#define MODE_COUNT 4
+#define MODE_COUNT 5
 
 
 class OctaSource {
@@ -24,6 +24,7 @@ public:
     void setAmplitude(float amplitude);
     void setWave(float wave);
     void setPosition(float position);
+    void setTriggerValue(float value);
     void trigger();
 
     float getFrequencyHz();

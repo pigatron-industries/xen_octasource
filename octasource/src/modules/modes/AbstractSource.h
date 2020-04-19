@@ -10,7 +10,7 @@
 class AbstractSource {
 
 public:
-    void execute(unsigned long timeDiff);
+    virtual void execute(unsigned long timeDiff);
     float getOutput(uint8_t index);
     bool getTriggerOut();
 
@@ -19,6 +19,7 @@ public:
     virtual void setAmplitude(float amplitude);
     virtual void setWave(float wave);
     virtual void setPosition(float position);
+    virtual void setTriggerValue(float value);
     virtual void trigger();
 
     float getFrequencyHz();

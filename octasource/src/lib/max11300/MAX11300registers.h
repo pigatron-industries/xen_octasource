@@ -132,7 +132,6 @@
 #define MAX_TMPINT_AVAIL	0x06
 #define MAX_TMPINT_LO		0x07
 #define MAX_TMPINT_HI		0x08
-//#define MAX_DACOI			0x05
 #define MAX_GPIDM			0x04
 #define MAX_GPIDR			0x03
 #define MAX_ADCDM			0x02

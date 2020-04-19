@@ -52,6 +52,9 @@ void AbstractSource::setPosition(float position) {
     }
 }
 
+void AbstractSource::setTriggerValue(float position) {
+}
+
 void AbstractSource::trigger() {
     init();
 }
