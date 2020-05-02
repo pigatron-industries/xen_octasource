@@ -6,7 +6,7 @@
 #include "generators/Oscillator.h"
 #include "modes/AbstractSource.h"
 
-#define MODE_COUNT 5
+#define MODE_COUNT 6
 
 
 class OctaSource {

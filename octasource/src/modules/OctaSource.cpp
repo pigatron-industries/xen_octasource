@@ -4,6 +4,7 @@
 #include "modes/MultipliedSource.h"
 #include "modes/UncorrelatedSource.h"
 #include "modes/BurstSource.h"
+#include "modes/ClockSource.h"
 #include "modes/BoidSource.h"
 
 #define AMP_SCALE 5
@@ -14,7 +15,8 @@ OctaSource::OctaSource() {
     _source[1] = new MultipliedSource();
     _source[2] = new UncorrelatedSource();
     _source[3] = new BurstSource();
-    _source[4] = new BoidSource();
+    _source[4] = new ClockSource();
+    _source[5] = new BoidSource();
     initMode();
 }
 

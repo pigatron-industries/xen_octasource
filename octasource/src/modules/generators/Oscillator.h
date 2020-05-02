@@ -25,7 +25,7 @@ public:
         return _voltage;
     }
 
-    float getTriggerOut() {
+    bool getTriggerOut() {
         return _trigger;
     }
 
