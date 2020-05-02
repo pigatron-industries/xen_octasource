@@ -17,6 +17,11 @@ public:
 
 private:
     uint8_t _pulseCount;
+    float _frequency;
+    float _swing;
+
+    float calculateSwingFrequency(float frequency);
+
 };
 
 #endif
