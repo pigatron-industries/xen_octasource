@@ -11,14 +11,18 @@ class ClockSource : public AbstractSource {
 public:
     void init();
     void execute(unsigned long timeDiff);
+    void trigger();
+
 
     void setFrequencyHz(float frequencyHz);
     void setWave(float wave); // Swing control
 
 private:
-    uint8_t _pulseCount;
+    uint16_t _pulseCount;
     float _frequency;
     float _swing;
+
+    Timer _triggerTimer;
 
     float calculateSwingFrequency(float frequency);
 

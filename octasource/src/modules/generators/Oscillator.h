@@ -14,6 +14,7 @@ class Oscillator {
 public:
     Oscillator();
     float execute(unsigned long timeDiff);
+    void reset();
 
     void setFrequencyHz(float frequencyHz);
     void setAmplitude(float amplitude);
@@ -45,6 +46,7 @@ private:
     float _position;
 
     bool _cycle;
+    bool _triggered;
 
     // outputs
     float _voltage;

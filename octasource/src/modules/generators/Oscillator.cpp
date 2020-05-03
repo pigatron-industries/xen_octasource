@@ -34,8 +34,10 @@ void Oscillator::setCycle(bool cycle) {
 
 float Oscillator::execute(unsigned long timeDiff) {
     // reset trigger
-    if(_trigger) {
-        _trigger = false;
+    _trigger = false;
+    if(_triggered) {
+        _trigger = true;
+        _triggered = false;
     }
 
     updatePosition(timeDiff);
@@ -57,6 +59,11 @@ float Oscillator::execute(unsigned long timeDiff) {
 
     float voltage = value / MAX_POSITION * _amplitude;
     return voltage;
+}
+
+void Oscillator::reset() {
+      setPosition(0);
+      _triggered = true;
 }
 
 void Oscillator::updatePosition(unsigned long timeDiff) {
