@@ -66,10 +66,10 @@ void InputTask::execute() {
         receiveData();
     }
 
-    float amplitude = getCalibratedValue(LENGTH_POT_PIN);
+    float amplitude = getCalibratedValue(LENGTH_POT_PIN) + getValue(LENGTH_CV_PIN);
     _octasource.setAmplitude(amplitude);
 
-    float wave = getCalibratedValue(WAVE_POT_PIN);
+    float wave = getCalibratedValue(WAVE_POT_PIN) + getValue(WAVE_CV_PIN);
     _octasource.setWave(wave);
 }
 
