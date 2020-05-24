@@ -26,7 +26,7 @@ Uses [PJRC Teensy 4.0](https://www.pjrc.com/teensy-4-0/) and [MikroElektronika P
 
 ## Modes
 
-There are various modes which can be cycled through by pressing the mode switch.
+There are various modes which can be cycled through by pressing the mode switch, and submodes can be cycled using a rotary encoder.
 
 ### 1 Phased
 
