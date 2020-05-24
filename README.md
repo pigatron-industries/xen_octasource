@@ -48,6 +48,11 @@ Submodes:
 A range of frequency outputs that are uncorrelated to each other. In this case multiplied by an irrational number, Pi.
 * Trigger: This mode starts off each wave at a completely random phase. When a trigger is received the phases are re-randomised, so can be used to create almost completely random voltages.
 
+Submodes:
+1. Multiply by square root of 2
+2. Multiply by golden ratio
+3. Multiply by Euler's number
+4. Multiply by pi
 
 ---
 
@@ -56,12 +61,6 @@ A range of frequency outputs that are uncorrelated to each other. In this case m
 2 Octasource modules can be synchronised with each other. The 2 modules serial ports must be connected together by attaching a wire from pin 8 (TX) on the first module to pin 7 (RX) on the second module, and vice versa. Once they are connected one of modules can be put into slave mode by holding down the mode switch for more than 3 seconds, then releasing it.
 
 After doing this the frequency control on the master module will also affect the slave module.
-
-Submodes:
-1. Multiply by square root of 2
-2. Multiply by golden ratio
-3. Multiply By Euler's number
-4. Multiply by pi
 
 ---
 
