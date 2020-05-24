@@ -15,7 +15,8 @@
 InputTask::InputTask(CvInputOutput& cvInputOutput, OctaSource& octasource) :
   AbstractInputTask(cvInputOutput),
   _octasource(octasource),
-  _modeSwitch(MODE_SWITCH_PIN, 100) {
+  _modeSwitch(MODE_SWITCH_PIN, 100),
+  _modeEncoder(MODE_ENCODER_PIN1, MODE_ENCODER_PIN2) {
     _calibrationMode = false;
     _slaveMode = false;
     AbstractInputTask::setPotCalibration(MODE_SWITCH_PIN, CALIBRATED_POT_SIZE, OUTPUT_CV_PIN_START);
@@ -46,7 +47,14 @@ void InputTask::execute() {
         }
     }
     if(_modeSwitch.read() == LOW && _modeSwitch.duration() >= 3000) {
-        return; //TODO indicate mode switch somehow
+        return;
+    }
+
+    _encoderMovement += _modeEncoder.readAndReset();
+    if(_encoderMovement != 0 && _encoderMovement%4 == 0) {
+         _octasource.cycleSubMode(_encoderMovement/4);
+         _encoderMovement = 0;
+         printMode();
     }
 
     float triggerValue = getValue(TRIGGER_IN_PIN);
@@ -85,8 +93,7 @@ float InputTask::rateVoltageToFrequency(float voltage) {
 
 void InputTask::switchMode() {
     _octasource.cycleMode();
-    Serial.print("Mode Switch: ");
-    Serial.println(_octasource.getMode());
+    printMode();
 
     // Indicate new mode
     for(int i = 0; i < OSCILLATOR_COUNT; i++) {
@@ -102,6 +109,13 @@ void InputTask::switchMode() {
         delay(1);
         time = millis();
     }
+}
+
+void InputTask::printMode() {
+    Serial.print("Mode: ");
+    Serial.print(_octasource.getMode());
+    Serial.print(".");
+    Serial.println(_octasource.getSubMode());
 }
 
 void InputTask::switchSlaveMode() {

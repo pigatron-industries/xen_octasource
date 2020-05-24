@@ -28,6 +28,15 @@ void AbstractSource::init() {
     }
 }
 
+long AbstractSource::setMode(long movement) {
+    if(movement >= 0) {
+        _mode = (_mode+movement) % _modeCount;
+    } else {
+        _mode = ((_mode+movement) - (movement*_modeCount)) % _modeCount;
+    }
+    return _mode;
+}
+
 void AbstractSource::setFrequencyHz(float frequencyHz) {
     for(int i = 0; i < OSCILLATOR_COUNT; i++) {
         _oscillators[i].setFrequencyHz(frequencyHz);

@@ -2,6 +2,7 @@
 #define InputTask_h
 
 #include <Bounce2.h>
+#include <Encoder.h>
 
 #include <inttypes.h>
 
@@ -21,7 +22,11 @@ public:
 
 private:
     OctaSource& _octasource;
+
     Bounce _modeSwitch;
+    Encoder _modeEncoder;
+    long _encoderMovement;
+
     GateInput _trigger;
     bool _slaveMode;
     Timer _transmitTimer;
@@ -29,6 +34,7 @@ private:
     float rateVoltageToFrequency(float voltage);
     void switchMode();
     void switchSlaveMode();
+    void printMode();
 
     void sendData();
     float receiveData();

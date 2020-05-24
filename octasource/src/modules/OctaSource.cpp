@@ -20,12 +20,17 @@ OctaSource::OctaSource() {
     initMode();
 }
 
-void OctaSource::cycleMode() {
+long OctaSource::cycleMode() {
     _mode += 1;
     if(_mode >= MODE_COUNT) {
         _mode = 0;
     }
     initMode();
+    return _mode;
+}
+
+long OctaSource::cycleSubMode(long movement) {
+    return _source[_mode]->setMode(movement);
 }
 
 void OctaSource::initMode() {
@@ -74,4 +79,8 @@ float OctaSource::getFrequencyHz() {
 
 float OctaSource::getPosition() {
     return _source[_mode]->getPosition();
+}
+
+long OctaSource::getSubMode() {
+    return _source[_mode]->getMode();
 }

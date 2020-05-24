@@ -13,7 +13,8 @@ class OctaSource {
 
 public:
     OctaSource();
-    void cycleMode();
+    long cycleMode();
+    long cycleSubMode(long movement);
 
     void execute(unsigned long timeDiff);
 
@@ -33,6 +34,7 @@ public:
     uint8_t getMode() {
         return _mode;
     }
+    long getSubMode();
 
 private:
 

@@ -7,6 +7,8 @@
 #define CV_INTERUPT 14
 #define CV_CNVT_PIN 15
 #define MODE_SWITCH_PIN 0
+#define MODE_ENCODER_PIN1 1
+#define MODE_ENCODER_PIN2 2
 
 // MAX11300 Pins
 #define LENGTH_CV_PIN 3
