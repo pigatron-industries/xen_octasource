@@ -35,8 +35,13 @@ Each output wave is the same frequency but phase shifted by 45 degrees.
 
 ### 2 Multiplied
 
-Each output is double the frequency of the previous output.
+Each output is multiplied by a whole number of the previous output.
 * Trigger: Will reset the phases back to initial values.
+
+Submodes:
+1. Multiply by 2
+2. Multiply by 3
+
 
 ### 3 Uncorrelated
 
@@ -52,6 +57,11 @@ A range of frequency outputs that are uncorrelated to each other. In this case m
 
 After doing this the frequency control on the master module will also affect the slave module.
 
+Submodes:
+1. Multiply by square root of 2
+2. Multiply by golden ratio
+3. Multiply By Euler's number
+4. Multiply by pi
 
 ---
 
