@@ -4,6 +4,9 @@
 #define PPQN 24
 #define TRIGGER_TIME 1000
 
+#define CLOCK_MODE_PPQN 0
+#define CLOCK_MODE_DIVIDE 1
+
 #define TRIG_HIGH 5
 #define TRIG_LOW 0
 
@@ -12,6 +15,7 @@ void ClockSource::init() {
         _oscillators[i].setWave(4);
     }
     _pulseCount = 0;
+    _modeCount = 2;
 }
 
 void ClockSource::execute(unsigned long timeDiff) {
@@ -24,14 +28,25 @@ void ClockSource::execute(unsigned long timeDiff) {
            _pulseCount = 0;
         }
 
-        _outputs[0] = _pulseCount % 1 == 0 ? TRIG_HIGH : TRIG_LOW;
-        _outputs[1] = _pulseCount % 6 == 0 ? TRIG_HIGH : TRIG_LOW;  //Sixteenth note
-        _outputs[2] = _pulseCount % 8 == 0 ? TRIG_HIGH : TRIG_LOW;  //Triplet
-        _outputs[3] = _pulseCount % 12 == 0 ? TRIG_HIGH : TRIG_LOW; //Eighth note
-        _outputs[4] = _pulseCount % 24 == 0 ? TRIG_HIGH : TRIG_LOW; //Quarter note
-        _outputs[6] = _pulseCount % 32 == 0 ? TRIG_HIGH : TRIG_LOW; //Third note
-        _outputs[5] = _pulseCount % 48 == 0 ? TRIG_HIGH : TRIG_LOW; //Semitone
-        _outputs[7] = _pulseCount % 96 == 0 ? TRIG_HIGH : TRIG_LOW; //Whole note
+        if(_mode == CLOCK_MODE_PPQN) {
+            _outputs[0] = _pulseCount % 1 == 0 ? TRIG_HIGH : TRIG_LOW;
+            _outputs[1] = _pulseCount % 6 == 0 ? TRIG_HIGH : TRIG_LOW;  //Sixteenth note
+            _outputs[2] = _pulseCount % 8 == 0 ? TRIG_HIGH : TRIG_LOW;  //Triplet
+            _outputs[3] = _pulseCount % 12 == 0 ? TRIG_HIGH : TRIG_LOW; //Eighth note
+            _outputs[4] = _pulseCount % 24 == 0 ? TRIG_HIGH : TRIG_LOW; //Quarter note
+            _outputs[6] = _pulseCount % 32 == 0 ? TRIG_HIGH : TRIG_LOW; //Third note
+            _outputs[5] = _pulseCount % 48 == 0 ? TRIG_HIGH : TRIG_LOW; //Semitone
+            _outputs[7] = _pulseCount % 96 == 0 ? TRIG_HIGH : TRIG_LOW; //Whole note
+        } else if(_mode == CLOCK_MODE_DIVIDE) {
+            _outputs[0] = _pulseCount % 1 == 0 ? TRIG_HIGH : TRIG_LOW;
+            _outputs[1] = _pulseCount % 2 == 0 ? TRIG_HIGH : TRIG_LOW;
+            _outputs[2] = _pulseCount % 3 == 0 ? TRIG_HIGH : TRIG_LOW;
+            _outputs[3] = _pulseCount % 4 == 0 ? TRIG_HIGH : TRIG_LOW;
+            _outputs[4] = _pulseCount % 5 == 0 ? TRIG_HIGH : TRIG_LOW;
+            _outputs[6] = _pulseCount % 6 == 0 ? TRIG_HIGH : TRIG_LOW;
+            _outputs[5] = _pulseCount % 7 == 0 ? TRIG_HIGH : TRIG_LOW;
+            _outputs[7] = _pulseCount % 8 == 0 ? TRIG_HIGH : TRIG_LOW;
+        }
 
     } else if(_triggerTimer.isStopped()) {
         for(int i = 0; i < OSCILLATOR_COUNT; i++) {
@@ -45,7 +60,11 @@ void ClockSource::trigger() {
 }
 
 void ClockSource::setFrequencyHz(float frequencyHz) {
-    _frequency = frequencyHz*8; // Use a higher frequency than other modes for 24 PPQN
+    if(_mode == CLOCK_MODE_PPQN) {
+        _frequency = frequencyHz*8; // Use a higher frequency than other modes for 24 PPQN
+    } else {
+        _frequency = frequencyHz*8;
+    }
     float frequency = calculateSwingFrequency(_frequency);
     _oscillators[0].setFrequencyHz(frequency);
 }

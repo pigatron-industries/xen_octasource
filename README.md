@@ -68,6 +68,7 @@ A clock source providing various subdivisions of a clock.
 
 Submodes:
 1. Divisions based on 24 PPQN: 1, 6, 8, 12, 24, 32, 48, 96
+2. Simple Divider: 1, 2, 3, 4, 5, 6, 7, 8
 
 ---
 
