@@ -1,10 +1,10 @@
 #include "ClockSource.h"
 #include <Arduino.h>
 
-#define PPQN 24
+#define PPQN24 24
 #define TRIGGER_TIME 1000
 
-#define CLOCK_MODE_PPQN 0
+#define CLOCK_MODE_PPQN24 0
 #define CLOCK_MODE_DIVIDE 1
 
 #define TRIG_HIGH 5
@@ -24,11 +24,11 @@ void ClockSource::execute(unsigned long timeDiff) {
     if(_oscillators[0].getTriggerOut()) {
         _triggerTimer.start(TRIGGER_TIME);
         _pulseCount++;
-        if(_pulseCount == PPQN*12) {
+        if(_pulseCount == PPQN24*12) {
            _pulseCount = 0;
         }
 
-        if(_mode == CLOCK_MODE_PPQN) {
+        if(_mode == CLOCK_MODE_PPQN24) {
             _outputs[0] = _pulseCount % 1 == 0 ? TRIG_HIGH : TRIG_LOW;
             _outputs[1] = _pulseCount % 6 == 0 ? TRIG_HIGH : TRIG_LOW;  //Sixteenth note
             _outputs[2] = _pulseCount % 8 == 0 ? TRIG_HIGH : TRIG_LOW;  //Triplet
@@ -60,17 +60,19 @@ void ClockSource::trigger() {
 }
 
 void ClockSource::setFrequencyHz(float frequencyHz) {
-    if(_mode == CLOCK_MODE_PPQN) {
-        _frequency = frequencyHz*8; // Use a higher frequency than other modes for 24 PPQN
-    } else {
-        _frequency = frequencyHz*8;
-    }
+    _frequency = frequencyHz*8;
     float frequency = calculateSwingFrequency(_frequency);
     _oscillators[0].setFrequencyHz(frequency);
 }
 
 float ClockSource::calculateSwingFrequency(float frequency) {
-    float freqQuarterNote = frequency/PPQN;
+
+    int ppqn = 4;
+    if(_mode == CLOCK_MODE_PPQN24) {
+        ppqn = PPQN24;
+    }
+
+    float freqQuarterNote = frequency/ppqn;
     float timeQuarterNote = 1/freqQuarterNote;
 
     float timeQuarterNote1 = timeQuarterNote/_swing;
@@ -79,10 +81,10 @@ float ClockSource::calculateSwingFrequency(float frequency) {
     float freqQuarterNote1 = 1/timeQuarterNote1;
     float freqQuarterNote2 = 1/timeQuarterNote2;
 
-    if((_pulseCount / PPQN) % 2 == 0) {
-        return freqQuarterNote1*PPQN;
+    if((_pulseCount / ppqn) % 2 == 0) {
+        return freqQuarterNote1*ppqn;
     } else {
-        return freqQuarterNote2*PPQN;
+        return freqQuarterNote2*ppqn;
     }
 }
 
