@@ -54,6 +54,21 @@ Submodes:
 3. Multiply by Euler's number
 4. Multiply by pi
 
+### 4 Burst
+
+When a trigger is applied, then outputs a burst of waves from each output.
+
+### 5 Clock Divider
+
+A clock source providing various subdivisions of a clock.
+* Trigger: External clock (Set rate knob to 12 o'clock, if rate knob is set to higher rate than trigger then the trigger will trigger the next clock pulse early).
+* Rate: Rate of internally generated clock.
+* Wave: Introduces shuffle into the internal clock.
+* Amplitude: No effect, the clock pulse is always 5V.
+
+Submodes:
+1. Divisions based on 24 PPQN: 1, 6, 8, 12, 24, 48, 72, 96
+
 ---
 
 ## Synchronising Multiple Modules
