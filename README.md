@@ -67,7 +67,7 @@ A clock source providing various subdivisions of a clock.
 * Amplitude: No effect, the clock pulse is always 5V.
 
 Submodes:
-1. Divisions based on 24 PPQN: 1, 6, 8, 12, 24, 48, 72, 96
+1. Divisions based on 24 PPQN: 1, 6, 8, 12, 24, 32, 48, 96
 
 ---
 
