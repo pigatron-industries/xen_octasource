@@ -64,7 +64,7 @@ A clock source providing various subdivisions of a clock.
 * Trigger: External clock (Set rate knob to 12 o'clock, if rate knob is set to higher rate than trigger then the trigger will trigger the next clock pulse early).
 * Rate: Rate of internally generated clock.
 * Wave: Introduces shuffle into the internal clock.
-* Amplitude: No effect, the clock pulse is always 5V.
+* Amplitude: A trigger pulse will cause the clock outputs rotate.
 
 Submodes:
 1. Divisions based on 24 PPQN: 1, 6, 8, 12, 24, 32, 48, 96
