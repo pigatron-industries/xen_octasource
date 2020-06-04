@@ -17,14 +17,16 @@ InputTask inputTask = InputTask(cvInputOutput, octasource);
 OutputTask outputTask = OutputTask(cvInputOutput, octasource);
 
 
-void bootstrap() {
+void setup() {
     Serial.begin(SERIAL_BAUD);
     Serial.println();
     Serial.println("=========================================");
     Serial.println("*     Pigatron Industries OctaSource    *");
     Serial.println("=========================================");
     Serial.println();
+}
 
+void loop() {
     Task* tasks[] = {&inputTask, &outputTask};
     TaskManager taskManager(tasks, 2);
     taskManager.run();

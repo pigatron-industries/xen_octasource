@@ -39,3 +39,8 @@ Thumbs.db
 *.*#*
 *.zip
 *.pro
+
+# Platform IO IDE
+.pio
+.clang_complete
+.gcc-flags.json
