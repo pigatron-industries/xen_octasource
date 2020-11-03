@@ -3,7 +3,6 @@
 #include "../../Config.h"
 
 #include <Arduino.h>
-#include <EEPROM.h>
 
 AbstractInputTask::AbstractInputTask(CvInputOutput& cvInputOutput) :
   _cvInputOutput(cvInputOutput) {
@@ -24,7 +23,12 @@ void AbstractInputTask::init() {
     pinMode(_modeSwitchPin, INPUT_PULLUP);
     digitalWrite(_modeSwitchPin, HIGH);
 
-    _potCalibration = Config::instance.getPotCalibrations();
+    float* realMin = Config::instance.getCalibrationRealMin();
+    float* realMax = Config::instance.getCalibrationRealMax();
+    for(int i = 0; i < _potCalibrationSize; i++) {
+        _potCalibration[i].setRealMin(realMin[i]);
+        _potCalibration[i].setRealMax(realMax[i]);
+    }
 
     // Check for calibration mode
     delay(100);
@@ -52,11 +56,11 @@ float AbstractInputTask::getCalibratedValue(uint8_t pin) {
 
 void AbstractInputTask::doCalibrationSequence() {
     _cvInputOutput.setPinModeAnalogOut(_displayLedPin);
-    _cvInputOutput.setVoltage(_displayLedPin, -5.0);
+    _cvInputOutput.setVoltage(_displayLedPin, 5.0);
     Serial.println("Calibration mode started.");
+    Serial.println("Release mode switch...");
 
     while (digitalRead(_modeSwitchPin) == LOW) {
-        Serial.println("Release mode switch...");
     }
 
     _cvInputOutput.setVoltage(_displayLedPin, -5.0);
@@ -83,6 +87,7 @@ void AbstractInputTask::doCalibrationSequence() {
     for(uint8_t i = 0; i < _potCalibrationSize; i++) {
         float voltage = _cvInputOutput.getVoltage(_potCalibration[i].getPin());
         _potCalibration[i].setRealMax(voltage);
+        Serial.println(voltage);
     }
 
     Config::instance.savePotCalibration(_potCalibration, _potCalibrationSize);

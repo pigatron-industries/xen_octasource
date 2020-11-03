@@ -20,7 +20,7 @@ InputTask::InputTask(CvInputOutput& cvInputOutput, OctaSource& octasource) :
   _modeEncoder(MODE_ENCODER_PIN1, MODE_ENCODER_PIN2) {
     _calibrationMode = false;
     _slaveMode = false;
-    AbstractInputTask::setPotCalibration(MODE_SWITCH_PIN, CALIBRATED_POT_SIZE, OUTPUT_CV_PIN_START);
+    AbstractInputTask::setPotCalibration(MODE_SWITCH_PIN, CALIBRATED_POT_SIZE, OUTPUT_CV_PIN_START+1);
     _potCalibration[0] = PotCalibration(RATE_POT_PIN, -5, 5);
     _potCalibration[1] = PotCalibration(LENGTH_POT_PIN, 0, 5);
     _potCalibration[2] = PotCalibration(WAVE_POT_PIN, 0, 4);
@@ -38,6 +38,7 @@ void InputTask::init() {
     AbstractInputTask::init();
     if(Config::instance.getSelectedMode() < MODE_COUNT) {
         _octasource.setMode(Config::instance.getSelectedMode());
+        _octasource.setSubMode(Config::instance.getSelectedMode());
     }
     _modeSwitch.update();
     delay(100);
@@ -59,9 +60,10 @@ void InputTask::execute() {
 
     _encoderMovement += _modeEncoder.readAndReset();
     if(_encoderMovement != 0 && _encoderMovement%4 == 0) {
-         _octasource.cycleSubMode(_encoderMovement/4);
-         _encoderMovement = 0;
-         printMode();
+        _octasource.cycleSubMode(_encoderMovement/4);
+        _encoderMovement = 0;
+        Config::instance.saveSelectedMode(_octasource.getMode(), _octasource.getSubMode());
+        printMode();
     }
 
     float triggerValue = getValue(TRIGGER_IN_PIN);
@@ -100,7 +102,7 @@ float InputTask::rateVoltageToFrequency(float voltage) {
 
 void InputTask::switchMode() {
     uint8_t mode = _octasource.cycleMode();
-    Config::instance.saveSelectedMode(mode);
+    Config::instance.saveSelectedMode(mode, _octasource.getSubMode());
     printMode();
 
     // Indicate new mode

@@ -11,15 +11,19 @@ class Config {
 
         void load(uint8_t potCalibrationSize);
         uint8_t getSelectedMode();
-        PotCalibration* getPotCalibrations();
+        uint8_t getSelectedSubMode();
+        float* getCalibrationRealMin() { return calibrationRealMin; }
+        float* getCalibrationRealMax() { return calibrationRealMax; }
 
-        void saveSelectedMode(uint8_t id);
+        void saveSelectedMode(uint8_t mode, uint8_t submode);
         void savePotCalibration(PotCalibration* potCalibration, uint8_t potCalibrationSize);
     
     private:
-        PotCalibration potCalibration[20];
+        float calibrationRealMin[10];
+        float calibrationRealMax[10];
         uint8_t potCalibrationSize;
         uint8_t selectedMode;
+        uint8_t selectedSubMode;
 
         int selectedModeStartAddress;
 

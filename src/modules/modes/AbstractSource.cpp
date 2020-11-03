@@ -28,12 +28,19 @@ void AbstractSource::init() {
     }
 }
 
-long AbstractSource::setMode(long movement) {
+void AbstractSource::setMode(uint8_t mode) {
+    if(mode < _modeCount) {
+        _mode = mode;
+    }
+}
+
+long AbstractSource::setModeIncrement(long movement) {
     if(movement >= 0) {
         _mode = (_mode+movement) % _modeCount;
     } else {
         _mode = ((_mode+movement) - (movement*_modeCount)) % _modeCount;
     }
+    this->setMode(_mode);
     return _mode;
 }
 

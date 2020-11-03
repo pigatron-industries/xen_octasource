@@ -10,7 +10,7 @@ class MultipliedSource : public AbstractSource {
 
 public:
     void init();
-    long setMode(long movement);
+    void setMode(uint8_t mode);
     void setFrequencyHz(float frequencyHz);
 
 };

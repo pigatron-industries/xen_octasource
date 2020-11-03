@@ -15,7 +15,8 @@ public:
     bool getTriggerOut();
 
     virtual void init();
-    virtual long setMode(long movement);
+    long setModeIncrement(long movement);
+    virtual void setMode(uint8_t mode);
     virtual void setFrequencyHz(float frequencyHz);
     virtual void setAmplitude(float amplitude);
     virtual void setWave(float wave);

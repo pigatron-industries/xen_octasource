@@ -16,6 +16,7 @@ public:
     uint8_t cycleMode();
     void setMode(uint8_t mode);
     uint8_t cycleSubMode(long movement);
+    void setSubMode(uint8_t submode);
 
     void execute(unsigned long timeDiff);
 
@@ -32,9 +33,7 @@ public:
     float getFrequencyHz();
     float getPosition();
 
-    uint8_t getMode() {
-        return _mode;
-    }
+    uint8_t getMode() { return _mode; }
     long getSubMode();
 
 private:

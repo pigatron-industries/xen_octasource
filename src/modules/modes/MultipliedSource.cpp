@@ -5,10 +5,9 @@ void MultipliedSource::init() {
     _modeCount = 2;
 }
 
-long MultipliedSource::setMode(long movement) {
-    AbstractSource::setMode(movement);
+void MultipliedSource::setMode(uint8_t mode) {
+    AbstractSource::setMode(mode);
     init();
-    return getMode();
 }
 
 void MultipliedSource::setFrequencyHz(float frequencyHz) {

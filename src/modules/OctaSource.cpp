@@ -34,7 +34,11 @@ void OctaSource::setMode(uint8_t mode) {
 }
 
 uint8_t OctaSource::cycleSubMode(long movement) {
-    return _source[_mode]->setMode(movement);
+    return _source[_mode]->setModeIncrement(movement);
+}
+
+void OctaSource::setSubMode(uint8_t submode) {
+    _source[_mode]->setMode(submode);
 }
 
 void OctaSource::initMode() {
