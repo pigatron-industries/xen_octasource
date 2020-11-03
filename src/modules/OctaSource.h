@@ -13,8 +13,9 @@ class OctaSource {
 
 public:
     OctaSource();
-    long cycleMode();
-    long cycleSubMode(long movement);
+    uint8_t cycleMode();
+    void setMode(uint8_t mode);
+    uint8_t cycleSubMode(long movement);
 
     void execute(unsigned long timeDiff);
 

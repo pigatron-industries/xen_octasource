@@ -1,5 +1,6 @@
 #include "AbstractInputTask.h"
 #include "../../hwconfig.h"
+#include "../../Config.h"
 
 #include <Arduino.h>
 #include <EEPROM.h>
@@ -23,9 +24,10 @@ void AbstractInputTask::init() {
     pinMode(_modeSwitchPin, INPUT_PULLUP);
     digitalWrite(_modeSwitchPin, HIGH);
 
-    loadCalibration();
+    _potCalibration = Config::instance.getPotCalibrations();
 
     // Check for calibration mode
+    delay(100);
     if(digitalRead(_modeSwitchPin) == LOW) {
         doCalibrationSequence();
     }
@@ -52,9 +54,10 @@ void AbstractInputTask::doCalibrationSequence() {
     _cvInputOutput.setPinModeAnalogOut(_displayLedPin);
     _cvInputOutput.setVoltage(_displayLedPin, -5.0);
     Serial.println("Calibration mode started.");
-    Serial.println("Release mode switch...");
 
-    while (digitalRead(_modeSwitchPin) == LOW) {}
+    while (digitalRead(_modeSwitchPin) == LOW) {
+        Serial.println("Release mode switch...");
+    }
 
     _cvInputOutput.setVoltage(_displayLedPin, -5.0);
     Serial.println("Turn all pots left, then press mode switch...");
@@ -82,29 +85,6 @@ void AbstractInputTask::doCalibrationSequence() {
         _potCalibration[i].setRealMax(voltage);
     }
 
+    Config::instance.savePotCalibration(_potCalibration, _potCalibrationSize);
     Serial.println("Calibration finished.");
-    saveCalibration();
-}
-
-void AbstractInputTask::loadCalibration() {
-    int address = 0;
-    float realMin, realMax;
-    for(uint8_t i = 0; i < _potCalibrationSize; i++) {
-        EEPROM.get(address, realMin);
-        address += sizeof(float);
-        EEPROM.get(address, realMax);
-        address += sizeof(float);
-        _potCalibration[i].setRealMin(realMin);
-        _potCalibration[i].setRealMax(realMax);
-    }
-}
-
-void AbstractInputTask::saveCalibration() {
-    int address = 0;
-    for(uint8_t i = 0; i < _potCalibrationSize; i++) {
-        EEPROM.put(address, _potCalibration[i].getRealMin());
-        address += sizeof(float);
-        EEPROM.put(address, _potCalibration[i].getRealMax());
-        address += sizeof(float);
-    }
 }

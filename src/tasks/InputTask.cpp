@@ -1,5 +1,6 @@
 #include "InputTask.h"
 #include "../hwconfig.h"
+#include "../Config.h"
 #include "../lib/util.h"
 #include "../lib/io/SerialUtil.h"
 
@@ -35,6 +36,12 @@ void InputTask::init() {
     _cvInputOutput.setPinModeAnalogIn(LENGTH_CV_PIN);
     _cvInputOutput.setPinModeAnalogIn(TRIGGER_IN_PIN);
     AbstractInputTask::init();
+    if(Config::instance.getSelectedMode() < MODE_COUNT) {
+        _octasource.setMode(Config::instance.getSelectedMode());
+    }
+    _modeSwitch.update();
+    delay(100);
+    _modeSwitch.update();
 }
 
 void InputTask::execute() {
@@ -92,7 +99,8 @@ float InputTask::rateVoltageToFrequency(float voltage) {
 }
 
 void InputTask::switchMode() {
-    _octasource.cycleMode();
+    uint8_t mode = _octasource.cycleMode();
+    Config::instance.saveSelectedMode(mode);
     printMode();
 
     // Indicate new mode

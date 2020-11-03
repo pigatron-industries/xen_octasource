@@ -1,6 +1,7 @@
 #include <Arduino.h>
 
 #include "hwconfig.h"
+#include "Config.h"
 
 #include "lib/task/TaskManager.h"
 #include "drivers/CvInputOutput.h"
@@ -24,6 +25,7 @@ void setup() {
     Serial.println("*     Pigatron Industries OctaSource    *");
     Serial.println("=========================================");
     Serial.println();
+    Config::instance.load(CALIBRATED_POT_SIZE);
 }
 
 void loop() {

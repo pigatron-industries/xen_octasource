@@ -30,8 +30,6 @@ protected:
 
 private:
     void doCalibrationSequence();
-    void loadCalibration();
-    void saveCalibration();
 
 };
 

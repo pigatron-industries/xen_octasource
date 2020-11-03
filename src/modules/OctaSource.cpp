@@ -1,4 +1,5 @@
 #include "OctaSource.h"
+#include "../Config.h"
 
 #include "modes/PhasedSource.h"
 #include "modes/MultipliedSource.h"
@@ -10,17 +11,15 @@
 #define AMP_SCALE 5
 
 OctaSource::OctaSource() {
-    _mode = 0;
     _source[0] = new PhasedSource();
     _source[1] = new MultipliedSource();
     _source[2] = new UncorrelatedSource();
     _source[3] = new BurstSource();
     _source[4] = new ClockSource();
     _source[5] = new BoidSource();
-    initMode();
 }
 
-long OctaSource::cycleMode() {
+uint8_t OctaSource::cycleMode() {
     _mode += 1;
     if(_mode >= MODE_COUNT) {
         _mode = 0;
@@ -29,7 +28,12 @@ long OctaSource::cycleMode() {
     return _mode;
 }
 
-long OctaSource::cycleSubMode(long movement) {
+void OctaSource::setMode(uint8_t mode) {
+    _mode = mode;
+    initMode();
+}
+
+uint8_t OctaSource::cycleSubMode(long movement) {
     return _source[_mode]->setMode(movement);
 }
 
