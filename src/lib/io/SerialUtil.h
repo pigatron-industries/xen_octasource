@@ -3,12 +3,12 @@
 
 #include <Arduino.h>
 
-byte getByte() {
+inline byte getByte() {
     while(!Serial2.available()){}
     return Serial2.read();
 }
 
-void writeFloat(HardwareSerial& serial, float floatData) {
+inline void writeFloat(HardwareSerial& serial, float floatData) {
     union {
         byte asBytes[4];
         float asFloat;
@@ -20,7 +20,7 @@ void writeFloat(HardwareSerial& serial, float floatData) {
     serial.write(data.asBytes[3]);
 }
 
-float readFloat(HardwareSerial& serial) {
+inline float readFloat(HardwareSerial& serial) {
     union {
         byte asBytes[4];
         float asFloat;

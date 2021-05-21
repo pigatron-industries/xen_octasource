@@ -1,22 +1,22 @@
-#ifndef InputTask_h
-#define InputTask_h
+#ifndef MainController_h
+#define MainController_h
 
 #include <Bounce2.h>
 #include <Encoder.h>
 
 #include <inttypes.h>
 
-#include "../lib/io/AbstractInputTask.h"
-#include "../lib/io/Timer.h"
-#include "../modules/OctaSource.h"
+#include "lib/io/AbstractInputTask.h"
+#include "lib/io/Timer.h"
+#include "modules/OctaSource.h"
 
 #define CALIBRATED_POT_SIZE 3
 
 
-class InputTask : public AbstractInputTask {
+class MainController : public AbstractInputTask {
 
 public:
-    InputTask(CvInputOutput& cvInputOutput, OctaSource& octasource);
+    MainController(CvInputOutput& cvInputOutput, OctaSource& octasource);
     void init();
     void execute();
 
@@ -30,6 +30,7 @@ private:
     GateInput _trigger;
     bool _slaveMode;
     Timer _transmitTimer;
+    Timer _triggerTimer;
 
     float rateVoltageToFrequency(float voltage);
     void switchMode();

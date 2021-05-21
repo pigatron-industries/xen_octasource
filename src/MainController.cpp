@@ -1,8 +1,8 @@
-#include "InputTask.h"
-#include "../hwconfig.h"
-#include "../Config.h"
-#include "../lib/util.h"
-#include "../lib/io/SerialUtil.h"
+#include "MainController.h"
+#include "hwconfig.h"
+#include "Config.h"
+#include "lib/util.h"
+#include "lib/io/SerialUtil.h"
 
 #include <Arduino.h>
 #include <math.h>
@@ -13,7 +13,7 @@
 #define TRANSMIT_TIME 10000
 
 
-InputTask::InputTask(CvInputOutput& cvInputOutput, OctaSource& octasource) :
+MainController::MainController(CvInputOutput& cvInputOutput, OctaSource& octasource) :
   AbstractInputTask(cvInputOutput),
   _octasource(octasource),
   _modeSwitch(MODE_SWITCH_PIN, 100),
@@ -26,7 +26,9 @@ InputTask::InputTask(CvInputOutput& cvInputOutput, OctaSource& octasource) :
     _potCalibration[2] = PotCalibration(WAVE_POT_PIN, 0, 4);
 }
 
-void InputTask::init() {
+void MainController::init() {
+    Task::init();
+
     Serial2.begin(SERIAL_BAUD);
     _cvInputOutput.setPinModeAnalogIn(RATE_POT_PIN);
     _cvInputOutput.setPinModeAnalogIn(RATE_CV_PIN);
@@ -43,9 +45,15 @@ void InputTask::init() {
     _modeSwitch.update();
     delay(100);
     _modeSwitch.update();
+
+    // configure outputs
+    for(uint8_t i = 0; i < OSCILLATOR_COUNT; i++) {
+        _cvInputOutput.setPinModeAnalogOut(OUTPUT_CV_PIN_START+i);
+    }
+    _cvInputOutput.setPinModeAnalogOut(OUTPUT_GATE);
 }
 
-void InputTask::execute() {
+void MainController::execute() {
     if(_modeSwitch.update()) {
         if(_modeSwitch.rose() && _modeSwitch.previousDuration() >= 3000) {
             switchSlaveMode();
@@ -88,9 +96,33 @@ void InputTask::execute() {
 
     float wave = getCalibratedValue(WAVE_POT_PIN) + getValue(WAVE_CV_PIN);
     _octasource.setWave(wave);
+
+        if(lastExecutionDiff > 100000 || lastExecutionDiff < 0) {
+        return;
+    }
+
+    _octasource.execute(lastExecutionDiff);
+
+    // output values
+    for(int i = 0; i < OSCILLATOR_COUNT; i++) {
+        float voltage = _octasource.getOutput(i);
+        _cvInputOutput.setVoltage(OUTPUT_CV_PIN_START+i, voltage);
+    }
+
+    if(_triggerTimer.isStopped()) {
+        if(_octasource.getTriggerOut()) {
+            _triggerTimer.start(OUTPUT_GATE_TIME);
+        }
+    }
+
+    if(_triggerTimer.isRunning()) {
+        _cvInputOutput.setVoltage(OUTPUT_GATE, 5);
+    } else {
+        _cvInputOutput.setVoltage(OUTPUT_GATE, 0);
+    }
 }
 
-float InputTask::rateVoltageToFrequency(float voltage) {
+float MainController::rateVoltageToFrequency(float voltage) {
     if(voltage <= 1 && voltage >= -1) {
         return RATE_EXP_START_FREQ * voltage;
     } else if(voltage > 1) {
@@ -100,7 +132,7 @@ float InputTask::rateVoltageToFrequency(float voltage) {
     }
 }
 
-void InputTask::switchMode() {
+void MainController::switchMode() {
     uint8_t mode = _octasource.cycleMode();
     Config::instance.saveSelectedMode(mode, _octasource.getSubMode());
     printMode();
@@ -121,20 +153,20 @@ void InputTask::switchMode() {
     }
 }
 
-void InputTask::printMode() {
+void MainController::printMode() {
     Serial.print("Mode: ");
     Serial.print(_octasource.getMode());
     Serial.print(".");
     Serial.println(_octasource.getSubMode());
 }
 
-void InputTask::switchSlaveMode() {
+void MainController::switchSlaveMode() {
     _slaveMode = !_slaveMode;
     Serial.print("Mode Switch Slave: ");
     Serial.println(_slaveMode);
 }
 
-void InputTask::sendData() {
+void MainController::sendData() {
     if(_transmitTimer.isStopped()) {
         Serial2.print('f');
         writeFloat(Serial2, _octasource.getFrequencyHz());
@@ -143,7 +175,7 @@ void InputTask::sendData() {
     }
 }
 
-float InputTask::receiveData() {
+float MainController::receiveData() {
     if(Serial2.available()) {
         byte b = getByte();
         Serial.println(b);

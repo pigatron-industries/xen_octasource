@@ -3,19 +3,16 @@
 #include "hwconfig.h"
 #include "Config.h"
 
-#include "lib/task/TaskManager.h"
+#include "MainController.h"
 #include "drivers/CvInputOutput.h"
 #include "modules/OctaSource.h"
-#include "tasks/InputTask.h"
-#include "tasks/OutputTask.h"
 
 
 // hardware
 CvInputOutput cvInputOutput = CvInputOutput(&SPI, CV_CNVT_PIN, CV_SELECT_PIN);
 
 OctaSource octasource  = OctaSource();
-InputTask inputTask = InputTask(cvInputOutput, octasource);
-OutputTask outputTask = OutputTask(cvInputOutput, octasource);
+MainController mainController = MainController(cvInputOutput, octasource);
 
 
 void setup() {
@@ -26,10 +23,9 @@ void setup() {
     Serial.println("=========================================");
     Serial.println();
     Config::instance.load(CALIBRATED_POT_SIZE);
+    mainController.init();
 }
 
 void loop() {
-    Task* tasks[] = {&inputTask, &outputTask};
-    TaskManager taskManager(tasks, 2);
-    taskManager.run();
+    mainController.run();
 }
