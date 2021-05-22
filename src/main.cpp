@@ -4,19 +4,16 @@
 #include "Config.h"
 
 #include "MainController.h"
-#include "drivers/CvInputOutput.h"
 #include "modules/OctaSource.h"
 
 
-// hardware
-CvInputOutput cvInputOutput = CvInputOutput(&SPI, CV_CNVT_PIN, CV_SELECT_PIN);
-
 OctaSource octasource  = OctaSource();
-MainController mainController = MainController(cvInputOutput, octasource);
+MainController mainController = MainController(octasource);
 
 
 void setup() {
     Serial.begin(SERIAL_BAUD);
+    delay(1000);
     Serial.println();
     Serial.println("=========================================");
     Serial.println("*     Pigatron Industries OctaSource    *");
@@ -27,5 +24,6 @@ void setup() {
 }
 
 void loop() {
+
     mainController.run();
 }

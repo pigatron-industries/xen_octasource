@@ -4,14 +4,14 @@
 #include <inttypes.h>
 
 #include "../task/Task.h"
-#include "../../drivers/CvInputOutput.h"
+#include "../../Hardware.h"
 #include "PotCalibration.h"
 #include "GateInput.h"
 
 class AbstractInputTask : public Task {
 
 public:
-    AbstractInputTask(CvInputOutput& cvInputOutput);
+    AbstractInputTask();
     void setPotCalibration(uint8_t modeSwitchPin, uint8_t potCalibrationSize, uint8_t displayLedPin);
     void init();
 
@@ -19,8 +19,6 @@ public:
     float getCalibratedValue(uint8_t pin);
 
 protected:
-    CvInputOutput& _cvInputOutput;
-
     PotCalibration* _potCalibration;
     uint8_t _potCalibrationSize;
 

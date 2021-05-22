@@ -4,8 +4,7 @@
 
 #include <Arduino.h>
 
-AbstractInputTask::AbstractInputTask(CvInputOutput& cvInputOutput) :
-  _cvInputOutput(cvInputOutput) {
+AbstractInputTask::AbstractInputTask() {
     _calibrationMode = false;
     _potCalibrationSize = 0;
     _calibrationMode = 0;
@@ -39,11 +38,11 @@ void AbstractInputTask::init() {
 }
 
 float AbstractInputTask::getValue(uint8_t pin) {
-    return _cvInputOutput.getVoltage(pin);
+    return Hardware::hw.cvPins[pin].readVoltage();
 }
 
 float AbstractInputTask::getCalibratedValue(uint8_t pin) {
-    float voltage = _cvInputOutput.getVoltage(pin);
+    float voltage = Hardware::hw.cvPins[pin].readVoltage();
 
     for(uint8_t i = 0; i < _potCalibrationSize; i++) {
         if(_potCalibration[i].getPin() == pin) {
@@ -55,15 +54,15 @@ float AbstractInputTask::getCalibratedValue(uint8_t pin) {
 }
 
 void AbstractInputTask::doCalibrationSequence() {
-    _cvInputOutput.setPinModeAnalogOut(_displayLedPin);
-    _cvInputOutput.setVoltage(_displayLedPin, 5.0);
+    Hardware::hw.max11300.setPinModeAnalogOut(_displayLedPin, DACNegative5to5);
+    Hardware::hw.cvPins[_displayLedPin].writeVoltage(5.0);
     Serial.println("Calibration mode started.");
     Serial.println("Release mode switch...");
 
     while (digitalRead(_modeSwitchPin) == LOW) {
     }
 
-    _cvInputOutput.setVoltage(_displayLedPin, -5.0);
+    Hardware::hw.cvPins[_displayLedPin].writeVoltage(-5.0);
     Serial.println("Turn all pots left, then press mode switch...");
     delay(100);
     while (digitalRead(_modeSwitchPin) == HIGH) {}
@@ -72,11 +71,11 @@ void AbstractInputTask::doCalibrationSequence() {
 
     // Read in min voltages for each pot
     for(uint8_t i = 0; i < _potCalibrationSize; i++) {
-        float voltage = _cvInputOutput.getVoltage(_potCalibration[i].getPin());
+        float voltage = Hardware::hw.cvPins[_potCalibration[i].getPin()].readVoltage();
         _potCalibration[i].setRealMin(voltage);
     }
 
-    _cvInputOutput.setVoltage(_displayLedPin, 5.0);
+    Hardware::hw.cvPins[_displayLedPin].writeVoltage(5.0);
     Serial.println("Turn all pots right, then press mode switch...");
     delay(100);
     while (digitalRead(_modeSwitchPin) == HIGH) {}
@@ -85,7 +84,7 @@ void AbstractInputTask::doCalibrationSequence() {
 
     // Read in max voltages for each pot
     for(uint8_t i = 0; i < _potCalibrationSize; i++) {
-        float voltage = _cvInputOutput.getVoltage(_potCalibration[i].getPin());
+        float voltage = Hardware::hw.cvPins[_potCalibration[i].getPin()].readVoltage();
         _potCalibration[i].setRealMax(voltage);
         Serial.println(voltage);
     }

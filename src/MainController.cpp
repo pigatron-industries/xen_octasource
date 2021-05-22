@@ -3,6 +3,7 @@
 #include "Config.h"
 #include "lib/util.h"
 #include "lib/io/SerialUtil.h"
+#include "Hardware.h"
 
 #include <Arduino.h>
 #include <math.h>
@@ -13,8 +14,8 @@
 #define TRANSMIT_TIME 10000
 
 
-MainController::MainController(CvInputOutput& cvInputOutput, OctaSource& octasource) :
-  AbstractInputTask(cvInputOutput),
+MainController::MainController(OctaSource& octasource) :
+  AbstractInputTask(),
   _octasource(octasource),
   _modeSwitch(MODE_SWITCH_PIN, 100),
   _modeEncoder(MODE_ENCODER_PIN1, MODE_ENCODER_PIN2) {
@@ -30,13 +31,14 @@ void MainController::init() {
     Task::init();
 
     Serial2.begin(SERIAL_BAUD);
-    _cvInputOutput.setPinModeAnalogIn(RATE_POT_PIN);
-    _cvInputOutput.setPinModeAnalogIn(RATE_CV_PIN);
-    _cvInputOutput.setPinModeAnalogIn(WAVE_POT_PIN);
-    _cvInputOutput.setPinModeAnalogIn(WAVE_CV_PIN);
-    _cvInputOutput.setPinModeAnalogIn(LENGTH_POT_PIN);
-    _cvInputOutput.setPinModeAnalogIn(LENGTH_CV_PIN);
-    _cvInputOutput.setPinModeAnalogIn(TRIGGER_IN_PIN);
+    Hardware::hw.max11300.setPinModeAnalogIn(RATE_POT_PIN, ADCNegative5to5);
+    Hardware::hw.max11300.setPinModeAnalogIn(RATE_CV_PIN, ADCNegative5to5);
+    Hardware::hw.max11300.setPinModeAnalogIn(WAVE_POT_PIN, ADCNegative5to5);
+    Hardware::hw.max11300.setPinModeAnalogIn(WAVE_CV_PIN, ADCNegative5to5);
+    Hardware::hw.max11300.setPinModeAnalogIn(LENGTH_POT_PIN, ADCNegative5to5);
+    Hardware::hw.max11300.setPinModeAnalogIn(LENGTH_CV_PIN, ADCNegative5to5);
+    Hardware::hw.max11300.setPinModeAnalogIn(TRIGGER_IN_PIN, ADCNegative5to5);
+
     AbstractInputTask::init();
     if(Config::instance.getSelectedMode() < MODE_COUNT) {
         _octasource.setMode(Config::instance.getSelectedMode());
@@ -48,9 +50,10 @@ void MainController::init() {
 
     // configure outputs
     for(uint8_t i = 0; i < OSCILLATOR_COUNT; i++) {
-        _cvInputOutput.setPinModeAnalogOut(OUTPUT_CV_PIN_START+i);
+        Hardware::hw.max11300.setPinModeAnalogOut(OUTPUT_CV_PIN_START+i, DACNegative5to5);
+        Hardware::hw.max11300.writeAnalogPin(OUTPUT_CV_PIN_START+i, 4096/2);
     }
-    _cvInputOutput.setPinModeAnalogOut(OUTPUT_GATE);
+    Hardware::hw.max11300.setPinModeAnalogOut(OUTPUT_GATE, DACNegative5to5);
 }
 
 void MainController::execute() {
@@ -106,7 +109,7 @@ void MainController::execute() {
     // output values
     for(int i = 0; i < OSCILLATOR_COUNT; i++) {
         float voltage = _octasource.getOutput(i);
-        _cvInputOutput.setVoltage(OUTPUT_CV_PIN_START+i, voltage);
+        Hardware::hw.cvPins[OUTPUT_CV_PIN_START+i].writeVoltage(voltage);
     }
 
     if(_triggerTimer.isStopped()) {
@@ -116,9 +119,9 @@ void MainController::execute() {
     }
 
     if(_triggerTimer.isRunning()) {
-        _cvInputOutput.setVoltage(OUTPUT_GATE, 5);
+        Hardware::hw.cvPins[OUTPUT_GATE].writeVoltage(5);
     } else {
-        _cvInputOutput.setVoltage(OUTPUT_GATE, 0);
+        Hardware::hw.cvPins[OUTPUT_GATE].writeVoltage(0);
     }
 }
 
@@ -139,15 +142,15 @@ void MainController::switchMode() {
 
     // Indicate new mode
     for(int i = 0; i < OSCILLATOR_COUNT; i++) {
-        _cvInputOutput.setVoltage(OUTPUT_CV_PIN_START+i, 0);
+        Hardware::hw.cvPins[OUTPUT_CV_PIN_START+i].writeVoltage(0);
     }
     uint8_t modeNum = _octasource.getMode();
     long startTime = millis();
     long time = millis();
     while(time - startTime < 500) {
-        _cvInputOutput.setVoltage(OUTPUT_CV_PIN_START+modeNum, 3);
+        Hardware::hw.cvPins[OUTPUT_CV_PIN_START+modeNum].writeVoltage(3);
         delay(1);
-        _cvInputOutput.setVoltage(OUTPUT_CV_PIN_START+modeNum, -3);
+        Hardware::hw.cvPins[OUTPUT_CV_PIN_START+modeNum].writeVoltage(-3);
         delay(1);
         time = millis();
     }

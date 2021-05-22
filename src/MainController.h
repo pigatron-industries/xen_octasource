@@ -16,7 +16,7 @@
 class MainController : public AbstractInputTask {
 
 public:
-    MainController(CvInputOutput& cvInputOutput, OctaSource& octasource);
+    MainController(OctaSource& octasource);
     void init();
     void execute();
 
