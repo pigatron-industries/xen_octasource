@@ -19,7 +19,7 @@ Uses [PJRC Teensy 4.0](https://www.pjrc.com/teensy-4-0/) and [MikroElektronika P
 
 ### Prototype
 
-<img src="images/octasource_prototype_032020_1.jpg" height="500" /> <img src="images/octasource_prototype_032020_2.jpg" height="500" /> <img src="octasource_prototype_032021_3.jpg" height="500" />
+<img src="images/octasource_prototype_032020_1.jpg" height="500" /> <img src="images/octasource_prototype_032020_2.jpg" height="500" /> <img src="images/octasource_prototype_032021_3.jpg" height="500" />
 
 
 ---
