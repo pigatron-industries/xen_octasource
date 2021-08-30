@@ -2,31 +2,30 @@
 #define Config_h
 
 #include <inttypes.h>
-#include "lib/io/PotCalibration.h"
+
+class PotCalibration {
+    public:
+        int min;
+        int max;
+};
+
+class Mode {
+    public:
+        uint8_t controllerIndex;
+        uint8_t controllerMode;
+};
 
 class Config {
 
     public:
-        static Config instance;
+        static Config data;
+        PotCalibration calibration[4];
+        Mode mode;
 
-        void load(uint8_t potCalibrationSize);
-        uint8_t getSelectedMode();
-        uint8_t getSelectedSubMode();
-        float* getCalibrationRealMin() { return calibrationRealMin; }
-        float* getCalibrationRealMax() { return calibrationRealMax; }
-
-        void saveSelectedMode(uint8_t mode, uint8_t submode);
-        void savePotCalibration(PotCalibration* potCalibration, uint8_t potCalibrationSize);
+        static void load();
+        static void saveMode();
+        static void saveCalibration();
     
-    private:
-        float calibrationRealMin[10];
-        float calibrationRealMax[10];
-        uint8_t potCalibrationSize;
-        uint8_t selectedMode;
-        uint8_t selectedSubMode;
-
-        int selectedModeStartAddress;
-
 };
 
 #endif

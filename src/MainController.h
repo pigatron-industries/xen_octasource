@@ -1,45 +1,36 @@
 #ifndef MainController_h
 #define MainController_h
 
-#include <Bounce2.h>
-#include <Encoder.h>
-
+#include <eurorack.h>
 #include <inttypes.h>
 
-#include "lib/io/AbstractInputTask.h"
 #include "lib/io/Timer.h"
-#include "modules/OctaSource.h"
+#include "Controller.h"
+#include "Hardware.h"
 
-#define CALIBRATED_POT_SIZE 3
 
-
-class MainController : public AbstractInputTask {
+class MainController {
 
 public:
-    MainController(OctaSource& octasource);
+    MainController(float sampleRate);
     void init();
-    void execute();
+    void update();
+    void process();
+
+    void registerController(Controller& controller);
 
 private:
-    OctaSource& _octasource;
+    float sampleRate;
+    ControllerList<Controller, 8> controllers;
 
-    Bounce _modeSwitch;
-    Encoder _modeEncoder;
-    long _encoderMovement;
+    void controllerInit();
+    void doCalibration();
+    void loadCalibration();
+    void displayVoltage(float voltage);
 
-    GateInput _trigger;
-    bool _slaveMode;
-    Timer _transmitTimer;
-    Timer _triggerTimer;
-
-    float rateVoltageToFrequency(float voltage);
-    void switchMode();
-    void switchSlaveMode();
-    void printMode();
-
-    void sendData();
-    float receiveData();
-
+    IntervalTimer interruptTimer;
+    static MainController* mainController;
+    static void interruptHandler();
 };
 
 #endif

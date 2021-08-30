@@ -6,9 +6,9 @@
 #define CV_SCLK_PIN 13
 #define CV_INTERUPT 14
 #define CV_CNVT_PIN 15
-#define MODE_SWITCH_PIN 0
-#define MODE_ENCODER_PIN1 1
-#define MODE_ENCODER_PIN2 2
+#define ENCODER_BTN_PIN 0
+#define ENCODER_PIN1 1
+#define ENCODER_PIN2 2
 
 // MAX11300 Pins
 #define LENGTH_CV_PIN 3
@@ -20,8 +20,10 @@
 #define TRIGGER_IN_PIN 9
 
 #define OUTPUT_CV_PIN_START 10
-#define OUTPUT_GATE 2
+#define OUTPUT_CV_COUNT 8
+#define OUTPUT_GATE_PIN 2
 #define OUTPUT_GATE_TIME 10000
 
 // Other config
 #define SERIAL_BAUD 115200
+#define SAMPLE_RATE 1000
