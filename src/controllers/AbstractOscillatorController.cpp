@@ -1,6 +1,6 @@
 #include "AbstractOscillatorController.h"
 
-void AbstractOscillatorController::init(float sampleRate) {
+void AbstractOscillatorController::init() {
     for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
         oscillators[i].init(sampleRate);
         oscillators[i].setFrequency(1);

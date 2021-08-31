@@ -11,7 +11,8 @@ using namespace pigatron;
 
 class AbstractOscillatorController : public Controller {
     public:
-        virtual void init(float sampleRate);
+        AbstractOscillatorController(int lastMode = 0) : Controller(lastMode) {}
+        virtual void init();
         virtual void update();
         virtual void process();
 

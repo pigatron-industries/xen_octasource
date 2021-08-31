@@ -30,9 +30,8 @@ void MainController::init() {
     Config::load();
     loadCalibration();
 
-    if(Config::data.mode.controllerIndex >= 0 && Config::data.mode.controllerIndex <= 1) {
-        controllers.setActiveController(Config::data.mode.controllerIndex);
-    }
+    controllers.setActiveController(Config::data.mode.controllerIndex);
+    controllers.getActiveController()->setMode(Config::data.mode.controllerMode);
     controllerInit();
 }
 
@@ -57,15 +56,17 @@ void MainController::update() {
     if(Hardware::hw.encoder.update()) {
         if(Hardware::hw.encoderButton.held()) {
             //change controller when button held down
-            if(Hardware::hw.encoder.getMovement() > 0) {
-                controllers.incrementController();
+            if(Hardware::hw.encoder.getMovement() != 0) {
+                controllers.cycle(Hardware::hw.encoder.getMovement());
                 controllerInit();
-            } else if (Hardware::hw.encoder.getMovement() < 0) {
-                controllers.decrementController();
-                controllerInit();
-            }
+            } 
         } else {
-            //button pressed
+            //change controller mode
+            if(Hardware::hw.encoder.getMovement() != 0) {
+                Config::data.mode.controllerMode = controllers.getActiveController()->cycleMode(Hardware::hw.encoder.getMovement());
+                controllers.getActiveController()->init();
+                Config::saveMode();
+            }
         }
     }
 

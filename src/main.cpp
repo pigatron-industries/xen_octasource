@@ -5,12 +5,12 @@
 
 #include "MainController.h"
 #include "controllers/PhasedController.h"
-#include "controllers/MultipliedController.h"
+#include "controllers/FrequencyController.h"
 
 MainController mainController = MainController(SAMPLE_RATE);
 
 PhasedController phasedController = PhasedController();
-MultipliedController multipliedController = MultipliedController();
+FrequencyController frequencyController = FrequencyController();
 
 void setup() {
     Serial.begin(SERIAL_BAUD);
@@ -21,7 +21,7 @@ void setup() {
     Serial.println();
     Hardware::hw.init();
     mainController.registerController(phasedController);
-    mainController.registerController(multipliedController);
+    mainController.registerController(frequencyController);
     mainController.init();
 }
 
