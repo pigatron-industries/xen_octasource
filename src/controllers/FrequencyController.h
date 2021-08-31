@@ -9,10 +9,11 @@ class FrequencyController : public AbstractOscillatorController {
     public:
         enum Mode {
             LINEAR,
-            EXP
+            EXP,
+            UNCORRELATED
         };
 
-        FrequencyController() : AbstractOscillatorController(Mode::EXP) {}
+        FrequencyController() : AbstractOscillatorController(Mode::UNCORRELATED) {}
         virtual void init();
         virtual void update();
         virtual void process();
