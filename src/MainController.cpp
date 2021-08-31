@@ -30,10 +30,18 @@ void MainController::init() {
     Config::load();
     loadCalibration();
 
+    if(Config::data.mode.controllerIndex >= 0 && Config::data.mode.controllerIndex <= 1) {
+        controllers.setActiveController(Config::data.mode.controllerIndex);
+    }
     controllerInit();
 }
 
 void MainController::controllerInit() {
+    interruptTimer.end();
+    
+    Config::data.mode.controllerIndex = controllers.getActiveControllerIndex();
+    Config::saveMode();
+
     controllers.getActiveController()->init(sampleRate);
 
     int intervalMicros = 1000000/sampleRate;

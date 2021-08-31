@@ -8,7 +8,10 @@ void PhasedController::init(float sampleRate) {
 }
 
 void PhasedController::update() {
-    AbstractOscillatorController::update();
+    updateRate();
+    updateAmp();
+    updateWave();
+    updateOutput();
 }
 
 void PhasedController::process() {

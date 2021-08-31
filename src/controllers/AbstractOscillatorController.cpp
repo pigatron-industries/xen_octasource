@@ -10,13 +10,29 @@ void AbstractOscillatorController::init(float sampleRate) {
 }
 
 void AbstractOscillatorController::update() {
+    updateRate();
+    updateAmp();
+    updateWave();
+    updateOutput();
+}
+
+void AbstractOscillatorController::process() {
+    for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
+        outputValues[i] = oscillators[i].process();
+    }
+}
+
+
+void AbstractOscillatorController::updateRate() {
     if(ratePotInput.update()) {
         float rateValue = ratePotInput.getValue();
         for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
             oscillators[i].setFrequency(rateValue);
         }
     }
+}
 
+void AbstractOscillatorController::updateAmp() {
     if(ampPotInput.update()) {
         float ampValue = ampPotInput.getValue();
         Serial.println(ampValue);
@@ -24,7 +40,9 @@ void AbstractOscillatorController::update() {
             oscillators[i].setAmp(ampValue);
         }
     }
+}
 
+void AbstractOscillatorController::updateWave() {
     if(wavePotInput.update()) {
         float waveValue = wavePotInput.getValue();
         for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
@@ -41,14 +59,10 @@ void AbstractOscillatorController::update() {
             }
         }
     }
-
-    for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
-        Hardware::hw.cvOutputPins[i].writeVoltage(outputValues[i]);
-    }
 }
 
-void AbstractOscillatorController::process() {
+void AbstractOscillatorController::updateOutput() {
     for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
-        outputValues[i] = oscillators[i].process();
+        Hardware::hw.cvOutputPins[i].writeVoltage(outputValues[i]);
     }
 }

@@ -4,7 +4,6 @@
 #include <eurorack.h>
 #include <inttypes.h>
 
-#include "lib/io/Timer.h"
 #include "Controller.h"
 #include "Hardware.h"
 
