@@ -6,6 +6,7 @@
 #include "MainController.h"
 #include "controllers/PhasedController.h"
 #include "controllers/FrequencyController.h"
+#include "controllers/ClockController.h"
 
 MainController mainController = MainController(SAMPLE_RATE);
 

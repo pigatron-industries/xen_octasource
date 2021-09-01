@@ -16,13 +16,6 @@ void AbstractOscillatorController::update() {
     updateOutput();
 }
 
-void AbstractOscillatorController::process() {
-    for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
-        outputValues[i] = oscillators[i].process();
-    }
-}
-
-
 void AbstractOscillatorController::updateRate() {
     if(ratePotInput.update()) {
         float rateValue = ratePotInput.getValue();
@@ -64,5 +57,11 @@ void AbstractOscillatorController::updateWave() {
 void AbstractOscillatorController::updateOutput() {
     for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
         Hardware::hw.cvOutputPins[i].writeVoltage(outputValues[i]);
+    }
+}
+
+void AbstractOscillatorController::process() {
+    for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
+        outputValues[i] = oscillators[i].process();
     }
 }
