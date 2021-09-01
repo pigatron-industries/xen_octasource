@@ -1,14 +1,17 @@
 #include "PhasedController.h"
 
-void PhasedController::init(float sampleRate) {
-    AbstractOscillatorController::init(sampleRate);
+void PhasedController::init() {
+    AbstractOscillatorController::init();
     for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
         oscillators[i].setPhase(i*0.125);
     }
 }
 
 void PhasedController::update() {
-    AbstractOscillatorController::update();
+    updateRate();
+    updateAmp();
+    updateWave();
+    updateOutput();
 }
 
 void PhasedController::process() {

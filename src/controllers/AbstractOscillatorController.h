@@ -11,7 +11,8 @@ using namespace pigatron;
 
 class AbstractOscillatorController : public Controller {
     public:
-        virtual void init(float sampleRate);
+        AbstractOscillatorController(int lastMode = 0) : Controller(lastMode) {}
+        virtual void init();
         virtual void update();
         virtual void process();
 
@@ -22,6 +23,11 @@ class AbstractOscillatorController : public Controller {
         BipolarExpInput<MAX11300AnalogInputPin&> ratePotInput = BipolarExpInput<MAX11300AnalogInputPin&>(Hardware::hw.ratePotPin);
         LinearInput<MAX11300AnalogInputPin&> wavePotInput = LinearInput<MAX11300AnalogInputPin&>(Hardware::hw.wavePotPin, -5, 5, 0, 5);
         LinearInput<MAX11300AnalogInputPin&> ampPotInput = LinearInput<MAX11300AnalogInputPin&>(Hardware::hw.ampPotPin, -5, 5, 0, 5);
+
+        void updateRate();
+        void updateAmp();
+        void updateWave();
+        void updateOutput();
 };
 
 #endif
