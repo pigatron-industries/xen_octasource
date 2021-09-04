@@ -14,7 +14,7 @@ class Hardware {
 
         // Native pins
         NativeDevice nativeDevice = NativeDevice();
-        DigitalInputPin<NativeDevice> encoderButtonPin = DigitalInputPin<NativeDevice>(nativeDevice, ENCODER_BTN_PIN);
+        DigitalInputPin<> encoderButtonPin = DigitalInputPin<>(nativeDevice, ENCODER_BTN_PIN);
 
         // Direct connections
         RotaryEncoder encoder = RotaryEncoder(ENCODER_PIN1, ENCODER_PIN2);
