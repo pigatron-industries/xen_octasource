@@ -90,30 +90,30 @@ void MainController::doCalibration() {
     displayVoltage(-5);
     Hardware::hw.encoderButton.waitForPressAndRelease();
 
-    Config::data.calibration[0].min = Hardware::hw.ratePotPin.read();
-    Config::data.calibration[1].min = Hardware::hw.wavePotPin.read();
-    Config::data.calibration[2].min = Hardware::hw.ampPotPin.read();
+    Config::data.calibration[0].min = Hardware::hw.ratePotPin.binaryRead();
+    Config::data.calibration[1].min = Hardware::hw.wavePotPin.binaryRead();
+    Config::data.calibration[2].min = Hardware::hw.ampPotPin.binaryRead();
 
     Serial.println("Turn all pots right, then press mode switch...");
     Serial.println();
     displayVoltage(5);
     Hardware::hw.encoderButton.waitForPressAndRelease();
 
-    Config::data.calibration[0].max = Hardware::hw.ratePotPin.read();
-    Config::data.calibration[1].max = Hardware::hw.wavePotPin.read();
-    Config::data.calibration[2].max = Hardware::hw.ampPotPin.read();
+    Config::data.calibration[0].max = Hardware::hw.ratePotPin.binaryRead();
+    Config::data.calibration[1].max = Hardware::hw.wavePotPin.binaryRead();
+    Config::data.calibration[2].max = Hardware::hw.ampPotPin.binaryRead();
 
     Config::saveCalibration();
 }
 
 void MainController::loadCalibration() {
-    Hardware::hw.ratePotPin.setInputRange(Config::data.calibration[0].min, Config::data.calibration[0].max);
-    Hardware::hw.wavePotPin.setInputRange(Config::data.calibration[1].min, Config::data.calibration[1].max);
-    Hardware::hw.ampPotPin.setInputRange(Config::data.calibration[2].min, Config::data.calibration[2].max);
+    Hardware::hw.ratePotPin.setBinaryRange(Config::data.calibration[0].min, Config::data.calibration[0].max);
+    Hardware::hw.wavePotPin.setBinaryRange(Config::data.calibration[1].min, Config::data.calibration[1].max);
+    Hardware::hw.ampPotPin.setBinaryRange(Config::data.calibration[2].min, Config::data.calibration[2].max);
 }
 
 void MainController::displayVoltage(float voltage) {
     for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
-        Hardware::hw.cvOutputPins[i].writeVoltage(voltage);
+        Hardware::hw.cvOutputPins[i]->analogWrite(voltage);
     }
 }
