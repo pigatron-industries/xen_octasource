@@ -72,6 +72,8 @@ void MainController::update() {
 
     //TODO long press switches to slave mode
     controllers.getActiveController()->update();
+
+    Hardware::hw.max11300.send();
 }
 
 void MainController::process() {

@@ -11,7 +11,6 @@ void PhasedController::update() {
     updateRate();
     updateAmp();
     updateWave();
-    updateOutput();
 }
 
 void PhasedController::process() {

@@ -13,13 +13,11 @@ void AbstractOscillatorController::update() {
     updateRate();
     updateAmp();
     updateWave();
-    updateOutput();
 }
 
 void AbstractOscillatorController::updateRate() {
     if(ratePotInput.update()) {
         float rateValue = ratePotInput.getValue();
-        Serial.println(rateValue);
         for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
             oscillators[i].setFrequency(rateValue);
         }
@@ -54,14 +52,8 @@ void AbstractOscillatorController::updateWave() {
     }
 }
 
-void AbstractOscillatorController::updateOutput() {
-    for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
-        Hardware::hw.cvOutputPins[i]->analogWrite(outputValues[i]);
-    }
-}
-
 void AbstractOscillatorController::process() {
     for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
-        outputValues[i] = oscillators[i].process();
+        Hardware::hw.cvOutputPins[i]->analogWrite(oscillators[i].process());
     }
 }

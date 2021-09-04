@@ -12,6 +12,7 @@ MainController mainController = MainController(SAMPLE_RATE);
 
 PhasedController phasedController = PhasedController();
 FrequencyController frequencyController = FrequencyController();
+ClockController clockController = ClockController();
 
 void setup() {
     Serial.begin(SERIAL_BAUD);
@@ -23,6 +24,7 @@ void setup() {
     Hardware::hw.init();
     mainController.registerController(phasedController);
     mainController.registerController(frequencyController);
+    mainController.registerController(clockController);
     mainController.init();
 }
 

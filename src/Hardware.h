@@ -13,12 +13,11 @@ class Hardware {
         void init();
 
         // Native pins
-        NativeDevice nativeDevice = NativeDevice();
-        DigitalInputPin<> encoderButtonPin = DigitalInputPin<>(nativeDevice, ENCODER_BTN_PIN);
+        DigitalInput(ENCODER_BTN_PIN);
 
         // Direct connections
         RotaryEncoder encoder = RotaryEncoder(ENCODER_PIN1, ENCODER_PIN2);
-        PushButton<> encoderButton = PushButton<>(encoderButtonPin);
+        PushButton<> encoderButton = PushButton<>(DENCODER_BTN_PIN);
 
         // MAX11300
         MAX11300Device max11300 = MAX11300Device(&SPI, CV_CNVT_PIN, CV_SELECT_PIN);

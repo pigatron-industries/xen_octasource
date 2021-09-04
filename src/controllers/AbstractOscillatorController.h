@@ -27,7 +27,6 @@ class AbstractOscillatorController : public Controller {
         void updateRate();
         void updateAmp();
         void updateWave();
-        void updateOutput();
 };
 
 #endif

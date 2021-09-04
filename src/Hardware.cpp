@@ -8,4 +8,6 @@ void Hardware::init() {
     for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
         cvOutputPins[i]->setPinType(PinType::ANALOG_OUTPUT);
     }
+
+    max11300.setDeferredOutput(true);
 }

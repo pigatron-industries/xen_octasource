@@ -11,7 +11,6 @@ void FrequencyController::update() {
     updateRate();
     updateAmp();
     updateWave();
-    updateOutput();
 }
 
 void FrequencyController::process() {
