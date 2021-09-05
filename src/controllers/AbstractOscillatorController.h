@@ -20,6 +20,7 @@ class AbstractOscillatorController : public Controller {
         Oscillator oscillators[OUTPUT_CV_COUNT];
         float outputValues[OUTPUT_CV_COUNT];
 
+        AnalogGateInput<MAX11300Device> triggerInput = AnalogGateInput<MAX11300Device>(Hardware::hw.triggerInPin);
         BipolarExpInput<MAX11300Device> ratePotInput = BipolarExpInput<MAX11300Device>(Hardware::hw.ratePotPin);
         LinearInput<MAX11300Device> wavePotInput = LinearInput<MAX11300Device>(Hardware::hw.wavePotPin, -5, 5, 0, 5);
         LinearInput<MAX11300Device> ampPotInput = LinearInput<MAX11300Device>(Hardware::hw.ampPotPin, -5, 5, 0, 5);

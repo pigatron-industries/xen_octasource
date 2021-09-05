@@ -19,6 +19,11 @@ void ClockController::update() {
             clock.setFrequency(rateValue);
         }
     }
+
+    if(triggerInput.update() && triggerInput.isTriggered()) {
+        tick();
+        clock.reset();
+    }
 }
 
 void ClockController::process() {

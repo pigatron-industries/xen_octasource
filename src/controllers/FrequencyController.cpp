@@ -33,13 +33,13 @@ void FrequencyController::updateRate() {
                 break;
             case Mode::UNCORRELATED:
                 oscillators[0].setFrequency(rateValue);
-                oscillators[1].setFrequency(rateValue/1.41421356);    // Square root of 2
-                oscillators[2].setFrequency(rateValue/1.61803398875); // Golden Ratio
-                oscillators[3].setFrequency(rateValue/2.718281828);   // Euler's Number
-                oscillators[4].setFrequency(rateValue/M_PI);          // Pi
-                oscillators[5].setFrequency(rateValue/(1.41421356*2));
-                oscillators[6].setFrequency(rateValue/(1.61803398875*2));
-                oscillators[7].setFrequency(rateValue/(2.718281828*2));
+                oscillators[1].setFrequency(rateValue/1.2020569);     // zeta 3
+                oscillators[2].setFrequency(rateValue/1.41421356);    // root 2
+                oscillators[3].setFrequency(rateValue/1.61803398875); // phi
+                oscillators[4].setFrequency(rateValue/2.718281828);   // e
+                oscillators[5].setFrequency(rateValue/M_PI);          // pi
+                oscillators[6].setFrequency(rateValue/4.669201609);   // feigenbaum constant
+                oscillators[7].setFrequency(rateValue/23.140692632);  // e^pi
                 break;
         }
     }

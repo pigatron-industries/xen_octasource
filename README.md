@@ -33,32 +33,22 @@ There are various modes which can be cycled through by pressing the mode switch,
 Each output wave is the same frequency but phase shifted by 45 degrees.
 * Trigger: Will reset the phases back to initial values.
 
-### 2 Multiplied
+### 2 Frequency
 
-Each output is multiplied by a whole number of the previous output.
+The frequencies of each output are different but related to each other.
 * Trigger: Will reset the phases back to initial values.
 
 Submodes:
-1. Multiply by 2
-2. Multiply by 3
+1. Divide by whole numbers: 1 / 2 / 3 / 4 / 5 / 6 / 7 / 8
+2. Divide by powers of 2: 1 / 2 / 4 / 8 / 16 / 32 / 64 / 128
+3. Divide by various irrational numbers: 1 / zeta 3 / root 2 / phi / e / pi / feigenbaum constant / e^pi
 
 
-### 3 Uncorrelated
-
-A range of frequency outputs that are uncorrelated to each other. In this case multiplied by an irrational number, Pi.
-* Trigger: This mode starts off each wave at a completely random phase. When a trigger is received the phases are re-randomised, so can be used to create almost completely random voltages.
-
-Submodes:
-1. Multiply by square root of 2
-2. Multiply by golden ratio
-3. Multiply by Euler's number
-4. Multiply by pi
-
-### 4 Burst
+### 3 Burst
 
 When a trigger is applied, then outputs a burst of waves from each output.
 
-### 5 Clock Divider
+### 4 Clock Divider
 
 A clock source providing various subdivisions of a clock.
 * Trigger: External clock (Set rate knob to 12 o'clock, if rate knob is set to higher rate than trigger then the trigger will trigger the next clock pulse early).
