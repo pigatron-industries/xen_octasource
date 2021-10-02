@@ -6,9 +6,23 @@
 #define CV_SCLK_PIN 13
 #define CV_INTERUPT 14
 #define CV_CNVT_PIN 15
-#define ENCODER_BTN_PIN 0
-#define ENCODER_PIN1 1
-#define ENCODER_PIN2 2
+#if defined(OCTASOURCE_MKI)
+    #define ENCODER_BTN_PIN 0
+    #define ENCODER_PIN1 1
+    #define ENCODER_PIN2 2
+#endif
+#if defined(OCTASOURCE_MKII)
+    #define ENCODER_BTN_PIN 2
+    #define ENCODER_PIN1 3
+    #define ENCODER_PIN2 4
+#endif
+
+#define DAC1_SYNC_PIN 9
+#define DAC2_SYNC_PIN 8
+
+#define SCL_PIN 19
+#define SDA_PIN 18
+#define I2C_SPEED 1000000
 
 // MAX11300 Pins
 #define LENGTH_CV_PIN 3

@@ -22,6 +22,7 @@ void setup() {
     Serial.println("=========================================");
     Serial.println();
     Hardware::hw.init();
+
     mainController.registerController(phasedController);
     mainController.registerController(frequencyController);
     mainController.registerController(clockController);

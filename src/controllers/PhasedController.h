@@ -7,7 +7,7 @@ using namespace pigatron;
 
 class PhasedController : public AbstractOscillatorController {
     public:
-        virtual void init();
+        virtual void init(float sampleRate);
         virtual void update();
         virtual void process();
 

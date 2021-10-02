@@ -1,6 +1,6 @@
 #include "ClockController.h"
 
-void ClockController::init() {
+void ClockController::init(float sampleRate) {
     clock.init(sampleRate);
     clockDividers[0].setDivisor(1);
     clockDividers[1].setDivisor(2);
@@ -13,8 +13,8 @@ void ClockController::init() {
 }
 
 void ClockController::update() {
-    if(ratePotInput.update()) {
-        float rateValue = ratePotInput.getValue();
+    if(rateCvInput.update()) {
+        float rateValue = rateCvInput.getValue();
         for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
             clock.setFrequency(rateValue);
         }

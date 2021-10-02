@@ -1,11 +1,9 @@
 #include "AbstractOscillatorController.h"
 
-void AbstractOscillatorController::init() {
+void AbstractOscillatorController::init(float sampleRate) {
+    Controller::init(sampleRate);
     for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
         oscillators[i].init(sampleRate);
-        oscillators[i].setFrequency(1);
-        oscillators[i].setAmp(5);
-        oscillators[i].setWaveform(Oscillator::WAVE_SIN);
     }
 }
 
@@ -16,8 +14,8 @@ void AbstractOscillatorController::update() {
 }
 
 void AbstractOscillatorController::updateRate() {
-    if(ratePotInput.update()) {
-        float rateValue = ratePotInput.getValue();
+    if(rateCvInput.update()) {
+        float rateValue = rateCvInput.getValue();
         for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
             oscillators[i].setFrequency(rateValue);
         }
@@ -25,8 +23,8 @@ void AbstractOscillatorController::updateRate() {
 }
 
 void AbstractOscillatorController::updateAmp() {
-    if(ampPotInput.update()) {
-        float ampValue = ampPotInput.getValue();
+    if(ampCvInput.update()) {
+        float ampValue = ampCvInput.getValue();
         for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
             oscillators[i].setAmp(ampValue);
         }
@@ -34,8 +32,8 @@ void AbstractOscillatorController::updateAmp() {
 }
 
 void AbstractOscillatorController::updateWave() {
-    if(wavePotInput.update()) {
-        float waveValue = wavePotInput.getValue();
+    if(waveCvInput.update()) {
+        float waveValue = waveCvInput.getValue();
         for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
             if(waveValue < 1) {
                 oscillators[i].setWaveform(Oscillator::WAVE_SIN);

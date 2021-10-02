@@ -12,18 +12,20 @@ using namespace pigatron;
 class AbstractOscillatorController : public Controller {
     public:
         AbstractOscillatorController(int lastMode = 0) : Controller(lastMode) {}
-        virtual void init();
+        virtual void init(float sampleRate);
         virtual void update();
         virtual void process();
 
     protected:
         Oscillator oscillators[OUTPUT_CV_COUNT];
-        float outputValues[OUTPUT_CV_COUNT];
 
-        AnalogGateInput<MAX11300Device> triggerInput = AnalogGateInput<MAX11300Device>(Hardware::hw.triggerInPin);
-        BipolarExpInput<MAX11300Device> ratePotInput = BipolarExpInput<MAX11300Device>(Hardware::hw.ratePotPin);
-        LinearInput<MAX11300Device> wavePotInput = LinearInput<MAX11300Device>(Hardware::hw.wavePotPin, -5, 5, 0, 5);
-        LinearInput<MAX11300Device> ampPotInput = LinearInput<MAX11300Device>(Hardware::hw.ampPotPin, -5, 5, 0, 5);
+        AnalogGateInput<OctasourceInputDevice> triggerInput = AnalogGateInput<OctasourceInputDevice>(Hardware::hw.syncCvPin);
+        BipolarExpInput<OctasourceInputDevice> rateCvInput = BipolarExpInput<OctasourceInputDevice>(Hardware::hw.rateCvPin);
+        LinearInput<OctasourceInputDevice> waveCvInput = LinearInput<OctasourceInputDevice>(Hardware::hw.waveCvPin, -5, 5, 0, 5);
+        LinearInput<OctasourceInputDevice> ampCvInput = LinearInput<OctasourceInputDevice>(Hardware::hw.ampCvPin, -5, 5, 0, 5);
+        #if defined(OCTASOURCE_MKII)
+            LinearInput<OctasourceInputDevice> phaseCvInput = LinearInput<OctasourceInputDevice>(Hardware::hw.phaseCvPin, -5, 5, 0, 5);
+        #endif
 
         void updateRate();
         void updateAmp();

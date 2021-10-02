@@ -1,7 +1,7 @@
 #include "FrequencyController.h"
 
-void FrequencyController::init() {
-    AbstractOscillatorController::init();
+void FrequencyController::init(float sampleRate) {
+    AbstractOscillatorController::init(sampleRate);
     for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
         oscillators[i].setFrequency(i*1);
     }
@@ -18,8 +18,8 @@ void FrequencyController::process() {
 }
 
 void FrequencyController::updateRate() {
-    if(ratePotInput.update()) {
-        float rateValue = ratePotInput.getValue();
+    if(rateCvInput.update()) {
+        float rateValue = rateCvInput.getValue();
         switch (mode.value) {
             case Mode::LINEAR:
                 for(int i = 0; i < OUTPUT_CV_COUNT; i++) {

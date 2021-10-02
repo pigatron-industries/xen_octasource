@@ -37,11 +37,23 @@ void MainController::init() {
 
 void MainController::controllerInit() {
     interruptTimer.end();
-    
+
+    #if defined(OCTASOURCE_MKII)
+        Hardware::hw.encoderLeds[Config::data.mode.controllerIndex]->analogWrite(0);
+    #endif
+
     Config::data.mode.controllerIndex = controllers.getActiveControllerIndex();
     Config::saveMode();
 
-    controllers.getActiveController()->init(sampleRate);
+    if(controllers.getActiveController()->getSampleRate() > 0) {
+        controllers.getActiveController()->init();
+    } else {
+        controllers.getActiveController()->init(sampleRate);
+    }
+
+    #if defined(OCTASOURCE_MKII)
+        Hardware::hw.encoderLeds[Config::data.mode.controllerIndex]->analogWrite(1);
+    #endif
 
     int intervalMicros = 1000000/sampleRate;
     interruptTimer.begin(MainController::interruptHandler, intervalMicros);
@@ -73,7 +85,13 @@ void MainController::update() {
     //TODO long press switches to slave mode
     controllers.getActiveController()->update();
 
-    Hardware::hw.max11300.send();
+    #if defined(OCTASOURCE_MKII)
+        Hardware::hw.dac8164a.send();
+        Hardware::hw.dac8164b.send();
+    #endif
+    #if defined(OCTASOURCE_MKI)
+        Hardware::hw.max11300.send();
+    #endif
 }
 
 void MainController::process() {
@@ -82,40 +100,47 @@ void MainController::process() {
 
 
 void MainController::doCalibration() {
-    Serial.println("Calibration mode started.");
-    Serial.println("Release mode switch...");
-    displayVoltage(0);
-    Hardware::hw.encoderButton.waitForPressAndRelease();
+    #if defined(OCTASOURCE_MKI)
+        Serial.println("Calibration mode started.");
+        Serial.println("Release mode switch...");
+        displayVoltage(0);
+        Hardware::hw.encoderButton.waitForPressAndRelease();
 
-    Serial.println("Turn all pots left, then press mode switch...");
-    Serial.println();
-    displayVoltage(-5);
-    Hardware::hw.encoderButton.waitForPressAndRelease();
+        Serial.println("Turn all pots left, then press mode switch...");
+        Serial.println();
+        displayVoltage(-5);
+        Hardware::hw.encoderButton.waitForPressAndRelease();
 
-    Config::data.calibration[0].min = Hardware::hw.ratePotPin.binaryRead();
-    Config::data.calibration[1].min = Hardware::hw.wavePotPin.binaryRead();
-    Config::data.calibration[2].min = Hardware::hw.ampPotPin.binaryRead();
+        Config::data.calibration[0].min = Hardware::hw.rateCvPin.binaryRead();
+        Config::data.calibration[1].min = Hardware::hw.waveCvPin.binaryRead();
+        Config::data.calibration[2].min = Hardware::hw.ampCvPin.binaryRead();
 
-    Serial.println("Turn all pots right, then press mode switch...");
-    Serial.println();
-    displayVoltage(5);
-    Hardware::hw.encoderButton.waitForPressAndRelease();
+        Serial.println("Turn all pots right, then press mode switch...");
+        Serial.println();
+        displayVoltage(5);
+        Hardware::hw.encoderButton.waitForPressAndRelease();
 
-    Config::data.calibration[0].max = Hardware::hw.ratePotPin.binaryRead();
-    Config::data.calibration[1].max = Hardware::hw.wavePotPin.binaryRead();
-    Config::data.calibration[2].max = Hardware::hw.ampPotPin.binaryRead();
+        Config::data.calibration[0].max = Hardware::hw.rateCvPin.binaryRead();
+        Config::data.calibration[1].max = Hardware::hw.waveCvPin.binaryRead();
+        Config::data.calibration[2].max = Hardware::hw.ampCvPin.binaryRead();
 
-    Config::saveCalibration();
+        Config::saveCalibration();
+    #endif
 }
 
 void MainController::loadCalibration() {
-    Hardware::hw.ratePotPin.setBinaryRange(Config::data.calibration[0].min, Config::data.calibration[0].max);
-    Hardware::hw.wavePotPin.setBinaryRange(Config::data.calibration[1].min, Config::data.calibration[1].max);
-    Hardware::hw.ampPotPin.setBinaryRange(Config::data.calibration[2].min, Config::data.calibration[2].max);
+    #if defined(OCTASOURCE_MKI)
+        Hardware::hw.rateCvPin.setBinaryRange(Config::data.calibration[0].min, Config::data.calibration[0].max);
+        Hardware::hw.waveCvPin.setBinaryRange(Config::data.calibration[1].min, Config::data.calibration[1].max);
+        Hardware::hw.ampCvPin.setBinaryRange(Config::data.calibration[2].min, Config::data.calibration[2].max);
+    #endif
 }
 
 void MainController::displayVoltage(float voltage) {
-    for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
-        Hardware::hw.cvOutputPins[i]->analogWrite(voltage);
-    }
+    // TODO put back in once mkii cvOutputPins defined
+    #if defined(OCTASOURCE_MKI)
+        for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
+            Hardware::hw.cvOutputPins[i]->analogWrite(voltage);
+        }
+    #endif
 }

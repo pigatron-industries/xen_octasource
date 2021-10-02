@@ -14,7 +14,7 @@ class FrequencyController : public AbstractOscillatorController {
         };
 
         FrequencyController() : AbstractOscillatorController(Mode::UNCORRELATED) {}
-        virtual void init();
+        virtual void init(float sampleRate);
         virtual void update();
         virtual void process();
 
