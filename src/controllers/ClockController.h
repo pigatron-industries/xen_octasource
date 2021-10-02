@@ -2,8 +2,8 @@
 #define ClockController_h
 
 #include "AbstractOscillatorController.h"
-#include "Clock.h"
-#include "ClockDivider.h"
+#include "lib/Clock.h"
+#include "lib/ClockDivider.h"
 
 using namespace pigatron;
 

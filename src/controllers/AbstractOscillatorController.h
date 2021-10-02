@@ -5,7 +5,7 @@
 #include <eurorack_dsp.h>
 #include "../Controller.h"
 #include "../Hardware.h"
-#include "BipolarExpInput.h"
+#include "lib/io/BipolarExpInput.h"
 
 using namespace pigatron;
 
