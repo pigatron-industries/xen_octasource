@@ -35,14 +35,14 @@ class Hardware {
             DAC8164Device dac8164a = DAC8164Device(-1, DAC1_SYNC_PIN);
             DAC8164Device dac8164b = DAC8164Device(-1, DAC2_SYNC_PIN);
             AnalogOutputPin<DAC8164Device>* cvOutputPins[OUTPUT_CV_COUNT] = {
-                &dac8164a.pins[0],
-                &dac8164a.pins[1],
+                &dac8164b.pins[1],
                 &dac8164a.pins[2],
+                &dac8164a.pins[1],
+                &dac8164a.pins[0],
                 &dac8164a.pins[3],
                 &dac8164b.pins[0],
-                &dac8164b.pins[1],
-                &dac8164b.pins[2],
-                &dac8164b.pins[3]
+                &dac8164b.pins[3],
+                &dac8164b.pins[2]
             };
 
             IS32FL3738Device is32fl3738 = IS32FL3738Device(Wire);
