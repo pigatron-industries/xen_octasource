@@ -13,8 +13,8 @@ void ClockController::init(float sampleRate) {
 }
 
 void ClockController::update() {
-    if(rateCvInput.update()) {
-        float rateValue = rateCvInput.getValue();
+    if(bipolarRateCvInput.update()) {
+        float rateValue = bipolarRateCvInput.getValue();
         for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
             clock.setFrequency(rateValue);
         }

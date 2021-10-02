@@ -18,8 +18,8 @@ void FrequencyController::process() {
 }
 
 void FrequencyController::updateRate() {
-    if(rateCvInput.update()) {
-        float rateValue = rateCvInput.getValue();
+    if(bipolarRateCvInput.update()) {
+        float rateValue = bipolarRateCvInput.getValue();
         switch (mode.value) {
             case Mode::LINEAR:
                 for(int i = 0; i < OUTPUT_CV_COUNT; i++) {

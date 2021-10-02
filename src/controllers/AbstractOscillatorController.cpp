@@ -8,14 +8,23 @@ void AbstractOscillatorController::init(float sampleRate) {
 }
 
 void AbstractOscillatorController::update() {
-    updateRate();
+    updateRateBipolar();
     updateAmp();
     updateWave();
 }
 
-void AbstractOscillatorController::updateRate() {
-    if(rateCvInput.update()) {
-        float rateValue = rateCvInput.getValue();
+void AbstractOscillatorController::updateRateBipolar() {
+    if(bipolarRateCvInput.update()) {
+        float rateValue = bipolarRateCvInput.getValue();
+        for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
+            oscillators[i].setFrequency(rateValue);
+        }
+    }
+}
+
+void AbstractOscillatorController::updateRateExponential() {
+    if(expRateCvInput.update()) {
+        float rateValue = expRateCvInput.getValue();
         for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
             oscillators[i].setFrequency(rateValue);
         }
@@ -40,11 +49,9 @@ void AbstractOscillatorController::updateWave() {
             } else if (waveValue < 2) {
                 oscillators[i].setWaveform(Oscillator::WAVE_TRI);
             } else if (waveValue < 3) {
-                oscillators[i].setWaveform(Oscillator::WAVE_RAMP);
-            } else if (waveValue < 4) {
-                oscillators[i].setWaveform(Oscillator::WAVE_SAW);
+                oscillators[i].setWaveform(Oscillator::WAVE_POLYBLEP_SAW);
             } else {
-                oscillators[i].setWaveform(Oscillator::WAVE_SQUARE);
+                oscillators[i].setWaveform(Oscillator::WAVE_POLYBLEP_SQUARE);
             }
         }
     }

@@ -85,10 +85,6 @@ void MainController::update() {
     //TODO long press switches to slave mode
     controllers.getActiveController()->update();
 
-    #if defined(OCTASOURCE_MKII)
-        Hardware::hw.dac8164a.send();
-        Hardware::hw.dac8164b.send();
-    #endif
     #if defined(OCTASOURCE_MKI)
         Hardware::hw.max11300.send();
     #endif
@@ -96,6 +92,10 @@ void MainController::update() {
 
 void MainController::process() {
     controllers.getActiveController()->process();
+    #if defined(OCTASOURCE_MKII)
+        Hardware::hw.dac8164a.send();
+        Hardware::hw.dac8164b.send();
+    #endif
 }
 
 

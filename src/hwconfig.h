@@ -40,4 +40,9 @@
 
 // Other config
 #define SERIAL_BAUD 115200
-#define SAMPLE_RATE 1000
+#if defined(OCTASOURCE_MKI)
+    #define SAMPLE_RATE 1000
+#endif
+#if defined(OCTASOURCE_MKII)
+    #define SAMPLE_RATE 48000
+#endif
