@@ -25,6 +25,8 @@ class PhasedController : public AbstractOscillatorController {
         virtual void update();
         virtual void process();
 
+        void updatePhase();
+
     private:
 };
 

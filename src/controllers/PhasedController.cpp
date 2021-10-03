@@ -22,6 +22,17 @@ void PhasedController::update() {
     }
     updateAmp();
     updateWave();
+    updatePhase();
+}
+
+void PhasedController::updatePhase() {
+    // if(phaseCvInput.update()) {
+    //     float phaseDiffValue = phaseCvInput.getValue();
+    //     float phase = oscillators[0].getPhase();
+    //     for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
+    //         oscillators[i].setPhase(phase + i*phaseDiffValue);
+    //     }
+    // }
 }
 
 void PhasedController::process() {

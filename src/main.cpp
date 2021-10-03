@@ -6,12 +6,14 @@
 #include "MainController.h"
 #include "controllers/PhasedController.h"
 #include "controllers/FrequencyController.h"
+#include "controllers/FilterController.h"
 #include "controllers/ClockController.h"
 
 MainController mainController = MainController(SAMPLE_RATE);
 
 PhasedController phasedController = PhasedController();
 FrequencyController frequencyController = FrequencyController();
+FilterController filterController = FilterController();
 ClockController clockController = ClockController();
 
 void setup() {
@@ -25,6 +27,7 @@ void setup() {
 
     mainController.registerController(phasedController);
     mainController.registerController(frequencyController);
+    mainController.registerController(filterController);
     mainController.registerController(clockController);
     mainController.init();
 }
