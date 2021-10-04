@@ -8,9 +8,9 @@ class ThomasAttractor : public Attractor {
     public:
         void init(float sampleRate) {
             Attractor::init(sampleRate);
-            x = 0.1;
-            y = 0;
-            z = 0;
+            pos.x = 0.1;
+            pos.y = 0;
+            pos.z = 0;
             xMult = 1.75;
             yMult = 1.75;
             zMult = 1.75;
@@ -20,12 +20,10 @@ class ThomasAttractor : public Attractor {
             speedMult = 4;
         }
 
-        Deltas system(float x, float y, float z) {
-            Deltas d;
-            d.dxdt = sinf(y)-b*x;
-            d.dydt = sinf(z)-b*y;
-            d.dzdt = sinf(x)-b*z;
-            return d;
+        void system() {
+            delta.x = sinf(pos.y)-b*pos.x;
+            delta.y = sinf(pos.z)-b*pos.y;
+            delta.z = sinf(pos.x)-b*pos.z;
         }
 
         void setB(float b) { this->b = b; }

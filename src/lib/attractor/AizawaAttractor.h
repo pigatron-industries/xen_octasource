@@ -8,9 +8,9 @@ class AizawaAttractor : public Attractor {
     public:
         void init(float sampleRate) {
             Attractor::init(sampleRate);
-            x = 0.1;
-            y = 0;
-            z = 0;
+            pos.x = 0.1;
+            pos.y = 0;
+            pos.z = 0;
             xMult = 2.75;
             yMult = 2.75;
             zMult = 3.75;
@@ -20,12 +20,10 @@ class AizawaAttractor : public Attractor {
             speedMult = 1;
         }
 
-        Deltas system(float x, float y, float z) {
-            Deltas dt;
-            dt.dxdt = x*(z-b) - d*y;
-            dt.dydt = d*x + y*(z-b);
-            dt.dzdt = c + a*z - (z*z*z/3) - (x*x+y*y)*(1+e*z) + f*z*x*x*x;
-            return dt;
+        void system() {
+            delta.x = pos.x*(pos.z-b) - d*pos.y;
+            delta.y = d*pos.x + pos.y*(pos.z-b);
+            delta.z = c + a*pos.z - (pos.z*pos.z*pos.z/3) - (pos.x*pos.x+pos.y*pos.y)*(1+e*pos.z) + f*pos.z*pos.x*pos.x*pos.x;
         }
 
     private:

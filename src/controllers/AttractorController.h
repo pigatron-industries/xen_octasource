@@ -3,12 +3,13 @@
 
 #include "AbstractOscillatorController.h"
 #include "lib/attractor/LorenzAttractor.h"
+#include "lib/attractor/Lorenz83Attractor.h"
 #include "lib/attractor/ThomasAttractor.h"
 #include "lib/attractor/AizawaAttractor.h"
 #include "lib/attractor/DadrasAttractor.h"
 #include "lib/attractor/ChenAttractor.h"
 
-#define ATTRACTOR_COUNT 5
+#define ATTRACTOR_COUNT 6
 
 class AttractorController : public Controller {
     public:
@@ -24,6 +25,7 @@ class AttractorController : public Controller {
         //LinearInput<OctasourceInputDevice> cCvInput = LinearInput<OctasourceInputDevice>(Hardware::hw.waveCvPin, -5, 5, 0, 5);
 
         LorenzAttractor lorenzAttractor;
+        Lorenz83Attractor lorenz83Attractor;
         ThomasAttractor thomasAttractor;
         AizawaAttractor aizawaAttractor;
         DadrasAttractor dadrasAttractor;
@@ -31,6 +33,7 @@ class AttractorController : public Controller {
 
         Attractor* attractors[ATTRACTOR_COUNT] = {
             &lorenzAttractor,
+            &lorenz83Attractor,
             &thomasAttractor,
             &aizawaAttractor,
             &dadrasAttractor,

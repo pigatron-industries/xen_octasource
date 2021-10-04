@@ -1,9 +1,10 @@
 #ifndef Attractor_h
 #define Attractor_h
 
-class Deltas {
+class Tuple {
     public:
-        float dxdt, dydt, dzdt, dwdt;
+        Tuple(float x = 0, float y = 0, float z = 0, float w = 0) : x(x), y(y), z(z), w(w) {};
+        float x, y, z, w;
 };
 
 class Attractor {
@@ -15,24 +16,26 @@ class Attractor {
         }
 
         void setSpeed(float speed) { dt = sampleRateRecip*speedMult*speed; }
+        void setPosition(float x, float y, float z) {}
 
-        float getX() { return (x+xOffset)*xMult; }
-        float getY() { return (y+yOffset)*yMult; }
-        float getZ() { return (z+zOffset)*zMult; }
+        float getX() { return (pos.x+xOffset)*xMult; }
+        float getY() { return (pos.y+yOffset)*yMult; }
+        float getZ() { return (pos.z+zOffset)*zMult; }
 
         void process() {
-            Deltas d = system(x, y, z);
-            x += dt*d.dxdt;
-            y += dt*d.dydt;
-            z += dt*d.dzdt;
+            system();
+            pos.x += dt*delta.x;
+            pos.y += dt*delta.y;
+            pos.z += dt*delta.z;
         };
 
-        virtual Deltas system(float x, float y, float z) = 0;
+        virtual void system() = 0;
 
     protected:
         float sampleRate, sampleRateRecip;
         float dt;
-        float x, y, z;
+        Tuple pos;
+        Tuple delta;
         float xMult = 1, yMult = 1, zMult = 1, speedMult = 1;
         float xOffset, yOffset, zOffset;
 };

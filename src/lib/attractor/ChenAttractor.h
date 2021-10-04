@@ -8,9 +8,9 @@ class ChenAttractor : public Attractor {
     public:
         void init(float sampleRate) {
             Attractor::init(sampleRate);
-            x = 0.1;
-            y = 0.1;
-            z = 0.1;
+            pos.x = 0.1;
+            pos.y = 0.1;
+            pos.z = 0.1;
             xMult = 0.25;
             yMult = 0.3;
             zMult = 0.8;
@@ -20,12 +20,10 @@ class ChenAttractor : public Attractor {
             speedMult = 1.5; //Breaks if it goes too fast
         }
 
-        Deltas system(float x, float y, float z) {
-            Deltas dt;
-            dt.dxdt = a*x - y*z;
-            dt.dydt = b*y + x * z;
-            dt.dzdt = c*z + x*y/3;
-            return dt;
+        void system() {
+            delta.x = a*pos.x - pos.y*pos.z;
+            delta.y = b*pos.y + pos.x*pos.z;
+            delta.z = c*pos.z + pos.x*pos.y/3;
         }
 
     private:
