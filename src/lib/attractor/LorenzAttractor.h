@@ -13,6 +13,8 @@ class LorenzAttractor : public Attractor {
             xMult = 0.2;
             yMult = 0.2;
             zMult = 0.2;
+            xOffset = 0;
+            yOffset = 0;
             zOffset = -25;
         }
 
