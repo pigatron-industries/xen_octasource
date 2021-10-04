@@ -7,6 +7,7 @@
 #include "controllers/PhasedController.h"
 #include "controllers/FrequencyController.h"
 #include "controllers/FilterController.h"
+#include "controllers/AttractorController.h"
 #include "controllers/ClockController.h"
 
 MainController mainController = MainController(SAMPLE_RATE);
@@ -15,6 +16,7 @@ PhasedController phasedController = PhasedController();
 FrequencyController frequencyController = FrequencyController();
 FilterController filterController = FilterController();
 ClockController clockController = ClockController();
+AttractorController attractorController = AttractorController();
 
 void setup() {
     Serial.begin(SERIAL_BAUD);
@@ -28,6 +30,7 @@ void setup() {
     mainController.registerController(phasedController);
     mainController.registerController(frequencyController);
     mainController.registerController(filterController);
+    mainController.registerController(attractorController);
     mainController.registerController(clockController);
     mainController.init();
 }
