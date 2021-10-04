@@ -9,8 +9,9 @@
 #include "lib/attractor/DadrasAttractor.h"
 #include "lib/attractor/ChenAttractor.h"
 #include "lib/attractor/RosslerAttractor.h"
+#include "lib/attractor/HalvorsenAttractor.h"
 
-#define ATTRACTOR_COUNT 7
+#define ATTRACTOR_COUNT 8
 
 class AttractorController : public Controller {
     public:
@@ -32,6 +33,7 @@ class AttractorController : public Controller {
         DadrasAttractor dadrasAttractor;
         ChenAttractor chenAttractor;
         RosslerAttractor rosslerAttractor;
+        HalvorsenAttractor halvorsenAttractor;
 
         Attractor* attractors[ATTRACTOR_COUNT] = {
             &lorenzAttractor,
@@ -40,7 +42,8 @@ class AttractorController : public Controller {
             &aizawaAttractor,
             &dadrasAttractor,
             &chenAttractor,
-            &rosslerAttractor
+            &rosslerAttractor,
+            &halvorsenAttractor
         };
 
         float amp;
