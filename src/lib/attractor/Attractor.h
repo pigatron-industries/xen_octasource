@@ -13,6 +13,10 @@ class Attractor {
             this->sampleRate = sampleRate;
             sampleRateRecip = 1/sampleRate;
             dt = sampleRateRecip;
+            limits.x = 99999;
+            limits.y = 99999;
+            limits.z = 99999;
+            limits.w = 99999;
         }
 
         void setSpeed(float speed) { dt = sampleRateRecip*speedMult*speed; }
@@ -27,6 +31,12 @@ class Attractor {
             pos.x += dt*delta.x;
             pos.y += dt*delta.y;
             pos.z += dt*delta.z;
+
+            if(pos.x > limits.x) {
+                pos.x = limits.x;
+            } else if(pos.x < -limits.x) {
+                pos.x = -limits.x;
+            }
         };
 
         virtual void system() = 0;
@@ -38,6 +48,7 @@ class Attractor {
         Tuple delta;
         float xMult = 1, yMult = 1, zMult = 1, speedMult = 1;
         float xOffset, yOffset, zOffset;
+        Tuple limits;
 };
 
 #endif

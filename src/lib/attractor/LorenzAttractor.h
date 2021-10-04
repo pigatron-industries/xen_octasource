@@ -16,6 +16,7 @@ class LorenzAttractor : public Attractor {
             xOffset = 0;
             yOffset = 0;
             zOffset = -25;
+            speedMult = 1;
         }
 
         void system() {
