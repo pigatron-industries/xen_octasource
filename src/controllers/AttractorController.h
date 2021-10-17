@@ -11,8 +11,11 @@
 #include "lib/attractor/RosslerAttractor.h"
 #include "lib/attractor/HalvorsenAttractor.h"
 #include "lib/attractor/ChuaMultiScrollAttractor.h"
+#include "lib/attractor/RabinovichFabrikantAttractor.h"
+#include "lib/attractor/ThreeScrollUnifiedAttractor.h"
+#include "lib/attractor/FourWingAttractor.h"
 
-#define ATTRACTOR_COUNT 9
+#define ATTRACTOR_COUNT 12
 
 class AttractorController : public Controller {
     public:
@@ -36,6 +39,9 @@ class AttractorController : public Controller {
         RosslerAttractor rosslerAttractor;
         HalvorsenAttractor halvorsenAttractor;
         ChuaMultiScrollAttractor chuaMultiScrollAttractor;
+        RabinovichFabrikantAttractor rabinovichFabrikantAttractor;
+        ThreeScrollUnifiedAttractor threeScrollUnifiedAttractor;
+        FourWingAttractor fourWingAttractor;
 
         Attractor* attractors[ATTRACTOR_COUNT] = {
             &lorenzAttractor,
@@ -46,7 +52,10 @@ class AttractorController : public Controller {
             &chenAttractor,
             &rosslerAttractor,
             &halvorsenAttractor,
-            &chuaMultiScrollAttractor
+            &chuaMultiScrollAttractor,
+            &rabinovichFabrikantAttractor,
+            &threeScrollUnifiedAttractor,
+            &fourWingAttractor
         };
 
         float amp;

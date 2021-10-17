@@ -25,6 +25,9 @@ class Attractor {
         float getX() { return (pos.x+xOffset)*xMult; }
         float getY() { return (pos.y+yOffset)*yMult; }
         float getZ() { return (pos.z+zOffset)*zMult; }
+        float getDX() { return delta.x; }
+        float getDY() { return delta.y; }
+        float getDZ() { return delta.z; }
 
         void process() {
             system();
