@@ -1,7 +1,8 @@
 #ifndef AttractorController_h
 #define AttractorController_h
 
-#include "AbstractOscillatorController.h"
+#include "../Controller.h"
+#include "../Hardware.h"
 #include "lib/attractor/LorenzAttractor.h"
 #include "lib/attractor/Lorenz83Attractor.h"
 #include "lib/attractor/ThomasAttractor.h"

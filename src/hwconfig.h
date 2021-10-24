@@ -15,6 +15,7 @@
     #define ENCODER_BTN_PIN 2
     #define ENCODER_PIN1 3
     #define ENCODER_PIN2 4
+    #define GATE_OUTPUT_PIN 5
 #endif
 
 #define DAC1_SYNC_PIN 9

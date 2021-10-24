@@ -43,4 +43,6 @@ void AttractorController::process() {
     Hardware::hw.cvOutputPins[3]->analogWrite(attractor->getDX()*amp);
     Hardware::hw.cvOutputPins[4]->analogWrite(attractor->getDY()*amp);
     Hardware::hw.cvOutputPins[5]->analogWrite(attractor->getDZ()*amp);
+
+    Hardware::hw.gateOutPin.digitalWrite(attractor->getZ() > 0);
 }

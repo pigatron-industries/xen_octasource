@@ -31,6 +31,7 @@ class Hardware {
             AnalogInput(ampCvPin, A3)
             AnalogInput(phaseCvPin, A7)
             AnalogInput(syncCvPin, A9)
+            DigitalOutput(gateOutPin, GATE_OUTPUT_PIN);
 
             DAC8164Device dac8164a = DAC8164Device(-1, DAC1_SYNC_PIN);
             DAC8164Device dac8164b = DAC8164Device(-1, DAC2_SYNC_PIN);
