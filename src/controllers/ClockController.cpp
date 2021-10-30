@@ -20,7 +20,7 @@ void ClockController::update() {
         }
     }
 
-    if(triggerInput.update() && triggerInput.isTriggered()) {
+    if(triggerInput.update() && triggerInput.isTriggeredOn()) {
         tick();
         clock.reset();
     }
