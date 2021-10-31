@@ -20,7 +20,13 @@ class Attractor {
         }
 
         void setSpeed(float speed) { dt = sampleRateRecip*speedMult*speed; }
-        void setPosition(float x, float y, float z) {}
+        void setPosition(Tuple position) { pos = position; }
+        void movePosition(Tuple move) {
+            pos.x += move.x;
+            pos.y += move.y;
+            pos.z += move.z;
+            pos.w += move.w;
+        }
 
         float getX() { return (pos.x+xOffset)*xMult; }
         float getY() { return (pos.y+yOffset)*yMult; }
