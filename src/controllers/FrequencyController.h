@@ -10,10 +10,11 @@ class FrequencyController : public AbstractOscillatorController {
         enum Mode {
             LINEAR,
             EXP,
-            UNCORRELATED
+            UNCORRELATED,
+            PLANETARY
         };
 
-        FrequencyController() : AbstractOscillatorController(Mode::UNCORRELATED) {}
+        FrequencyController() : AbstractOscillatorController(Mode::PLANETARY) {}
         virtual void init(float sampleRate);
         virtual void update();
         virtual void process();

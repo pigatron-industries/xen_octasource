@@ -41,6 +41,16 @@ void FrequencyController::updateRate() {
                 oscillators[6].setFrequency(rateValue/4.669201609);   // feigenbaum constant
                 oscillators[7].setFrequency(rateValue/23.140692632);  // e^pi
                 break;
+            case Mode::PLANETARY:
+                oscillators[0].setFrequency(rateValue);        // mercury
+                oscillators[1].setFrequency(rateValue/2.553);  // venus
+                oscillators[2].setFrequency(rateValue/4.152);  // earth
+                oscillators[3].setFrequency(rateValue/7.810);  // mars
+                oscillators[4].setFrequency(rateValue/49.243); // jupiter
+                oscillators[5].setFrequency(rateValue/122.319);// saturn
+                oscillators[6].setFrequency(rateValue/348.812);// uranus
+                oscillators[7].setFrequency(rateValue/684.255);// neptune
+                break;
         }
     }
 }
