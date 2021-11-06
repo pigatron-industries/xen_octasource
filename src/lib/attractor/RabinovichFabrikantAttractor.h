@@ -1,28 +1,28 @@
 #ifndef RabinovichFabrikantAttractor_h
 #define RabinovichFabrikantAttractor_h
 
-#include "Attractor.h"
+#include "ContinuousSystem.h"
 
-class RabinovichFabrikantAttractor : public Attractor {
+class RabinovichFabrikantAttractor : public ContinuousSystemN<3> {
     public:
         void init(float sampleRate) {
-            Attractor::init(sampleRate);
-            pos.x = 0.1;
-            pos.y = 0.1;
-            pos.z = 0.1;
-            xMult = 1.75;
-            yMult = 1.75;
-            zMult = 6;
-            xOffset = 0;
-            yOffset = 0;
-            zOffset = -0.5; //-0.75;
+            ContinuousSystemN::init(sampleRate);
+            pos[X] = 0.1;
+            pos[Y] = 0.1;
+            pos[Z] = 0.1;
+            mult[X] = 1.75;
+            mult[Y] = 1.75;
+            mult[Z] = 6;
+            offset[X] = 0;
+            offset[Y] = 0;
+            offset[Z] = -0.5; //-0.75;
             speedMult = 2;
         }
 
         void system() {
-            delta.x = pos.y*(pos.z-1+pos.x*pos.x) + b*pos.x;
-            delta.y = pos.x*(3*pos.z+1-pos.x*pos.x) + b*pos.y;
-            delta.z = - 2*pos.z*(a + pos.x*pos.y);
+            delta[X] = pos[Y]*(pos[Z]-1+pos[X]*pos[X]) + b*pos[X];
+            delta[Y] = pos[X]*(3*pos[Z]+1-pos[X]*pos[X]) + b*pos[Y];
+            delta[Z] = - 2*pos[Z]*(a + pos[X]*pos[Y]);
         }
 
     private:

@@ -1,28 +1,28 @@
 #ifndef HalvorsenAttractor_h
 #define HalvorsenAttractor_h
 
-#include "Attractor.h"
+#include "ContinuousSystem.h"
 
-class HalvorsenAttractor : public Attractor {
+class HalvorsenAttractor : public ContinuousSystemN<3> {
     public:
         void init(float sampleRate) {
-            Attractor::init(sampleRate);
-            pos.x = 0.1;
-            pos.y = 0.1;
-            pos.z = 0.1;
-            xMult = 0.4;
-            yMult = 0.5;
-            zMult = 0.5;
-            xOffset = 2.75;
-            yOffset = 3;
-            zOffset = 2.75;
+            ContinuousSystemN::init(sampleRate);
+            pos[X] = 0.1;
+            pos[Y] = 0.1;
+            pos[Z] = 0.1;
+            mult[X] = 0.4;
+            mult[Y] = 0.5;
+            mult[Z] = 0.5;
+            offset[X] = 2.75;
+            offset[Y] = 3;
+            offset[Z] = 2.75;
             speedMult = 1;
         }
 
         void system() {
-            delta.x = -a*pos.x - 4*pos.y - 4*pos.z - pos.y*pos.y;
-            delta.y = -a*pos.y - 4*pos.z - 4*pos.x - pos.z*pos.z;
-            delta.z = -a*pos.z - 4*pos.x - 4*pos.y - pos.x*pos.x;
+            delta[X] = -a*pos[X] - 4*pos[Y] - 4*pos[Z] - pos[Y]*pos[Y];
+            delta[Y] = -a*pos[Y] - 4*pos[Z] - 4*pos[X] - pos[Z]*pos[Z];
+            delta[Z] = -a*pos[Z] - 4*pos[X] - 4*pos[Y] - pos[X]*pos[X];
         }
 
     private:

@@ -1,28 +1,28 @@
 #ifndef FourWingAttractor_h
 #define FourWingAttractor_h
 
-#include "Attractor.h"
+#include "ContinuousSystem.h"
 
-class FourWingAttractor : public Attractor {
+class FourWingAttractor : public ContinuousSystemN<3> {
     public:
         void init(float sampleRate) {
-            Attractor::init(sampleRate);
-            pos.x = 0.1;
-            pos.y = 0;
-            pos.z = 0;
-            xMult = 2;
-            yMult = 2;
-            zMult = 2;
-            xOffset = 0;
-            yOffset = 0;
-            zOffset = 0;
+            ContinuousSystemN::init(sampleRate);
+            pos[X] = 0.1;
+            pos[Y] = 0;
+            pos[Z] = 0;
+            mult[X] = 2;
+            mult[Y] = 2;
+            mult[Z] = 2;
+            offset[X] = 0;
+            offset[Y] = 0;
+            offset[Z] = 0;
             speedMult = 4;
         }
 
         void system() {
-            delta.x = a*pos.x + pos.y*pos.z;
-            delta.y = b*pos.x + c*pos.y - pos.x*pos.z;
-            delta.z = - pos.z - pos.x*pos.y;
+            delta[X] = a*pos[X] + pos[Y]*pos[Z];
+            delta[Y] = b*pos[X] + c*pos[Y] - pos[X]*pos[Z];
+            delta[Z] = - pos[Z] - pos[X]*pos[Y];
         }
 
     private:

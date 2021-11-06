@@ -1,28 +1,28 @@
 #ifndef Lorenz83Attractor_h
 #define Lorenz83Attractor_h
 
-#include "Attractor.h"
+#include "ContinuousSystem.h"
 
-class Lorenz83Attractor : public Attractor {
+class Lorenz83Attractor : public ContinuousSystemN<3> {
     public:
         void init(float sampleRate) {
-            Attractor::init(sampleRate);
-            pos.x = 0.1;
-            pos.y = 0.1;
-            pos.z = 0.1;
-            xMult = 1.8;
-            yMult = 1.5;
-            zMult = 1.5;
-            xOffset = -0.75;
-            yOffset = -0.25;
-            zOffset = -0.25;
+            ContinuousSystemN::init(sampleRate);
+            pos[X] = 0.1;
+            pos[Y] = 0.1;
+            pos[Z] = 0.1;
+            mult[X] = 1.8;
+            mult[Y] = 1.5;
+            mult[Z] = 1.5;
+            offset[X] = -0.75;
+            offset[Y] = -0.25;
+            offset[Z] = -0.25;
             speedMult = 1;
         }
 
         void system() {
-            delta.x = - a*pos.x - pos.y*pos.y - pos.z*pos.z + a*f;
-            delta.y = - pos.y + pos.x*pos.y - b*pos.x*pos.z + g;
-            delta.z = - pos.z + b*pos.x*pos.y + pos.x*pos.z;
+            delta[X] = - a*pos[X] - pos[Y]*pos[Y] - pos[Z]*pos[Z] + a*f;
+            delta[Y] = - pos[Y] + pos[X]*pos[Y] - b*pos[X]*pos[Z] + g;
+            delta[Z] = - pos[Z] + b*pos[X]*pos[Y] + pos[X]*pos[Z];
         }
 
     private:

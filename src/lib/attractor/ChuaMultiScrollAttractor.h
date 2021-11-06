@@ -1,31 +1,31 @@
 #ifndef Chua9ScrollAttractor_h
 #define Chua9ScrollAttractor_h
 
-#include "Attractor.h"
+#include "ContinuousSystem.h"
 #include <math.h>
 
-class ChuaMultiScrollAttractor : public Attractor {
+class ChuaMultiScrollAttractor : public ContinuousSystemN<3> {
     public:
         void init(float sampleRate) {
-            Attractor::init(sampleRate);
-            pos.x = 0.1;
-            pos.y = 0;
-            pos.z = 0;
-            xMult = 0.2;
-            yMult = 8;
-            zMult = 0.2;
-            xOffset = 0;
-            yOffset = 0;
-            zOffset = 0;
+            ContinuousSystemN::init(sampleRate);
+            pos[X] = 0.1;
+            pos[Y] = 0;
+            pos[Z] = 0;
+            mult[X] = 0.2;
+            mult[Y] = 8;
+            mult[Z] = 0.2;
+            offset[X] = 0;
+            offset[Y] = 0;
+            offset[Z] = 0;
             speedMult = 2;
-            limits.x = 20;
+            limits[X] = 20;
         }
 
         void system() {
-            float h = -b*sinf((M_PI*pos.x)/(2*a) + d);
-            delta.x = alpha*(pos.y-h);
-            delta.y = pos.x - pos.y + pos.z;
-            delta.z = -beta*pos.y;
+            float h = -b*sinf((M_PI*pos[X])/(2*a) + d);
+            delta[X] = alpha*(pos[Y]-h);
+            delta[Y] = pos[X] - pos[Y] + pos[Z];
+            delta[Z] = -beta*pos[Y];
         }
 
 

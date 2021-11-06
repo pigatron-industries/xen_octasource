@@ -56,7 +56,7 @@ class AttractorController : public Controller {
         FourWingAttractor fourWingAttractor1;
         FourWingAttractor fourWingAttractor2;
 
-        Attractor* attractors1[ATTRACTOR_COUNT] = {
+        ContinuousSystem* attractors1[ATTRACTOR_COUNT] = {
             &lorenzAttractor1,
             &lorenz83Attractor1,
             &thomasAttractor1,
@@ -71,7 +71,7 @@ class AttractorController : public Controller {
             &fourWingAttractor1
         };
 
-        Attractor* attractors2[ATTRACTOR_COUNT] = {
+        ContinuousSystem* attractors2[ATTRACTOR_COUNT] = {
             &lorenzAttractor2,
             &lorenz83Attractor2,
             &thomasAttractor2,

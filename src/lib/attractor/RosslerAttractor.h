@@ -1,28 +1,28 @@
 #ifndef RosslerAttractor_h
 #define RosslerAttractor_h
 
-#include "Attractor.h"
+#include "ContinuousSystem.h"
 
-class RosslerAttractor : public Attractor {
+class RosslerAttractor : public ContinuousSystemN<3> {
     public:
         void init(float sampleRate) {
-            Attractor::init(sampleRate);
-            pos.x = 0.1;
-            pos.y = 0;
-            pos.z = 0;
-            xMult = 0.4;
-            yMult = 0.5;
-            zMult = 0.4;
-            xOffset = -1;
-            yOffset = 1.5;
-            zOffset = -11;
+            ContinuousSystemN::init(sampleRate);
+            pos[X] = 0.1;
+            pos[Y] = 0;
+            pos[Z] = 0;
+            mult[X] = 0.4;
+            mult[Y] = 0.5;
+            mult[Z] = 0.4;
+            offset[X] = -1;
+            offset[Y] = 1.5;
+            offset[Z] = -11;
             speedMult = 2;
         }
 
         void system() {
-            delta.x = -(pos.y+pos.z);
-            delta.y = pos.x + a*pos.y;
-            delta.z = b + pos.z*(pos.x-c);
+            delta[X] = -(pos[Y]+pos[Z]);
+            delta[Y] = pos[X] + a*pos[Y];
+            delta[Z] = b + pos[Z]*(pos[X]-c);
         }
 
     private:

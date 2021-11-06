@@ -1,28 +1,28 @@
 #ifndef ThreeScrollUnifiedAttractor_h
 #define ThreeScrollUnifiedAttractor_h
 
-#include "Attractor.h"
+#include "ContinuousSystem.h"
 
-class ThreeScrollUnifiedAttractor : public Attractor {
+class ThreeScrollUnifiedAttractor : public ContinuousSystemN<3> {
     public:
         void init(float sampleRate) {
-            Attractor::init(sampleRate);
-            pos.x = -0.29;
-            pos.y = -0.25;
-            pos.z = -0.59;
-            xMult = 0.025;
-            yMult = 0.02;
-            zMult = 0.025;
-            xOffset = 0;
-            yOffset = 0;
-            zOffset = -90;
+            ContinuousSystemN::init(sampleRate);
+            pos[X] = -0.29;
+            pos[Y] = -0.25;
+            pos[Z] = -0.59;
+            mult[X] = 0.025;
+            mult[Y] = 0.02;
+            mult[Z] = 0.025;
+            offset[X] = 0;
+            offset[Y] = 0;
+            offset[Z] = -90;
             speedMult = 0.25;
         }
 
         void system() {
-            delta.x = a*(pos.y - pos.x) + d*pos.x*pos.z;
-            delta.y = c*pos.x - pos.x*pos.z + f*pos.y;
-            delta.z = b*pos.z + pos.x*pos.y - e*pos.x*pos.x;
+            delta[X] = a*(pos[Y] - pos[X]) + d*pos[X]*pos[Z];
+            delta[Y] = c*pos[X] - pos[X]*pos[Z] + f*pos[Y];
+            delta[Z] = b*pos[Z] + pos[X]*pos[Y] - e*pos[X]*pos[X];
         }
 
     private:

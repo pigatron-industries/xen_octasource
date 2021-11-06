@@ -1,29 +1,29 @@
 #ifndef AizawaAttractor_h
 #define AizawaAttractor_h
 
-#include "Attractor.h"
+#include "ContinuousSystem.h"
 #include <math.h>
 
-class AizawaAttractor : public Attractor {
+class AizawaAttractor : public ContinuousSystemN<3> {
     public:
         void init(float sampleRate) {
-            Attractor::init(sampleRate);
-            pos.x = 0.1;
-            pos.y = 0;
-            pos.z = 0;
-            xMult = 2.75;
-            yMult = 2.75;
-            zMult = 3.75;
-            xOffset = 0;
-            yOffset = 0;
-            zOffset = -0.75;
+            ContinuousSystemN::init(sampleRate);
+            pos[X] = 0.1;
+            pos[Y] = 0;
+            pos[Z] = 0;
+            mult[X] = 2.75;
+            mult[Y] = 2.75;
+            mult[Z] = 3.75;
+            offset[X] = 0;
+            offset[Y] = 0;
+            offset[Z] = -0.75;
             speedMult = 1;
         }
 
         void system() {
-            delta.x = pos.x*(pos.z-b) - d*pos.y;
-            delta.y = d*pos.x + pos.y*(pos.z-b);
-            delta.z = c + a*pos.z - (pos.z*pos.z*pos.z/3) - (pos.x*pos.x+pos.y*pos.y)*(1+e*pos.z) + f*pos.z*pos.x*pos.x*pos.x;
+            delta[X] = pos[X]*(pos[Z]-b) - d*pos[Y];
+            delta[Y] = d*pos[X] + pos[Y]*(pos[Z]-b);
+            delta[Z] = c + a*pos[Z] - (pos[Z]*pos[Z]*pos[Z]/3) - (pos[X]*pos[X]+pos[Y]*pos[Y])*(1+e*pos[Z]) + f*pos[Z]*pos[X]*pos[X]*pos[X];
         }
 
     private:
