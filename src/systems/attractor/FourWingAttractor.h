@@ -1,7 +1,7 @@
 #ifndef FourWingAttractor_h
 #define FourWingAttractor_h
 
-#include "ContinuousSystem.h"
+#include "../ContinuousSystem.h"
 
 class FourWingAttractor : public ContinuousSystemN<3> {
     public:

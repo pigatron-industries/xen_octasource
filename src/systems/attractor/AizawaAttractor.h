@@ -1,7 +1,7 @@
 #ifndef AizawaAttractor_h
 #define AizawaAttractor_h
 
-#include "ContinuousSystem.h"
+#include "../ContinuousSystem.h"
 #include <math.h>
 
 class AizawaAttractor : public ContinuousSystemN<3> {

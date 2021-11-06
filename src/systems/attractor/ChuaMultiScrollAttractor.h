@@ -1,7 +1,7 @@
 #ifndef Chua9ScrollAttractor_h
 #define Chua9ScrollAttractor_h
 
-#include "ContinuousSystem.h"
+#include "../ContinuousSystem.h"
 #include <math.h>
 
 class ChuaMultiScrollAttractor : public ContinuousSystemN<3> {

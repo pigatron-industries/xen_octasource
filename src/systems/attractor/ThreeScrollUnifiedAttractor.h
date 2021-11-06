@@ -1,7 +1,7 @@
 #ifndef ThreeScrollUnifiedAttractor_h
 #define ThreeScrollUnifiedAttractor_h
 
-#include "ContinuousSystem.h"
+#include "../ContinuousSystem.h"
 
 class ThreeScrollUnifiedAttractor : public ContinuousSystemN<3> {
     public:

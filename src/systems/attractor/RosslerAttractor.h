@@ -1,7 +1,7 @@
 #ifndef RosslerAttractor_h
 #define RosslerAttractor_h
 
-#include "ContinuousSystem.h"
+#include "../ContinuousSystem.h"
 
 class RosslerAttractor : public ContinuousSystemN<3> {
     public:

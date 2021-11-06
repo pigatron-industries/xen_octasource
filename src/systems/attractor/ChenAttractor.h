@@ -1,7 +1,7 @@
 #ifndef ChenAttractor_h
 #define ChenAttractor_h
 
-#include "ContinuousSystem.h"
+#include "../ContinuousSystem.h"
 #include <math.h>
 
 class ChenAttractor : public ContinuousSystemN<3> {

@@ -1,7 +1,7 @@
 #ifndef ThomasAttractor_h
 #define ThomasAttractor_h
 
-#include "ContinuousSystem.h"
+#include "../ContinuousSystem.h"
 #include <math.h>
 
 class ThomasAttractor : public ContinuousSystemN<3> {

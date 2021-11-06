@@ -1,7 +1,7 @@
 #ifndef RabinovichFabrikantAttractor_h
 #define RabinovichFabrikantAttractor_h
 
-#include "ContinuousSystem.h"
+#include "../ContinuousSystem.h"
 
 class RabinovichFabrikantAttractor : public ContinuousSystemN<3> {
     public:

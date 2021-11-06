@@ -1,7 +1,7 @@
 #ifndef DadrasAttractor_h
 #define DadrasAttractor_h
 
-#include "ContinuousSystem.h"
+#include "../ContinuousSystem.h"
 #include <math.h>
 
 class DadrasAttractor : public ContinuousSystemN<3> {

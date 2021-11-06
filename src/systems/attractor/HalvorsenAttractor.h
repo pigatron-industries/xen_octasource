@@ -1,7 +1,7 @@
 #ifndef HalvorsenAttractor_h
 #define HalvorsenAttractor_h
 
-#include "ContinuousSystem.h"
+#include "../ContinuousSystem.h"
 
 class HalvorsenAttractor : public ContinuousSystemN<3> {
     public:

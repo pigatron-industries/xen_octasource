@@ -1,7 +1,7 @@
 #ifndef LorenzAttractor_h
 #define LorenzAttractor_h
 
-#include "ContinuousSystem.h"
+#include "../ContinuousSystem.h"
 
 class LorenzAttractor : public ContinuousSystemN<3> {
     public:
