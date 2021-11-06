@@ -1,6 +1,8 @@
 #ifndef Tuple_h
 #define Tuple_h
 
+#include <stdarg.h>
+
 template<int N>
 class Tuple {
     public:

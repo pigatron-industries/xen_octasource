@@ -16,8 +16,9 @@ class ContinuousSystem {
             dt = sampleRateRecip;
         };
         virtual void process() = 0;
-        virtual void system() = 0;
         virtual float getOutput(int i) = 0;
+        virtual void setParam(int i, float value) {};
+        void setSpeed(float speed) { dt = sampleRateRecip*speedMult*speed; }
     protected:
         float sampleRate, sampleRateRecip;
         float dt;
@@ -34,7 +35,8 @@ class ContinuousSystemN : public ContinuousSystem {
             }
         }
 
-        void setSpeed(float speed) { dt = sampleRateRecip*speedMult*speed; }
+        virtual void system() {};
+
         void setPosition(Tuple<N> position) { pos = position; }
         void changePosition(Tuple<N> change) { pos += change; }
 

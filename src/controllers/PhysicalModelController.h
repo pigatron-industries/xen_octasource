@@ -3,7 +3,7 @@
 
 #include "../Controller.h"
 #include "../Hardware.h"
-#include "lib/attractor/ContinuousSystem.h"
+#include "systems/physical/DoublePendulum.h"
 
 #define MODEL_COUNT 1
 
@@ -18,18 +18,20 @@ class PhysicalModelController : public Controller {
     private:
         ExpInput<OctasourceInputDevice> expRateCvInput = ExpInput<OctasourceInputDevice>(Hardware::hw.rateCvPin, 1);
         LinearInput<OctasourceInputDevice> ampCvInput = LinearInput<OctasourceInputDevice>(Hardware::hw.ampCvPin, -5, 5, 0, 1);
-        //LinearInput<OctasourceInputDevice> cCvInput = LinearInput<OctasourceInputDevice>(Hardware::hw.waveCvPin, -5, 5, 0, 5);
+        LinearInput<OctasourceInputDevice> param1CvInput = LinearInput<OctasourceInputDevice>(Hardware::hw.waveCvPin, -5, 5, 0.1, 1);
+        LinearInput<OctasourceInputDevice> param2CvInput = LinearInput<OctasourceInputDevice>(Hardware::hw.phaseCvPin, -5, 5, 0.1, 0.9);
 
-        //ContinuousSystem model;
+        DoublePendulum doublePendulum;
 
-        // Attractor* models[MODEL_COUNT] = {
-        //     &model,
-        // };
+        ContinuousSystemN<2>* models[MODEL_COUNT] = {
+            &doublePendulum,
+        };
 
         float amp;
         
         void updateRate();
         void updateAmp();
+        void updateParams();
 };
 
 #endif

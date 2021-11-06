@@ -45,5 +45,5 @@
     #define SAMPLE_RATE 1000
 #endif
 #if defined(OCTASOURCE_MKII)
-    #define SAMPLE_RATE 48000
+    #define SAMPLE_RATE 22000
 #endif
