@@ -10,6 +10,7 @@
 #include "controllers/ClockController.h"
 #include "controllers/EnvelopeController.h"
 #include "controllers/AttractorController.h"
+//#include "controllers/PhysicalModelController.h"
 
 MainController mainController = MainController(SAMPLE_RATE);
 

@@ -4,12 +4,13 @@ void AttractorController::init(float sampleRate) {
     for(int i = 0; i < ATTRACTOR_COUNT; i++) {
         attractors1[i]->init(sampleRate);
         attractors2[i]->init(sampleRate);
-        attractors2[i]->movePosition(Tuple(0.01, 0, 0));
+        attractors2[i]->changePosition(Tuple<3>(0.01, 0, 0));
     }
     init();
 }
 
 void AttractorController::init() {
+    Serial.println("Attractor");
 }
 
 void AttractorController::update() {
@@ -37,17 +38,17 @@ void AttractorController::updateAmp() {
 }
 
 void AttractorController::process() {
-    Attractor* attractor = attractors1[mode.value];
+    ContinuousSystem* attractor = attractors1[mode.value];
     attractor->process();
-    Hardware::hw.cvOutputPins[0]->analogWrite(attractor->getX()*amp);
-    Hardware::hw.cvOutputPins[1]->analogWrite(attractor->getY()*amp);
-    Hardware::hw.cvOutputPins[2]->analogWrite(attractor->getZ()*amp);
+    Hardware::hw.cvOutputPins[0]->analogWrite(attractor->getOutput(X)*amp);
+    Hardware::hw.cvOutputPins[1]->analogWrite(attractor->getOutput(Y)*amp);
+    Hardware::hw.cvOutputPins[2]->analogWrite(attractor->getOutput(Z)*amp);
 
     attractor = attractors2[mode.value];
     attractor->process();
-    Hardware::hw.cvOutputPins[3]->analogWrite(attractor->getX()*amp);
-    Hardware::hw.cvOutputPins[4]->analogWrite(attractor->getY()*amp);
-    Hardware::hw.cvOutputPins[5]->analogWrite(attractor->getZ()*amp);
+    Hardware::hw.cvOutputPins[3]->analogWrite(attractor->getOutput(X)*amp);
+    Hardware::hw.cvOutputPins[4]->analogWrite(attractor->getOutput(Y)*amp);
+    Hardware::hw.cvOutputPins[5]->analogWrite(attractor->getOutput(Z)*amp);
 
-    Hardware::hw.gateOutPin.digitalWrite(attractor->getZ() > 0);
+    Hardware::hw.gateOutPin.digitalWrite(attractor->getOutput(Z) > 0);
 }

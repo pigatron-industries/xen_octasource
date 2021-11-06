@@ -3,18 +3,18 @@
 
 #include "../Controller.h"
 #include "../Hardware.h"
-#include "lib/attractor/LorenzAttractor.h"
-#include "lib/attractor/Lorenz83Attractor.h"
-#include "lib/attractor/ThomasAttractor.h"
-#include "lib/attractor/AizawaAttractor.h"
-#include "lib/attractor/DadrasAttractor.h"
-#include "lib/attractor/ChenAttractor.h"
-#include "lib/attractor/RosslerAttractor.h"
-#include "lib/attractor/HalvorsenAttractor.h"
-#include "lib/attractor/ChuaMultiScrollAttractor.h"
-#include "lib/attractor/RabinovichFabrikantAttractor.h"
-#include "lib/attractor/ThreeScrollUnifiedAttractor.h"
-#include "lib/attractor/FourWingAttractor.h"
+#include "systems/attractor/LorenzAttractor.h"
+#include "systems/attractor/Lorenz83Attractor.h"
+#include "systems/attractor/ThomasAttractor.h"
+#include "systems/attractor/AizawaAttractor.h"
+#include "systems/attractor/DadrasAttractor.h"
+#include "systems/attractor/ChenAttractor.h"
+#include "systems/attractor/RosslerAttractor.h"
+#include "systems/attractor/HalvorsenAttractor.h"
+#include "systems/attractor/ChuaMultiScrollAttractor.h"
+#include "systems/attractor/RabinovichFabrikantAttractor.h"
+#include "systems/attractor/ThreeScrollUnifiedAttractor.h"
+#include "systems/attractor/FourWingAttractor.h"
 
 #define ATTRACTOR_COUNT 12
 
@@ -56,7 +56,7 @@ class AttractorController : public Controller {
         FourWingAttractor fourWingAttractor1;
         FourWingAttractor fourWingAttractor2;
 
-        Attractor* attractors1[ATTRACTOR_COUNT] = {
+        ContinuousSystemN<3>* attractors1[ATTRACTOR_COUNT] = {
             &lorenzAttractor1,
             &lorenz83Attractor1,
             &thomasAttractor1,
@@ -71,7 +71,7 @@ class AttractorController : public Controller {
             &fourWingAttractor1
         };
 
-        Attractor* attractors2[ATTRACTOR_COUNT] = {
+        ContinuousSystemN<3>* attractors2[ATTRACTOR_COUNT] = {
             &lorenzAttractor2,
             &lorenz83Attractor2,
             &thomasAttractor2,
