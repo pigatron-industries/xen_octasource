@@ -85,7 +85,6 @@ void MainController::update() {
         }
     }
     if(Hardware::hw.encoderButton.released()) {
-        Serial.print("Released");
         if(!cycled) {
             controllerInit();
         }
