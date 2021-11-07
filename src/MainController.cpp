@@ -69,6 +69,7 @@ void MainController::update() {
         if(Hardware::hw.encoderButton.held()) {
             //change controller when button held down
             if(Hardware::hw.encoder.getMovement() != 0) {
+                cycled = true;
                 controllers.cycle(Hardware::hw.encoder.getMovement());
                 controllerInit();
             } 
@@ -82,6 +83,13 @@ void MainController::update() {
                 Serial.println(Config::data.mode.controllerMode);
             }
         }
+    }
+    if(Hardware::hw.encoderButton.released()) {
+        Serial.print("Released");
+        if(!cycled) {
+            controllerInit();
+        }
+        cycled = false;
     }
 
     //TODO long press switches to slave mode
