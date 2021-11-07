@@ -11,8 +11,8 @@ void DoublePendulum::init(float sampleRate) {
     offset[Y] = 0;
     speedMult = 1;
 
-    p1.mass = 10;
-    p2.mass = 10;
+    p1.mass = 2;
+    p2.mass = 2;
     p1.length = 2;
     p2.length = 2;
     p1.velocity = 0;
@@ -25,11 +25,11 @@ void DoublePendulum::init(float sampleRate) {
 void DoublePendulum::setParam(int param, float value) {
     switch(param) {
         case 0:
-            p2.mass = value*10;
+            p2.mass = value*2 + 0.2;
             break;
         case 1:
-            //p1.length = value*4;
-            //p2.length = 4-value*4;
+            p1.length = value*4;
+            p2.length = 4-value*4;
             break;
     }
 }
@@ -60,6 +60,18 @@ void DoublePendulum::process() {
 
     p1.velocity += p1Acceleration * dt;
     p2.velocity += p2Acceleration * dt;
+
+    if(p1.velocity > maxVelocity) {
+        p1.velocity = maxVelocity;
+    } else if(p1.velocity < -maxVelocity) {
+        p1.velocity = -maxVelocity;
+    }
+    if(p2.velocity > maxVelocity) {
+        p2.velocity = maxVelocity;
+    } else if(p2.velocity < -maxVelocity) {
+        p2.velocity = -maxVelocity;
+    }
+
     p1.angle += p1.velocity * dt;
     p2.angle += p2.velocity * dt;
 

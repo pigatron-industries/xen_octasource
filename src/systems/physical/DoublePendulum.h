@@ -25,6 +25,7 @@ class DoublePendulum : public ContinuousSystemN<2> {
         Pendulum p2;
 
         float g = 9.8;
+        float maxVelocity = 10;
 };
 
 #endif
