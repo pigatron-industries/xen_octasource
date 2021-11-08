@@ -20,6 +20,8 @@ void DoublePendulum::init(float sampleRate) {
 
     p2.angle = M_PI+0.01;
     p1.angle = M_PI-0.01;
+
+    p2LengthMultMass = p2.length * p2.mass;
 }
 
 void DoublePendulum::setParam(int param, float value) {
@@ -32,15 +34,14 @@ void DoublePendulum::setParam(int param, float value) {
             p2.length = 4-value*4;
             break;
     }
+    p2LengthMultMass = p2.length * p2.mass;
 }
 
 void DoublePendulum::process() {
-    float p2LengthMultMass = p2.length * p2.mass;
-
     float cosP1Angle = cosf(p1.angle);
     float sinP1Angle = sinf(p1.angle);
     float sinP1AngleMinusP2Angle = sinf(p1.angle-p2.angle);
-    float p2MassMultCos2P1AngleMinusP2Angle = p2.mass * cosf(2*(p1.angle-p2.angle));
+    float p1Mass_plus_p2Mass_minus_p2MassMultCos2P1AngleMinusP2Angle = 2 * p1.mass + p2.mass - p2.mass * cosf(2*(p1.angle-p2.angle));
     float p1VelocitySquared = p1.velocity * p1.velocity;
     float p2VelocitySquared = p2.velocity * p2.velocity;
     float p1VelocitySquaredMultLength = p1VelocitySquared * p1.length;
@@ -50,13 +51,13 @@ void DoublePendulum::process() {
     p1Acceleration -= g * p2.mass * sinf(p1.angle-2*p2.angle);
     p1Acceleration -= 2 * p2VelocitysquaredMultLengthMultMass * sinP1AngleMinusP2Angle;
     p1Acceleration -= p1VelocitySquaredMultLength * p2.mass * sinf(2*(p1.angle-p2.angle));
-    p1Acceleration /= p1.length * (2 * p1.mass + p2.mass - p2MassMultCos2P1AngleMinusP2Angle);
+    p1Acceleration /= p1.length * p1Mass_plus_p2Mass_minus_p2MassMultCos2P1AngleMinusP2Angle;
 
     float p2Acceleration = (p1.mass+p2.mass) * p1VelocitySquaredMultLength;
     p2Acceleration += g * (p1.mass+p2.mass) * cosP1Angle;
     p2Acceleration += p2VelocitysquaredMultLengthMultMass * cosf(p1.angle-p2.angle);
     p2Acceleration *= 2 * sinP1AngleMinusP2Angle;
-    p2Acceleration /= p2.length * (2 * p1.mass + p2.mass - p2MassMultCos2P1AngleMinusP2Angle);
+    p2Acceleration /= p2.length * p1Mass_plus_p2Mass_minus_p2MassMultCos2P1AngleMinusP2Angle;
 
     p1.velocity += p1Acceleration * dt;
     p2.velocity += p2Acceleration * dt;

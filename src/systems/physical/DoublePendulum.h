@@ -26,6 +26,8 @@ class DoublePendulum : public ContinuousSystemN<2> {
 
         float g = 9.8;
         float maxVelocity = 10;
+
+        float p2LengthMultMass;
 };
 
 #endif
