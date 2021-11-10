@@ -1,7 +1,7 @@
 #ifndef ContinuousSystem_h
 #define ContinuousSystem_h
 
-#include "Tuple.h"
+#include "Vector.h"
 
 #define X 0
 #define Y 1
@@ -37,8 +37,8 @@ class ContinuousSystemN : public ContinuousSystem {
 
         virtual void system() {};
 
-        void setPosition(Tuple<N> position) { pos = position; }
-        void changePosition(Tuple<N> change) { pos += change; }
+        void setPosition(Vector<N> position) { pos = position; }
+        void changePosition(Vector<N> change) { pos += change; }
 
         float getOutput(int i) { return (pos[i]+offset.val[i])*mult.val[i]; }
 
@@ -54,11 +54,11 @@ class ContinuousSystemN : public ContinuousSystem {
         };
 
     protected:
-        Tuple<N> pos;
-        Tuple<N> delta;
-        Tuple<N> mult;
-        Tuple<N> offset;
-        Tuple<N> limits;
+        Vector<N> pos;
+        Vector<N> delta;
+        Vector<N> mult;
+        Vector<N> offset;
+        Vector<N> limits;
 };
 
 #endif

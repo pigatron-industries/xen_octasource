@@ -5,9 +5,9 @@
 
 class Body {
     public:
-        Tuple<2> position;
-        Tuple<2> velocity;
-        Tuple<2> acceleration;
+        Vector<2> position;
+        Vector<2> velocity;
+        Vector<2> acceleration;
 };
 
 class ThreeBody : public ContinuousSystemN<6> {

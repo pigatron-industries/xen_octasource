@@ -4,7 +4,7 @@ void AttractorController::init(float sampleRate) {
     for(int i = 0; i < ATTRACTOR_COUNT; i++) {
         attractors1[i]->init(sampleRate);
         attractors2[i]->init(sampleRate);
-        attractors2[i]->changePosition(Tuple<3>(0.01, 0, 0));
+        attractors2[i]->changePosition(Vector<3>(0.01, 0, 0));
     }
     init();
 }

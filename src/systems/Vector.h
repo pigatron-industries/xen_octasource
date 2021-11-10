@@ -1,14 +1,14 @@
-#ifndef Tuple_h
-#define Tuple_h
+#ifndef Vector_h
+#define Vector_h
 
 #include <stdarg.h>
 
 template<int N>
-class Tuple {
+class Vector {
     public:
-        Tuple() {}
+        Vector() {}
 
-        Tuple(float first, ...) {
+        Vector(float first, ...) {
             va_list args;
             va_start(args, first);
             val[0] = first;
@@ -20,26 +20,26 @@ class Tuple {
 
         float& operator[](int i) { return val[i]; }
 
-        Tuple& operator+=(const Tuple& rhs) { 
+        Vector& operator+=(const Vector& rhs) { 
             for(int i = 0; i < N; i++) {
                 val[i] += rhs.val[i];
             }
             return *this;
         }
 
-        const Tuple operator+(const Tuple& other) const {
+        const Vector operator+(const Vector& other) const {
             return Tuple(*this) += other;
         }
 
-        Tuple& operator*=(float rhs) { 
+        Vector& operator*=(float rhs) { 
             for(int i = 0; i < N; i++) {
                 val[i] *= rhs;
             }
             return *this;
         }
 
-        const Tuple operator*(float other) const {
-            return Tuple(*this) *= other;
+        const Vector operator*(float other) const {
+            return Vector(*this) *= other;
         }
 
         float val[N];
