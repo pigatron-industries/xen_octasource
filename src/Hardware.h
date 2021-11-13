@@ -65,6 +65,37 @@ class Hardware {
                 &is32fl3738.pins[22],
                 &is32fl3738.pins[23]
             };
+            AnalogOutputPin<IS32FL3738Device>* outputRedLeds[8] = {
+                &is32fl3738.pins[0],
+                &is32fl3738.pins[1],
+                &is32fl3738.pins[3],
+                &is32fl3738.pins[6],
+                &is32fl3738.pins[7],
+                &is32fl3738.pins[5],
+                &is32fl3738.pins[4],
+                &is32fl3738.pins[2],
+            };
+            AnalogOutputPin<IS32FL3738Device>* outputBlueLeds[8] = {
+                &is32fl3738.pins[8],
+                &is32fl3738.pins[9],
+                &is32fl3738.pins[11],
+                &is32fl3738.pins[14],
+                &is32fl3738.pins[15],
+                &is32fl3738.pins[13],
+                &is32fl3738.pins[12],
+                &is32fl3738.pins[10]
+            };
+            AnalogOutputPin<IS32FL3738Device>* outputGreenLeds[8] = {
+                &is32fl3738.pins[32],
+                &is32fl3738.pins[33],
+                &is32fl3738.pins[35],
+                &is32fl3738.pins[38],
+                &is32fl3738.pins[39],
+                &is32fl3738.pins[37],
+                &is32fl3738.pins[36],
+                &is32fl3738.pins[34]
+            };
+
         #endif
 
         #if defined(OCTASOURCE_MKI)

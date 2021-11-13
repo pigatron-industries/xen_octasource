@@ -1,7 +1,8 @@
 #ifndef Controller_h
 #define Controller_h
 
-#include "eurorack.h"
+#include <eurorack.h>
+#include "Hardware.h"
 
 class Controller {
     public:

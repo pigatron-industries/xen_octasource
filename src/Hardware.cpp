@@ -20,6 +20,15 @@ void Hardware::init() {
         for(int i = 0; i < 16; i++) {
             encoderLeds[i]->analogWrite(0);
         }
+        for(int i = 0; i < 8; i++) {
+            outputRedLeds[i]->analogWrite(0);
+        }
+        for(int i = 0; i < 8; i++) {
+            outputBlueLeds[i]->analogWrite(0);
+        }
+        for(int i = 0; i < 8; i++) {
+            outputGreenLeds[i]->analogWrite(0);
+        }
     #endif
 
     #if defined(OCTASOURCE_MKI)
