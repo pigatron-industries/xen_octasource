@@ -11,6 +11,7 @@
 #include "controllers/EnvelopeController.h"
 #include "controllers/AttractorController.h"
 #include "controllers/PhysicalModelController.h"
+#include "controllers/ThreeBodyController.h"
 
 MainController mainController = MainController(SAMPLE_RATE);
 
@@ -21,6 +22,7 @@ ClockController clockController = ClockController();
 EnvelopeController envelopeController = EnvelopeController();
 AttractorController attractorController = AttractorController();
 PhysicalModelController physicalModelController = PhysicalModelController();
+ThreeBodyController threeBodyController = ThreeBodyController();
 
 void setup() {
     Serial.begin(SERIAL_BAUD);
@@ -38,6 +40,7 @@ void setup() {
     mainController.registerController(envelopeController);
     mainController.registerController(attractorController);
     mainController.registerController(physicalModelController);
+    mainController.registerController(threeBodyController);
     mainController.init();
 }
 

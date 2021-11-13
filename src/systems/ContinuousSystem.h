@@ -31,6 +31,9 @@ class ContinuousSystemN : public ContinuousSystem {
         virtual void init(float sampleRate) {
             ContinuousSystem::init(sampleRate);
             for(int i = 0; i < N; i++) {
+                pos[i] = 0;
+                mult[i] = 1;
+                offset[i] = 0;
                 limits.val[i] = 99999;
             }
         }
