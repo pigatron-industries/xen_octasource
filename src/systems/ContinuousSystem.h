@@ -3,25 +3,21 @@
 
 #include "Vector.h"
 
-#define X 0
-#define Y 1
-#define Z 2
-#define W 3
-
 class ContinuousSystem {
     public: 
         virtual void init(float sampleRate) {
             this->sampleRate = sampleRate;
             sampleRateRecip = 1/sampleRate;
-            dt = sampleRateRecip;
+            setSpeed(speed);
         };
         virtual void process() = 0;
         virtual float getOutput(int i) = 0;
         virtual void setParam(int i, float value) {};
-        void setSpeed(float speed) { dt = sampleRateRecip*speedMult*speed; }
+        void setSpeed(float speed) { this->speed = speed; dt = sampleRateRecip*speedMult*speed; }
     protected:
         float sampleRate, sampleRateRecip;
         float dt;
+        float speed = 1;
         float speedMult = 1;
 };
 

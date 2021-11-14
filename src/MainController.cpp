@@ -77,10 +77,10 @@ void MainController::update() {
             //change controller mode
             if(Hardware::hw.encoder.getMovement() != 0) {
                 Config::data.mode.controllerMode = controllers.getActiveController()->cycleMode(Hardware::hw.encoder.getMovement());
-                controllers.getActiveController()->init();
-                Config::saveMode();
                 Serial.print("Mode: ");
                 Serial.println(Config::data.mode.controllerMode);
+                controllers.getActiveController()->init();
+                Config::saveMode();
             }
         }
     }

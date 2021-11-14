@@ -7,7 +7,19 @@
 
 class ThreeBodyController : public Controller {
     public:
-        ThreeBodyController() : Controller(0) {}
+        enum Mode {
+            STABLE1,
+            STABLE2,
+            STABLE3,
+            STABLE4,
+            STABLE5,
+            CHAOTIC_BOUNCE1,
+            CHAOTIC_BOUNCE2,
+            CHAOTIC_BOUNCE3,
+            CHAOTIC_WRAP1
+        };
+
+        ThreeBodyController() : Controller(Mode::CHAOTIC_WRAP1) {}
         virtual void init(float sampleRate);
         virtual void init();
         virtual void update();

@@ -8,15 +8,17 @@ void ThreeBody::init(float sampleRate) {
     speedMult = 1;
 }
 
-void ThreeBody::setBodies(const List<Body, BODIES>& bodies) {
-    Vector<2> centreOfMass = calculateCentreOfMass(bodies);
-    Vector<2> momentum = calculateMomentum(bodies);
+void ThreeBody::setBodies(const Array<Body, BODIES>& bodies) {
     for(int i = 0; i < BODIES; i++) {
         this->bodies[i] = bodies[i];
-        this->bodies[i].position -= centreOfMass;
     }
-    //TODO make sure total momentum (mass*velocity) of system is zero
 
+    Vector<2> momentum = calculateMomentum(bodies);
+    // Serial.print("momentum: ");
+    // momentum.print();
+    // Serial.println();
+
+    doDriftCorrection();
     setOutputs();
 }
 
@@ -41,13 +43,9 @@ void ThreeBody::process() {
         bodies[i].position += bodies[i].velocity * dt;
     }
 
-    // Vector<2> momentum = calculateMomentum(bodies);
-    // momentum.print();
-    // Serial.println();
-    // Vector<2> centreOfMass = calculateCentreOfMass(bodies);
-    // centreOfMass.print();
-    // Serial.println();
-
+    if(driftCorrection) {
+        doDriftCorrection();
+    }
     limitBodies();
     setOutputs();
 }
@@ -56,11 +54,25 @@ void ThreeBody::limitBodies() {
     for(int i = 0; i < BODIES; i++) {
         for(int dim = 0; dim < 2; dim++) {
             if(bodies[i].position[dim] > limit) {
-                bodies[i].position[dim] = limit;
-                bodies[i].velocity[dim] = -bodies[i].velocity[dim]*0.5;
+                if(edgeMode == EdgeMode::BOUNCE) {
+                    bodies[i].position[dim] = limit;
+                    if(bodies[i].velocity[dim] > 0) {
+                        bodies[i].velocity[dim] = -bodies[i].velocity[dim]*0.5;
+                    }
+                } else if(edgeMode == EdgeMode::WRAP)  {
+                    bodies[i].position[dim] = -limit;
+                    bodies[i].velocity[dim] = bodies[i].velocity[dim]*0.5;
+                }
             } else if (bodies[i].position[dim] < -limit) {
-                bodies[i].position[dim] = -limit;
-                bodies[i].velocity[dim] = -bodies[i].velocity[dim]*0.5;
+                if(edgeMode == EdgeMode::BOUNCE) {
+                    bodies[i].position[dim] = -limit;
+                    if(bodies[i].velocity[dim] < 0) {
+                        bodies[i].velocity[dim] = -bodies[i].velocity[dim]*0.5;
+                    }
+                } else if(edgeMode == EdgeMode::WRAP)  {
+                    bodies[i].position[dim] = limit;
+                    bodies[i].velocity[dim] = bodies[i].velocity[dim]*0.5;
+                }
             }
         }
     }
@@ -86,7 +98,7 @@ void ThreeBody::calculateAcceleration(int i) {
     }
 }
 
-Vector<2> ThreeBody::calculateCentreOfMass(const List<Body, BODIES>& bodies) {
+Vector<2> ThreeBody::calculateCentreOfMass(const Array<Body, BODIES>& bodies) {
     Vector<2> massPosition = Vector<2>(0, 0);
     float totalMass = 0;
     for(int i = 0; i < BODIES; i++) {
@@ -96,10 +108,22 @@ Vector<2> ThreeBody::calculateCentreOfMass(const List<Body, BODIES>& bodies) {
     return massPosition / totalMass;
 }
 
-Vector<2> ThreeBody::calculateMomentum(const List<Body, BODIES>& bodies) {
+Vector<2> ThreeBody::calculateMomentum(const Array<Body, BODIES>& bodies) {
     Vector<2> momentum = Vector<2>(0, 0);
     for(int i = 0; i < BODIES; i++) {
         momentum += bodies[i].velocity * bodies[i].mass;
     }
     return momentum;
+}
+
+void ThreeBody::doDriftCorrection() {
+    Vector<2> centreOfMass = calculateCentreOfMass(bodies);
+    for(int i = 0; i < BODIES; i++) {
+        bodies[i].position -= centreOfMass;
+    }
+
+    // Vector<2> momentumDiv = calculateMomentum(bodies) / BODIES;
+    // for(int i = 0; i < BODIES; i++) {
+    //     bodies[i].velocity -= momentumDiv / bodies[i].mass;
+    // }
 }

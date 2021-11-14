@@ -25,6 +25,7 @@ PhysicalModelController physicalModelController = PhysicalModelController();
 ThreeBodyController threeBodyController = ThreeBodyController();
 
 void setup() {
+    delay(100);
     Serial.begin(SERIAL_BAUD);
     Serial.println();
     Serial.println("=========================================");

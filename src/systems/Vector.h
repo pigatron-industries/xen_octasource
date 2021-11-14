@@ -3,6 +3,12 @@
 
 #include <stdarg.h>
 #include <math.h>
+#include <Arduino.h>
+
+#define X 0
+#define Y 1
+#define Z 2
+#define W 3
 
 template<int N>
 class Vector {
@@ -19,6 +25,7 @@ class Vector {
         }
 
         float& operator[](int i) { return val[i]; }
+        const float& operator[](int i) const { return val[i]; }
 
         Vector& operator+=(const Vector& rhs) { 
             for(int i = 0; i < N; i++) {
@@ -72,15 +79,30 @@ class Vector {
             return sqrtf(l);
         }
 
-        // void print() {
-        //     Serial.print("(");
-        //     Serial.print(val[0], 5);
-        //     Serial.print(",");
-        //     Serial.print(val[1], 5);
-        //     Serial.print(") ");
-        // }
-
         float val[N];
 };
+
+inline void print(Vector<2>& vector) {
+    Serial.print("(");
+    Serial.print(vector[X], 5);
+    Serial.print(",");
+    Serial.print(vector[Y], 5);
+    Serial.print(") ");
+}
+
+inline void println(Vector<2>& vector) {
+    Serial.print("(");
+    Serial.print(vector[X], 5);
+    Serial.print(",");
+    Serial.print(vector[Y], 5);
+    Serial.println(")");
+}
+
+inline Vector<2> rotate(Vector<2> vector, float radians) {
+    Vector<2> rotated;
+    rotated[X] = vector[X]*cosf(radians) + vector[Y]*sinf(radians);
+    rotated[Y] = vector[X]*sinf(radians) + vector[Y]*cosf(radians);
+    return rotated;
+}
 
 #endif
