@@ -51,18 +51,18 @@ void ThreeBodyController::init() {
             threeBody.setDriftCorrection(true);
             threeBody.setEdgeMode(ThreeBody::EdgeMode::NONE);
             break;
-        case Mode::STABLE4: // Figure 8 (not working)
-            bodies[0].mass = 5;
-            bodies[0].position = Vector<2>(-2, 0);
-            bodies[0].velocity = Vector<2>(1, 1);
-            bodies[1].mass = 5;
-            bodies[1].position = Vector<2>(0, 0);
-            bodies[1].velocity = Vector<2>(-1, -1);
-            bodies[2].mass = 5;
-            bodies[2].position = Vector<2>(2, 0);
-            bodies[2].velocity = Vector<2>(1, 1);
+        case Mode::STABLE4: // Figure 8
+            bodies[0].mass = 4;
+            bodies[0].position = Vector<2>(-4, 0);
+            bodies[0].velocity = Vector<2>(0.347111, 0.532728);
+            bodies[1].mass = 4;
+            bodies[1].position = Vector<2>(4, 0);
+            bodies[1].velocity = Vector<2>(0.347111, 0.532728);
+            bodies[2].mass = 4;
+            bodies[2].position = Vector<2>(0, 0);
+            bodies[2].velocity = Vector<2>(-2*0.347111, -2*0.532728);
             threeBody.setDriftCorrection(true);
-            threeBody.setEdgeMode(ThreeBody::EdgeMode::BOUNCE);
+            threeBody.setEdgeMode(ThreeBody::EdgeMode::NONE);
             break;
         case Mode::STABLE5: // Stable state with 3 equal masses
             bodies[0].mass = 10;
