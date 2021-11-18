@@ -9,10 +9,11 @@ class ThreeBodyController : public Controller {
     public:
         enum Mode {
             STABLE1,
-            STABLE2,
-            STABLE3,
+            STABLE_BUTTERFLY1,
+            STABLE_DRAGONFLY1,
+            STABLE_FIGURE8,
+            BROUKE_A2,
             STABLE4,
-            STABLE5,
             CHAOTIC_BOUNCE1,
             CHAOTIC_BOUNCE2,
             CHAOTIC_BOUNCE3,

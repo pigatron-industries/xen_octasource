@@ -10,6 +10,13 @@ void ThreeBodyController::init() {
     Serial.println("Three Body");
     //printBodies();
 
+
+    /**
+     * Initial conditionas taken from 
+     * https://observablehq.com/@rreusser/periodic-planar-three-body-orbits
+     * To increase size without affecting pattern, multiply mass and initial position by the same amount
+     */
+
     Array<Body, 3> bodies;
     switch(mode.value) {
         case Mode::STABLE1: // Massive star with opposite planets of equal mass
@@ -25,33 +32,33 @@ void ThreeBodyController::init() {
             threeBody.setDriftCorrection(true);
             threeBody.setEdgeMode(ThreeBody::EdgeMode::NONE);
             break;
-        case Mode::STABLE2: // Lagrange point L5 (TODO)
-            bodies[0].mass = 100;
-            bodies[0].position = Vector<2>(0, 0);
-            bodies[0].velocity = Vector<2>(0, 0);
-            bodies[1].mass = 1;
-            bodies[1].position = Vector<2>(0, 4);
-            bodies[1].velocity = Vector<2>(5, 0);
-            bodies[2].mass = 0.01;
-            bodies[2].position = rotate(bodies[1].position, -M_PI/3);
-            bodies[2].velocity = rotate(bodies[1].velocity, -M_PI/3);
+        case Mode::STABLE_BUTTERFLY1: //Butterfly I.19.A - Becomes unstable after few iterations
+            bodies[0].mass = 4;
+            bodies[0].position = Vector<2>(-4, 0);
+            bodies[0].velocity = Vector<2>(0.407376, 0.238843);
+            bodies[1].mass = 4;
+            bodies[1].position = Vector<2>(4, 0);
+            bodies[1].velocity = Vector<2>(0.407376, 0.238843);
+            bodies[2].mass = 4;
+            bodies[2].position = Vector<2>(0, 0);
+            bodies[2].velocity = Vector<2>(-0.814752, -0.477686);
             threeBody.setDriftCorrection(true);
             threeBody.setEdgeMode(ThreeBody::EdgeMode::NONE);
             break;
-        case Mode::STABLE3: // Sun, Earth, Moon (Moon escapes after a few orbits)
-            bodies[0].mass = 100;
-            bodies[0].position = Vector<2>(0, 0);
-            bodies[0].velocity = Vector<2>(0, 0);
-            bodies[1].mass = 1;
-            bodies[1].position = Vector<2>(0, 4);
-            bodies[1].velocity = Vector<2>(-5, 0);
-            bodies[2].mass = 0.1;
-            bodies[2].position = Vector<2>(0, 4.5);
-            bodies[2].velocity = Vector<2>(-5.5, 0);
+        case Mode::STABLE_DRAGONFLY1: //Dragonlfy - Becomes unstable after few iterations
+            bodies[0].mass = 4;
+            bodies[0].position = Vector<2>(-4, 0);
+            bodies[0].velocity = Vector<2>(0.049051, 0.590194);
+            bodies[1].mass = 4;
+            bodies[1].position = Vector<2>(4, 0);
+            bodies[1].velocity = Vector<2>(0.049051, 0.590194);
+            bodies[2].mass = 4;
+            bodies[2].position = Vector<2>(0, 0);
+            bodies[2].velocity = Vector<2>(-0.098102, -1.180388);
             threeBody.setDriftCorrection(true);
             threeBody.setEdgeMode(ThreeBody::EdgeMode::NONE);
             break;
-        case Mode::STABLE4: // Figure 8
+        case Mode::STABLE_FIGURE8: // Figure 8
             bodies[0].mass = 4;
             bodies[0].position = Vector<2>(-4, 0);
             bodies[0].velocity = Vector<2>(0.347111, 0.532728);
@@ -64,7 +71,20 @@ void ThreeBodyController::init() {
             threeBody.setDriftCorrection(true);
             threeBody.setEdgeMode(ThreeBody::EdgeMode::NONE);
             break;
-        case Mode::STABLE5: // Stable state with 3 equal masses
+        case Mode::BROUKE_A2:
+            bodies[0].mass = 4;
+            bodies[0].position = Vector<2>(0.336130095, 0) * 4;
+            bodies[0].velocity = Vector<2>(0, 1.532431537);
+            bodies[1].mass = 4;
+            bodies[1].position = Vector<2>(0.7699893804, 0) * 4;
+            bodies[1].velocity = Vector<2>(0, -0.6287350978);
+            bodies[2].mass = 4;
+            bodies[2].position = Vector<2>(-1.1061194753, 0) * 4;
+            bodies[2].velocity = Vector<2>(0, -0.9036964391);
+            threeBody.setDriftCorrection(true);
+            threeBody.setEdgeMode(ThreeBody::EdgeMode::NONE);
+            break;
+        case Mode::STABLE4: // Stable state with 3 equal masses, found accidentally from CHAOTIC_BOUNCE1
             bodies[0].mass = 10;
             bodies[0].position = Vector<2>(-7.13871,-0.24831);
             bodies[0].velocity = Vector<2>(-0.14822,-0.47005);
