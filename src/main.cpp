@@ -43,6 +43,9 @@ void setup() {
     mainController.registerController(physicalModelController);
     mainController.registerController(threeBodyController);
     mainController.init();
+
+    ARM_DEMCR |= ARM_DEMCR_TRCENA;
+    ARM_DWT_CTRL |= ARM_DWT_CTRL_CYCCNTENA;
 }
 
 void loop() {

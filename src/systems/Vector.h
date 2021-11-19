@@ -82,22 +82,6 @@ class Vector {
         float val[N];
 };
 
-inline void print(Vector<2>& vector) {
-    Serial.print("(");
-    Serial.print(vector[X], 5);
-    Serial.print(",");
-    Serial.print(vector[Y], 5);
-    Serial.print(") ");
-}
-
-inline void println(Vector<2>& vector) {
-    Serial.print("(");
-    Serial.print(vector[X], 5);
-    Serial.print(",");
-    Serial.print(vector[Y], 5);
-    Serial.println(")");
-}
-
 inline Vector<2> rotate(Vector<2> vector, float radians) {
     Vector<2> rotated;
     rotated[X] = vector[X]*cosf(radians) + vector[Y]*sinf(radians);

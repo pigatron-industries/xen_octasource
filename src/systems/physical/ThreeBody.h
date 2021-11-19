@@ -5,6 +5,7 @@
 #include <eurorack.h>
 
 #define BODIES 3
+#define G 1
 
 class Body {
     public:
@@ -20,7 +21,8 @@ class ThreeBody : public ContinuousSystemN<6> {
         enum EdgeMode {
             NONE,
             BOUNCE,
-            WRAP
+            WRAP,
+            ANTIGRAV
         };
 
         void init(float sampleRate);
@@ -34,10 +36,15 @@ class ThreeBody : public ContinuousSystemN<6> {
 
         void process();
 
+        Vector<2> calculateMomentum() { return calculateMomentum(bodies); }
+
+        static Array<Body, BODIES> initEqualInlineSystem(int mult, Vector<2> velocity);
+
     private:
         Array<Body, BODIES> bodies;
-        float g = 1;
         float limit = 5;
+        float damp = 0.25;
+        float minDist = 0.01;
         bool driftCorrection;
         EdgeMode edgeMode;
 
@@ -46,6 +53,8 @@ class ThreeBody : public ContinuousSystemN<6> {
         Vector<2> calculateMomentum(const Array<Body, BODIES>& bodies);
         void limitBodies();
         void doDriftCorrection();
+        void applyAntiGrav(int body);
+        void applyAntiGrav(int body, int dimension, int direction);
         void setOutputs();
     
 };

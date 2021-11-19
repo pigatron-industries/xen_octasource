@@ -109,14 +109,18 @@ void MainController::update() {
             }
         }
     #endif
+
+    PROFILE_PRINT
 }
 
 void MainController::process() {
+    PROFILE_START
     controllers.getActiveController()->process();
     #if defined(OCTASOURCE_MKII)
         Hardware::hw.dac8164a.send();
         Hardware::hw.dac8164b.send();
     #endif
+    PROFILE_END
 }
 
 

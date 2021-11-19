@@ -3,6 +3,22 @@
 
 #include <Arduino.h>
 
+
+Array<Body, BODIES> ThreeBody::initEqualInlineSystem(int mass, Vector<2> velocity) {
+    Array<Body, 3> bodies;
+    bodies[0].mass = mass;
+    bodies[0].position = Vector<2>(-1, 0) * mass;
+    bodies[0].velocity = velocity;
+    bodies[1].mass = mass;
+    bodies[1].position = Vector<2>(1, 0) * mass;
+    bodies[1].velocity = velocity;
+    bodies[2].mass = mass;
+    bodies[2].position = Vector<2>(0, 0) * mass;
+    bodies[2].velocity = velocity * -2; // opposite and equal to other 2 velocities
+    return bodies;
+}
+
+
 void ThreeBody::init(float sampleRate) {
     ContinuousSystemN::init(sampleRate);
     speedMult = 1;
@@ -57,21 +73,21 @@ void ThreeBody::limitBodies() {
                 if(edgeMode == EdgeMode::BOUNCE) {
                     bodies[i].position[dim] = limit;
                     if(bodies[i].velocity[dim] > 0) {
-                        bodies[i].velocity[dim] = -bodies[i].velocity[dim]*0.5;
+                        bodies[i].velocity[dim] = -bodies[i].velocity[dim]*damp;
                     }
                 } else if(edgeMode == EdgeMode::WRAP)  {
                     bodies[i].position[dim] = -limit;
-                    bodies[i].velocity[dim] = bodies[i].velocity[dim]*0.5;
+                    bodies[i].velocity[dim] = bodies[i].velocity[dim]*damp;
                 }
             } else if (bodies[i].position[dim] < -limit) {
                 if(edgeMode == EdgeMode::BOUNCE) {
                     bodies[i].position[dim] = -limit;
                     if(bodies[i].velocity[dim] < 0) {
-                        bodies[i].velocity[dim] = -bodies[i].velocity[dim]*0.5;
+                        bodies[i].velocity[dim] = -bodies[i].velocity[dim]*damp;
                     }
                 } else if(edgeMode == EdgeMode::WRAP)  {
                     bodies[i].position[dim] = limit;
-                    bodies[i].velocity[dim] = bodies[i].velocity[dim]*0.5;
+                    bodies[i].velocity[dim] = bodies[i].velocity[dim]*damp;
                 }
             }
         }
@@ -93,9 +109,34 @@ void ThreeBody::calculateAcceleration(int i) {
         if(j != i) {
             Vector<2> r = bodies[j].position - bodies[i].position;
             float dist = r.length();
-            bodies[i].acceleration += r * ((g * bodies[j].mass) / (dist*dist*dist));
+            if(dist <= minDist) {
+                dist = minDist;
+            }
+            bodies[i].acceleration += r * ((G * bodies[j].mass) / (dist*dist*dist));
         }
     }
+    if(edgeMode == EdgeMode::ANTIGRAV) {
+        applyAntiGrav(i);
+    }
+}
+
+void ThreeBody::applyAntiGrav(int body, int dim, int dir) {
+    float dist = limit - dir*bodies[body].position[dim];
+    if(dist <= minDist) {
+        dist = minDist;
+    }
+    if(dir * bodies[body].velocity[dim] > 0) {
+        bodies[body].acceleration[dim] -= dir / (dist*dist);
+    } else {
+        bodies[body].acceleration[dim] -= damp*dir / (dist*dist);
+    }
+}
+
+void ThreeBody::applyAntiGrav(int body) {
+    applyAntiGrav(body, X, 1);
+    applyAntiGrav(body, X, -1);
+    applyAntiGrav(body, Y, 1);
+    applyAntiGrav(body, Y, -1);
 }
 
 Vector<2> ThreeBody::calculateCentreOfMass(const Array<Body, BODIES>& bodies) {
