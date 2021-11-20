@@ -15,14 +15,14 @@ class ClockController : public AbstractOscillatorController {
 
     private:
         AnalogTriggerOutput<OctasourceOutputDevice> triggerOutputs[8] = {
-            AnalogTriggerOutput<OctasourceOutputDevice>(*Hardware::hw.cvOutputPins[0]),
-            AnalogTriggerOutput<OctasourceOutputDevice>(*Hardware::hw.cvOutputPins[1]),
-            AnalogTriggerOutput<OctasourceOutputDevice>(*Hardware::hw.cvOutputPins[2]),
-            AnalogTriggerOutput<OctasourceOutputDevice>(*Hardware::hw.cvOutputPins[3]),
-            AnalogTriggerOutput<OctasourceOutputDevice>(*Hardware::hw.cvOutputPins[4]),
-            AnalogTriggerOutput<OctasourceOutputDevice>(*Hardware::hw.cvOutputPins[5]),
-            AnalogTriggerOutput<OctasourceOutputDevice>(*Hardware::hw.cvOutputPins[6]),
-            AnalogTriggerOutput<OctasourceOutputDevice>(*Hardware::hw.cvOutputPins[7])
+            AnalogTriggerOutput<OctasourceOutputDevice>(*Hardware::hw.cvOutputPins[0], 20000),
+            AnalogTriggerOutput<OctasourceOutputDevice>(*Hardware::hw.cvOutputPins[1], 20000),
+            AnalogTriggerOutput<OctasourceOutputDevice>(*Hardware::hw.cvOutputPins[2], 20000),
+            AnalogTriggerOutput<OctasourceOutputDevice>(*Hardware::hw.cvOutputPins[3], 20000),
+            AnalogTriggerOutput<OctasourceOutputDevice>(*Hardware::hw.cvOutputPins[4], 20000),
+            AnalogTriggerOutput<OctasourceOutputDevice>(*Hardware::hw.cvOutputPins[5], 20000),
+            AnalogTriggerOutput<OctasourceOutputDevice>(*Hardware::hw.cvOutputPins[6], 20000),
+            AnalogTriggerOutput<OctasourceOutputDevice>(*Hardware::hw.cvOutputPins[7], 20000)
         };
 
         Clock clock;
