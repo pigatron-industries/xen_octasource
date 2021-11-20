@@ -3,6 +3,9 @@
 
 class ClockDivider {
     public:
+        ClockDivider(int divisor = 1) {
+            this->divisor = divisor;
+        }
 
         bool tick() {
             counter++;

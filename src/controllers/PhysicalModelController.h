@@ -4,8 +4,10 @@
 #include "../Controller.h"
 #include "../Hardware.h"
 #include "systems/physical/DoublePendulum.h"
+#include "lib/ClockDivider.h"
 
 #define MODEL_COUNT 1
+#define SAMPLE_RATE_DIVISOR 2
 
 class PhysicalModelController : public Controller {
     public:
@@ -22,6 +24,7 @@ class PhysicalModelController : public Controller {
         LinearInput<OctasourceInputDevice> param2CvInput = LinearInput<OctasourceInputDevice>(Hardware::hw.phaseCvPin, -5, 5, 0.1, 0.9);
 
         DoublePendulum doublePendulum;
+        ClockDivider clockDivider = ClockDivider(SAMPLE_RATE_DIVISOR);
 
         ContinuousSystemN<2>* models[MODEL_COUNT] = {
             &doublePendulum,

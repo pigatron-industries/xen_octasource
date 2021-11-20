@@ -1,7 +1,7 @@
 #include "PhysicalModelController.h"
 
 void PhysicalModelController::init(float sampleRate) {
-    Controller::init(sampleRate);
+    Controller::init(sampleRate / SAMPLE_RATE_DIVISOR);
     init();
 }
 
@@ -45,8 +45,10 @@ void PhysicalModelController::updateParams() {
 }
 
 void PhysicalModelController::process() {
-    ContinuousSystem* model = models[mode.value];
-    model->process();
-    Hardware::hw.cvOutputPins[0]->analogWrite(model->getOutput(X)*amp);
-    Hardware::hw.cvOutputPins[1]->analogWrite(model->getOutput(Y)*amp);
+    if(clockDivider.tick()) {
+        ContinuousSystem* model = models[mode.value];
+        model->process();
+        Hardware::hw.cvOutputPins[0]->analogWrite(model->getOutput(X)*amp);
+        Hardware::hw.cvOutputPins[1]->analogWrite(model->getOutput(Y)*amp);
+    }
 }
