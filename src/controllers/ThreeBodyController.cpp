@@ -119,6 +119,8 @@ void ThreeBodyController::init() {
 void ThreeBodyController::update() {
     updateRate();
     updateAmp();
+    updateSize();
+    updateDamp();
 }
 
 void ThreeBodyController::updateRate() {
@@ -131,18 +133,32 @@ void ThreeBodyController::updateRate() {
 void ThreeBodyController::updateAmp() {
     if(ampCvInput.update()) {
         amp = ampCvInput.getValue();
-        threeBody.setLimit(5/amp);
+        totalGain = amp * size;
+    }
+}
+
+void ThreeBodyController::updateSize() {
+    if(sizeCvInput.update()) {
+        size = sizeCvInput.getValue();
+        threeBody.setLimit(5/size);
+        totalGain = amp * size;
+    }
+}
+
+void ThreeBodyController::updateDamp() {
+    if(dampCvInput.update()) {
+        threeBody.setDamp(dampCvInput.getValue());
     }
 }
 
 void ThreeBodyController::process() {
     threeBody.process();
-    Hardware::hw.cvOutputPins[0]->analogWrite(threeBody.getOutput(0)*amp);
-    Hardware::hw.cvOutputPins[1]->analogWrite(threeBody.getOutput(1)*amp);
-    Hardware::hw.cvOutputPins[2]->analogWrite(threeBody.getOutput(2)*amp);
-    Hardware::hw.cvOutputPins[3]->analogWrite(threeBody.getOutput(3)*amp);
-    Hardware::hw.cvOutputPins[4]->analogWrite(threeBody.getOutput(4)*amp);
-    Hardware::hw.cvOutputPins[5]->analogWrite(threeBody.getOutput(5)*amp);
+    Hardware::hw.cvOutputPins[0]->analogWrite(threeBody.getOutput(0)*totalGain);
+    Hardware::hw.cvOutputPins[1]->analogWrite(threeBody.getOutput(1)*totalGain);
+    Hardware::hw.cvOutputPins[2]->analogWrite(threeBody.getOutput(2)*totalGain);
+    Hardware::hw.cvOutputPins[3]->analogWrite(threeBody.getOutput(3)*totalGain);
+    Hardware::hw.cvOutputPins[4]->analogWrite(threeBody.getOutput(4)*totalGain);
+    Hardware::hw.cvOutputPins[5]->analogWrite(threeBody.getOutput(5)*totalGain);
 }
 
 void ThreeBodyController::printBodies() {

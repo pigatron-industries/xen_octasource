@@ -29,7 +29,7 @@ void ThreeBody::setBodies(const Array<Body, BODIES>& bodies) {
         this->bodies[i] = bodies[i];
     }
 
-    Vector<2> momentum = calculateMomentum(bodies);
+    //Vector<2> momentum = calculateMomentum(bodies);
     // Serial.print("momentum: ");
     // momentum.print();
     // Serial.println();

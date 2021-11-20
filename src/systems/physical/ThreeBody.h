@@ -31,6 +31,7 @@ class ThreeBody : public ContinuousSystemN<6> {
         void setLimit(float limit) { this->limit = limit; };
         void setDriftCorrection(bool driftCorrection) { this->driftCorrection = driftCorrection; };
         void setEdgeMode(EdgeMode edgeMode) { this->edgeMode = edgeMode; };
+        void setDamp(float damp) { this->damp = damp; }
 
         Array<Body, BODIES>& getBodies() { return bodies; }
 
