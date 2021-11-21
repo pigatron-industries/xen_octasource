@@ -16,7 +16,7 @@ class SlewController : public Controller {
         virtual void process();
 
     private:
-        ExpInput<OctasourceInputDevice> expRateCvInput = ExpInput<OctasourceInputDevice>(Hardware::hw.rateCvPin, 2);
+        LinearInput<OctasourceInputDevice> timeCvInput = LinearInput<OctasourceInputDevice>(Hardware::hw.rateCvPin, -5, 5, 0.1, 1);
         LinearInput<OctasourceInputDevice> ampCvInput = LinearInput<OctasourceInputDevice>(Hardware::hw.ampCvPin, -5, 5, 0, 1);
         
         ClockDivider clockDivider = ClockDivider(8);

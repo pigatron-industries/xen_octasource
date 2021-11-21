@@ -15,6 +15,11 @@ void SlewController::init() {
 }
 
 void SlewController::update() {
+    if(timeCvInput.update()) {
+        for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
+            filters[i].setFrequency(1/((i+1)*timeCvInput.getValue()));
+        }
+    }
 }
 
 void SlewController::process() {
