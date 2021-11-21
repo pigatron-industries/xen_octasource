@@ -30,7 +30,9 @@ class ThreeBodyController : public Controller {
         ExpInput<OctasourceInputDevice> expRateCvInput = ExpInput<OctasourceInputDevice>(Hardware::hw.rateCvPin, 2);
         LinearInput<OctasourceInputDevice> ampCvInput = LinearInput<OctasourceInputDevice>(Hardware::hw.ampCvPin, -5, 5, 0, 1);
         LinearInput<OctasourceInputDevice> sizeCvInput = LinearInput<OctasourceInputDevice>(Hardware::hw.waveCvPin, -5, 5, 0.1, 1);
-        LinearInput<OctasourceInputDevice> dampCvInput = LinearInput<OctasourceInputDevice>(Hardware::hw.phaseCvPin, -5, 5, 0, 1);
+        #if defined(OCTASOURCE_MKII)
+            LinearInput<OctasourceInputDevice> dampCvInput = LinearInput<OctasourceInputDevice>(Hardware::hw.phaseCvPin, -5, 5, 0, 1);
+        #endif
 
         ThreeBody threeBody;
 

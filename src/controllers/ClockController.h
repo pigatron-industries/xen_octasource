@@ -9,7 +9,13 @@ using namespace pigatron;
 
 class ClockController : public AbstractOscillatorController {
     public:
+        enum Mode {
+            INTEGER,
+            PPQN24
+        };
+        ClockController() : AbstractOscillatorController(Mode::PPQN24) {}
         virtual void init(float sampleRate);
+        virtual void init();
         virtual void update();
         virtual void process();
 

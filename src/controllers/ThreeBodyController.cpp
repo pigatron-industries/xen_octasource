@@ -146,9 +146,11 @@ void ThreeBodyController::updateSize() {
 }
 
 void ThreeBodyController::updateDamp() {
-    if(dampCvInput.update()) {
-        threeBody.setDamp(dampCvInput.getValue());
-    }
+    #if defined(OCTASOURCE_MKII)
+        if(dampCvInput.update()) {
+            threeBody.setDamp(dampCvInput.getValue());
+        }
+    #endif
 }
 
 void ThreeBodyController::process() {

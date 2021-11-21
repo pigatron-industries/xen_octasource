@@ -53,9 +53,11 @@ void EnvelopeController::updateAttackReleaseTime() {
 }
 
 void EnvelopeController::updateLength() {
-    if(lengthCvInput.update()) {
-        length = lengthCvInput.getValue();
-    }
+    #if defined(OCTASOURCE_MKII)
+        if(lengthCvInput.update()) {
+            length = lengthCvInput.getValue();
+        }
+    #endif
 }
 
 void EnvelopeController::updateAmp() {

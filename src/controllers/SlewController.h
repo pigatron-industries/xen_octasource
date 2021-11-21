@@ -1,13 +1,15 @@
-#ifndef DelayController_h
-#define DelayController_h
+#ifndef QuantizerController_h
+#define QuantizerController_h
 
+#include <eurorack_dsp.h>
 #include "../Controller.h"
 #include "../Hardware.h"
+#include "lib/ClockDivider.h"
 
-class DelayController : public Controller {
+class SlewController : public Controller {
     public:
 
-        DelayController() : Controller(0) {}
+        SlewController() : Controller(0) {}
         virtual void init(float sampleRate);
         virtual void init();
         virtual void update();
@@ -16,11 +18,10 @@ class DelayController : public Controller {
     private:
         ExpInput<OctasourceInputDevice> expRateCvInput = ExpInput<OctasourceInputDevice>(Hardware::hw.rateCvPin, 2);
         LinearInput<OctasourceInputDevice> ampCvInput = LinearInput<OctasourceInputDevice>(Hardware::hw.ampCvPin, -5, 5, 0, 1);
-        LinearInput<OctasourceInputDevice> param1CvInput = LinearInput<OctasourceInputDevice>(Hardware::hw.syncCvPin, -5, 5, -5, 5);
         
-        void updateRate();
-        void updateAmp();
-        void updateParams();
+        ClockDivider clockDivider = ClockDivider(8);
+        StateVariableFilter filters[OUTPUT_CV_COUNT];
+        float value;  
 };
 
 #endif

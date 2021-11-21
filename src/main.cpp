@@ -9,9 +9,11 @@
 #include "controllers/FilterController.h"
 #include "controllers/ClockController.h"
 #include "controllers/EnvelopeController.h"
+#include "controllers/SlewController.h"
 #include "controllers/AttractorController.h"
 #include "controllers/PhysicalModelController.h"
 #include "controllers/ThreeBodyController.h"
+#include "controllers/VoltageReferenceController.h"
 
 MainController mainController = MainController(SAMPLE_RATE);
 
@@ -20,9 +22,11 @@ FrequencyController frequencyController = FrequencyController();
 FilterController filterController = FilterController();
 ClockController clockController = ClockController();
 EnvelopeController envelopeController = EnvelopeController();
+SlewController quantizerController = SlewController();
 AttractorController attractorController = AttractorController();
 PhysicalModelController physicalModelController = PhysicalModelController();
 ThreeBodyController threeBodyController = ThreeBodyController();
+VoltageReferenceController voltageReferenceController = VoltageReferenceController();
 
 void setup() {
     delay(100);
@@ -39,9 +43,12 @@ void setup() {
     mainController.registerController(filterController);
     mainController.registerController(clockController);
     mainController.registerController(envelopeController);
+    mainController.registerController(quantizerController);
     mainController.registerController(attractorController);
     mainController.registerController(physicalModelController);
     mainController.registerController(threeBodyController);
+    mainController.registerController(quantizerController);
+    mainController.registerController(voltageReferenceController);
     mainController.init();
 
     ARM_DEMCR |= ARM_DEMCR_TRCENA;

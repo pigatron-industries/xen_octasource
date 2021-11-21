@@ -47,12 +47,14 @@ void FilterController::updateFilterFrequency() {
 }
 
 void FilterController::updateFilterResonance() {
-    if(resonanceCvInput.update()) {
-        float resonance = resonanceCvInput.getValue();
-        for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
-            filters[i].setResonance(resonance);
+    #if defined(OCTASOURCE_MKII)
+        if(resonanceCvInput.update()) {
+            float resonance = resonanceCvInput.getValue();
+            for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
+                filters[i].setResonance(resonance);
+            }
         }
-    }
+    #endif
 }
 
 void FilterController::process() {

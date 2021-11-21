@@ -16,7 +16,9 @@ class FilterController : public AbstractOscillatorController {
 
     private:
         LinearInput<OctasourceInputDevice> filterCvInput = LinearInput<OctasourceInputDevice>(Hardware::hw.waveCvPin, -5, 5, 0, 100);
-        LinearInput<OctasourceInputDevice> resonanceCvInput = LinearInput<OctasourceInputDevice>(Hardware::hw.phaseCvPin, -5, 5, 0, 1);
+        #if defined(OCTASOURCE_MKII)
+            LinearInput<OctasourceInputDevice> resonanceCvInput = LinearInput<OctasourceInputDevice>(Hardware::hw.phaseCvPin, -5, 5, 0, 1);
+        #endif
 
         StateVariableFilter filters[OUTPUT_CV_COUNT];
 

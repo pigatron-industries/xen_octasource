@@ -38,10 +38,13 @@ void PhysicalModelController::updateParams() {
         ContinuousSystem* model = models[mode.value];
         model->setParam(0, param1CvInput.getValue());
     }
-    if(param2CvInput.update()) {
-        ContinuousSystem* model = models[mode.value];
-        model->setParam(1, param2CvInput.getValue());
-    }
+    
+    #if defined(OCTASOURCE_MKII)
+        if(param2CvInput.update()) {
+            ContinuousSystem* model = models[mode.value];
+            model->setParam(1, param2CvInput.getValue());
+        }
+    #endif
 }
 
 void PhysicalModelController::process() {

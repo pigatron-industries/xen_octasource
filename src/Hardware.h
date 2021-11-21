@@ -111,6 +111,7 @@ class Hardware {
             //AnalogInputOutputPin<MAX11300Device>& ampCvPin = max11300.pins[LENGTH_CV_PIN];
             AnalogInputOutputPin<MAX11300Device>& ampCvPin = max11300.pins[LENGTH_POT_PIN];
             AnalogInputOutputPin<MAX11300Device>& syncCvPin = max11300.pins[TRIGGER_IN_PIN];
+            AnalogInputOutputPin<MAX11300Device>& gateOutPin = max11300.pins[OUTPUT_GATE_PIN];
             AnalogInputOutputPin<MAX11300Device>* cvOutputPins[OUTPUT_CV_COUNT] = {
                 &max11300.pins[OUTPUT_CV_PIN_START],
                 &max11300.pins[OUTPUT_CV_PIN_START+1],
