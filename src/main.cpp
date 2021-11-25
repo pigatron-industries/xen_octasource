@@ -11,7 +11,7 @@
 #include "controllers/EnvelopeController.h"
 #include "controllers/SlewController.h"
 #include "controllers/AttractorController.h"
-#include "controllers/PhysicalModelController.h"
+#include "controllers/DoublePendulumController.h"
 #include "controllers/ThreeBodyController.h"
 #include "controllers/VoltageReferenceController.h"
 
@@ -24,7 +24,7 @@ ClockController clockController = ClockController();
 EnvelopeController envelopeController = EnvelopeController();
 SlewController quantizerController = SlewController();
 AttractorController attractorController = AttractorController();
-PhysicalModelController physicalModelController = PhysicalModelController();
+DoublePendulumController doublePendulumController = DoublePendulumController();
 ThreeBodyController threeBodyController = ThreeBodyController();
 VoltageReferenceController voltageReferenceController = VoltageReferenceController();
 
@@ -45,7 +45,7 @@ void setup() {
     mainController.registerController(envelopeController);
     mainController.registerController(quantizerController);
     mainController.registerController(attractorController);
-    mainController.registerController(physicalModelController);
+    mainController.registerController(doublePendulumController);
     mainController.registerController(threeBodyController);
     mainController.registerController(quantizerController);
     mainController.registerController(voltageReferenceController);
