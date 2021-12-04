@@ -35,6 +35,7 @@ class ThreeBodyController : public Controller {
         #endif
 
         ThreeBody threeBody;
+        int oscBody = 0;
 
         float amp = 1;
         float size = 1;
