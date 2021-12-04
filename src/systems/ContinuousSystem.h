@@ -44,13 +44,16 @@ class ContinuousSystemN : public ContinuousSystem {
         void process() {
             system();
             pos += delta * dt;
+            limit();
+        };
 
+        void limit() {
             if(pos[X] > limits[X]) {
                 pos[X] = limits[X];
             } else if(pos[X] < -limits[X]) {
                 pos[X] = -limits[X];
             }
-        };
+        }
 
     protected:
         Vector<N> pos;
