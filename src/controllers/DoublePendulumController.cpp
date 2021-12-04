@@ -9,7 +9,7 @@ void DoublePendulumController::init() {
     for(int i = 0; i < MODEL_COUNT; i++) {
         models[i]->init(sampleRate);
     }
-    Serial.println("Physical Model");
+    Serial.println("Double Pendulum");
 }
 
 void DoublePendulumController::update() {
