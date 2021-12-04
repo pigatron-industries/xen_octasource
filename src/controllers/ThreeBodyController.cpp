@@ -161,6 +161,13 @@ void ThreeBodyController::process() {
     Hardware::hw.cvOutputPins[3]->analogWrite(threeBody.getOutput(3)*totalGain);
     Hardware::hw.cvOutputPins[4]->analogWrite(threeBody.getOutput(4)*totalGain);
     Hardware::hw.cvOutputPins[5]->analogWrite(threeBody.getOutput(5)*totalGain);
+
+    Hardware::hw.cvOutputPins[6]->analogWrite(threeBody.getOutput(oscBody*2)*totalGain);
+    Hardware::hw.cvOutputPins[7]->analogWrite(threeBody.getOutput(oscBody*2+1)*totalGain);
+    oscBody++;
+    if(oscBody >= 3) {
+        oscBody = 0;
+    }
 }
 
 void ThreeBodyController::printBodies() {
