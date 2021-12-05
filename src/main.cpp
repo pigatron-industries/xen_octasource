@@ -23,11 +23,11 @@ FrequencyController frequencyController = FrequencyController();
 FilterController filterController = FilterController();
 ClockController clockController = ClockController();
 EnvelopeController envelopeController = EnvelopeController();
-SlewController quantizerController = SlewController();
 BouncingBallController bouncingBallController = BouncingBallController();
 AttractorController attractorController = AttractorController();
 DoublePendulumController doublePendulumController = DoublePendulumController();
 ThreeBodyController threeBodyController = ThreeBodyController();
+SlewController slewController = SlewController();
 VoltageReferenceController voltageReferenceController = VoltageReferenceController();
 
 void setup() {
@@ -45,12 +45,11 @@ void setup() {
     mainController.registerController(filterController);
     mainController.registerController(clockController);
     mainController.registerController(envelopeController);
-    mainController.registerController(quantizerController);
     mainController.registerController(bouncingBallController);
     mainController.registerController(attractorController);
     mainController.registerController(doublePendulumController);
     mainController.registerController(threeBodyController);
-    mainController.registerController(quantizerController);
+    mainController.registerController(slewController);
     mainController.registerController(voltageReferenceController);
     mainController.init();
 
