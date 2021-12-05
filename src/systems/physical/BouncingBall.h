@@ -17,6 +17,9 @@ class BouncingBall : public ContinuousSystemN<1> {
 
         void setStartVelocityForHeight(float height) { startVelocity = calcInitVelocityForHeight(height); }
 
+        bool getBounced() { return bounced; }
+        float getBounceHeight() { return bounceHeight; }
+
         void process();
 
     private:
@@ -26,10 +29,12 @@ class BouncingBall : public ContinuousSystemN<1> {
 
         float time;
         float bounceVelocity;
+        float bounceHeight;
+        bool bounced;
 
         float calcHeightAtTime(float initVelocity, float time);
-        float calcInitBounceTimeAtHeight();
-        float calcInitBounceTimeAtMax();
+        float calcTimeToHeight(float startVelocity, float height);
+        float calcTimeToMaxHeight(float startVelocity);
         float calcInitVelocityForHeight(float height);
 };
 

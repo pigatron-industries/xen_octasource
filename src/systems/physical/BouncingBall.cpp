@@ -15,7 +15,8 @@ void BouncingBall::setParam(int param, float value) {
 
 void BouncingBall::trigger() {
     bounceVelocity = startVelocity;
-    time = calcInitBounceTimeAtHeight();
+    time = calcTimeToHeight(startVelocity, pos[X]);
+    bounceHeight = calcHeightAtTime(bounceVelocity, calcTimeToMaxHeight(bounceVelocity));
 }
 
 void BouncingBall::process() {
@@ -26,6 +27,14 @@ void BouncingBall::process() {
         bounceVelocity = bounceVelocity * damp;
         time = 0;
         pos[X] = 0;
+        bounceHeight = calcHeightAtTime(bounceVelocity, calcTimeToMaxHeight(bounceVelocity));
+        if(bounceHeight > 0) {
+            bounced = true;
+        } else {
+            bounced = false;
+        }
+    } else {
+        bounced = false;
     }
 }
 
@@ -33,13 +42,13 @@ float BouncingBall::calcHeightAtTime(float initVelocity, float time) {
     return (initVelocity * time) - (0.5 * acceleration * time * time);
 }
 
-float BouncingBall::calcInitBounceTimeAtHeight() {
+float BouncingBall::calcTimeToHeight(float initVelocity, float height) {
     // quadratic formula
-    return (-startVelocity + sqrtf(startVelocity*startVelocity - 2*acceleration*pos[X])) / -acceleration;
+    return (-initVelocity + sqrtf(initVelocity*initVelocity - 2*acceleration*height)) / -acceleration;
 }
 
-float BouncingBall::calcInitBounceTimeAtMax() {
-    return startVelocity/acceleration;
+float BouncingBall::calcTimeToMaxHeight(float initVelocity) {
+    return initVelocity/acceleration;
 }
 
 float BouncingBall::calcInitVelocityForHeight(float height) {
