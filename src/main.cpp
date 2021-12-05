@@ -10,6 +10,7 @@
 #include "controllers/ClockController.h"
 #include "controllers/EnvelopeController.h"
 #include "controllers/SlewController.h"
+#include "controllers/BouncingBallController.h"
 #include "controllers/AttractorController.h"
 #include "controllers/DoublePendulumController.h"
 #include "controllers/ThreeBodyController.h"
@@ -23,6 +24,7 @@ FilterController filterController = FilterController();
 ClockController clockController = ClockController();
 EnvelopeController envelopeController = EnvelopeController();
 SlewController quantizerController = SlewController();
+BouncingBallController bouncingBallController = BouncingBallController();
 AttractorController attractorController = AttractorController();
 DoublePendulumController doublePendulumController = DoublePendulumController();
 ThreeBodyController threeBodyController = ThreeBodyController();
@@ -44,6 +46,7 @@ void setup() {
     mainController.registerController(clockController);
     mainController.registerController(envelopeController);
     mainController.registerController(quantizerController);
+    mainController.registerController(bouncingBallController);
     mainController.registerController(attractorController);
     mainController.registerController(doublePendulumController);
     mainController.registerController(threeBodyController);

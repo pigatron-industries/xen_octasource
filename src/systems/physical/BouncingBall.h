@@ -14,7 +14,7 @@ class BouncingBall : public ContinuousSystemN<1> {
         };
 
         void init(float sampleRate);
-        void trigger(float velocity);
+        void trigger();
         void setParam(int param, float value);
         void setFloorMode(FloorMode floorMode) { this->floorMode = floorMode; };
         void setDamp(float damp) { this->damp = damp; }
@@ -22,8 +22,9 @@ class BouncingBall : public ContinuousSystemN<1> {
         void process();
 
     private:
-        float damp = 0.25;
-        FloorMode floorMode;
+        float damp = 0.9;
+        float startVelocity = 3;
+        FloorMode floorMode = FloorMode::INVERT;
     
         float velocity;
         float acceleration = 1;
