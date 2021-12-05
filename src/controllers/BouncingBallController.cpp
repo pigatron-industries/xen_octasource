@@ -9,15 +9,10 @@ void BouncingBallController::init() {
     Serial.println("Bouncing Ball");
     for(int i = 0; i < 8; i++) {
         bouncingBalls[i].init(sampleRate);
+        bouncingBalls[i].setDamp(0.9);
+        bouncingBalls[i].setAcceleration(i+1);
+        bouncingBalls[i].setStartVelocityForHeight(5);
     }
-    bouncingBalls[0].setDamp(0.95);
-    bouncingBalls[1].setDamp(0.95);
-    bouncingBalls[2].setDamp(0.9);
-    bouncingBalls[3].setDamp(0.9);
-    bouncingBalls[4].setDamp(0.85);
-    bouncingBalls[5].setDamp(0.85);
-    bouncingBalls[6].setDamp(0.8);
-    bouncingBalls[7].setDamp(0.8);
 }
 
 void BouncingBallController::update() {

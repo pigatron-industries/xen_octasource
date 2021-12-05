@@ -12,6 +12,10 @@ class BouncingBall : public ContinuousSystemN<1> {
         void trigger();
         void setParam(int param, float value);
         void setDamp(float damp) { this->damp = damp; }
+        void setStartVelocity(float startVelocity) { this->startVelocity = startVelocity; }
+        void setAcceleration(float acceleration) { this->acceleration = acceleration; }
+
+        void setStartVelocityForHeight(float height) { startVelocity = calcInitVelocityForHeight(height); }
 
         void process();
 
@@ -23,7 +27,10 @@ class BouncingBall : public ContinuousSystemN<1> {
         float time;
         float bounceVelocity;
 
-        float calcStartBounceTimeAtHeight();
+        float calcHeightAtTime(float initVelocity, float time);
+        float calcInitBounceTimeAtHeight();
+        float calcInitBounceTimeAtMax();
+        float calcInitVelocityForHeight(float height);
 };
 
 #endif
