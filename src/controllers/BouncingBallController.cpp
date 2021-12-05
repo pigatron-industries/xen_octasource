@@ -18,15 +18,6 @@ void BouncingBallController::init() {
     bouncingBalls[5].setDamp(0.85);
     bouncingBalls[6].setDamp(0.8);
     bouncingBalls[7].setDamp(0.8);
-
-    bouncingBalls[0].setFloorMode(BouncingBall::FloorMode::BOUNCE);
-    bouncingBalls[1].setFloorMode(BouncingBall::FloorMode::INVERT);
-    bouncingBalls[2].setFloorMode(BouncingBall::FloorMode::BOUNCE);
-    bouncingBalls[3].setFloorMode(BouncingBall::FloorMode::INVERT);
-    bouncingBalls[4].setFloorMode(BouncingBall::FloorMode::BOUNCE);
-    bouncingBalls[5].setFloorMode(BouncingBall::FloorMode::INVERT);
-    bouncingBalls[6].setFloorMode(BouncingBall::FloorMode::BOUNCE);
-    bouncingBalls[7].setFloorMode(BouncingBall::FloorMode::INVERT);
 }
 
 void BouncingBallController::update() {

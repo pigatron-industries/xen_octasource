@@ -5,36 +5,30 @@
 void BouncingBall::init(float sampleRate) {
     ContinuousSystemN::init(sampleRate);
     speedMult = 1;
-    velocity = startVelocity;
+    time = 0;
+    startVelocity = 3;
+    bounceVelocity = 3;
 }
 
 void BouncingBall::setParam(int param, float value) {
 }
 
 void BouncingBall::trigger() {
-    velocity = startVelocity;
+    bounceVelocity = startVelocity;
+    time = calcStartBounceTimeAtHeight();
 }
 
 void BouncingBall::process() {
-    float accel = -acceleration;
-    float prevPos = pos[X];
-    if(floorMode == FloorMode::INVERT) {
-        if(pos[X] <= 0) {
-            accel = acceleration;
-        }
-    }
+    time += dt;
+    pos[X] = (bounceVelocity * time) - (0.5 * acceleration * time * time);
 
-    velocity += accel * dt;
-    pos[X] += velocity * dt;
-
-    if(floorMode == FloorMode::BOUNCE) {
-        if(pos[X] <= 0) {
-            velocity = -velocity * damp;
-            pos[X] = 0;
-        }
-    } else {
-        if((prevPos > 0 && pos[X] <= 0) || (prevPos < 0 && pos[X] >= 0)) {
-            velocity = velocity * damp;
-        }
+    if(pos[X] <= 0) {
+        bounceVelocity = bounceVelocity * damp;
+        time = 0;
+        pos[X] = 0;
     }
+}
+
+float BouncingBall::calcStartBounceTimeAtHeight() {
+    return (-startVelocity + sqrtf(startVelocity*startVelocity - 2*acceleration*pos[X])) / -acceleration;
 }

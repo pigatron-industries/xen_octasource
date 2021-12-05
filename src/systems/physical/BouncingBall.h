@@ -8,15 +8,9 @@
 class BouncingBall : public ContinuousSystemN<1> {
     public:
 
-        enum FloorMode {
-            BOUNCE,
-            INVERT
-        };
-
         void init(float sampleRate);
         void trigger();
         void setParam(int param, float value);
-        void setFloorMode(FloorMode floorMode) { this->floorMode = floorMode; };
         void setDamp(float damp) { this->damp = damp; }
 
         void process();
@@ -24,10 +18,12 @@ class BouncingBall : public ContinuousSystemN<1> {
     private:
         float damp = 0.9;
         float startVelocity = 3;
-        FloorMode floorMode = FloorMode::INVERT;
-    
-        float velocity;
         float acceleration = 1;
+
+        float time;
+        float bounceVelocity;
+
+        float calcStartBounceTimeAtHeight();
 };
 
 #endif
