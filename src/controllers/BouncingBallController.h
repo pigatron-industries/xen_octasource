@@ -8,7 +8,8 @@
 class BouncingBallController : public Controller {
     public:
         enum Mode {
-            GRAVITY,
+            BOUNCE,
+            TRIGGERS,
             ROTATE
         };
         BouncingBallController() : Controller(Mode::ROTATE) {}
@@ -22,10 +23,17 @@ class BouncingBallController : public Controller {
         ExpInput<OctasourceInputDevice> expRateCvInput = ExpInput<OctasourceInputDevice>(Hardware::hw.rateCvPin, 10);
         LinearInput<OctasourceInputDevice> ampCvInput = LinearInput<OctasourceInputDevice>(Hardware::hw.ampCvPin, -5, 5, 0, 1);
         LinearInput<OctasourceInputDevice> dampCvInput = LinearInput<OctasourceInputDevice>(Hardware::hw.waveCvPin, -5, 5, 0.5, 1);
-        TriggerOutput<> triggerOutput = TriggerOutput<>(Hardware::hw.gateOutPin, 20000);
         #if defined(OCTASOURCE_MKII)
             LinearInput<OctasourceInputDevice> param2CvInput = LinearInput<OctasourceInputDevice>(Hardware::hw.phaseCvPin, -5, 5, 0.1, 0.9);
         #endif
+
+        TriggerOutput<> triggerOutput = TriggerOutput<>(Hardware::hw.gateOutPin, 20000);
+        AnalogTriggerOutput<OctasourceOutputDevice> triggerOutputs[4] = {
+            AnalogTriggerOutput<OctasourceOutputDevice>(*Hardware::hw.cvOutputPins[0], 20000),
+            AnalogTriggerOutput<OctasourceOutputDevice>(*Hardware::hw.cvOutputPins[2], 20000),
+            AnalogTriggerOutput<OctasourceOutputDevice>(*Hardware::hw.cvOutputPins[4], 20000),
+            AnalogTriggerOutput<OctasourceOutputDevice>(*Hardware::hw.cvOutputPins[6], 20000)
+        };
 
         BouncingBall bouncingBalls[4] = {
             BouncingBall(),

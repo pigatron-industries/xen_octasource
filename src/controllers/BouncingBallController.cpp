@@ -60,26 +60,40 @@ void BouncingBallController::updateDamp() {
 
 void BouncingBallController::process() {
     triggerOutput.update();
-    
-    if(mode.value == Mode::ROTATE) {
-        bouncingBalls[0].process();
-        if(bouncingBalls[0].getBounced()) {
-            triggerOutput.trigger();
-            Hardware::hw.cvOutputPins[rotateOutput]->analogWrite(0);
-            rotateOutput++;
-            if(rotateOutput >= 8) {
-                rotateOutput = 0;
+    for(int i = 0; i < 4; i++) {
+        bouncingBalls[i].process();
+    }
+
+    switch(mode.value) {
+        case Mode::BOUNCE:
+            for(int i = 0; i < 4; i++) {
+                Hardware::hw.cvOutputPins[i*2]->analogWrite(bouncingBalls[i].getOutput(X)*amp);
+                Hardware::hw.cvOutputPins[i*2+1]->analogWrite(bouncingBalls[i].getBounceHeight()*amp);
             }
-        }
-        Hardware::hw.cvOutputPins[rotateOutput]->analogWrite(bouncingBalls[0].getOutput(X)*amp);
-    } else {
-        for(int i = 0; i < 4; i++) {
-            bouncingBalls[i].process();
-            Hardware::hw.cvOutputPins[i*2]->analogWrite(bouncingBalls[i].getOutput(X)*amp);
-            Hardware::hw.cvOutputPins[i*2+1]->analogWrite(bouncingBalls[i].getBounceHeight()*amp);
-        }
-        if(bouncingBalls[0].getBounced()) {
-            triggerOutput.trigger();
-        }
+            if(bouncingBalls[0].getBounced()) {
+                triggerOutput.trigger();
+            }
+            break;
+        case Mode::TRIGGERS:
+            for(int i = 0; i < 4; i++) {
+                triggerOutputs[i].update();
+                if(bouncingBalls[i].getBounced()) {
+                    triggerOutputs[i].trigger();
+                    triggerOutput.trigger();
+                }
+                Hardware::hw.cvOutputPins[i*2+1]->analogWrite(bouncingBalls[i].getBounceHeight()*amp);
+            }
+            break;
+        case Mode::ROTATE:
+            if(bouncingBalls[0].getBounced()) {
+                triggerOutput.trigger();
+                Hardware::hw.cvOutputPins[rotateOutput]->analogWrite(0);
+                rotateOutput++;
+                if(rotateOutput >= 8) {
+                    rotateOutput = 0;
+                }
+            }
+            Hardware::hw.cvOutputPins[rotateOutput]->analogWrite(bouncingBalls[0].getOutput(X)*amp);
+            break;
     }
 }
