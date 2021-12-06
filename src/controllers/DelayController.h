@@ -24,7 +24,7 @@ class DelayController : public Controller {
         virtual void process();
 
     private:
-        LinearInput<OctasourceInputDevice> timeCvInput = LinearInput<OctasourceInputDevice>(Hardware::hw.rateCvPin, -5, 5, 0.1, 1);
+        LinearInput<OctasourceInputDevice> timeCvInput = LinearInput<OctasourceInputDevice>(Hardware::hw.rateCvPin, -5, 5, 0.02, 1);
         LinearInput<OctasourceInputDevice> ampCvInput = LinearInput<OctasourceInputDevice>(Hardware::hw.ampCvPin, -5, 5, 0, 1);
         
         ClockDivider clockDivider = ClockDivider(SAMPLERATE_DIVIDER);
