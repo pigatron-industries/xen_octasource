@@ -81,6 +81,8 @@ void DoublePendulum::process() {
     p2.positionX = p1.positionX + sinf(p2.angle) * p2.length;
     p2.positionY = p1.positionY + cosf(p2.angle) * p2.length;
 
-    pos[X] = p2.positionX;
-    pos[Y] = p2.positionY;
+    pos[X] = p1.positionX;
+    pos[Y] = p1.positionY;
+    pos[Z] = p2.positionX;
+    pos[W] = p2.positionY;
 }

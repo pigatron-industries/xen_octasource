@@ -6,12 +6,11 @@
 #include "systems/physical/DoublePendulum.h"
 #include "lib/ClockDivider.h"
 
-#define MODEL_COUNT 1
 #define SAMPLE_RATE_DIVISOR 2
 
 class DoublePendulumController : public Controller {
     public:
-        DoublePendulumController() : Controller(MODEL_COUNT-1) {}
+        DoublePendulumController() : Controller(0) {}
         virtual void init(float sampleRate);
         virtual void init();
         virtual void update();
@@ -27,10 +26,6 @@ class DoublePendulumController : public Controller {
 
         DoublePendulum doublePendulum;
         ClockDivider clockDivider = ClockDivider(SAMPLE_RATE_DIVISOR);
-
-        ContinuousSystemN<2>* models[MODEL_COUNT] = {
-            &doublePendulum,
-        };
 
         float amp;
         

@@ -14,7 +14,7 @@ class Pendulum {
         float positionY;
 };
 
-class DoublePendulum : public ContinuousSystemN<2> {
+class DoublePendulum : public ContinuousSystemN<4> {
     public:
         void init(float sampleRate);
         void setParam(int param, float value);
