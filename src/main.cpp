@@ -9,7 +9,7 @@
 #include "controllers/FilterController.h"
 #include "controllers/ClockController.h"
 #include "controllers/EnvelopeController.h"
-#include "controllers/SlewController.h"
+#include "controllers/DelayController.h"
 #include "controllers/BouncingBallController.h"
 #include "controllers/AttractorController.h"
 #include "controllers/DoublePendulumController.h"
@@ -27,7 +27,7 @@ BouncingBallController bouncingBallController = BouncingBallController();
 AttractorController attractorController = AttractorController();
 DoublePendulumController doublePendulumController = DoublePendulumController();
 ThreeBodyController threeBodyController = ThreeBodyController();
-SlewController slewController = SlewController();
+DelayController delayController = DelayController();
 VoltageReferenceController voltageReferenceController = VoltageReferenceController();
 
 void setup() {
@@ -49,7 +49,7 @@ void setup() {
     mainController.registerController(attractorController);
     mainController.registerController(doublePendulumController);
     mainController.registerController(threeBodyController);
-    mainController.registerController(slewController);
+    mainController.registerController(delayController);
     mainController.registerController(voltageReferenceController);
     mainController.init();
 

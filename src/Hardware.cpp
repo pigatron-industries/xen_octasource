@@ -2,6 +2,8 @@
 
 Hardware Hardware::hw = Hardware();
 
+float Hardware::memPoolBuffer[MEMPOOL_SIZE];
+
 void Hardware::init() {
     analogReadResolution(12);
 

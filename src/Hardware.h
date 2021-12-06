@@ -10,10 +10,16 @@
 #include "lib/io/AnalogInputPinSum.h"
 #include "hwconfig.h"
 
+#define MEMPOOL_SIZE 48*1024
+
 class Hardware {
     public:
         static Hardware hw;
         void init();
+
+        // Memory pool
+        static float memPoolBuffer[MEMPOOL_SIZE];
+        MemPool<float> memPool = MemPool<float>(Hardware::memPoolBuffer, MEMPOOL_SIZE);
 
         // Native pins
         DigitalInput(encoderBtnPin, ENCODER_BTN_PIN);
