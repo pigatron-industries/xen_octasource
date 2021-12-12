@@ -11,6 +11,7 @@ class ClockController : public AbstractOscillatorController {
     public:
         enum Mode {
             INTEGER,
+            POWER2,
             PPQN24
         };
         ClockController() : AbstractOscillatorController(Mode::PPQN24) {}
