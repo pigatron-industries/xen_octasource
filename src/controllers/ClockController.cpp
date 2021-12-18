@@ -11,24 +11,44 @@ void ClockController::init() {
     }
     switch(mode.value) {
         case Mode::INTEGER:
-            clockDividers[0].setDivisor(1);
-            clockDividers[1].setDivisor(2);
-            clockDividers[2].setDivisor(3);
-            clockDividers[3].setDivisor(4);
-            clockDividers[4].setDivisor(5);
-            clockDividers[5].setDivisor(6);
-            clockDividers[6].setDivisor(7);
-            clockDividers[7].setDivisor(8);
+            clockDividers[0].setDivisor(2);
+            clockDividers[1].setDivisor(3);
+            clockDividers[2].setDivisor(4);
+            clockDividers[3].setDivisor(5);
+            clockDividers[4].setDivisor(6);
+            clockDividers[5].setDivisor(7);
+            clockDividers[6].setDivisor(8);
+            clockDividers[7].setDivisor(9);
+            break;
+        case Mode::EVEN:
+            clockDividers[0].setDivisor(2);
+            clockDividers[1].setDivisor(4);
+            clockDividers[2].setDivisor(6);
+            clockDividers[3].setDivisor(8);
+            clockDividers[4].setDivisor(10);
+            clockDividers[5].setDivisor(12);
+            clockDividers[6].setDivisor(14);
+            clockDividers[7].setDivisor(16);
+            break;
+        case Mode::ODD:
+            clockDividers[0].setDivisor(3);
+            clockDividers[1].setDivisor(5);
+            clockDividers[2].setDivisor(7);
+            clockDividers[3].setDivisor(9);
+            clockDividers[4].setDivisor(11);
+            clockDividers[5].setDivisor(13);
+            clockDividers[6].setDivisor(15);
+            clockDividers[7].setDivisor(17);
             break;
         case Mode::POWER2:
-            clockDividers[0].setDivisor(1);
-            clockDividers[1].setDivisor(2);
-            clockDividers[2].setDivisor(4);
-            clockDividers[3].setDivisor(8);
-            clockDividers[4].setDivisor(16);
-            clockDividers[5].setDivisor(32);
-            clockDividers[6].setDivisor(64);
-            clockDividers[7].setDivisor(128);
+            clockDividers[0].setDivisor(2);
+            clockDividers[1].setDivisor(4);
+            clockDividers[2].setDivisor(8);
+            clockDividers[3].setDivisor(16);
+            clockDividers[4].setDivisor(32);
+            clockDividers[5].setDivisor(64);
+            clockDividers[6].setDivisor(128);
+            clockDividers[7].setDivisor(256);
             break;
         case Mode::PPQN24:
             clockDividers[0].setDivisor(1); // Clock
@@ -44,8 +64,8 @@ void ClockController::init() {
 }
 
 void ClockController::update() {
-    if(bipolarRateCvInput.update()) {
-        float rateValue = bipolarRateCvInput.getValue();
+    if(rateCvInput.update()) {
+        float rateValue = rateCvInput.getValue();
         for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
             clock.setFrequency(rateValue);
         }

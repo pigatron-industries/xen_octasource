@@ -10,6 +10,8 @@ class ClockController : public Controller {
     public:
         enum Mode {
             INTEGER,
+            EVEN,
+            ODD,
             POWER2,
             PPQN24
         };
@@ -21,7 +23,7 @@ class ClockController : public Controller {
 
     private:
         AnalogGateInput<OctasourceInputDevice> triggerInput = AnalogGateInput<OctasourceInputDevice>(Hardware::hw.syncCvPin);
-        BipolarExpInput<OctasourceInputDevice> bipolarRateCvInput = BipolarExpInput<OctasourceInputDevice>(Hardware::hw.rateCvPin);
+        LinearInput<OctasourceInputDevice> rateCvInput = LinearInput<OctasourceInputDevice>(Hardware::hw.rateCvPin, -5, 5, 0, 10);
         //LinearInput<OctasourceInputDevice> waveCvInput = LinearInput<OctasourceInputDevice>(Hardware::hw.waveCvPin, -5, 5, 0, 5);
         LinearInput<OctasourceInputDevice> sloppinessCvInput = LinearInput<OctasourceInputDevice>(Hardware::hw.ampCvPin, -5, 5, 0, 100000);
         #if defined(OCTASOURCE_MKII)
