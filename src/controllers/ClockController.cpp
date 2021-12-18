@@ -51,6 +51,10 @@ void ClockController::update() {
         }
     }
 
+    if(sloppinessCvInput.update()) {
+        sloppiness = sloppinessCvInput.getValue();
+    }
+
     if(triggerInput.update() && triggerInput.isTriggeredOn()) {
         tick();
         clock.reset();
@@ -64,13 +68,17 @@ void ClockController::process() {
 
     for(int i = 0; i < 8; i++) {
         triggerOutputs[i].update();
+        if(timer[i].hasJustStopped()) {
+            triggerOutputs[i].trigger();
+        }
     }
 }
 
 void ClockController::tick() {
     for(int i = 0; i < 8; i++) {
         if(clockDividers[i].tick()) {
-            triggerOutputs[i].trigger();
+            timer[i].start(random(sloppiness));
+            //triggerOutputs[i].trigger();
         }
     }
 }

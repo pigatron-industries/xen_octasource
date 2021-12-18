@@ -1,26 +1,33 @@
 #ifndef ClockController_h
 #define ClockController_h
 
-#include "AbstractOscillatorController.h"
+#include "Controller.h"
 #include "lib/Clock.h"
 #include "lib/ClockDivider.h"
+#include "lib/io/BipolarExpInput.h"
 
-using namespace pigatron;
-
-class ClockController : public AbstractOscillatorController {
+class ClockController : public Controller {
     public:
         enum Mode {
             INTEGER,
             POWER2,
             PPQN24
         };
-        ClockController() : AbstractOscillatorController(Mode::PPQN24) {}
+        ClockController() : Controller(Mode::PPQN24) {}
         virtual void init(float sampleRate);
         virtual void init();
         virtual void update();
         virtual void process();
 
     private:
+        AnalogGateInput<OctasourceInputDevice> triggerInput = AnalogGateInput<OctasourceInputDevice>(Hardware::hw.syncCvPin);
+        BipolarExpInput<OctasourceInputDevice> bipolarRateCvInput = BipolarExpInput<OctasourceInputDevice>(Hardware::hw.rateCvPin);
+        //LinearInput<OctasourceInputDevice> waveCvInput = LinearInput<OctasourceInputDevice>(Hardware::hw.waveCvPin, -5, 5, 0, 5);
+        LinearInput<OctasourceInputDevice> sloppinessCvInput = LinearInput<OctasourceInputDevice>(Hardware::hw.ampCvPin, -5, 5, 0, 100000);
+        #if defined(OCTASOURCE_MKII)
+            LinearInput<OctasourceInputDevice> phaseCvInput = LinearInput<OctasourceInputDevice>(Hardware::hw.phaseCvPin, -5, 5, -0.125, 0.125);
+        #endif
+
         AnalogTriggerOutput<OctasourceOutputDevice> triggerOutputs[8] = {
             AnalogTriggerOutput<OctasourceOutputDevice>(*Hardware::hw.cvOutputPins[0], 20000),
             AnalogTriggerOutput<OctasourceOutputDevice>(*Hardware::hw.cvOutputPins[1], 20000),
@@ -34,6 +41,9 @@ class ClockController : public AbstractOscillatorController {
 
         Clock clock;
         ClockDivider clockDividers[8];
+        Timer timer[8];
+
+        float sloppiness = 0;
 
         void tick();
         
