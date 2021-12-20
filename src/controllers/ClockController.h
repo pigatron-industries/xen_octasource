@@ -13,6 +13,8 @@ class ClockController : public Controller {
             EVEN,
             ODD,
             POWER2,
+            PRIME,
+            FIBONACCI,
             PPQN24
         };
         ClockController() : Controller(Mode::PPQN24) {}
