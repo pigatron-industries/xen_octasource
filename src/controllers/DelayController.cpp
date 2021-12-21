@@ -24,6 +24,8 @@ void DelayController::update() {
             delays[i].setDelay((float)DELAYBUFFER_SIZE/8*(i+1)*time);
         }
     }
+
+    Hardware::hw.updateOutputLeds();
 }
 
 void DelayController::process() {

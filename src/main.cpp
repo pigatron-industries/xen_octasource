@@ -15,6 +15,7 @@
 #include "controllers/DoublePendulumController.h"
 #include "controllers/ThreeBodyController.h"
 #include "controllers/VoltageReferenceController.h"
+#include "controllers/AudioFrequencyController.h"
 
 MainController mainController = MainController(SAMPLE_RATE);
 
@@ -29,6 +30,9 @@ DoublePendulumController doublePendulumController = DoublePendulumController();
 ThreeBodyController threeBodyController = ThreeBodyController();
 DelayController delayController = DelayController();
 VoltageReferenceController voltageReferenceController = VoltageReferenceController();
+
+AudioFrequencyController audiofrequencyController = AudioFrequencyController();
+
 
 void setup() {
     delay(100);
@@ -51,6 +55,7 @@ void setup() {
     mainController.registerController(threeBodyController);
     mainController.registerController(delayController);
     mainController.registerController(voltageReferenceController);
+    mainController.registerController(audiofrequencyController);
     mainController.init();
 
     ARM_DEMCR |= ARM_DEMCR_TRCENA;

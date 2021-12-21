@@ -14,6 +14,7 @@ void DoublePendulumController::update() {
     updateRate();
     updateAmp();
     updateParams();
+    Hardware::hw.updateOutputLeds();
 }
 
 void DoublePendulumController::updateRate() {

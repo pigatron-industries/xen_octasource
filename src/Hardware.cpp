@@ -41,3 +41,28 @@ void Hardware::init() {
         cvOutputPins[i]->setPinType(PinType::ANALOG_OUTPUT);
     }
 }
+
+void Hardware::clearOutputLeds() {
+    #if defined(OCTASOURCE_MKII)
+        for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
+            Hardware::hw.outputRedLeds[i]->analogWrite(0);
+            Hardware::hw.outputGreenLeds[i]->analogWrite(0);
+            Hardware::hw.outputBlueLeds[i]->analogWrite(0);
+        }
+    #endif
+}
+
+void Hardware::updateOutputLeds() {
+    #if defined(OCTASOURCE_MKII)
+        for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
+            float value = Hardware::hw.cvOutputPins[i]->getAnalogValue();
+            if(value > 0) {
+                Hardware::hw.outputRedLeds[i]->analogWrite(0);
+                Hardware::hw.outputGreenLeds[i]->analogWrite(value*0.1);
+            } else {
+                Hardware::hw.outputGreenLeds[i]->analogWrite(0);
+                Hardware::hw.outputRedLeds[i]->analogWrite(-value*0.1);
+            }
+        }
+    #endif
+}

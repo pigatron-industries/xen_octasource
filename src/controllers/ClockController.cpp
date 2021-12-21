@@ -99,6 +99,8 @@ void ClockController::update() {
         tick();
         clock.reset();
     }
+
+    Hardware::hw.updateOutputLeds();
 }
 
 void ClockController::process() {

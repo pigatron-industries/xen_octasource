@@ -19,6 +19,9 @@ class FrequencyController : public AbstractOscillatorController {
         virtual void update();
         virtual void process();
 
+    protected:
+        void setRate(float baseFrequency);
+
     private:
         void updateRate();
 };

@@ -121,6 +121,7 @@ void ThreeBodyController::update() {
     updateAmp();
     updateSize();
     updateDamp();
+    Hardware::hw.updateOutputLeds();
 }
 
 void ThreeBodyController::updateRate() {

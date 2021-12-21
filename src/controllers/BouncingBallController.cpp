@@ -27,6 +27,8 @@ void BouncingBallController::update() {
             rotateOutput = 0;
         }
     }
+
+    Hardware::hw.updateOutputLeds();
 }
 
 void BouncingBallController::updateRate() {

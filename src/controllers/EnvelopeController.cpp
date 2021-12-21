@@ -35,6 +35,8 @@ void EnvelopeController::update() {
             envelopes[envelopeIndex].trigger(false);
         }
     }
+
+    Hardware::hw.updateOutputLeds();
 }
 
 void EnvelopeController::updateAttackReleaseTime() {

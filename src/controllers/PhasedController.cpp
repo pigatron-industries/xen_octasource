@@ -23,6 +23,7 @@ void PhasedController::update() {
     updateAmp();
     updateWave();
     updatePhase();
+    Hardware::hw.updateOutputLeds();
 }
 
 void PhasedController::updatePhase() {

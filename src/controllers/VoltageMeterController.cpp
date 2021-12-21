@@ -11,6 +11,7 @@ void VoltageMeterController::init() {
 
 void VoltageMeterController::update() {
     value = Hardware::hw.syncCvPin.analogRead();
+    Hardware::hw.updateOutputLeds();
 }
 
 void VoltageMeterController::process() {

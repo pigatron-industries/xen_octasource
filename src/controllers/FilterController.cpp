@@ -26,6 +26,7 @@ void FilterController::update() {
     updateFilterFrequency();
     updateFilterResonance();
     updateAmp();
+    Hardware::hw.updateOutputLeds();
 }
 
 void FilterController::updateRateBipolar() {

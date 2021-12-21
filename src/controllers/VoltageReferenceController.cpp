@@ -10,6 +10,7 @@ void VoltageReferenceController::init() {
 }
 
 void VoltageReferenceController::update() {
+    Hardware::hw.updateOutputLeds();
 }
 
 void VoltageReferenceController::process() {

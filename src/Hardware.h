@@ -17,6 +17,9 @@ class Hardware {
         static Hardware hw;
         void init();
 
+        void clearOutputLeds();
+        void updateOutputLeds();
+
         // Memory pool
         static float memPoolBuffer[MEMPOOL_SIZE];
         MemPool<float> memPool = MemPool<float>(Hardware::memPoolBuffer, MEMPOOL_SIZE);

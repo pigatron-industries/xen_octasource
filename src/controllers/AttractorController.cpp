@@ -16,9 +16,7 @@ void AttractorController::init() {
 void AttractorController::update() {
     updateRate();
     updateAmp();
-    // if(cCvInput.update()) {
-    //     lorenzAttractor.setB(cCvInput.getValue());
-    // }
+    Hardware::hw.updateOutputLeds();
 }
 
 void AttractorController::updateRate() {
