@@ -35,15 +35,17 @@ void RandomController::process() {
 
     noise = random(-5, 5);
     Hardware::hw.cvOutputPins[2]->analogWrite(noise);
+    
     if(clock.process()) {
         tick();
     }
 }
 
 void RandomController::tick() {
-    if(noise < 0) {
+    if(noise < chanceValue) {
         triggerOutputs[0].trigger();
     } else {
         triggerOutputs[1].trigger();
     }
+    Hardware::hw.cvOutputPins[3]->analogWrite(noise);
 }

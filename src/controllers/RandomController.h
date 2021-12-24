@@ -17,7 +17,7 @@ class RandomController : public Controller {
     private:
         AnalogGateInput<OctasourceInputDevice> triggerInput = AnalogGateInput<OctasourceInputDevice>(Hardware::hw.syncCvPin);
         LinearInput<OctasourceInputDevice> rateCvInput = LinearInput<OctasourceInputDevice>(Hardware::hw.rateCvPin, -5, 5, 0, 10);
-        LinearInput<OctasourceInputDevice> chanceCvInput = LinearInput<OctasourceInputDevice>(Hardware::hw.waveCvPin, -5, 5, 0, 1);
+        LinearInput<OctasourceInputDevice> chanceCvInput = LinearInput<OctasourceInputDevice>(Hardware::hw.waveCvPin, -5, 5, -5, 5);
         LinearInput<OctasourceInputDevice> ampCvInput = LinearInput<OctasourceInputDevice>(Hardware::hw.ampCvPin, -5, 5, 0, 100000);
         #if defined(OCTASOURCE_MKII)
             LinearInput<OctasourceInputDevice> phaseCvInput = LinearInput<OctasourceInputDevice>(Hardware::hw.phaseCvPin, -5, 5, -0.125, 0.125);
