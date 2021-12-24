@@ -9,11 +9,12 @@
 #include "controllers/FilterController.h"
 #include "controllers/ClockController.h"
 #include "controllers/EnvelopeController.h"
-#include "controllers/DelayController.h"
 #include "controllers/BouncingBallController.h"
 #include "controllers/AttractorController.h"
 #include "controllers/DoublePendulumController.h"
 #include "controllers/ThreeBodyController.h"
+#include "controllers/RandomController.h"
+#include "controllers/DelayController.h"
 #include "controllers/VoltageReferenceController.h"
 #include "controllers/AudioFrequencyController.h"
 
@@ -28,6 +29,7 @@ BouncingBallController bouncingBallController = BouncingBallController();
 AttractorController attractorController = AttractorController();
 DoublePendulumController doublePendulumController = DoublePendulumController();
 ThreeBodyController threeBodyController = ThreeBodyController();
+RandomController randomController = RandomController();
 DelayController delayController = DelayController();
 VoltageReferenceController voltageReferenceController = VoltageReferenceController();
 
@@ -53,6 +55,7 @@ void setup() {
     mainController.registerController(attractorController);
     mainController.registerController(doublePendulumController);
     mainController.registerController(threeBodyController);
+    mainController.registerController(randomController);
     mainController.registerController(delayController);
     mainController.registerController(voltageReferenceController);
     mainController.registerController(audiofrequencyController);
