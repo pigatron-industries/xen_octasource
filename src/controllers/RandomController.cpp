@@ -17,6 +17,10 @@ void RandomController::update() {
         }
     }
 
+    if(ampCvInput.update()) {
+        amp = ampCvInput.getValue();
+    }
+
     if(chanceCvInput.update()) {
         chanceValue = chanceCvInput.getValue();
     }
@@ -34,8 +38,8 @@ void RandomController::process() {
     triggerOutputs[1].update();
 
     noise = random(-5, 5);
-    Hardware::hw.cvOutputPins[2]->analogWrite(noise);
-    
+    Hardware::hw.cvOutputPins[2]->analogWrite(noise*amp);
+
     if(clock.process()) {
         tick();
     }
@@ -47,5 +51,5 @@ void RandomController::tick() {
     } else {
         triggerOutputs[1].trigger();
     }
-    Hardware::hw.cvOutputPins[3]->analogWrite(noise);
+    Hardware::hw.cvOutputPins[3]->analogWrite(noise*amp);
 }
