@@ -36,9 +36,8 @@ void RandomController::update() {
 void RandomController::process() {
     triggerOutputs[0].update();
     triggerOutputs[1].update();
-
-    noise = random(-5, 5);
-    Hardware::hw.cvOutputPins[2]->analogWrite(noise*amp);
+    triggerOutputs[2].update();
+    triggerOutputs[3].update();
 
     if(clock.process()) {
         tick();
@@ -46,10 +45,20 @@ void RandomController::process() {
 }
 
 void RandomController::tick() {
-    if(noise < chanceValue) {
+    if(random(-5, 5) < chanceValue) {
         triggerOutputs[0].trigger();
     } else {
         triggerOutputs[1].trigger();
     }
-    Hardware::hw.cvOutputPins[3]->analogWrite(noise*amp);
+
+    if(random(-5, 5) < chanceValue) {
+        triggerOutputs[2].trigger();
+    } else {
+        triggerOutputs[3].trigger();
+    }
+
+    Hardware::hw.cvOutputPins[1]->analogWrite(random(-5, 5)*amp);
+    Hardware::hw.cvOutputPins[3]->analogWrite(random(-5, 5)*amp);
+    Hardware::hw.cvOutputPins[5]->analogWrite(random(-5, 5)*amp);
+    Hardware::hw.cvOutputPins[7]->analogWrite(random(-5, 5)*amp);
 }

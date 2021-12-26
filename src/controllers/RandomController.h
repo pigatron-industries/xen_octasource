@@ -23,14 +23,15 @@ class RandomController : public Controller {
             LinearInput<OctasourceInputDevice> phaseCvInput = LinearInput<OctasourceInputDevice>(Hardware::hw.phaseCvPin, -5, 5, -0.125, 0.125);
         #endif
 
-        AnalogTriggerOutput<OctasourceOutputDevice> triggerOutputs[2] = {
+        AnalogTriggerOutput<OctasourceOutputDevice> triggerOutputs[4] = {
             AnalogTriggerOutput<OctasourceOutputDevice>(*Hardware::hw.cvOutputPins[0], 20000),
-            AnalogTriggerOutput<OctasourceOutputDevice>(*Hardware::hw.cvOutputPins[1], 20000)
+            AnalogTriggerOutput<OctasourceOutputDevice>(*Hardware::hw.cvOutputPins[2], 20000),
+            AnalogTriggerOutput<OctasourceOutputDevice>(*Hardware::hw.cvOutputPins[4], 20000),
+            AnalogTriggerOutput<OctasourceOutputDevice>(*Hardware::hw.cvOutputPins[6], 20000)
         };
 
         Clock clock;
         float chanceValue;
-        float noise;
         float amp;
 
         void tick();
