@@ -66,6 +66,7 @@ void MainController::interruptHandler() {
 
 void MainController::update() {
     Hardware::hw.encoderButton.update();
+    bool cycled = false;
     if(Hardware::hw.encoder.update()) {
         if(Hardware::hw.encoderButton.held()) {
             //change controller when button held down
@@ -89,7 +90,6 @@ void MainController::update() {
         if(!cycled) {
             controllerInit();
         }
-        cycled = false;
     }
 
     //TODO long press switches to slave mode

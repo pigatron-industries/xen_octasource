@@ -21,7 +21,6 @@ public:
 private:
     float sampleRate;
     ControllerList<Controller, 16> controllers;
-    bool cycled = false;
 
     void controllerInit();
     void doCalibration();
