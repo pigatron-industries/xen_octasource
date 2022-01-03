@@ -1,5 +1,5 @@
 #include "ThreeBodyController.h"
-#include "debug/debug.h"
+#include "debug/debugfunctions.h"
 
 void ThreeBodyController::init(float sampleRate) {
     Controller::init(sampleRate);
