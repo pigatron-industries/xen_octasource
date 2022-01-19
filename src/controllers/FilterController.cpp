@@ -1,7 +1,7 @@
 #include "FilterController.h"
 
 void FilterController::init(float sampleRate) {
-    AbstractOscillatorController::init(sampleRate);
+    Controller::init(sampleRate);
     for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
         oscillators[i].init(sampleRate);
         filters[i].init(sampleRate);
@@ -19,6 +19,7 @@ void FilterController::init(float sampleRate) {
 }
 
 void FilterController::init() {
+    Serial.println("Filter");
 }
 
 void FilterController::update() {
@@ -58,11 +59,19 @@ void FilterController::updateFilterResonance() {
     #endif
 }
 
+void FilterController::updateAmp() {
+    if(ampCvInput.update()) {
+        float ampValue = ampCvInput.getValue();
+        for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
+            oscillators[i].setAmp(ampValue);
+        }
+    }
+}
+
 void FilterController::process() {
     for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
         float value = oscillators[i].process();
         filters[i].process(value);
         Hardware::hw.cvOutputPins[i]->analogWrite(filters[i].low());
-        //Hardware::hw.cvOutputPins[i]->analogWrite(value);
     }
 }

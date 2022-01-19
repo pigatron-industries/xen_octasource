@@ -4,8 +4,6 @@
 #include "FrequencyController.h"
 #include "lib/ClockDivider.h"
 
-#define SAMPLERATE_DIVIDER 8
-
 class AudioFrequencyController : public FrequencyController {
     public:
 

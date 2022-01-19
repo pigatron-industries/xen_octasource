@@ -1,10 +1,7 @@
 #include "AudioFrequencyController.h"
 
 void AudioFrequencyController::init(float sampleRate) {
-    AbstractOscillatorController::init(sampleRate);
-    for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
-        oscillators[i].setFrequency(i*1);
-    }
+    FrequencyController::init(sampleRate);
 }
 
 void AudioFrequencyController::init() {
@@ -20,14 +17,11 @@ void AudioFrequencyController::update() {
 }
 
 void AudioFrequencyController::updateRate() {
-    if(expRateCvInput.update())
-    FrequencyController::setRate(expRateCvInput.getValue());
+    if(expRateCvInput.update()) {
+        FrequencyController::setRate(expRateCvInput.getValue());
+    }
 }
 
 void AudioFrequencyController::process() {
-    // bool tick = clockDivider.tick();
-    // if(tick) {
-    //     FrequencyController::setRate(expRateCvInput.getValue());
-    // }
-    AbstractOscillatorController::process();
+    FrequencyController::process();
 }

@@ -1,7 +1,8 @@
 #ifndef EnvelopeController_h
 #define EnvelopeController_h
 
-#include "AbstractOscillatorController.h"
+#include "Controller.h"
+#include <eurorack_dsp.h>
 
 #define ATTRACTOR_COUNT 12
 

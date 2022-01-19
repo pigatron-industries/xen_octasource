@@ -1,10 +1,16 @@
 #include "FrequencyController.h"
 
 void FrequencyController::init(float sampleRate) {
-    AbstractOscillatorController::init(sampleRate);
+    Controller::init(sampleRate);
+    init();
     for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
+        oscillators[i].init(sampleRate);
         oscillators[i].setFrequency(i*1);
     }
+}
+
+void FrequencyController::init() {
+    Serial.println("Frequency");
 }
 
 void FrequencyController::update() {
@@ -12,10 +18,6 @@ void FrequencyController::update() {
     updateAmp();
     updateWave();
     Hardware::hw.updateOutputLeds();
-}
-
-void FrequencyController::process() {
-    AbstractOscillatorController::process();
 }
 
 void FrequencyController::updateRate() {
@@ -57,5 +59,55 @@ void FrequencyController::setRate(float baseFrequency) {
             oscillators[6].setFrequency(baseFrequency/348.812);// uranus
             oscillators[7].setFrequency(baseFrequency/684.255);// neptune
             break;
+    }
+}
+
+void FrequencyController::updateRateBipolar() {
+    if(bipolarRateCvInput.update()) {
+        float rateValue = bipolarRateCvInput.getValue();
+        for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
+            oscillators[i].setFrequency(rateValue);
+        }
+    }
+}
+
+void FrequencyController::updateRateExponential() {
+    if(expRateCvInput.update()) {
+        float rateValue = expRateCvInput.getValue();
+        for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
+            oscillators[i].setFrequency(rateValue);
+        }
+    }
+}
+
+void FrequencyController::updateAmp() {
+    if(ampCvInput.update()) {
+        float ampValue = ampCvInput.getValue();
+        for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
+            oscillators[i].setAmp(ampValue);
+        }
+    }
+}
+
+void FrequencyController::updateWave() {
+    if(waveCvInput.update()) {
+        float waveValue = waveCvInput.getValue();
+        for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
+            if(waveValue < 1) {
+                oscillators[i].setWaveform(Oscillator::WAVE_SIN);
+            } else if (waveValue < 2) {
+                oscillators[i].setWaveform(Oscillator::WAVE_TRI);
+            } else if (waveValue < 3) {
+                oscillators[i].setWaveform(Oscillator::WAVE_POLYBLEP_SAW);
+            } else {
+                oscillators[i].setWaveform(Oscillator::WAVE_POLYBLEP_SQUARE);
+            }
+        }
+    }
+}
+
+void FrequencyController::process() {
+    for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
+        Hardware::hw.cvOutputPins[i]->analogWrite(oscillators[i].process());
     }
 }
