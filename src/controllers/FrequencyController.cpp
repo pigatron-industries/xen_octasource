@@ -2,11 +2,11 @@
 
 void FrequencyController::init(float sampleRate) {
     Controller::init(sampleRate);
-    init();
     for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
         oscillators[i].init(sampleRate);
-        oscillators[i].setFrequency(i*1);
+        oscillators[i].setFrequency(1);
     }
+    init();
 }
 
 void FrequencyController::init() {
@@ -22,8 +22,8 @@ void FrequencyController::update() {
 
 void FrequencyController::updateRate() {
     if(bipolarRateCvInput.update()) {
-        float rateValue = bipolarRateCvInput.getValue();
-        setRate(rateValue);
+       float rateValue = bipolarRateCvInput.getValue();
+       setRate(rateValue);
     }
 }
 
@@ -62,30 +62,9 @@ void FrequencyController::setRate(float baseFrequency) {
     }
 }
 
-void FrequencyController::updateRateBipolar() {
-    if(bipolarRateCvInput.update()) {
-        float rateValue = bipolarRateCvInput.getValue();
-        for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
-            oscillators[i].setFrequency(rateValue);
-        }
-    }
-}
-
-void FrequencyController::updateRateExponential() {
-    if(expRateCvInput.update()) {
-        float rateValue = expRateCvInput.getValue();
-        for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
-            oscillators[i].setFrequency(rateValue);
-        }
-    }
-}
-
 void FrequencyController::updateAmp() {
     if(ampCvInput.update()) {
-        float ampValue = ampCvInput.getValue();
-        for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
-            oscillators[i].setAmp(ampValue);
-        }
+        ampValue = ampCvInput.getValue();
     }
 }
 
@@ -94,13 +73,13 @@ void FrequencyController::updateWave() {
         float waveValue = waveCvInput.getValue();
         for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
             if(waveValue < 1) {
-                oscillators[i].setWaveform(Oscillator::WAVE_SIN);
+                waveList.select(0);
             } else if (waveValue < 2) {
-                oscillators[i].setWaveform(Oscillator::WAVE_TRI);
+                waveList.select(1);
             } else if (waveValue < 3) {
-                oscillators[i].setWaveform(Oscillator::WAVE_POLYBLEP_SAW);
+                waveList.select(2);
             } else {
-                oscillators[i].setWaveform(Oscillator::WAVE_POLYBLEP_SQUARE);
+                waveList.select(3);
             }
         }
     }
@@ -108,6 +87,6 @@ void FrequencyController::updateWave() {
 
 void FrequencyController::process() {
     for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
-        Hardware::hw.cvOutputPins[i]->analogWrite(oscillators[i].process());
+        Hardware::hw.cvOutputPins[i]->analogWrite(oscillators[i].process() * ampValue);
     }
 }

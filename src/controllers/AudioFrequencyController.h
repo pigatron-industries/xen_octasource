@@ -2,7 +2,7 @@
 #define AudioFrequencyController_h
 
 #include "FrequencyController.h"
-#include "lib/ClockDivider.h"
+#include <eurorack_dsp.h>
 
 class AudioFrequencyController : public FrequencyController {
     public:

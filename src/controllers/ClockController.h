@@ -2,9 +2,8 @@
 #define ClockController_h
 
 #include "Controller.h"
-#include "lib/Clock.h"
-#include "lib/ClockDivider.h"
 #include "lib/io/BipolarExpInput.h"
+#include <eurorack_dsp.h>
 
 class ClockController : public Controller {
     public:

@@ -8,7 +8,7 @@
 #include "Hardware.h"
 
 
-class MainController {
+class MainController : AbstractMainController<Controller, 16> {
 
 public:
     MainController(float sampleRate);
@@ -20,7 +20,6 @@ public:
 
 private:
     float sampleRate;
-    ControllerList<Controller, 16> controllers;
 
     void controllerInit();
     void doCalibration();

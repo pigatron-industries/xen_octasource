@@ -4,7 +4,7 @@
 #include "../Controller.h"
 #include "../Hardware.h"
 #include "systems/physical/DoublePendulum.h"
-#include "lib/ClockDivider.h"
+#include <eurorack_dsp.h>
 
 #define SAMPLE_RATE_DIVISOR 2
 

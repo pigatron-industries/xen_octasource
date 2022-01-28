@@ -1,7 +1,6 @@
 #include <Arduino.h>
 
 #include "hwconfig.h"
-#include "Config.h"
 
 #include "MainController.h"
 #include "controllers/PhasedController.h"

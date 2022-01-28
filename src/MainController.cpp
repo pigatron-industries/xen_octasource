@@ -1,6 +1,5 @@
 #include "MainController.h"
 #include "hwconfig.h"
-#include "Config.h"
 #include "lib/io/SerialUtil.h"
 #include "Hardware.h"
 
@@ -12,39 +11,37 @@
 
 MainController* MainController::mainController = nullptr;
 
-MainController::MainController(float sampleRate) {
+MainController::MainController(float sampleRate) : AbstractMainController(Hardware::hw.encoder, Hardware::hw.encoderButton) {
     MainController::mainController = this;
     this->sampleRate = sampleRate;
 }
 
 void MainController::registerController(Controller& controller) {
-    controllers.addController(controller);
+    AbstractMainController::registerController(controller);
 }
 
 void MainController::init() {
+    Hardware::hw.init();
+    AbstractMainController::init();
+
     Hardware::hw.encoderButton.update();
     if(Hardware::hw.encoderButton.held()) {
         doCalibration();
     }
-
-    Config::load();
     loadCalibration();
-
-    controllers.setActiveController(Config::data.mode.controllerIndex);
-    controllers.getActiveController()->setMode(Config::data.mode.controllerMode);
-    controllerInit();
 }
 
 void MainController::controllerInit() {
     interruptTimer.end();
 
-    #if defined(OCTASOURCE_MKII)
-        Hardware::hw.encoderLeds[Config::data.mode.controllerIndex]->analogWrite(0);
-        Hardware::hw.clearOutputLeds();
-    #endif
+    AbstractMainController::controllerInit();
 
-    Config::data.mode.controllerIndex = controllers.getActiveControllerIndex();
-    Config::saveMode();
+    #if defined(OCTASOURCE_MKII)
+        for(int i = 0; i < 16; i++) {
+            Hardware::hw.encoderLeds[i]->analogWrite(0);
+            Hardware::hw.clearOutputLeds();
+        }
+    #endif
 
     if(controllers.getActiveController()->getSampleRate() > 0) {
         controllers.getActiveController()->init();
@@ -53,7 +50,7 @@ void MainController::controllerInit() {
     }
 
     #if defined(OCTASOURCE_MKII)
-        Hardware::hw.encoderLeds[Config::data.mode.controllerIndex]->analogWrite(1);
+        Hardware::hw.encoderLeds[controllers.getActiveControllerIndex()]->analogWrite(1);
     #endif
 
     int intervalMicros = 1000000/sampleRate;
@@ -65,35 +62,7 @@ void MainController::interruptHandler() {
 }
 
 void MainController::update() {
-    Hardware::hw.encoderButton.update();
-    bool cycled = false;
-    if(Hardware::hw.encoder.update()) {
-        if(Hardware::hw.encoderButton.held()) {
-            //change controller when button held down
-            if(Hardware::hw.encoder.getMovement() != 0) {
-                cycled = true;
-                controllers.cycle(Hardware::hw.encoder.getMovement());
-                controllerInit();
-            } 
-        } else {
-            //change controller mode
-            if(Hardware::hw.encoder.getMovement() != 0) {
-                Config::data.mode.controllerMode = controllers.getActiveController()->cycleMode(Hardware::hw.encoder.getMovement());
-                Serial.print("Mode: ");
-                Serial.println(Config::data.mode.controllerMode);
-                controllers.getActiveController()->init();
-                Config::saveMode();
-            }
-        }
-    }
-    if(Hardware::hw.encoderButton.released()) {
-        if(!cycled) {
-            controllerInit();
-        }
-    }
-
-    //TODO long press switches to slave mode
-    controllers.getActiveController()->update();
+    AbstractMainController::update();
 
     #if defined(OCTASOURCE_MKI)
         Hardware::hw.max11300.send();

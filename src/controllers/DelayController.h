@@ -4,7 +4,7 @@
 #include <eurorack_dsp.h>
 #include "../Controller.h"
 #include "../Hardware.h"
-#include "lib/ClockDivider.h"
+#include <eurorack_dsp.h>
 
 #define DELAYBUFFER_SIZE ((MEMPOOL_SIZE/8)-1)
 #define SAMPLERATE_DIVIDER 8

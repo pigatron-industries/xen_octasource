@@ -25,12 +25,29 @@ class FrequencyController : public Controller {
     protected:
         void setRate(float baseFrequency);
         void updateRate();
-        void updateRateBipolar();
-        void updateRateExponential();
         void updateAmp();
         void updateWave();
 
-        Oscillator oscillators[OUTPUT_CV_COUNT];
+        Sine sine;
+        Triangle triangle;
+        Saw saw;
+        Pulse pulse;
+
+        WaveShape* waveShapes[4] = {&sine, &triangle, &saw, &pulse};
+        WaveList<4> waveList = WaveList<4>(waveShapes);
+
+        WaveOscillator<WaveList<4>&> oscillators[OUTPUT_CV_COUNT] = {
+            WaveOscillator<WaveList<4>&>(waveList), 
+            WaveOscillator<WaveList<4>&>(waveList), 
+            WaveOscillator<WaveList<4>&>(waveList), 
+            WaveOscillator<WaveList<4>&>(waveList), 
+            WaveOscillator<WaveList<4>&>(waveList), 
+            WaveOscillator<WaveList<4>&>(waveList), 
+            WaveOscillator<WaveList<4>&>(waveList), 
+            WaveOscillator<WaveList<4>&>(waveList)
+        };
+
+        float ampValue = 0;
 
         AnalogGateInput<OctasourceInputDevice> triggerInput = AnalogGateInput<OctasourceInputDevice>(Hardware::hw.syncCvPin);
         BipolarExpInput<OctasourceInputDevice> bipolarRateCvInput = BipolarExpInput<OctasourceInputDevice>(Hardware::hw.rateCvPin);
