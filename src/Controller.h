@@ -3,6 +3,7 @@
 
 #include <eurorack.h>
 #include "Hardware.h"
+#include "common/Controls.h"
 
 class Controller {
     public:

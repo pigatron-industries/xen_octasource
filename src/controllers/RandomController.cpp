@@ -25,7 +25,7 @@ void RandomController::update() {
         chanceValue = chanceCvInput.getValue();
     }
 
-    if(triggerInput.update() && triggerInput.isTriggeredOn()) {
+    if(Controls::syncInput.update() && Controls::syncInput.isTriggeredOn()) {
         clock.reset();
         tick();
     }

@@ -3,9 +3,8 @@
 
 #include "Controller.h"
 #include "lib/io/BipolarExpInput.h"
+#include "common/WaveShapes.h"
 #include <eurorack_dsp.h>
-
-using namespace pigatron;
 
 class FilterController : public Controller {
     public:
@@ -17,17 +16,24 @@ class FilterController : public Controller {
         virtual void process();
 
     private:
-        AnalogGateInput<OctasourceInputDevice> triggerInput = AnalogGateInput<OctasourceInputDevice>(Hardware::hw.syncCvPin);
-        BipolarExpInput<OctasourceInputDevice> bipolarRateCvInput = BipolarExpInput<OctasourceInputDevice>(Hardware::hw.rateCvPin);
-        ExpInput<OctasourceInputDevice> expRateCvInput = ExpInput<OctasourceInputDevice>(Hardware::hw.rateCvPin);
-        LinearInput<OctasourceInputDevice> ampCvInput = LinearInput<OctasourceInputDevice>(Hardware::hw.ampCvPin, -5, 5, 0, 5);
         LinearInput<OctasourceInputDevice> filterCvInput = LinearInput<OctasourceInputDevice>(Hardware::hw.waveCvPin, -5, 5, 0, 100);
         #if defined(OCTASOURCE_MKII)
             LinearInput<OctasourceInputDevice> resonanceCvInput = LinearInput<OctasourceInputDevice>(Hardware::hw.phaseCvPin, -5, 5, 0, 1);
         #endif
 
-        Oscillator oscillators[OUTPUT_CV_COUNT];
+
+        WaveOscillator<Sine> sineOscillator = WaveOscillator<Sine>();
+        WaveOscillator<Triangle> triangleOscillator = WaveOscillator<Triangle>();
+        WaveOscillator<Saw> sawOscillator = WaveOscillator<Saw>();
+        WaveOscillator<Pulse> pulseOscillator = WaveOscillator<Pulse>();
+
+        BaseOscillator* oscillators[OUTPUT_CV_COUNT] = {
+            &sineOscillator, &triangleOscillator, &sawOscillator, &pulseOscillator, 
+            &sineOscillator, &triangleOscillator, &sawOscillator, &pulseOscillator
+        };
         StateVariableFilter filters[OUTPUT_CV_COUNT];
+
+        float ampValue;
 
         void updateRateBipolar();
         void updateFilterFrequency();

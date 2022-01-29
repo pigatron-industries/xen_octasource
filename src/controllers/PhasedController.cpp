@@ -31,8 +31,8 @@ void PhasedController::update() {
 }
 
 void PhasedController::updateRateBipolar() {
-    if(bipolarRateCvInput.update()) {
-        float rateValue = bipolarRateCvInput.getValue();
+    if(Controls::bipolarRateCvInput.update()) {
+        float rateValue = Controls::bipolarRateCvInput.getValue();
         for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
             oscillators[i].setFrequency(rateValue);
         }
@@ -40,8 +40,8 @@ void PhasedController::updateRateBipolar() {
 }
 
 void PhasedController::updateRateExponential() {
-    if(expRateCvInput.update()) {
-        float rateValue = expRateCvInput.getValue();
+    if(Controls::expRateCvInput.update()) {
+        float rateValue = Controls::expRateCvInput.getValue();
         for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
             oscillators[i].setFrequency(rateValue);
         }
@@ -49,26 +49,23 @@ void PhasedController::updateRateExponential() {
 }
 
 void PhasedController::updateAmp() {
-    if(ampCvInput.update()) {
-        float ampValue = ampCvInput.getValue();
-        for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
-            oscillators[i].setAmp(ampValue);
-        }
+    if(Controls::ampCvInput.update()) {
+        ampValue = Controls::ampCvInput.getValue();
     }
 }
 
 void PhasedController::updateWave() {
-    if(waveCvInput.update()) {
-        float waveValue = waveCvInput.getValue();
+    if(Controls::waveCvInput.update()) {
+        float waveValue = Controls::waveCvInput.getValue();
         for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
             if(waveValue < 1) {
-                oscillators[i].setWaveform(Oscillator::WAVE_SIN);
+                waveList.select(0);
             } else if (waveValue < 2) {
-                oscillators[i].setWaveform(Oscillator::WAVE_TRI);
+                waveList.select(1);
             } else if (waveValue < 3) {
-                oscillators[i].setWaveform(Oscillator::WAVE_POLYBLEP_SAW);
+                waveList.select(2);
             } else {
-                oscillators[i].setWaveform(Oscillator::WAVE_POLYBLEP_SQUARE);
+                waveList.select(3);
             }
         }
     }
@@ -86,6 +83,6 @@ void PhasedController::updatePhase() {
 
 void PhasedController::process() {
     for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
-        Hardware::hw.cvOutputPins[i]->analogWrite(oscillators[i].process());
+        Hardware::hw.cvOutputPins[i]->analogWrite(oscillators[i].process() * ampValue);
     }
 }

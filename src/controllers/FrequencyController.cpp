@@ -21,8 +21,8 @@ void FrequencyController::update() {
 }
 
 void FrequencyController::updateRate() {
-    if(bipolarRateCvInput.update()) {
-       float rateValue = bipolarRateCvInput.getValue();
+    if(Controls::bipolarRateCvInput.update()) {
+       float rateValue = Controls::bipolarRateCvInput.getValue();
        setRate(rateValue);
     }
 }
@@ -63,14 +63,14 @@ void FrequencyController::setRate(float baseFrequency) {
 }
 
 void FrequencyController::updateAmp() {
-    if(ampCvInput.update()) {
-        ampValue = ampCvInput.getValue();
+    if(Controls::ampCvInput.update()) {
+        ampValue = Controls::ampCvInput.getValue();
     }
 }
 
 void FrequencyController::updateWave() {
-    if(waveCvInput.update()) {
-        float waveValue = waveCvInput.getValue();
+    if(Controls::waveCvInput.update()) {
+        float waveValue = Controls::waveCvInput.getValue();
         for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
             if(waveValue < 1) {
                 waveList.select(0);

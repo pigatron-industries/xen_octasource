@@ -17,8 +17,8 @@ void AudioFrequencyController::update() {
 }
 
 void AudioFrequencyController::updateRate() {
-    if(expRateCvInput.update()) {
-        FrequencyController::setRate(expRateCvInput.getValue());
+    if(Controls::expRateCvInput.update()) {
+        FrequencyController::setRate(Controls::expRateCvInput.getValue());
     }
 }
 

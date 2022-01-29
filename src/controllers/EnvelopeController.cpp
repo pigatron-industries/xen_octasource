@@ -21,8 +21,8 @@ void EnvelopeController::update() {
     updateLength();
     updateAmp();
 
-    if(triggerInput.update()) {
-        if(triggerInput.isTriggeredOn()) {
+    if(Controls::syncInput.update()) {
+        if(Controls::syncInput.isTriggeredOn()) {
             if(envelopeIndex >= 0) {
                 envelopes[envelopeIndex].trigger(false);
             }
@@ -63,14 +63,14 @@ void EnvelopeController::updateLength() {
 }
 
 void EnvelopeController::updateAmp() {
-    if(ampCvInput.update()) {
-        amp = ampCvInput.getValue();
+    if(Controls::ampCvInput.update()) {
+        amp = Controls::ampCvInput.getValue();
     }
 }
 
 void EnvelopeController::process() {
     for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
         float value = envelopes[i].process();
-        Hardware::hw.cvOutputPins[i]->analogWrite(value);
+        Hardware::hw.cvOutputPins[i]->analogWrite(value*amp);
     }
 }

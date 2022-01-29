@@ -6,6 +6,7 @@ void ClockController::init(float sampleRate) {
 }
 
 void ClockController::init() {
+    Serial.println("Clock");
     for(int i = 0; i < 8; i++) {
         clockDividers[i].reset();
     }
@@ -95,7 +96,7 @@ void ClockController::update() {
         sloppiness = sloppinessCvInput.getValue();
     }
 
-    if(triggerInput.update() && triggerInput.isTriggeredOn()) {
+    if(Controls::syncInput.update() && Controls::syncInput.isTriggeredOn()) {
         clock.externalTick();
     }
 

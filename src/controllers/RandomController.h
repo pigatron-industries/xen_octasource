@@ -14,7 +14,6 @@ class RandomController : public Controller {
         virtual void process();
 
     private:
-        AnalogGateInput<OctasourceInputDevice> triggerInput = AnalogGateInput<OctasourceInputDevice>(Hardware::hw.syncCvPin);
         LinearInput<OctasourceInputDevice> rateCvInput = LinearInput<OctasourceInputDevice>(Hardware::hw.rateCvPin, -5, 5, 0, 10);
         LinearInput<OctasourceInputDevice> chanceCvInput = LinearInput<OctasourceInputDevice>(Hardware::hw.waveCvPin, -5, 5, -5, 5);
         LinearInput<OctasourceInputDevice> ampCvInput = LinearInput<OctasourceInputDevice>(Hardware::hw.ampCvPin, -5, 5, 0, 1);

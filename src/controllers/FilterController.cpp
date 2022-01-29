@@ -2,19 +2,13 @@
 
 void FilterController::init(float sampleRate) {
     Controller::init(sampleRate);
+    sineOscillator.init(sampleRate);
+    triangleOscillator.init(sampleRate);
+    sawOscillator.init(sampleRate);
+    pulseOscillator.init(sampleRate);
     for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
-        oscillators[i].init(sampleRate);
         filters[i].init(sampleRate);
     }
-    oscillators[0].setWaveform(Oscillator::WAVE_SIN);
-    oscillators[1].setWaveform(Oscillator::WAVE_TRI);
-    oscillators[2].setWaveform(Oscillator::WAVE_POLYBLEP_SAW);
-    oscillators[3].setWaveform(Oscillator::WAVE_POLYBLEP_SQUARE);
-
-    oscillators[4].setWaveform(Oscillator::WAVE_SIN);
-    oscillators[5].setWaveform(Oscillator::WAVE_TRI);
-    oscillators[6].setWaveform(Oscillator::WAVE_POLYBLEP_SAW);
-    oscillators[7].setWaveform(Oscillator::WAVE_POLYBLEP_SQUARE);
     init();
 }
 
@@ -31,11 +25,12 @@ void FilterController::update() {
 }
 
 void FilterController::updateRateBipolar() {
-    if(bipolarRateCvInput.update()) {
-        float rateValue = bipolarRateCvInput.getValue();
-        for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
-            oscillators[i].setFrequency(rateValue);
-        }
+    if(Controls::bipolarRateCvInput.update()) {
+        float rateValue = Controls::bipolarRateCvInput.getValue();
+        sineOscillator.setFrequency(rateValue);
+        triangleOscillator.setFrequency(rateValue);
+        sawOscillator.setFrequency(rateValue);
+        pulseOscillator.setFrequency(rateValue);
     }
 }
 
@@ -60,18 +55,15 @@ void FilterController::updateFilterResonance() {
 }
 
 void FilterController::updateAmp() {
-    if(ampCvInput.update()) {
-        float ampValue = ampCvInput.getValue();
-        for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
-            oscillators[i].setAmp(ampValue);
-        }
+    if(Controls::ampCvInput.update()) {
+        ampValue = Controls::ampCvInput.getValue();
     }
 }
 
 void FilterController::process() {
     for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
-        float value = oscillators[i].process();
+        float value = oscillators[i]->process();
         filters[i].process(value);
-        Hardware::hw.cvOutputPins[i]->analogWrite(filters[i].low());
+        Hardware::hw.cvOutputPins[i]->analogWrite(filters[i].low() * ampValue);
     }
 }
