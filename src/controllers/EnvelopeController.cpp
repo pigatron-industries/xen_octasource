@@ -1,18 +1,25 @@
 #include "EnvelopeController.h"
 
 void EnvelopeController::init(float sampleRate) {
+
+    envelopeShape.segment(0).setLength(0.5);
+    envelopeShape.segment(0).setStartValue(0);
+    envelopeShape.segment(0).setEndValue(1);
+    
+    envelopeShape.segment(1).setLength(0.5);
+    envelopeShape.segment(1).setStartValue(1);
+    envelopeShape.segment(1).setEndValue(0);
+
+    envelopeShape.setSustainPhase(0.5);
+
     for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
         envelopes[i].init(sampleRate);
-        envelopes[i].setSegmentLength(0, 0.5);
-        envelopes[i].setSegmentEndValue(0, 5);
-        envelopes[i].setSegmentLength(1, 0.5);
-        envelopes[i].setSegmentEndValue(1, 0);
     }
     init();
 }
 
 void EnvelopeController::init() {
-    Serial.println("Envelope");
+    Serial.println("Sequential Envelope");
     envelopeIndex = -1;
 }
 
@@ -24,15 +31,15 @@ void EnvelopeController::update() {
     if(Controls::syncInput.update()) {
         if(Controls::syncInput.isTriggeredOn()) {
             if(envelopeIndex >= 0) {
-                envelopes[envelopeIndex].trigger(false);
+                envelopes[envelopeIndex].setGate(false);
             }
             envelopeIndex++;
             if(envelopeIndex >= length) {
                 envelopeIndex = 0;
             }
-            envelopes[envelopeIndex].trigger(true);
+            envelopes[envelopeIndex].setGate(true);
         } else if (mode.value == Mode::GATED) {
-            envelopes[envelopeIndex].trigger(false);
+            envelopes[envelopeIndex].setGate(false);
         }
     }
 
@@ -42,15 +49,12 @@ void EnvelopeController::update() {
 void EnvelopeController::updateAttackReleaseTime() {
     if(attackTimeCvInput.update()) {
         float attackTimeValue = attackTimeCvInput.getValue();
-        for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
-            envelopes[i].setSegmentLength(0, attackTimeValue);
-        }
+        envelopeShape.setSegmentLength(0, attackTimeValue);
+        envelopeShape.setSustainPhase(attackTimeValue);
     }
     if(releaseTimeCvInput.update()) {
         float releaseTimeValue = releaseTimeCvInput.getValue();
-        for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
-            envelopes[i].setSegmentLength(1, releaseTimeValue);
-        }
+        envelopeShape.setSegmentLength(1, releaseTimeValue);
     }
 }
 

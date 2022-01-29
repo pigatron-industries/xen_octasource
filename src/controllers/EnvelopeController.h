@@ -20,8 +20,18 @@ class EnvelopeController : public Controller {
         virtual void process();
 
     private:
-        //TODO use line segments
-        Envelope envelopes[OUTPUT_CV_COUNT];
+        Envelope<WaveSequence<2, Line>> envelopeShape;
+
+        EnvelopePlayer<Envelope<WaveSequence<2, Line>>&> envelopes[OUTPUT_CV_COUNT] = {
+            EnvelopePlayer<Envelope<WaveSequence<2, Line>>&>(envelopeShape),
+            EnvelopePlayer<Envelope<WaveSequence<2, Line>>&>(envelopeShape),
+            EnvelopePlayer<Envelope<WaveSequence<2, Line>>&>(envelopeShape),
+            EnvelopePlayer<Envelope<WaveSequence<2, Line>>&>(envelopeShape),
+            EnvelopePlayer<Envelope<WaveSequence<2, Line>>&>(envelopeShape),
+            EnvelopePlayer<Envelope<WaveSequence<2, Line>>&>(envelopeShape),
+            EnvelopePlayer<Envelope<WaveSequence<2, Line>>&>(envelopeShape),
+            EnvelopePlayer<Envelope<WaveSequence<2, Line>>&>(envelopeShape)
+        };
 
         LinearInput<OctasourceInputDevice> attackTimeCvInput = LinearInput<OctasourceInputDevice>(Hardware::hw.waveCvPin, -5, 5, 0.01, 5);
         LinearInput<OctasourceInputDevice> releaseTimeCvInput = LinearInput<OctasourceInputDevice>(Hardware::hw.rateCvPin, -5, 5, 0.01, 5);
