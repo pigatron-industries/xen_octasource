@@ -3,7 +3,6 @@
 
 #include "Controller.h"
 #include "lib/io/BipolarExpInput.h"
-#include "common/WaveShapes.h"
 #include <eurorack_dsp.h>
 
 class FilterController : public Controller {

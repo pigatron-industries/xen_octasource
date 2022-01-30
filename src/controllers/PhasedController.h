@@ -3,7 +3,6 @@
 
 #include "Controller.h"
 #include "lib/io/BipolarExpInput.h"
-#include "common/WaveShapes.h"
 #include <eurorack_dsp.h>
 
 #if defined(OCTASOURCE_MKII)
@@ -34,16 +33,16 @@ class PhasedController : public Controller {
         void updateWave();
         void updatePhase();
 
-        WaveList<4> waveList = WaveList<4>(WaveShapes::waveShapes);
-        WaveOscillator<WaveList<4>&> oscillators[OUTPUT_CV_COUNT] = {
-            WaveOscillator<WaveList<4>&>(waveList), 
-            WaveOscillator<WaveList<4>&>(waveList), 
-            WaveOscillator<WaveList<4>&>(waveList), 
-            WaveOscillator<WaveList<4>&>(waveList), 
-            WaveOscillator<WaveList<4>&>(waveList), 
-            WaveOscillator<WaveList<4>&>(waveList), 
-            WaveOscillator<WaveList<4>&>(waveList), 
-            WaveOscillator<WaveList<4>&>(waveList)
+        WaveSelector<Sine, Triangle, Saw, Pulse> waveSelector;
+        WaveOscillator<WaveSelector<Sine, Triangle, Saw, Pulse>&> oscillators[OUTPUT_CV_COUNT] = {
+            WaveOscillator<WaveSelector<Sine, Triangle, Saw, Pulse>&>(waveSelector), 
+            WaveOscillator<WaveSelector<Sine, Triangle, Saw, Pulse>&>(waveSelector), 
+            WaveOscillator<WaveSelector<Sine, Triangle, Saw, Pulse>&>(waveSelector), 
+            WaveOscillator<WaveSelector<Sine, Triangle, Saw, Pulse>&>(waveSelector), 
+            WaveOscillator<WaveSelector<Sine, Triangle, Saw, Pulse>&>(waveSelector), 
+            WaveOscillator<WaveSelector<Sine, Triangle, Saw, Pulse>&>(waveSelector), 
+            WaveOscillator<WaveSelector<Sine, Triangle, Saw, Pulse>&>(waveSelector), 
+            WaveOscillator<WaveSelector<Sine, Triangle, Saw, Pulse>&>(waveSelector)
         };
 
         float ampValue = 0;

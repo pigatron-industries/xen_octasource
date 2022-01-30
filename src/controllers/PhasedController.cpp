@@ -59,13 +59,13 @@ void PhasedController::updateWave() {
         float waveValue = Controls::waveCvInput.getValue();
         for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
             if(waveValue < 1) {
-                waveList.select(0);
+                waveSelector.select(0);
             } else if (waveValue < 2) {
-                waveList.select(1);
+                waveSelector.select(1);
             } else if (waveValue < 3) {
-                waveList.select(2);
+                waveSelector.select(2);
             } else {
-                waveList.select(3);
+                waveSelector.select(3);
             }
         }
     }
