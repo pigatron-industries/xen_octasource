@@ -17,11 +17,9 @@
 #include "systems/attractor/FourWingAttractor.h"
 #include "eurorack.h"
 
-#define ATTRACTOR_COUNT 12
-
 class AttractorController : public Controller {
     public:
-        AttractorController() : Controller(ATTRACTOR_COUNT-1) {}
+        AttractorController() : Controller(attractors1.getSize()-1) {}
         virtual void init(float sampleRate);
         virtual void init();
         virtual void update();

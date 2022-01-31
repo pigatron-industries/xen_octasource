@@ -1,7 +1,7 @@
 #include "AttractorController.h"
 
 void AttractorController::init(float sampleRate) {
-    for(int i = 0; i < ATTRACTOR_COUNT; i++) {
+    for(size_t i = 0; i < attractors1.getSize(); i++) {
         attractors1[i]->init(sampleRate);
         attractors2[i]->init(sampleRate);
         attractors2[i]->changePosition(Vector<3>(0.01, 0, 0));
@@ -22,7 +22,7 @@ void AttractorController::update() {
 void AttractorController::updateRate() {
     if(expRateCvInput.update()) {
         float rateValue = expRateCvInput.getValue();
-        for(int i = 0; i < ATTRACTOR_COUNT; i++) {
+        for(size_t i = 0; i < attractors1.getSize(); i++) {
             attractors1[i]->setSpeed(rateValue);
             attractors2[i]->setSpeed(rateValue);
         }
