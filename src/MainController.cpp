@@ -43,14 +43,14 @@ void MainController::controllerInit() {
         }
     #endif
 
-    if(controllers.getActiveController()->getSampleRate() > 0) {
-        controllers.getActiveController()->init();
+    if(controllers.getSelected()->getSampleRate() > 0) {
+        controllers.getSelected()->init();
     } else {
-        controllers.getActiveController()->init(sampleRate);
+        controllers.getSelected()->init(sampleRate);
     }
 
     #if defined(OCTASOURCE_MKII)
-        Hardware::hw.encoderLeds[controllers.getActiveControllerIndex()]->analogWrite(1);
+        Hardware::hw.encoderLeds[controllers.getSelectedIndex()]->analogWrite(1);
     #endif
 
     int intervalMicros = 1000000/sampleRate;
@@ -73,7 +73,7 @@ void MainController::update() {
 
 void MainController::process() {
     PROFILE_START
-    controllers.getActiveController()->process();
+    controllers.getSelected()->process();
     #if defined(OCTASOURCE_MKII)
         Hardware::hw.dac8164a.send();
         Hardware::hw.dac8164b.send();
