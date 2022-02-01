@@ -6,17 +6,15 @@
 
 #include "Controller.h"
 #include "Hardware.h"
+#include "apps.h"
 
-
-class MainController : AbstractMainController<Controller, 16> {
+class MainController : AbstractMainController<Controller, CONTROLLERS> {
 
 public:
     MainController(float sampleRate);
     void init();
     void update();
     void process();
-
-    void registerController(Controller& controller);
 
 private:
     float sampleRate;

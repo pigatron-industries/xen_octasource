@@ -16,10 +16,6 @@ MainController::MainController(float sampleRate) : AbstractMainController(Hardwa
     this->sampleRate = sampleRate;
 }
 
-void MainController::registerController(Controller& controller) {
-    AbstractMainController::registerController(controller);
-}
-
 void MainController::init() {
     Hardware::hw.init();
     AbstractMainController::init();
