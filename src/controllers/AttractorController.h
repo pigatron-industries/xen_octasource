@@ -15,7 +15,7 @@
 #include "systems/attractor/RabinovichFabrikantAttractor.h"
 #include "systems/attractor/ThreeScrollUnifiedAttractor.h"
 #include "systems/attractor/FourWingAttractor.h"
-#include "eurorack.h"
+#include <eurorack.h>
 
 class AttractorController : public Controller {
     public:
@@ -30,7 +30,7 @@ class AttractorController : public Controller {
         LinearInput<OctasourceInputDevice> ampCvInput = LinearInput<OctasourceInputDevice>(Hardware::hw.ampCvPin, -5, 5, 0, 1);
         //LinearInput<OctasourceInputDevice> cCvInput = LinearInput<OctasourceInputDevice>(Hardware::hw.waveCvPin, -5, 5, 0, 5);
 
-        ObjectSelector<ContinuousSystemN<3>, 
+        TypeSelector<ContinuousSystemN<3>, 
                         LorenzAttractor, 
                         Lorenz83Attractor, 
                         ThomasAttractor, 
@@ -43,7 +43,7 @@ class AttractorController : public Controller {
                         RabinovichFabrikantAttractor, 
                         ThreeScrollUnifiedAttractor, 
                         FourWingAttractor> attractors1;
-        ObjectSelector<ContinuousSystemN<3>, 
+        TypeSelector<ContinuousSystemN<3>, 
                         LorenzAttractor, 
                         Lorenz83Attractor, 
                         ThomasAttractor, 
