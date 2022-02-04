@@ -28,8 +28,7 @@ class Hardware {
         DigitalInput(encoderBtnPin, ENCODER_BTN_PIN);
 
         // Direct connections
-        RotaryEncoder encoder = RotaryEncoder(ENCODER_PIN1, ENCODER_PIN2);
-        PushButton<> encoderButton = PushButton<>(encoderBtnPin);
+        RotaryEncoderButton encoder = RotaryEncoderButton(ENCODER_PIN1, ENCODER_PIN2, ENCODER_BTN_PIN);
 
         #if defined(OCTASOURCE_MKII)
             #define OctasourceInputDevice NativeDevice

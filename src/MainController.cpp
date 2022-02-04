@@ -11,7 +11,7 @@
 
 MainController* MainController::mainController = nullptr;
 
-MainController::MainController(float sampleRate) : AbstractMainController(Hardware::hw.encoder, Hardware::hw.encoderButton) {
+MainController::MainController(float sampleRate) : AbstractMainController(Hardware::hw.encoder) {
     MainController::mainController = this;
     this->sampleRate = sampleRate;
 }
@@ -20,8 +20,8 @@ void MainController::init() {
     Hardware::hw.init();
     AbstractMainController::init();
 
-    Hardware::hw.encoderButton.update();
-    if(Hardware::hw.encoderButton.held()) {
+    encoder.getEncoderButton().update();
+    if(encoder.getEncoderButton().held()) {
         doCalibration();
     }
     loadCalibration();
