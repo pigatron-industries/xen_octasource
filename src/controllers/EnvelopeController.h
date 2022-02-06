@@ -4,6 +4,8 @@
 #include "Controller.h"
 #include <eurorack_dsp.h>
 
+using namespace eurorack;
+
 #define ATTRACTOR_COUNT 12
 
 class EnvelopeController : public Controller {

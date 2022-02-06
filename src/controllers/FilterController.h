@@ -5,6 +5,8 @@
 #include "lib/io/BipolarExpInput.h"
 #include <eurorack_dsp.h>
 
+using namespace eurorack;
+
 class FilterController : public Controller {
     public:
 

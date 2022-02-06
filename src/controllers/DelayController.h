@@ -6,6 +6,8 @@
 #include "../Hardware.h"
 #include <eurorack_dsp.h>
 
+using namespace eurorack;
+
 #define DELAYBUFFER_SIZE ((MEMPOOL_SIZE/8)-1)
 #define SAMPLERATE_DIVIDER 8
 

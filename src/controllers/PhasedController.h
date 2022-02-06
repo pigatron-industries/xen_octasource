@@ -5,6 +5,8 @@
 #include "lib/io/BipolarExpInput.h"
 #include <eurorack_dsp.h>
 
+using namespace eurorack;
+
 #if defined(OCTASOURCE_MKII)
     #define PHASED_LAST_MODE Mode::EXPONENTIAL_VCO
 #endif
