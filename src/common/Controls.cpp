@@ -14,4 +14,4 @@ LinearInput<OctasourceInputDevice> Controls::waveCvInput = LinearInput<Octasourc
     LinearInput<OctasourceInputDevice> Controls::mod2CvInput = LinearInput<OctasourceInputDevice>(Hardware::hw.phaseCvPin, -5, 5, 0, 5);
 #endif
 
-TriggerOutput<> Controls::triggerOutput = TriggerOutput<>(Hardware::hw.gateOutPin, 20000);
+TriggerOutput<OctasourceInputDevice> Controls::triggerOutput = TriggerOutput<OctasourceInputDevice>(Hardware::hw.gateOutPin, 20000);

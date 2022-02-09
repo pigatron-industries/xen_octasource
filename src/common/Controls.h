@@ -20,7 +20,7 @@ class Controls {
             static LinearInput<OctasourceInputDevice> mod2CvInput;
         #endif
 
-        static TriggerOutput<> triggerOutput;
+        static TriggerOutput<OctasourceInputDevice> triggerOutput;
 };
 
 #endif
