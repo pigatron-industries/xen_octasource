@@ -10,6 +10,10 @@ void ClockController::init() {
     for(int i = 0; i < 8; i++) {
         clockDividers[i].reset();
     }
+
+    clock.getFunction().setMidPoint(0.5, 0.5);
+    clock.calculatePhaseIncrements();
+
     switch(mode.value) {
         case Mode::INTEGER:
             clockDividers[0].setDivisor(2);
@@ -92,8 +96,11 @@ void ClockController::update() {
         }
     }
 
-    if(sloppinessCvInput.update()) {
-        sloppiness = sloppinessCvInput.getValue();
+    if(distortionXCvInput.update() || distortionYCvInput.update()) {
+        float distortionX = distortionXCvInput.getValue();
+        float distortionY = distortionYCvInput.getValue();
+        clock.getFunction().setMidPoint(distortionX, distortionY);
+        clock.calculatePhaseIncrements();
     }
 
     if(Controls::syncInput.update() && Controls::syncInput.isTriggeredOn()) {
