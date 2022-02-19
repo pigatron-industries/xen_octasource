@@ -97,8 +97,8 @@ void ClockController::update() {
     }
 
     if(distortionXCvInput.update() || distortionYCvInput.update()) {
-        float distortionX = distortionXCvInput.getValue();
-        float distortionY = distortionYCvInput.getValue();
+        distortionX = distortionXCvInput.getValue();
+        distortionY = distortionYCvInput.getValue();
         clock.getFunction().setMidPoint(distortionX, distortionY);
         clock.calculatePhaseIncrements();
     }
@@ -107,7 +107,7 @@ void ClockController::update() {
         clock.externalTick();
     }
 
-    Hardware::hw.updateOutputLeds();
+    updateOutputLeds();
 }
 
 void ClockController::process() {
@@ -130,4 +130,25 @@ void ClockController::tick() {
             triggerOutputs[i].trigger();
         }
     }
+}
+
+void ClockController::updateOutputLeds() {
+    #if defined(OCTASOURCE_MKII)
+        float distortionAmount = distortionX - distortionY;
+        for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
+            float value = Hardware::hw.cvOutputPins[i]->getAnalogValue();
+            if(value > 0) {
+                Hardware::hw.outputGreenLeds[i]->analogWrite(value*0.1);
+            } else {
+                Hardware::hw.outputGreenLeds[i]->analogWrite(0);
+                if(distortionAmount > 0) {
+                    Hardware::hw.outputRedLeds[i]->analogWrite(0);
+                    Hardware::hw.outputBlueLeds[i]->analogWrite(distortionAmount*0.1);
+                } else {
+                    Hardware::hw.outputRedLeds[i]->analogWrite(-distortionAmount*0.1);
+                    Hardware::hw.outputBlueLeds[i]->analogWrite(0);
+                }
+            }
+        }
+    #endif
 }

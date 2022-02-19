@@ -50,7 +50,10 @@ class ClockController : public Controller {
         ClockDivider clockDividers[8];
         Timer timer[8];
 
+        float distortionX, distortionY;
+
         void tick();
+        void updateOutputLeds();
         
 };
 
