@@ -96,10 +96,11 @@ void ClockController::update() {
         }
     }
 
-    if(distortionXCvInput.update() || distortionYCvInput.update()) {
+    if(distortionXCvInput.update() || distortionYCvInput.update() || lengthInput.update()) {
         distortionX = distortionXCvInput.getValue();
         distortionY = distortionYCvInput.getValue();
         clock.getFunction().setMidPoint(distortionX, distortionY);
+        clock.setLength((int)lengthInput.getValue());
         clock.calculatePhaseIncrements();
     }
 
@@ -115,18 +116,16 @@ void ClockController::process() {
         tick();
     }
 
+    triggerOutput.update();
     for(int i = 0; i < 8; i++) {
         triggerOutputs[i].update();
-        // if(timer[i].hasJustStopped()) {
-        //     triggerOutputs[i].trigger();
-        // }
     }
 }
 
 void ClockController::tick() {
+    triggerOutput.trigger();
     for(int i = 0; i < 8; i++) {
         if(clockDividers[i].tick()) {
-            //timer[i].start(random(sloppiness));
             triggerOutputs[i].trigger();
         }
     }

@@ -28,7 +28,7 @@ class ClockController : public Controller {
     private:
         LinearInput<OctasourceInputDevice> rateCvInput = LinearInput<OctasourceInputDevice>(Hardware::hw.rateCvPin, -5, 5, 0, 20);
         LinearInput<OctasourceInputDevice> distortionXCvInput = LinearInput<OctasourceInputDevice>(Hardware::hw.waveCvPin, -5, 5, 0, 1);
-        //LinearInput<OctasourceInputDevice> distortionXCvInput = LinearInput<OctasourceInputDevice>(Hardware::hw.ampCvPin, -5, 5, 0, 100000);
+        LinearInput<OctasourceInputDevice> lengthInput = LinearInput<OctasourceInputDevice>(Hardware::hw.ampCvPin, -5, 5, 4.1, 16.9);
         #if defined(OCTASOURCE_MKII)
             LinearInput<OctasourceInputDevice> distortionYCvInput = LinearInput<OctasourceInputDevice>(Hardware::hw.phaseCvPin, -5, 5, 0, 1);
         #endif
@@ -44,9 +44,9 @@ class ClockController : public Controller {
             AnalogTriggerOutput<OctasourceOutputDevice>(*Hardware::hw.cvOutputPins[7], 20000)
         };
 
-        DistortedClock<TwoLineFunction, 16> clock;
+        TriggerOutput<> triggerOutput = TriggerOutput<>(Hardware::hw.gateOutPin, 20000);
 
-        //Clock clock;
+        DistortedClock<TwoLineFunction, 16> clock;
         ClockDivider clockDividers[8];
         Timer timer[8];
 

@@ -10,6 +10,7 @@ namespace eurorack {
         public:
             DistortedClock() { calculatePhaseIncrements(); }
             F& getFunction() { return distortionFunction; }
+            void setLength(int length) { this->length = length; phaseDivision = 1.0/length; }
             void calculatePhaseIncrements();
 
         protected:
@@ -17,12 +18,11 @@ namespace eurorack {
 
         private:
             int currentTick = -1;
+            int length = N;
             float phaseMaxs[N];
             F distortionFunction;
 
             float phaseDivision = 1.0/N;
-
-            
     };
 
     template<class F, int N>
@@ -30,7 +30,7 @@ namespace eurorack {
         bool ticked = Clock::processInternal();
         if(ticked) {
             currentTick++;
-            currentTick %= N;
+            currentTick %= length;
             setPhaseMax(phaseMaxs[currentTick]);
         }
         return ticked;
@@ -41,11 +41,11 @@ namespace eurorack {
         float phase = 0;
         float distortedPhase = 0;
 
-        for(size_t i = 0; i < N; i++) {
+        for(int i = 0; i < length; i++) {
             float nextPhase = phase + phaseDivision;
             float nextDistortedPhase = distortionFunction.get(nextPhase);
 
-            phaseMaxs[i] = (nextDistortedPhase - distortedPhase)*N;
+            phaseMaxs[i] = (nextDistortedPhase - distortedPhase)*length;
 
             phase = nextPhase;
             distortedPhase = nextDistortedPhase;
