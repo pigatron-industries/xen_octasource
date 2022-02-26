@@ -15,75 +15,75 @@ void ClockController::init() {
     clock.calculatePhaseIncrements();
 
     switch(mode.value) {
-        case Mode::INTEGER:
-            clockDividers[0].setDivisor(2);
-            clockDividers[1].setDivisor(3);
-            clockDividers[2].setDivisor(4);
-            clockDividers[3].setDivisor(5);
-            clockDividers[4].setDivisor(6);
-            clockDividers[5].setDivisor(7);
-            clockDividers[6].setDivisor(8);
-            clockDividers[7].setDivisor(9);
+        case Preset::INTEGER:
+            setClockDivisorLength(0, 2, 1);
+            setClockDivisorLength(1, 3, 2);
+            setClockDivisorLength(2, 4, 3);
+            setClockDivisorLength(3, 5, 4);
+            setClockDivisorLength(4, 6, 5);
+            setClockDivisorLength(5, 7, 6);
+            setClockDivisorLength(6, 8, 7);
+            setClockDivisorLength(7, 9, 8);
             break;
-        case Mode::EVEN:
-            clockDividers[0].setDivisor(2);
-            clockDividers[1].setDivisor(4);
-            clockDividers[2].setDivisor(6);
-            clockDividers[3].setDivisor(8);
-            clockDividers[4].setDivisor(10);
-            clockDividers[5].setDivisor(12);
-            clockDividers[6].setDivisor(14);
-            clockDividers[7].setDivisor(16);
+        case Preset::EVEN:
+            setClockDivisorLength(0, 2,  1);
+            setClockDivisorLength(1, 4,  2);
+            setClockDivisorLength(2, 6,  3);
+            setClockDivisorLength(3, 8,  4);
+            setClockDivisorLength(4, 10, 5);
+            setClockDivisorLength(5, 12, 6);
+            setClockDivisorLength(6, 14, 7);
+            setClockDivisorLength(7, 16, 8);
             break;
-        case Mode::ODD:
-            clockDividers[0].setDivisor(3);
-            clockDividers[1].setDivisor(5);
-            clockDividers[2].setDivisor(7);
-            clockDividers[3].setDivisor(9);
-            clockDividers[4].setDivisor(11);
-            clockDividers[5].setDivisor(13);
-            clockDividers[6].setDivisor(15);
-            clockDividers[7].setDivisor(17);
+        case Preset::ODD:
+            setClockDivisorLength(0, 3,  1);
+            setClockDivisorLength(1, 5,  2);
+            setClockDivisorLength(2, 7,  3);
+            setClockDivisorLength(3, 9,  4);
+            setClockDivisorLength(4, 11, 5);
+            setClockDivisorLength(5, 13, 6);
+            setClockDivisorLength(6, 15, 7);
+            setClockDivisorLength(7, 17, 8);
             break;
-        case Mode::POWER2:
-            clockDividers[0].setDivisor(2);
-            clockDividers[1].setDivisor(4);
-            clockDividers[2].setDivisor(8);
-            clockDividers[3].setDivisor(16);
-            clockDividers[4].setDivisor(32);
-            clockDividers[5].setDivisor(64);
-            clockDividers[6].setDivisor(128);
-            clockDividers[7].setDivisor(256);
+        case Preset::POWER2:
+            setClockDivisorLength(0, 2, 1);
+            setClockDivisorLength(1, 4, 2);
+            setClockDivisorLength(2, 8, 4);
+            setClockDivisorLength(3, 16, 8);
+            setClockDivisorLength(4, 32, 16);
+            setClockDivisorLength(5, 64, 32);
+            setClockDivisorLength(6, 128, 64);
+            setClockDivisorLength(7, 256, 128);
             break;
-        case Mode::PRIME:
-            clockDividers[0].setDivisor(2);
-            clockDividers[1].setDivisor(3);
-            clockDividers[2].setDivisor(5);
-            clockDividers[3].setDivisor(7);
-            clockDividers[4].setDivisor(11);
-            clockDividers[5].setDivisor(13);
-            clockDividers[6].setDivisor(17);
-            clockDividers[7].setDivisor(19);
+        case Preset::PRIME:
+            setClockDivisorLength(0, 2,  1);
+            setClockDivisorLength(1, 3,  2);
+            setClockDivisorLength(2, 5,  3);
+            setClockDivisorLength(3, 7,  5);
+            setClockDivisorLength(4, 11, 7);
+            setClockDivisorLength(5, 13, 11);
+            setClockDivisorLength(6, 17, 13);
+            setClockDivisorLength(7, 19, 17);
             break;
-        case Mode::FIBONACCI:
-            clockDividers[0].setDivisor(2);
-            clockDividers[1].setDivisor(3);
-            clockDividers[2].setDivisor(5);
-            clockDividers[3].setDivisor(8);
-            clockDividers[4].setDivisor(13);
-            clockDividers[5].setDivisor(21);
-            clockDividers[6].setDivisor(34);
-            clockDividers[7].setDivisor(55);
+        case Preset::FIBONACCI:
+            setClockDivisorLength(0, 2,  1);
+            setClockDivisorLength(1, 3,  2);
+            setClockDivisorLength(2, 5,  3);
+            setClockDivisorLength(3, 8,  5);
+            setClockDivisorLength(4, 13, 8);
+            setClockDivisorLength(5, 21, 13);
+            setClockDivisorLength(6, 34, 21);
+            setClockDivisorLength(7, 55, 34);
             break;
-        case Mode::PPQN24:
-            clockDividers[0].setDivisor(1); // Clock
-            clockDividers[1].setDivisor(6);
-            clockDividers[2].setDivisor(8); //24/3
-            clockDividers[3].setDivisor(12);
-            clockDividers[4].setDivisor(24);
-            clockDividers[5].setDivisor(32);//96/3
-            clockDividers[6].setDivisor(48);
-            clockDividers[7].setDivisor(96);
+        case Preset::PPQN24:
+            setClockDivisorLength(0, 3,  1);
+            setClockDivisorLength(1, 6,  3);
+            setClockDivisorLength(2, 8,  4);
+            setClockDivisorLength(3, 12, 6);
+            setClockDivisorLength(4, 24, 12);
+            setClockDivisorLength(5, 32, 16);
+            setClockDivisorLength(6, 48, 24);
+            setClockDivisorLength(7, 96, 48);
             break;
     }
 }
@@ -117,18 +117,19 @@ void ClockController::process() {
     }
 
     triggerOutput.update();
-    for(int i = 0; i < 8; i++) {
-        triggerOutputs[i].update();
-    }
 }
 
 void ClockController::tick() {
     triggerOutput.trigger();
     for(int i = 0; i < 8; i++) {
-        if(clockDividers[i].tick()) {
-            triggerOutputs[i].trigger();
-        }
+        bool gate = clockGate[i].tick(clockDividers[i].tick());
+        gateOutputs[i].gate(gate);
     }
+}
+
+void ClockController::setClockDivisorLength(int channel, int divisor, int length) {
+    clockDividers[channel].setDivisor(divisor);
+    clockGate[channel].setLength(length);
 }
 
 void ClockController::updateOutputLeds() {

@@ -58,7 +58,12 @@ void MainController::interruptHandler() {
 }
 
 void MainController::update() {
-    AbstractMainController::update();
+    RotaryEncoderButton::EncoderEvent event = encoder.getEncoderEvent();
+    if(event == RotaryEncoderButton::EncoderEvent::EVENT_SHORT_PRESS) {
+        
+    }
+    doEncoderEvent(event);
+    controllers.getSelected()->update();
 
     #if defined(OCTASOURCE_MKI)
         Hardware::hw.max11300.send();
