@@ -3,7 +3,7 @@ order: 1
 ---
 # OctoSource
 
-A Eurorack synthesiser module ith 8 control voltage outputs.
+A Eurorack synthesiser module with 8 control voltage outputs.
 
 ## Features
 * Uses [PJRC Teensy 4.0](https://www.pjrc.com/teensy-4-0/) Microcontroller.
