@@ -14,6 +14,7 @@ A Eurorack synthesiser module ith 8 control voltage outputs.
 * Trigger input which is used in some modes. Triggers when voltage exceeds 3V.
 * Trigger output which is used in some modes.
 
+## Documentation
 
 * [User Manual](user.md)
 * [Development History](development.md)
