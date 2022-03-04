@@ -1,3 +1,6 @@
+---
+order: 2
+---
 # User Manual
 
 ## Modes

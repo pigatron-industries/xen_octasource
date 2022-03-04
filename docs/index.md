@@ -1,3 +1,6 @@
+---
+order: 1
+---
 # OctoSource
 
 A Eurorack synthesiser module ith 8 control voltage outputs.
