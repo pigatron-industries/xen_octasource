@@ -12,15 +12,15 @@ Change the mode by holding down the encoder switch and turning clockwise or anti
 Each output wave is the same frequency but phase shifted by 45 degrees.
 
 Inputs:
-* SYNC: 
-* WAVE: The waveform generated for all outputs. Sine, Triangle, Saw or Pulse.
-* RATE: Bipolar frequency control. The wave will be 'stopped' at the top position and moving clockwise will increase frequency. Moving anti-clockwise will decrease the frequency into the negative, which will cause the phase shifted waves to rotate in the opposite direction.
-* PHASE: The phase difference between waves. Full clockwise will give a 1/8 phase difference so all 8 outputs give a full 360 degrees with equal spacing.
-* AMP: Amplitude of the wave on all outputs.
+* **SYNC**: 
+* **WAVE**: The waveform generated for all outputs. Sine, Triangle, Saw or Pulse.
+* **RATE**: Bipolar frequency control. The wave will be 'stopped' at the top position and moving clockwise will increase frequency. Moving anti-clockwise will decrease the frequency into the negative, which will cause the phase shifted waves to rotate in the opposite direction.
+* **PHASE**: The phase difference between waves. Full clockwise will give a 1/8 phase difference so all 8 outputs give a full 360 degrees with equal spacing.
+* **AMP**: Amplitude of the wave on all outputs.
 
 Outputs:
-* OUTPUTS 1-8: The phase shifted wave forms.
-* TRIG: Outputs a trigger for each cycle, the same frequency as the waves.
+* **OUTPUTS 1-8**: The phase shifted wave forms.
+* **TRIG**: Outputs a trigger for each cycle, the same frequency as the waves.
 
 
 ### 2 Frequency Relationships
