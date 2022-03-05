@@ -3,7 +3,7 @@ order: 3
 ---
 # Development History
 
-### MK1 Prototype
+### MKI Prototype
 
 Used a [MikroElektronika PIXI Click](https://www.mikroe.com/pixi-click) for all inputs and outputs.
 

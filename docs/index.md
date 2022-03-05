@@ -17,4 +17,4 @@ A Eurorack synthesiser module with 8 control voltage outputs.
 ## Documentation
 
 * [User Manual](user.md)
-* [Development History](development.md)
+* [Development History](history.md)
