@@ -189,7 +189,32 @@ Outputs:
 
 ### 9. Three Body Simulation
 
-TODO
+A 2 dimensional simulation of three planetary bodies in various orbits.
+
+Inputs:
+* **SYNC**: 
+* **WAVE**: The size of the simulation space. Larger spaces effectively zoom out from the simulation allowing the planets more space to move around before hitting the edges.
+* **RATE**: Speed of the double pendulum simulation.
+* **PHASE**: Damping. If a planet hits the edge of space it bounces back with a lower speed determined by this input.
+* **AMP**: Amplitude of the outputs.
+
+Outputs:
+* **OUTPUTS 1,2**: X, Y position of planet 1.
+* **OUTPUTS 3,4**: X, Y position of planet 2.
+* **OUTPUTS 5,6**: X, Y position of planet 3.
+* **TRIG**: 
+
+Submodes:
+1. Basic orbit. Astable orbit of 2 smaller planets around a centre massive planet
+2. Figure 8 stable. A stable figure 8 which slowly drifts rotationally.
+3. Figure 8 Chaotic. A more chatoric Figure 8 orbit.
+4. Broucke. Broucke orbit.
+5. Broucke Asymetrical. An assymetrical Broucke orbit.
+6. Chaotic Bounce. Completely chaotic orbit where the planets may bounce off the sides of the space with a speed dependent on the Damping setting.
+7. Chaotic Antigrav. Completely chaotic orbit where the planets are repelled from the sides of space by an amount depending on the Damping setting.
+8. Chaotic Wrap. Completely chaotic orbit where the planets can wrap around to the other side of space.
+9. Chaotic 100/1/1. Chaotic orbit with one large mass and two smaller masses.
+10. Chaotic 100/10/1. Chaotic orbit with three different masses.
 
 ---
 
