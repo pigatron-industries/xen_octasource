@@ -171,7 +171,19 @@ Submodes:
 
 ### 8. Double Pendulum
 
-TODO
+A 2 dimensional double pendulum simulation.
+
+Inputs:
+* **SYNC**: 
+* **WAVE**: Mass of the second pendulum. Can be changed from 0.2 to 2 times the mass of the first pendulum. 12 o'clock position has bothe masses the same.
+* **RATE**: Speed of the double pendulum simulation.
+* **PHASE**: Ratio of pendulum lengths. Anti-clockwise, pendulum 1 length is 0 and pendulum 2 length is max. Clockwise, pendulum 1 length is max and pendulum 2 length is 0. 12 o'clock position length of both pendulums is the same.
+* **AMP**: Amplitude of the double pendulum simulation.
+
+Outputs:
+* **OUTPUTS 1,2**: X, Y position of end of pendulum 1.
+* **OUTPUTS 3,4**: X, Y position of end of pendulum 2.
+* **TRIG**: 
 
 ---
 
