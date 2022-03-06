@@ -99,7 +99,7 @@ The gate length of output gates will be based on the division of the previous ou
 
 Clock divider outputs example
 
-![Clock Divider Outputs](images/phase_difference.drawio.png)
+![Clock Divider Outputs](images/clock_divider.drawio.png)
 
 How altering clock distortion X and Y values can produce different types of shuffle:
 
