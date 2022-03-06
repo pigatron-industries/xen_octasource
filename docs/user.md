@@ -239,7 +239,22 @@ Outputs:
 
 ### 11. Delay
 
-TODO
+Delays or slews an input voltage by different amounts on each output.
+
+Inputs:
+* **SYNC**: The inpout voltage to delay.
+* **WAVE**: 
+* **RATE**: The delay time.
+* **PHASE**: 
+* **AMP**: 
+
+Outputs:
+* **OUTPUTS 1-8**: The delayed or slewed voltage. Each output delays by delay time multipled by output number.
+* **TRIG**: 
+
+Submodes:
+1. Delay
+2. Slew
 
 ---
 
