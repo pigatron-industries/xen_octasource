@@ -73,9 +73,9 @@ A clock source providing various subdivisions of an external or internal clock.
 
 Inputs:
 * **SYNC**: External clock, an external clock signal should be autodetected and used instead of internal clock.
-* **WAVE**: Shuffle X Axis.
+* **WAVE**: Shuffle X Axis. Only applies to internal clock.
 * **RATE**: Rate of internally generated clock.
-* **PHASE**: Shuffle Y Axis.
+* **PHASE**: Shuffle Y Axis. Only applies to internal clock.
 
 Outputs:
 * **OUTPUTS 1-8**: Divided clock signals.
@@ -116,7 +116,24 @@ Submodes:
 
 ### 6. Bouncing Ball
 
-TODO
+A ball dropped from a height, bounces off the 0V line, according the laws of gravity.
+
+Inputs:
+* **SYNC**: Trigger the bounce. Can be retriggered mid bounce to boost the ball back to initial height.
+* **WAVE**: Damping. Determines the force that the ball bounces back up after each hit of the floor.
+* **RATE**: Speed of the bouncing ball.
+* **PHASE**: N/A
+* **AMP**: Height of the bouncing ball.
+
+Outputs:
+* **OUTPUTS 1,3,5,7**: The bouncing ball outputs. Each output has different damping settings applied.
+* **OUTPUTS 2,3,4,5**: A stepped voltage representing the bounce height of each bounce from the previous output.
+* **TRIG**: Trigger the next envelope in the cycle.
+
+Submodes:
+* **Bounce**: Output continuous curve representing the current ball height + stepped bounce height on every other output.
+* **Triggers**: Output a trigger for each time the ball hits the floor + stepped bounce height on every other output.
+* **Rotate**: Rotates to the next output for each bounce, cycling through all 8 outputs until the ball stops.
 
 ---
 
