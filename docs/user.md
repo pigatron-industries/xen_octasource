@@ -260,10 +260,30 @@ Submodes:
 
 ### 12. Voltage Reference
 
-TODO
+Fixed voltage references.
+
+Outputs:
+* **OUTPUTS 1-8**: -5V, -2V, -1V, 0V, 0V, 1V, 2V, 5V
 
 ---
 
 ### 13. Audio Rate Oscillator
 
-TODO
+Same as frequency relationship mode but outputs at audio rate
+
+Inputs:
+* **SYNC**: 
+* **WAVE**: The waveform generated for all outputs. Sine, Triangle, Saw or Pulse.
+* **RATE**: Base frequency of outputs.
+* **PHASE**: 
+* **AMP**: Amplitude of the wave on all outputs.
+
+Outputs:
+* **OUTPUTS 1-8**: Waveforms with frequency relationships dependent upon the selected submode.
+* **TRIG**: Outputs a trigger for each cycle, the same frequency as the waves.
+
+Submode frequency divisions:
+1. Whole numbers: 1 / 2 / 3 / 4 / 5 / 6 / 7 / 8
+2. Powers of 2: 1 / 2 / 4 / 8 / 16 / 32 / 64 / 128
+3. Irrational numbers: 1 / zeta 3 / root 2 / phi / e / pi / feigenbaum constant / e^pi
+4. Solar system planets: Mercury / Venus / Earth / Mars / Jupiter / Saturn / Uranus / Neptune
