@@ -164,7 +164,7 @@ Submodes:
 * Halvorsen Attractor
 * Chua Multi Scroll Attractor
 * Rabinovich-Fabrikant Attractor
-* Three Scroll Unified Attractor, 
+* Three Scroll Unified Attractor
 * Four Wing Attractor
 
 ---
