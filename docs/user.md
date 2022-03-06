@@ -22,6 +22,10 @@ Outputs:
 * **OUTPUTS 1-8**: The phase shifted wave forms.
 * **TRIG**: Outputs a trigger for each cycle, the same frequency as the waves.
 
+Example of 8 phase shifted sine waves
+
+![Phase shifted sine waves](images/phase_difference.drawio.png)
+
 ---
 
 ### 2. Frequency Relationships
