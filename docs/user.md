@@ -220,7 +220,20 @@ Submodes:
 
 ### 10. Random
 
-TODO
+Stepped random voltage and trigger outputs.
+
+Inputs:
+* **SYNC**: 
+* **WAVE**: Chance. The chance of outputting trigger 1 as opposed to trigger 2.
+* **RATE**: Clock rate of steps and triggers.
+* **PHASE**: 
+* **AMP**: Amplitude of stepped voltage outputs.
+
+Outputs:
+* **OUTPUTS 1,3**: One of these outputs will trigger per clock cycle depedning on chance setting.
+* **OUTPTUS 5,7**: One of these outputs will trigger per clock cycle depedning on chance setting.
+* **OUTPUTS 2,4,6,8**: Random stepped voltage.
+* **TRIG**: 
 
 ---
 
