@@ -139,7 +139,33 @@ Submodes:
 
 ### 7. Strange Attractor
 
-TODO
+Various 3 dimensional strange attractors with threee outputs, one for each axis.
+
+Inputs:
+* **SYNC**: 
+* **WAVE**: 
+* **RATE**: Speed of the strange attractor.
+* **PHASE**: 
+* **AMP**: Amplitude of the strange attractor.
+
+Outputs:
+* **OUTPUTS 1,2,3**: X, Y and Z co-ordinates of the strange attractor.
+* **OUTPUTS 4,5,6**: X, Y and Z co-ordinates of the same strange attractor with slighly different starting position.
+* **TRIG**: Gate, triggers on when Z axis goes above 0 and off below 0.
+
+Submodes:
+* Lorenz Attractor
+* Lorenz 83 Attractor
+* Thomas Attractor
+* Aizawa Attractor
+* Dadras Attractor
+* Chen Attractor
+* Rossler Attractor
+* Halvorsen Attractor
+* Chua Multi Scroll Attractor
+* Rabinovich-Fabrikant Attractor
+* Three Scroll Unified Attractor, 
+* Four Wing Attractor
 
 ---
 
