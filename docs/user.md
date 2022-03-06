@@ -74,12 +74,13 @@ Outputs:
 ### 4. Clock Divider
 
 A clock source providing various subdivisions of an external or internal clock.
+If using internal clock, a clock distortion can be added to create different types of shuffle effects.
 
 Inputs:
 * **SYNC**: External clock, an external clock signal should be autodetected and used instead of internal clock.
-* **WAVE**: Shuffle X Axis. Only applies to internal clock.
+* **WAVE**: Clock Distortion X Axis. Only applies to internal clock.
 * **RATE**: Rate of internally generated clock.
-* **PHASE**: Shuffle Y Axis. Only applies to internal clock.
+* **PHASE**: Clock Distortion Y Axis. Only applies to internal clock.
 
 Outputs:
 * **OUTPUTS 1-8**: Divided clock signals.
@@ -95,6 +96,14 @@ Submodes:
 7. Divisions based on 24 PPQN: 3, 6, 8, 12, 24, 32, 48, 96
 
 The gate length of output gates will be based on the division of the previous output, allowing it to be used as accent CVs ans well as triggers.
+
+Clock divider outputs example
+
+![Clock Divider Outputs](images/phase_difference.drawio.png)
+
+How altering clock distortion X and Y values can produce different types of shuffle:
+
+![Clock Distortion](images/clock_divider_swing.drawio.png)
 
 ---
 
