@@ -96,7 +96,21 @@ The gate length of output gates will be based on the division of the previous ou
 
 ### 5. Sequential Envelope
 
-TODO
+Rotating sequential envelope, where each trigger signal triggers the envelope on the next output, rotating through all outputs.
+
+Inputs:
+* **SYNC**: Trigger the envlelope.
+* **WAVE**: Attack time of envelope.
+* **RATE**: Decay time of envelope.
+* **PHASE**: Length: Select the number of outputs to use for envelopes. Can use from 2 to 8 outputs.
+
+Outputs:
+* **OUTPUTS 1-8**: The envelope output. Depending on Length setting not all outputs may be used.
+* **TRIG**: Trigger the next envelope in the cycle.
+
+Submodes:
+1. **Latched**: The envelope will remain in the sustain phase until the next trigger is recieved, then the envlope will decay will the next envelope starts its attack.
+2. **Gated**: The envlope will remain in the sustain phase while there is a high voltage on the **SYNC** input. When this goes low the envelope will decay. The next envelope will not be triggered until the next gate signal is received.
 
 ---
 
