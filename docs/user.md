@@ -171,18 +171,18 @@ Outputs:
 * **TRIG**: Gate, triggers on when Z axis goes above 0 and off below 0.
 
 Submodes:
-* Lorenz Attractor
-* Lorenz 83 Attractor
-* Thomas Attractor
-* Aizawa Attractor
-* Dadras Attractor
-* Chen Attractor
-* Rossler Attractor
-* Halvorsen Attractor
-* Chua Multi Scroll Attractor
-* Rabinovich-Fabrikant Attractor
-* Three Scroll Unified Attractor
-* Four Wing Attractor
+1. Lorenz Attractor
+2. Lorenz 83 Attractor
+3. Thomas Attractor
+4. Aizawa Attractor
+5. Dadras Attractor
+6. Chen Attractor
+7. Rossler Attractor
+8. Halvorsen Attractor
+9. Chua Multi Scroll Attractor
+10. Rabinovich-Fabrikant Attractor
+11. Three Scroll Unified Attractor
+12. Four Wing Attractor
 
 ---
 
