@@ -125,6 +125,8 @@ Submodes:
 1. **Latched**: The envelope will remain in the sustain phase until the next trigger is recieved, then the envlope will decay will the next envelope starts its attack.
 2. **Gated**: The envlope will remain in the sustain phase while there is a high voltage on the **SYNC** input. When this goes low the envelope will decay. The next envelope will not be triggered until the next gate signal is received.
 
+![Sequential Envelope](images/sequential_envelope.drawio.png)
+
 ---
 
 ### 6. Bouncing Ball
