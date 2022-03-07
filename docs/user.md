@@ -150,6 +150,8 @@ Submodes:
 * **Triggers**: Output a trigger for each time the ball hits the floor + stepped bounce height on every other output.
 * **Rotate**: Rotates to the next output for each bounce, cycling through all 8 outputs until the ball stops.
 
+![Bouncing Ball](images/bouncing_ball.drawio.png)
+
 ---
 
 ### 7. Strange Attractor
