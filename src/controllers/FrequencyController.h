@@ -12,6 +12,7 @@ class FrequencyController : public Controller {
         enum Mode {
             LINEAR,
             EXP,
+            INTERVAL,
             UNCORRELATED,
             PLANETARY
         };

@@ -39,6 +39,16 @@ void FrequencyController::setRate(float baseFrequency) {
                 oscillators[i].setFrequency(baseFrequency/powf(2, i));
             }
             break;
+        case Mode::INTERVAL:
+            oscillators[0].setFrequency(baseFrequency);
+            oscillators[1].setFrequency(baseFrequency/1.2);     // Minor THird
+            oscillators[2].setFrequency(baseFrequency/1.25);    // Major Third
+            oscillators[3].setFrequency(baseFrequency/1.33333); // Perfect Fourth
+            oscillators[4].setFrequency(baseFrequency/1.5);     // Perfect Fifth
+            oscillators[5].setFrequency(baseFrequency/1.6);     // Minor Sixth
+            oscillators[6].setFrequency(baseFrequency/1.66667); // Major Sixth
+            oscillators[7].setFrequency(baseFrequency/2);       // Octave
+            break;
         case Mode::UNCORRELATED:
             oscillators[0].setFrequency(baseFrequency);
             oscillators[1].setFrequency(baseFrequency/1.2020569);     // zeta 3

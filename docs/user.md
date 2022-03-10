@@ -46,6 +46,7 @@ Outputs:
 Submode frequency divisions:
 1. Whole numbers: 1 / 2 / 3 / 4 / 5 / 6 / 7 / 8
 2. Powers of 2: 1 / 2 / 4 / 8 / 16 / 32 / 64 / 128
+2. Musical Intervals: 1:1 / 6:5  / 5:4 / 4:3 / 3:2 / 8:5 / 5:3 / 2:1
 3. Irrational numbers: 1 / zeta 3 / root 2 / phi / e / pi / feigenbaum constant / e^pi
 4. Solar system planets: Mercury / Venus / Earth / Mars / Jupiter / Saturn / Uranus / Neptune
 
@@ -259,7 +260,7 @@ Outputs:
 Delays or slews an input voltage by different amounts on each output.
 
 Inputs:
-* **SYNC**: The inpout voltage to delay.
+* **SYNC**: The input voltage to delay.
 * **WAVE**: 
 * **RATE**: The delay time.
 * **PHASE**: 
