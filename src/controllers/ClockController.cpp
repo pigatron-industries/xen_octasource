@@ -2,6 +2,10 @@
 
 void ClockController::init(float sampleRate) {
     clock.init(sampleRate);
+    clock.getFunction().setMidPoint(0.5, 0.5);
+    clock.calculatePhaseIncrements();
+    smoothClock.init(sampleRate);
+    smoothClock.calculatePhaseIncrements();
     init();
 }
 
@@ -10,9 +14,6 @@ void ClockController::init() {
     for(int i = 0; i < 8; i++) {
         clockDividers[i].reset();
     }
-
-    clock.getFunction().setMidPoint(0.5, 0.5);
-    clock.calculatePhaseIncrements();
 
     switch(mode.value) {
         case Preset::INTEGER:
@@ -93,6 +94,7 @@ void ClockController::update() {
         float rateValue = rateCvInput.getValue();
         for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
             clock.setFrequency(rateValue);
+            smoothClock.setFrequency(rateValue);
         }
     }
 
@@ -102,6 +104,10 @@ void ClockController::update() {
         clock.getFunction().setMidPoint(distortionX, distortionY);
         clock.setLength((int)lengthInput.getValue());
         clock.calculatePhaseIncrements();
+
+        smoothClock.getFunction().setParams(distortionX, distortionY*1.8-0.9);
+        smoothClock.setLength((int)lengthInput.getValue());
+        smoothClock.calculatePhaseIncrements();
     }
 
     if(Controls::syncInput.update() && Controls::syncInput.isTriggeredOn()) {
@@ -112,7 +118,10 @@ void ClockController::update() {
 }
 
 void ClockController::process() {
-    if(clock.process()) {
+    // if(clock.process()) {
+    //    tick();
+    // }
+    if(smoothClock.process()) {
         tick();
     }
 
