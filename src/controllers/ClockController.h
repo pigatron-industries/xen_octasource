@@ -57,7 +57,7 @@ class ClockController : public Controller {
             AnalogGateOutput<OctasourceOutputDevice>(*Hardware::hw.cvOutputPins[7])
         };
 
-        TriggerOutput<> triggerOutput = TriggerOutput<>(Hardware::hw.gateOutPin, 20000);
+        TriggerOutput<OctasourceInputDevice> triggerOutput = TriggerOutput<OctasourceInputDevice>(Hardware::hw.gateOutPin, 20000);
 
         DistortedClock<TwoLineFunction, 32> clock;
         DistortedClock<SmoothStepFunction, 32> smoothClock;

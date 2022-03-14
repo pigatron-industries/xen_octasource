@@ -5,10 +5,12 @@
 #include <math.h>
 #include <Arduino.h>
 
-#define X 0
-#define Y 1
-#define Z 2
-#define W 3
+enum {
+    X = 0,
+    Y = 1,
+    Z = 2,
+    W = 3
+};
 
 template<int N>
 class Vector {

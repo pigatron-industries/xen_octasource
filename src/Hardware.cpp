@@ -34,6 +34,7 @@ void Hardware::init() {
     #endif
 
     #if defined(OCTASOURCE_MKI)
+        max11300.init();
         max11300.setDeferredOutput(true);
     #endif
 
