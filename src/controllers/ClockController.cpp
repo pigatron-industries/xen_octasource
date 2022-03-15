@@ -98,9 +98,15 @@ void ClockController::update() {
         }
     }
 
+#if defined(OCTASOURCE_MKII)
     if(distortionXCvInput.update() || distortionYCvInput.update() || lengthInput.update()) {
+#else
+    if(distortionXCvInput.update() || lengthInput.update()) {
+#endif
         distortionX = distortionXCvInput.getValue();
+#if defined(OCTASOURCE_MKII)
         distortionY = distortionYCvInput.getValue();
+#endif
         clock.getFunction().setMidPoint(distortionX, distortionY);
         clock.setLength((int)lengthInput.getValue());
         clock.calculatePhaseIncrements();

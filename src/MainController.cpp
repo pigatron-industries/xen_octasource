@@ -88,35 +88,35 @@ void MainController::doCalibration() {
         Serial.println("Calibration mode started.");
         Serial.println("Release mode switch...");
         displayVoltage(0);
-        Hardware::hw.encoderButton.waitForPressAndRelease();
+        Hardware::hw.encoder.getEncoderButton().waitForPressAndRelease();
 
         Serial.println("Turn all pots left, then press mode switch...");
         Serial.println();
         displayVoltage(-5);
-        Hardware::hw.encoderButton.waitForPressAndRelease();
+        Hardware::hw.encoder.getEncoderButton().waitForPressAndRelease();
 
-        Config::data.calibration[0].min = Hardware::hw.rateCvPin.binaryRead();
-        Config::data.calibration[1].min = Hardware::hw.waveCvPin.binaryRead();
-        Config::data.calibration[2].min = Hardware::hw.ampCvPin.binaryRead();
+        // Config::data.calibration[0].min = Hardware::hw.rateCvPin.binaryRead();
+        // Config::data.calibration[1].min = Hardware::hw.waveCvPin.binaryRead();
+        // Config::data.calibration[2].min = Hardware::hw.ampCvPin.binaryRead();
 
         Serial.println("Turn all pots right, then press mode switch...");
         Serial.println();
         displayVoltage(5);
-        Hardware::hw.encoderButton.waitForPressAndRelease();
+        Hardware::hw.encoder.getEncoderButton().waitForPressAndRelease();
 
-        Config::data.calibration[0].max = Hardware::hw.rateCvPin.binaryRead();
-        Config::data.calibration[1].max = Hardware::hw.waveCvPin.binaryRead();
-        Config::data.calibration[2].max = Hardware::hw.ampCvPin.binaryRead();
+        // Config::data.calibration[0].max = Hardware::hw.rateCvPin.binaryRead();
+        // Config::data.calibration[1].max = Hardware::hw.waveCvPin.binaryRead();
+        // Config::data.calibration[2].max = Hardware::hw.ampCvPin.binaryRead();
 
-        Config::saveCalibration();
+        //Config::saveCalibration();
     #endif
 }
 
 void MainController::loadCalibration() {
     #if defined(OCTASOURCE_MKI)
-        Hardware::hw.rateCvPin.setBinaryRange(Config::data.calibration[0].min, Config::data.calibration[0].max);
-        Hardware::hw.waveCvPin.setBinaryRange(Config::data.calibration[1].min, Config::data.calibration[1].max);
-        Hardware::hw.ampCvPin.setBinaryRange(Config::data.calibration[2].min, Config::data.calibration[2].max);
+        // Hardware::hw.rateCvPin.setBinaryRange(Config::data.calibration[0].min, Config::data.calibration[0].max);
+        // Hardware::hw.waveCvPin.setBinaryRange(Config::data.calibration[1].min, Config::data.calibration[1].max);
+        // Hardware::hw.ampCvPin.setBinaryRange(Config::data.calibration[2].min, Config::data.calibration[2].max);
     #endif
 }
 
