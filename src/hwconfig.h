@@ -18,6 +18,8 @@
     #define GATE_OUTPUT_PIN 5
 #endif
 
+#define SDB_PIN 7
+
 #define DAC1_SYNC_PIN 9
 #define DAC2_SYNC_PIN 8
 

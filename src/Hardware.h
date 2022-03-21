@@ -51,7 +51,7 @@ class Hardware {
                 &dac8164b.pins[2]
             };
 
-            IS32FL3738Device is32fl3738 = IS32FL3738Device(Wire);
+            IS32FL3738Device is32fl3738 = IS32FL3738Device(Wire, SDB_PIN);
             AnalogOutputPin<IS32FL3738Device>* encoderLeds[16] = {
                 &is32fl3738.pins[31],
                 &is32fl3738.pins[30],
