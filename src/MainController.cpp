@@ -29,8 +29,7 @@ void MainController::init() {
 
 void MainController::controllerInit() {
     interruptTimer.end();
-
-    AbstractMainController::controllerInit();
+    saveMode();
 
     #if defined(OCTASOURCE_MKII)
         for(int i = 0; i < 16; i++) {
