@@ -12,7 +12,6 @@ void setup() {
     Serial.println("*     Pigatron Industries OctaSource    *");
     Serial.println("=========================================");
     Serial.println();
-    Hardware::hw.init();
 
     mainController.init();
 

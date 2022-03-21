@@ -24,9 +24,6 @@ class Hardware {
         static float memPoolBuffer[MEMPOOL_SIZE];
         MemPool<float> memPool = MemPool<float>(Hardware::memPoolBuffer, MEMPOOL_SIZE);
 
-        // Native pins
-        DigitalInput(encoderBtnPin, ENCODER_BTN_PIN);
-
         // Direct connections
         RotaryEncoderButton encoder = RotaryEncoderButton(ENCODER_PIN1, ENCODER_PIN2, ENCODER_BTN_PIN);
 
