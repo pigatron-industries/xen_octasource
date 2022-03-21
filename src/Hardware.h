@@ -31,6 +31,11 @@ class Hardware {
             #define OctasourceInputDevice NativeDevice
             #define OctasourceOutputDevice DAC8164Device
 
+            AnalogInput(wavePotPin, A10)
+            AnalogInput(ratePotPin, A11)
+            AnalogInput(ampPotPin, A12)
+            AnalogInput(phasePotPin, A13)
+
             AnalogInput(waveCvPin, A8)
             AnalogInput(rateCvPin, A6)
             AnalogInput(ampCvPin, A3)
