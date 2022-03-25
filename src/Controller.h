@@ -19,6 +19,7 @@ class Controller {
     protected: 
         float sampleRate = 0;
         CycleEnum<int> mode;
+        Controls& controls = Controls::controls;
 };
 
 #endif

@@ -31,8 +31,8 @@ void PhasedController::update() {
 }
 
 void PhasedController::updateRateBipolar() {
-    if(Controls::bipolarRateCvInput.update()) {
-        float rateValue = Controls::bipolarRateCvInput.getValue();
+    if(controls.bipolarRateCvInput.update()) {
+        float rateValue = controls.bipolarRateCvInput.getValue();
         for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
             oscillators[i].setFrequency(rateValue);
         }
@@ -40,8 +40,8 @@ void PhasedController::updateRateBipolar() {
 }
 
 void PhasedController::updateRateExponential() {
-    if(Controls::expRateCvInput.update()) {
-        float rateValue = Controls::expRateCvInput.getValue();
+    if(controls.expRateCvInput.update()) {
+        float rateValue = controls.expRateCvInput.getValue();
         for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
             oscillators[i].setFrequency(rateValue);
         }
@@ -49,14 +49,14 @@ void PhasedController::updateRateExponential() {
 }
 
 void PhasedController::updateAmp() {
-    if(Controls::ampCvInput.update()) {
-        ampValue = Controls::ampCvInput.getValue();
+    if(controls.ampCvInput.update()) {
+        ampValue = controls.ampCvInput.getValue();
     }
 }
 
 void PhasedController::updateWave() {
-    if(Controls::waveCvInput.update()) {
-        float waveValue = Controls::waveCvInput.getValue();
+    if(controls.waveCvInput.update()) {
+        float waveValue = controls.waveCvInput.getValue();
         for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
             if(waveValue < 1) {
                 waveSelector.select(0);

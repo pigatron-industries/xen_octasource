@@ -117,7 +117,7 @@ void ClockController::update() {
         smoothClock.calculatePhaseIncrements();
     }
 
-    if(Controls::syncInput.update() && Controls::syncInput.isTriggeredOn()) {
+    if(controls.syncInput.update() && controls.syncInput.isTriggeredOn()) {
         clock.externalTick();
     }
 
@@ -132,11 +132,11 @@ void ClockController::process() {
         tick();
     }
 
-    Controls::triggerOutput.update();
+    controls.triggerOutput.update();
 }
 
 void ClockController::tick() {
-    Controls::triggerOutput.trigger();
+    controls.triggerOutput.trigger();
     for(int i = 0; i < 8; i++) {
         bool gate = clockGate[i].tick(clockDividers[i].tick());
         gateOutputs[i].gate(gate);

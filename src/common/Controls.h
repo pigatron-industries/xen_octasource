@@ -7,16 +7,18 @@
 
 class Controls {
     public:
-        static AnalogGateInput<AnalogInputPinT> syncInput;
-        static BipolarExpInput<AnalogInputSumPinT> bipolarRateCvInput;
-        static ExpInput<AnalogInputSumPinT> expRateCvInput;
-        static LinearInput<AnalogInputSumPinT> ampCvInput;
-        static LinearInput<AnalogInputSumPinT> waveCvInput;
+        static Controls controls;
+
+        AnalogGateInput<AnalogInputPinT> syncInput = AnalogGateInput<AnalogInputPinT>(Hardware::hw.syncCvPin);
+        BipolarExpInput<AnalogInputSumPinT> bipolarRateCvInput = BipolarExpInput<AnalogInputSumPinT>(Hardware::hw.rateSumPin);
+        ExpInput<AnalogInputSumPinT> expRateCvInput = ExpInput<AnalogInputSumPinT>(Hardware::hw.rateSumPin);
+        LinearInput<AnalogInputSumPinT> ampCvInput = LinearInput<AnalogInputSumPinT>(Hardware::hw.ampSumPin, -5, 5, 0, 5);
+        LinearInput<AnalogInputSumPinT> waveCvInput = LinearInput<AnalogInputSumPinT>(Hardware::hw.waveSumPin, -5, 5, 0, 5);
         #if defined(OCTASOURCE_MKII)
-            static LinearInput<AnalogInputSumPinT> phaseCvInput;
+            LinearInput<AnalogInputSumPinT> phaseCvInput = LinearInput<AnalogInputSumPinT>(Hardware::hw.phaseSumPin, -5, 5, 0, 5);
         #endif
 
-        static TriggerOutput<DigitalOutputDeviceT> triggerOutput;
+        TriggerOutput<DigitalOutputDeviceT> triggerOutput = TriggerOutput<DigitalOutputDeviceT>(Hardware::hw.gateOutPin, 20000);
 };
 
 #endif

@@ -28,8 +28,8 @@ void EnvelopeController::update() {
     updateLength();
     updateAmp();
 
-    if(Controls::syncInput.update()) {
-        if(Controls::syncInput.isTriggeredOn()) {
+    if(controls.syncInput.update()) {
+        if(controls.syncInput.isTriggeredOn()) {
             if(envelopeIndex >= 0) {
                 envelopes[envelopeIndex].setGate(false);
             }
@@ -67,8 +67,8 @@ void EnvelopeController::updateLength() {
 }
 
 void EnvelopeController::updateAmp() {
-    if(Controls::ampCvInput.update()) {
-        amp = Controls::ampCvInput.getValue();
+    if(controls.ampCvInput.update()) {
+        amp = controls.ampCvInput.getValue();
     }
 }
 

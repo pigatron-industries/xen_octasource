@@ -25,8 +25,8 @@ void FilterController::update() {
 }
 
 void FilterController::updateRateBipolar() {
-    if(Controls::bipolarRateCvInput.update()) {
-        float rateValue = Controls::bipolarRateCvInput.getValue();
+    if(controls.bipolarRateCvInput.update()) {
+        float rateValue = controls.bipolarRateCvInput.getValue();
         sineOscillator.setFrequency(rateValue);
         triangleOscillator.setFrequency(rateValue);
         sawOscillator.setFrequency(rateValue);
@@ -55,8 +55,8 @@ void FilterController::updateFilterResonance() {
 }
 
 void FilterController::updateAmp() {
-    if(Controls::ampCvInput.update()) {
-        ampValue = Controls::ampCvInput.getValue();
+    if(controls.ampCvInput.update()) {
+        ampValue = controls.ampCvInput.getValue();
     }
 }
 

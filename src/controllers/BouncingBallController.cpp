@@ -20,10 +20,10 @@ void BouncingBallController::update() {
     updateAmp();
     updateDamp();
 
-    if(Controls::syncInput.update() && Controls::syncInput.isTriggeredOn()) {
+    if(controls.syncInput.update() && controls.syncInput.isTriggeredOn()) {
         for(int i = 0; i < 4; i++) {
             bouncingBalls[i].trigger();
-            Controls::triggerOutput.trigger();
+            controls.triggerOutput.trigger();
             rotateOutput = 0;
         }
     }
@@ -32,8 +32,8 @@ void BouncingBallController::update() {
 }
 
 void BouncingBallController::updateRate() {
-    if(Controls::expRateCvInput.update()) {
-        float rateValue = Controls::expRateCvInput.getValue();
+    if(controls.expRateCvInput.update()) {
+        float rateValue = controls.expRateCvInput.getValue();
         for(int i = 0; i < 4; i++) {
             bouncingBalls[i].setSpeed(rateValue);
         }
@@ -61,7 +61,7 @@ void BouncingBallController::updateDamp() {
 }
 
 void BouncingBallController::process() {
-    Controls::triggerOutput.update();
+    controls.triggerOutput.update();
     for(int i = 0; i < 4; i++) {
         bouncingBalls[i].process();
     }
@@ -73,7 +73,7 @@ void BouncingBallController::process() {
                 Hardware::hw.cvOutputPins[i*2+1]->analogWrite(bouncingBalls[i].getBounceHeight()*amp);
             }
             if(bouncingBalls[0].getBounced()) {
-                Controls::triggerOutput.trigger();
+                controls.triggerOutput.trigger();
             }
             break;
         case Mode::TRIGGERS:
@@ -81,14 +81,14 @@ void BouncingBallController::process() {
                 triggerOutputs[i].update();
                 if(bouncingBalls[i].getBounced()) {
                     triggerOutputs[i].trigger();
-                    Controls::triggerOutput.trigger();
+                    controls.triggerOutput.trigger();
                 }
                 Hardware::hw.cvOutputPins[i*2+1]->analogWrite(bouncingBalls[i].getBounceHeight()*amp);
             }
             break;
         case Mode::ROTATE:
             if(bouncingBalls[0].getBounced()) {
-                Controls::triggerOutput.trigger();
+                controls.triggerOutput.trigger();
                 Hardware::hw.cvOutputPins[rotateOutput]->analogWrite(0);
                 rotateOutput++;
                 if(rotateOutput >= 8) {
