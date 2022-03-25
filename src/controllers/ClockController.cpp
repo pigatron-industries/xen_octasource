@@ -1,4 +1,5 @@
 #include "ClockController.h"
+#include "common/Controls.h"
 
 void ClockController::init(float sampleRate) {
     clock.init(sampleRate);
@@ -131,11 +132,11 @@ void ClockController::process() {
         tick();
     }
 
-    triggerOutput.update();
+    Controls::triggerOutput.update();
 }
 
 void ClockController::tick() {
-    triggerOutput.trigger();
+    Controls::triggerOutput.trigger();
     for(int i = 0; i < 8; i++) {
         bool gate = clockGate[i].tick(clockDividers[i].tick());
         gateOutputs[i].gate(gate);

@@ -39,25 +39,23 @@ class ClockController : public Controller {
         virtual void process();
 
     private:
-        LinearInput<OctasourceInputDevice> rateCvInput = LinearInput<OctasourceInputDevice>(Hardware::hw.rateCvPin, -5, 5, 0, 30);
-        LinearInput<OctasourceInputDevice> lengthInput = LinearInput<OctasourceInputDevice>(Hardware::hw.ampCvPin, -5, 5, 4.1, 32.9);
-        LinearInput<OctasourceInputDevice> distortionXCvInput = LinearInput<OctasourceInputDevice>(Hardware::hw.waveCvPin, -5, 5, 0, 1);
+        LinearInput<AnalogInputPinT> rateCvInput = LinearInput<AnalogInputPinT>(Hardware::hw.rateCvPin, -5, 5, 0, 30);
+        LinearInput<AnalogInputPinT> lengthInput = LinearInput<AnalogInputPinT>(Hardware::hw.ampCvPin, -5, 5, 4.1, 32.9);
+        LinearInput<AnalogInputPinT> distortionXCvInput = LinearInput<AnalogInputPinT>(Hardware::hw.waveCvPin, -5, 5, 0, 1);
         #if defined(OCTASOURCE_MKII)
-            LinearInput<OctasourceInputDevice> distortionYCvInput = LinearInput<OctasourceInputDevice>(Hardware::hw.phaseCvPin, -5, 5, 0, 1);
+            LinearInput<AnalogInputPinT> distortionYCvInput = LinearInput<AnalogInputPinT>(Hardware::hw.phaseCvPin, -5, 5, 0, 1);
         #endif
 
-        AnalogGateOutput<OctasourceOutputDevice> gateOutputs[8] = {
-            AnalogGateOutput<OctasourceOutputDevice>(*Hardware::hw.cvOutputPins[0]),
-            AnalogGateOutput<OctasourceOutputDevice>(*Hardware::hw.cvOutputPins[1]),
-            AnalogGateOutput<OctasourceOutputDevice>(*Hardware::hw.cvOutputPins[2]),
-            AnalogGateOutput<OctasourceOutputDevice>(*Hardware::hw.cvOutputPins[3]),
-            AnalogGateOutput<OctasourceOutputDevice>(*Hardware::hw.cvOutputPins[4]),
-            AnalogGateOutput<OctasourceOutputDevice>(*Hardware::hw.cvOutputPins[5]),
-            AnalogGateOutput<OctasourceOutputDevice>(*Hardware::hw.cvOutputPins[6]),
-            AnalogGateOutput<OctasourceOutputDevice>(*Hardware::hw.cvOutputPins[7])
+        AnalogGateOutput<AnalogOutputDeviceT> gateOutputs[8] = {
+            AnalogGateOutput<AnalogOutputDeviceT>(*Hardware::hw.cvOutputPins[0]),
+            AnalogGateOutput<AnalogOutputDeviceT>(*Hardware::hw.cvOutputPins[1]),
+            AnalogGateOutput<AnalogOutputDeviceT>(*Hardware::hw.cvOutputPins[2]),
+            AnalogGateOutput<AnalogOutputDeviceT>(*Hardware::hw.cvOutputPins[3]),
+            AnalogGateOutput<AnalogOutputDeviceT>(*Hardware::hw.cvOutputPins[4]),
+            AnalogGateOutput<AnalogOutputDeviceT>(*Hardware::hw.cvOutputPins[5]),
+            AnalogGateOutput<AnalogOutputDeviceT>(*Hardware::hw.cvOutputPins[6]),
+            AnalogGateOutput<AnalogOutputDeviceT>(*Hardware::hw.cvOutputPins[7])
         };
-
-        TriggerOutput<OctasourceInputDevice> triggerOutput = TriggerOutput<OctasourceInputDevice>(Hardware::hw.gateOutPin, 20000);
 
         DistortedClock<TwoLineFunction, 32> clock;
         DistortedClock<SmoothStepFunction, 32> smoothClock;

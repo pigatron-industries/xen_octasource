@@ -26,8 +26,8 @@ class AttractorController : public Controller {
         virtual void process();
 
     private:
-        ExpInput<OctasourceInputDevice> expRateCvInput = ExpInput<OctasourceInputDevice>(Hardware::hw.rateCvPin, 1);
-        LinearInput<OctasourceInputDevice> ampCvInput = LinearInput<OctasourceInputDevice>(Hardware::hw.ampCvPin, -5, 5, 0, 1);
+        ExpInput<AnalogInputPinT> expRateCvInput = ExpInput<AnalogInputPinT>(Hardware::hw.rateCvPin, 1);
+        LinearInput<AnalogInputPinT> ampCvInput = LinearInput<AnalogInputPinT>(Hardware::hw.ampCvPin, -5, 5, 0, 1);
         //LinearInput<OctasourceInputDevice> cCvInput = LinearInput<OctasourceInputDevice>(Hardware::hw.waveCvPin, -5, 5, 0, 5);
 
         TypeSelector<ContinuousSystemN<3>, 

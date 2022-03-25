@@ -7,20 +7,16 @@
 
 class Controls {
     public:
-        static AnalogGateInput<OctasourceInputDevice> syncInput;
-        static BipolarExpInput<OctasourceInputDevice> bipolarRateCvInput;
-        static ExpInput<OctasourceInputDevice> expRateCvInput;
-        static LinearInput<OctasourceInputDevice> ampCvInput;
-
-        // mod 1
-        static LinearInput<OctasourceInputDevice> waveCvInput;
-
-        // mod 2
+        static AnalogGateInput<AnalogInputPinT> syncInput;
+        static BipolarExpInput<AnalogInputSumPinT> bipolarRateCvInput;
+        static ExpInput<AnalogInputSumPinT> expRateCvInput;
+        static LinearInput<AnalogInputSumPinT> ampCvInput;
+        static LinearInput<AnalogInputSumPinT> waveCvInput;
         #if defined(OCTASOURCE_MKII)
-            static LinearInput<OctasourceInputDevice> mod2CvInput;
+            static LinearInput<AnalogInputSumPinT> phaseCvInput;
         #endif
 
-        static TriggerOutput<OctasourceInputDevice> triggerOutput;
+        static TriggerOutput<DigitalOutputDeviceT> triggerOutput;
 };
 
 #endif

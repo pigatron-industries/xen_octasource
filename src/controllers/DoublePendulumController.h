@@ -17,11 +17,11 @@ class DoublePendulumController : public Controller {
         virtual void process();
 
     private:
-        ExpInput<OctasourceInputDevice> expRateCvInput = ExpInput<OctasourceInputDevice>(Hardware::hw.rateCvPin, 1);
-        LinearInput<OctasourceInputDevice> ampCvInput = LinearInput<OctasourceInputDevice>(Hardware::hw.ampCvPin, -5, 5, 0, 1);
-        LinearInput<OctasourceInputDevice> param1CvInput = LinearInput<OctasourceInputDevice>(Hardware::hw.waveCvPin, -5, 5, 0.1, 1);
+        ExpInput<AnalogInputPinT> expRateCvInput = ExpInput<AnalogInputPinT>(Hardware::hw.rateCvPin, 1);
+        LinearInput<AnalogInputPinT> ampCvInput = LinearInput<AnalogInputPinT>(Hardware::hw.ampCvPin, -5, 5, 0, 1);
+        LinearInput<AnalogInputPinT> param1CvInput = LinearInput<AnalogInputPinT>(Hardware::hw.waveCvPin, -5, 5, 0.1, 1);
         #if defined(OCTASOURCE_MKII)
-            LinearInput<OctasourceInputDevice> param2CvInput = LinearInput<OctasourceInputDevice>(Hardware::hw.phaseCvPin, -5, 5, 0.1, 0.9);
+            LinearInput<AnalogInputPinT> param2CvInput = LinearInput<AnalogInputPinT>(Hardware::hw.phaseCvPin, -5, 5, 0.1, 0.9);
         #endif
 
         DoublePendulum doublePendulum;

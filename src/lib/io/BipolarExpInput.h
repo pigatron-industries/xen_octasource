@@ -10,10 +10,10 @@
  * Has a linear response from -1 to 1 volts, exponential response outside of this range in both positive and negative directions.
  * Not 1V/oct
  */
-template<class T = NativeDevice>
+template<class T = AnalogInputPin<NativeDevice>>
 class BipolarExpInput : public AbstractInput<T> {
     public:
-        BipolarExpInput(AnalogInputPin<T>& input) : 
+        BipolarExpInput(T& input) : 
             AbstractInput<T>(input) {}
 
         float getValue() { 

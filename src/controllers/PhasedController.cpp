@@ -72,8 +72,8 @@ void PhasedController::updateWave() {
 }
 
 void PhasedController::updatePhase() {
-    // if(phaseCvInput.update()) {
-    //     float phaseDiffValue = phaseCvInput.getValue();
+    // if(Controls::phaseCvInput.update()) {
+    //     float phaseDiffValue = Controls::phaseCvInput.getValue();
     //     float phase = oscillators[0].getPhase();
     //     for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
     //         oscillators[i].setPhase(phase + i*phaseDiffValue);

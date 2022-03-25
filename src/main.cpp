@@ -5,7 +5,6 @@
 MainController mainController = MainController(SAMPLE_RATE);
 
 void setup() {
-    delay(100);
     Serial.begin(SERIAL_BAUD);
     Serial.println();
     Serial.println("=========================================");
@@ -14,9 +13,6 @@ void setup() {
     Serial.println();
 
     mainController.init();
-
-    ARM_DEMCR |= ARM_DEMCR_TRCENA;
-    ARM_DWT_CTRL |= ARM_DWT_CTRL_CYCCNTENA;
 }
 
 void loop() {

@@ -35,10 +35,10 @@ class EnvelopeController : public Controller {
             EnvelopePlayer<Envelope<WaveSequence<2, Line>>&>(envelopeShape)
         };
 
-        LinearInput<OctasourceInputDevice> attackTimeCvInput = LinearInput<OctasourceInputDevice>(Hardware::hw.waveCvPin, -5, 5, 0.01, 5);
-        LinearInput<OctasourceInputDevice> releaseTimeCvInput = LinearInput<OctasourceInputDevice>(Hardware::hw.rateCvPin, -5, 5, 0.01, 5);
+        LinearInput<AnalogInputPinT> attackTimeCvInput = LinearInput<AnalogInputPinT>(Hardware::hw.waveCvPin, -5, 5, 0.01, 5);
+        LinearInput<AnalogInputPinT> releaseTimeCvInput = LinearInput<AnalogInputPinT>(Hardware::hw.rateCvPin, -5, 5, 0.01, 5);
         #if defined(OCTASOURCE_MKII)
-            LinearInput<OctasourceInputDevice> lengthCvInput = LinearInput<OctasourceInputDevice>(Hardware::hw.phaseCvPin, -5, 5, 0, 8.99);
+            LinearInput<AnalogInputPinT> lengthCvInput = LinearInput<AnalogInputPinT>(Hardware::hw.phaseCvPin, -5, 5, 0, 8.99);
         #endif
         
         float amp;

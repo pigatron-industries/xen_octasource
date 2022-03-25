@@ -28,20 +28,26 @@ class Hardware {
         RotaryEncoderButton encoder = RotaryEncoderButton(ENCODER_PIN1, ENCODER_PIN2, ENCODER_BTN_PIN);
 
         #if defined(OCTASOURCE_MKII)
-            #define OctasourceInputDevice NativeDevice
-            #define OctasourceOutputDevice DAC8164Device
+            #define AnalogInputPinT AnalogInputPin<NativeDevice>
+            #define AnalogInputSumPinT AnalogInputSumPin<NativeDevice>
+            #define AnalogOutputDeviceT DAC8164Device
+            #define DigitalOutputDeviceT NativeDevice
 
             AnalogInput(wavePotPin, A10)
             AnalogInput(ratePotPin, A11)
-            AnalogInput(ampPotPin, A12)
-            AnalogInput(phasePotPin, A13)
-
+            AnalogInput(ampPotPin, A13)
+            AnalogInput(phasePotPin, A12)
             AnalogInput(waveCvPin, A8)
             AnalogInput(rateCvPin, A6)
             AnalogInput(ampCvPin, A3)
             AnalogInput(phaseCvPin, A7)
             AnalogInput(syncCvPin, A9)
             DigitalOutput(gateOutPin, GATE_OUTPUT_PIN);
+
+            AnalogInputSumPin<> waveSumPin = AnalogInputSumPin<>(wavePotPin, waveCvPin);
+            AnalogInputSumPin<> rateSumPin = AnalogInputSumPin<>(ratePotPin, rateCvPin);
+            AnalogInputSumPin<> ampSumPin = AnalogInputSumPin<>(ampPotPin, ampCvPin);
+            AnalogInputSumPin<> phaseSumPin = AnalogInputSumPin<>(phasePotPin, phaseCvPin);
 
             DAC8164Device dac8164a = DAC8164Device(-1, DAC1_SYNC_PIN);
             DAC8164Device dac8164b = DAC8164Device(-1, DAC2_SYNC_PIN);
@@ -109,19 +115,26 @@ class Hardware {
         #endif
 
         #if defined(OCTASOURCE_MKI)
-            #define OctasourceInputDevice MAX11300Device
-            #define OctasourceOutputDevice MAX11300Device
+            #define AnalogInputPinT AnalogInputPin<MAX11300Device>
+            #define AnalogInputSumPinT AnalogInputSumPin<MAX11300Device>
+            #define AnalogOutputDeviceT MAX11300Device
+            #define DigitalOutputDeviceT MAX11300Device
 
             MAX11300Device max11300 = MAX11300Device(&SPI, CV_CNVT_PIN, CV_SELECT_PIN);
             // AnalogInputPinSum<MAX11300Device> test = AnalogInputPinSum<MAX11300Device>(max11300.pins[RATE_CV_PIN], max11300.pins[RATE_POT_PIN]);
-            //AnalogInputOutputPin<MAX11300Device>& rateCvPin = max11300.pins[RATE_CV_PIN];
-            AnalogInputOutputPin<MAX11300Device>& rateCvPin = max11300.pins[RATE_POT_PIN];
-            //AnalogInputOutputPin<MAX11300Device>& waveCvPin = max11300.pins[WAVE_CV_PIN];
-            AnalogInputOutputPin<MAX11300Device>& waveCvPin = max11300.pins[WAVE_POT_PIN];
-            //AnalogInputOutputPin<MAX11300Device>& ampCvPin = max11300.pins[LENGTH_CV_PIN];
-            AnalogInputOutputPin<MAX11300Device>& ampCvPin = max11300.pins[LENGTH_POT_PIN];
+            AnalogInputOutputPin<MAX11300Device>& rateCvPin = max11300.pins[RATE_CV_PIN];
+            AnalogInputOutputPin<MAX11300Device>& ratePotPin = max11300.pins[RATE_POT_PIN];
+            AnalogInputOutputPin<MAX11300Device>& waveCvPin = max11300.pins[WAVE_CV_PIN];
+            AnalogInputOutputPin<MAX11300Device>& wavePotPin = max11300.pins[WAVE_POT_PIN];
+            AnalogInputOutputPin<MAX11300Device>& ampCvPin = max11300.pins[LENGTH_CV_PIN];
+            AnalogInputOutputPin<MAX11300Device>& ampPotPin = max11300.pins[LENGTH_POT_PIN];
             AnalogInputOutputPin<MAX11300Device>& syncCvPin = max11300.pins[TRIGGER_IN_PIN];
             AnalogInputOutputPin<MAX11300Device>& gateOutPin = max11300.pins[OUTPUT_GATE_PIN];
+
+            AnalogInputSumPinT waveSumPin = AnalogInputSumPinT(wavePotPin, waveCvPin);
+            AnalogInputSumPinT rateSumPin = AnalogInputSumPinT(ratePotPin, rateCvPin);
+            AnalogInputSumPinT ampSumPin = AnalogInputSumPinT(ampPotPin, ampCvPin);
+
             AnalogInputOutputPin<MAX11300Device>* cvOutputPins[OUTPUT_CV_COUNT] = {
                 &max11300.pins[OUTPUT_CV_PIN_START],
                 &max11300.pins[OUTPUT_CV_PIN_START+1],
