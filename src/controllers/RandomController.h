@@ -14,11 +14,11 @@ class RandomController : public Controller {
         virtual void process();
 
     private:
-        LinearInput<AnalogInputPinT> rateCvInput = LinearInput<AnalogInputPinT>(Hardware::hw.rateCvPin, -5, 5, 0, 10);
-        LinearInput<AnalogInputPinT> chanceCvInput = LinearInput<AnalogInputPinT>(Hardware::hw.waveCvPin, -5, 5, -5, 5);
-        LinearInput<AnalogInputPinT> ampCvInput = LinearInput<AnalogInputPinT>(Hardware::hw.ampCvPin, -5, 5, 0, 1);
+        LinearInput<AnalogInputSumPinT> rateCvInput = LinearInput<AnalogInputSumPinT>(Hardware::hw.rateSumPin, -5, 5, 0, 10);
+        LinearInput<AnalogInputSumPinT> chanceCvInput = LinearInput<AnalogInputSumPinT>(Hardware::hw.waveSumPin, -5, 5, -5, 5);
+        LinearInput<AnalogInputSumPinT> ampCvInput = LinearInput<AnalogInputSumPinT>(Hardware::hw.ampSumPin, -5, 5, 0, 1);
         #if defined(OCTASOURCE_MKII)
-            LinearInput<AnalogInputPinT> phaseCvInput = LinearInput<AnalogInputPinT>(Hardware::hw.phaseCvPin, -5, 5, -0.125, 0.125);
+            LinearInput<AnalogInputSumPinT> phaseCvInput = LinearInput<AnalogInputSumPinT>(Hardware::hw.phaseSumPin, -5, 5, -0.125, 0.125);
         #endif
 
         AnalogTriggerOutput<AnalogOutputDeviceT> triggerOutputs[4] = {

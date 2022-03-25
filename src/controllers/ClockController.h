@@ -39,11 +39,11 @@ class ClockController : public Controller {
         virtual void process();
 
     private:
-        LinearInput<AnalogInputPinT> rateCvInput = LinearInput<AnalogInputPinT>(Hardware::hw.rateCvPin, -5, 5, 0, 30);
-        LinearInput<AnalogInputPinT> lengthInput = LinearInput<AnalogInputPinT>(Hardware::hw.ampCvPin, -5, 5, 4.1, 32.9);
-        LinearInput<AnalogInputPinT> distortionXCvInput = LinearInput<AnalogInputPinT>(Hardware::hw.waveCvPin, -5, 5, 0, 1);
+        LinearInput<AnalogInputSumPinT> rateCvInput = LinearInput<AnalogInputSumPinT>(Hardware::hw.rateSumPin, -5, 5, 0, 30);
+        LinearInput<AnalogInputSumPinT> lengthInput = LinearInput<AnalogInputSumPinT>(Hardware::hw.ampSumPin, -5, 5, 4.1, 32.9);
+        LinearInput<AnalogInputSumPinT> distortionXCvInput = LinearInput<AnalogInputSumPinT>(Hardware::hw.waveSumPin, -5, 5, 0, 1);
         #if defined(OCTASOURCE_MKII)
-            LinearInput<AnalogInputPinT> distortionYCvInput = LinearInput<AnalogInputPinT>(Hardware::hw.phaseCvPin, -5, 5, 0, 1);
+            LinearInput<AnalogInputSumPinT> distortionYCvInput = LinearInput<AnalogInputSumPinT>(Hardware::hw.phaseSumPin, -5, 5, 0, 1);
         #endif
 
         AnalogGateOutput<AnalogOutputDeviceT> gateOutputs[8] = {

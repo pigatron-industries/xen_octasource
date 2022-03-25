@@ -17,9 +17,9 @@ class FilterController : public Controller {
         virtual void process();
 
     private:
-        LinearInput<AnalogInputPinT> filterCvInput = LinearInput<AnalogInputPinT>(Hardware::hw.waveCvPin, -5, 5, 0, 100);
+        LinearInput<AnalogInputSumPinT> filterCvInput = LinearInput<AnalogInputSumPinT>(Hardware::hw.waveSumPin, -5, 5, 0, 100);
         #if defined(OCTASOURCE_MKII)
-            LinearInput<AnalogInputPinT> resonanceCvInput = LinearInput<AnalogInputPinT>(Hardware::hw.phaseCvPin, -5, 5, 0, 1);
+            LinearInput<AnalogInputSumPinT> resonanceCvInput = LinearInput<AnalogInputSumPinT>(Hardware::hw.phaseSumPin, -5, 5, 0, 1);
         #endif
 
 
