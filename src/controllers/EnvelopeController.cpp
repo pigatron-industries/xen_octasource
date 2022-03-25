@@ -20,6 +20,7 @@ void EnvelopeController::init(float sampleRate) {
 
 void EnvelopeController::init() {
     Serial.println("Sequential Envelope");
+    Hardware::hw.display.title("ENVELOPE");
     envelopeIndex = -1;
 }
 

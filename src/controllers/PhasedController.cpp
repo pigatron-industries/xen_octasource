@@ -10,6 +10,7 @@ void PhasedController::init(float sampleRate) {
 
 void PhasedController::init() {
     Serial.println("Phase");
+    Hardware::hw.display.title("PHASE");
     for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
         oscillators[i].setPhase(i*0.125);
     }

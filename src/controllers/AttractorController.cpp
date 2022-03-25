@@ -11,6 +11,7 @@ void AttractorController::init(float sampleRate) {
 
 void AttractorController::init() {
     Serial.println("Attractor");
+    Hardware::hw.display.title("ATTRACTOR");
 }
 
 void AttractorController::update() {

@@ -12,6 +12,7 @@ void ClockController::init(float sampleRate) {
 
 void ClockController::init() {
     Serial.println("Clock");
+    Hardware::hw.display.title("CLOCK");
     for(int i = 0; i < 8; i++) {
         clockDividers[i].reset();
     }

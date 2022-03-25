@@ -9,6 +9,7 @@ void ThreeBodyController::init(float sampleRate) {
 void ThreeBodyController::init() {
     threeBody.init(sampleRate);
     Serial.println("Three Body");
+    Hardware::hw.display.title("THREE BODY");
     //printBodies();
 
 

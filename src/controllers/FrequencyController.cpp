@@ -11,6 +11,7 @@ void FrequencyController::init(float sampleRate) {
 
 void FrequencyController::init() {
     Serial.println("Frequency");
+    Hardware::hw.display.title("FREQUENCY");
 }
 
 void FrequencyController::update() {

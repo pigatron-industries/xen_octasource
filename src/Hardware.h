@@ -8,6 +8,7 @@
 #include <eurorack_is32fl3738.h>
 #include <eurorack_dac8164.h>
 #include "lib/io/AnalogInputPinSum.h"
+#include "display/Display.h"
 #include "hwconfig.h"
 
 #define MEMPOOL_SIZE 48*1024
@@ -111,6 +112,8 @@ class Hardware {
                 &is32fl3738.pins[36],
                 &is32fl3738.pins[34]
             };
+
+            Display display;
 
         #endif
 

@@ -14,6 +14,7 @@ void DelayController::init(float sampleRate) {
 
 void DelayController::init() {
     Serial.println("Delay");
+    Hardware::hw.display.title("DELAY");
 }
 
 void DelayController::update() {

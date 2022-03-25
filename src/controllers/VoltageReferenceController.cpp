@@ -7,6 +7,7 @@ void VoltageReferenceController::init(float sampleRate) {
 
 void VoltageReferenceController::init() {
     Serial.println("Voltage Reference");
+    Hardware::hw.display.title("REFERENCE");
 }
 
 void VoltageReferenceController::update() {

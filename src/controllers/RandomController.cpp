@@ -7,6 +7,7 @@ void RandomController::init(float sampleRate) {
 
 void RandomController::init() {
     Serial.println("Random");
+    Hardware::hw.display.title("RANDOM");
 }
 
 void RandomController::update() {

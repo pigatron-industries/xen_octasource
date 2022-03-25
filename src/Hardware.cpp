@@ -18,6 +18,7 @@ void Hardware::init() {
         dac8164b.init();
         dac8164a.setDeferredOutput(true);
         dac8164b.setDeferredOutput(true);
+        display.init();
 
         for(int i = 0; i < 16; i++) {
             encoderLeds[i]->analogWrite(0);

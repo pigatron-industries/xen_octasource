@@ -7,6 +7,7 @@ void BouncingBallController::init(float sampleRate) {
 
 void BouncingBallController::init() {
     Serial.println("Bouncing Ball");
+    Hardware::hw.display.title("BOUNCE");
     for(int i = 0; i < 4; i++) {
         bouncingBalls[i].init(sampleRate);
         bouncingBalls[i].setDamp(0.9);

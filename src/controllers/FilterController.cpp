@@ -14,6 +14,7 @@ void FilterController::init(float sampleRate) {
 
 void FilterController::init() {
     Serial.println("Filter");
+    Hardware::hw.display.title("FILTER");
 }
 
 void FilterController::update() {

@@ -6,6 +6,7 @@ void AudioFrequencyController::init(float sampleRate) {
 
 void AudioFrequencyController::init() {
     Serial.println("Audio Frequency");
+    Hardware::hw.display.title("AUDIO");
     updateRate();
 }
 
