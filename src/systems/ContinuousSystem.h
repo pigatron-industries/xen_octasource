@@ -10,6 +10,7 @@ class ContinuousSystem {
             sampleRateRecip = 1/sampleRate;
             setSpeed(speed);
         };
+        virtual const char* getName() { return ""; };
         virtual void process() = 0;
         virtual float getOutput(int i) = 0;
         virtual void setParam(int i, float value) {};

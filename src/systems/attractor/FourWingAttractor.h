@@ -19,6 +19,8 @@ class FourWingAttractor : public ContinuousSystemN<3> {
             speedMult = 4;
         }
 
+        const char* getName() { return "FOUR WING"; }
+
         void system() {
             delta[X] = a*pos[X] + pos[Y]*pos[Z];
             delta[Y] = b*pos[X] + c*pos[Y] - pos[X]*pos[Z];

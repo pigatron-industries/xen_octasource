@@ -20,7 +20,15 @@ void EnvelopeController::init(float sampleRate) {
 
 void EnvelopeController::init() {
     Serial.println("Sequential Envelope");
-    Hardware::hw.display.title("ENVELOPE");
+    Hardware::hw.display.text("ENVELOPE");
+    switch(mode.value) {
+        case Mode::LATCHED:
+            Hardware::hw.display.text("LATCHED", Display::TEXTLINE_2);
+            break;
+        case Mode::GATED:
+            Hardware::hw.display.text("GATED", Display::TEXTLINE_2);
+            break;
+    }
     envelopeIndex = -1;
 }
 

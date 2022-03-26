@@ -11,7 +11,24 @@ void FrequencyController::init(float sampleRate) {
 
 void FrequencyController::init() {
     Serial.println("Frequency");
-    Hardware::hw.display.title("FREQUENCY");
+    Hardware::hw.display.text("FREQUENCY");
+    switch(mode.value) {
+        case Mode::LINEAR:
+            Hardware::hw.display.text("LINEAR", Display::TEXTLINE_2);
+            break;
+        case Mode::EXP:
+            Hardware::hw.display.text("EXPONENTIAL", Display::TEXTLINE_2);
+            break;
+        case Mode::INTERVAL:
+            Hardware::hw.display.text("INTERVAL", Display::TEXTLINE_2);
+            break;
+        case Mode::UNCORRELATED:
+            Hardware::hw.display.text("UNCORRELATED", Display::TEXTLINE_2);
+            break;
+        case Mode::PLANETARY:
+            Hardware::hw.display.text("PLANETARY", Display::TEXTLINE_2);
+            break;
+    }
 }
 
 void FrequencyController::update() {
@@ -93,6 +110,7 @@ void FrequencyController::updateWave() {
                 waveSelector.select(3);
             }
         }
+        Hardware::hw.display.drawWaveShape(&waveSelector, 0, 17, 32, 16, 2);
     }
 }
 

@@ -38,6 +38,8 @@ void MainController::controllerInit() {
         }
     #endif
 
+    Hardware::hw.display.clear();
+
     if(controllers.getSelected()->getSampleRate() > 0) {
         controllers.getSelected()->init();
     } else {
@@ -63,6 +65,10 @@ void MainController::update() {
     }
     doEncoderEvent(event);
     controllers.getSelected()->update();
+
+    #if defined(OCTASOURCE_MKII)
+        Hardware::hw.display.update();
+    #endif
 
     #if defined(OCTASOURCE_MKI)
         Hardware::hw.max11300.send();

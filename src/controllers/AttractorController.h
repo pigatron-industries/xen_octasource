@@ -15,6 +15,7 @@
 #include "systems/attractor/RabinovichFabrikantAttractor.h"
 #include "systems/attractor/ThreeScrollUnifiedAttractor.h"
 #include "systems/attractor/FourWingAttractor.h"
+#include "display/PixelTrail.h"
 #include <eurorack.h>
 
 class AttractorController : public Controller {
@@ -58,6 +59,9 @@ class AttractorController : public Controller {
                         FourWingAttractor> attractors2;
 
         float amp;
+
+        PixelTrail<100> pixelTrail1;
+        PixelTrail<100> pixelTrail2;
         
         void updateRate();
         void updateAmp();

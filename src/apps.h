@@ -10,7 +10,6 @@
 #include "controllers/RandomController.h"
 #include "controllers/DelayController.h"
 #include "controllers/VoltageReferenceController.h"
-#include "controllers/AudioFrequencyController.h"
 
 #define CONTROLLERS \
 PhasedController, \
@@ -24,5 +23,4 @@ DoublePendulumController, \
 ThreeBodyController, \
 RandomController, \
 DelayController, \
-VoltageReferenceController, \
-AudioFrequencyController
+VoltageReferenceController

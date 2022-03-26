@@ -20,6 +20,8 @@ class ChenAttractor : public ContinuousSystemN<3> {
             speedMult = 1.5; //Breaks if it goes too fast
         }
 
+        const char* getName() { return "CHEN"; }
+
         void system() {
             delta[X] = a*pos[X] - pos[Y]*pos[Z];
             delta[Y] = b*pos[Y] + pos[X]*pos[Z];

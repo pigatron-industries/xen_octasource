@@ -10,7 +10,7 @@ void PhasedController::init(float sampleRate) {
 
 void PhasedController::init() {
     Serial.println("Phase");
-    Hardware::hw.display.title("PHASE");
+    Hardware::hw.display.text("PHASE");
     for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
         oscillators[i].setPhase(i*0.125);
     }
@@ -69,7 +69,7 @@ void PhasedController::updateWave() {
                 waveSelector.select(3);
             }
         }
-        Hardware::hw.display.drawWaveShape(&waveSelector, 0, 10, 32, 20, 2);
+        Hardware::hw.display.drawWaveShape(&waveSelector, 0, 17, 32, 16, 2);
     }
 }
 

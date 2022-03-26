@@ -19,6 +19,8 @@ class ThreeScrollUnifiedAttractor : public ContinuousSystemN<3> {
             speedMult = 0.25;
         }
 
+        const char* getName() { return "THREE SCROLL"; }
+
         void system() {
             delta[X] = a*(pos[Y] - pos[X]) + d*pos[X]*pos[Z];
             delta[Y] = c*pos[X] - pos[X]*pos[Z] + f*pos[Y];

@@ -20,6 +20,8 @@ class ThomasAttractor : public ContinuousSystemN<3> {
             speedMult = 4;
         }
 
+        const char* getName() { return "THOMAS"; }
+
         void system() {
             delta[X] = sinf(pos[Y])-b*pos[X];
             delta[Y] = sinf(pos[Z])-b*pos[Y];

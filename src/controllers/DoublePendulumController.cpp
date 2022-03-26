@@ -8,7 +8,7 @@ void DoublePendulumController::init(float sampleRate) {
 void DoublePendulumController::init() {
     doublePendulum.init(sampleRate);
     Serial.println("Double Pendulum");
-    Hardware::hw.display.title("PENDULUM");
+    Hardware::hw.display.text("PENDULUM");
 }
 
 void DoublePendulumController::update() {

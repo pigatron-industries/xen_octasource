@@ -9,7 +9,7 @@ void ThreeBodyController::init(float sampleRate) {
 void ThreeBodyController::init() {
     threeBody.init(sampleRate);
     Serial.println("Three Body");
-    Hardware::hw.display.title("THREE BODY");
+    Hardware::hw.display.text("THREE BODY");
     //printBodies();
 
 
@@ -23,6 +23,7 @@ void ThreeBodyController::init() {
     Array<Body, 3> bodies;
     switch(mode.value) {
         case Mode::STABLE1: // Massive star with opposite planets of equal mass
+            Hardware::hw.display.text("STABLE ORBIT", Display::TEXTLINE_2);
             bodies[0].mass = 100;
             bodies[0].position = Vector<2>(0, 0);
             bodies[0].velocity = Vector<2>(0, 0);
@@ -36,16 +37,19 @@ void ThreeBodyController::init() {
             threeBody.setEdgeMode(ThreeBody::EdgeMode::NONE);
             break;
         case Mode::FIGURE8_STABLE_V1A: // Figure 8 Stable
+            Hardware::hw.display.text("FIGURE8 STABLE", Display::TEXTLINE_2);
             bodies = ThreeBody::initEqualInlineSystem(4, Vector<2>(0.347111, 0.532728));
             threeBody.setDriftCorrection(true);
             threeBody.setEdgeMode(ThreeBody::EdgeMode::NONE);
             break;
         case Mode::FIGURE8_CHAOTIC_V17A: // Figure 8 Chaotic
+            Hardware::hw.display.text("FIGURE8 CHAOTIC", Display::TEXTLINE_2);
             bodies = ThreeBody::initEqualInlineSystem(4, Vector<2>(0.210832, 0.51741));
             threeBody.setDriftCorrection(true);
             threeBody.setEdgeMode(ThreeBody::EdgeMode::NONE);
             break;
         case Mode::BROUCKE_A2: // Broucke Stable
+            Hardware::hw.display.text("BROUCKE STABLE", Display::TEXTLINE_2);
             bodies[0].mass = 4;
             bodies[0].position = Vector<2>(0.336130095, 0) * 4;
             bodies[0].velocity = Vector<2>(0, 1.532431537);
@@ -59,6 +63,7 @@ void ThreeBodyController::init() {
             threeBody.setEdgeMode(ThreeBody::EdgeMode::NONE);
             break;
         case Mode::BROUCKE_ASYMETRICAL: // Stable state with 3 equal masses, found accidentally from CHAOTIC_BOUNCE1
+            Hardware::hw.display.text("BROUCKE ASYM", Display::TEXTLINE_2);
             bodies[0].mass = 4;
             bodies[0].position = Vector<2>(-2.855484,-0.099324);
             bodies[0].velocity = Vector<2>(-0.14822,-0.47005);
@@ -72,21 +77,25 @@ void ThreeBodyController::init() {
             threeBody.setEdgeMode(ThreeBody::EdgeMode::NONE);
             break;
         case Mode::CHAOTIC1_BOUNCE:
+            Hardware::hw.display.text("CHAOTIC BOUNCE", Display::TEXTLINE_2);
             bodies = ThreeBody::initEqualInlineSystem(4, Vector<2>(0.201678, 0.409896));
             threeBody.setDriftCorrection(false);
             threeBody.setEdgeMode(ThreeBody::EdgeMode::BOUNCE);
             break;
         case Mode::CHAOTIC1_ANTIGRAV:
+            Hardware::hw.display.text("CHAOTIC ANTIGRAV", Display::TEXTLINE_2);
             bodies = ThreeBody::initEqualInlineSystem(4, Vector<2>(0.201678, 0.409896));
             threeBody.setDriftCorrection(false);
             threeBody.setEdgeMode(ThreeBody::EdgeMode::ANTIGRAV);
             break;
         case Mode::CHAOTIC1_WRAP:
+            Hardware::hw.display.text("CHAOTIC WRAP", Display::TEXTLINE_2);
             bodies = ThreeBody::initEqualInlineSystem(4, Vector<2>(0.201678, 0.409896));
             threeBody.setDriftCorrection(false);
             threeBody.setEdgeMode(ThreeBody::EdgeMode::WRAP);
             break;
         case Mode::CHAOTIC2: // Large mass with 2 small masses
+            Hardware::hw.display.text("CHAOTIC 1L2S", Display::TEXTLINE_2);
             bodies[0].mass = 100;
             bodies[0].position = Vector<2>(0, 0);
             bodies[0].velocity = Vector<2>(0, 0);
@@ -100,6 +109,7 @@ void ThreeBodyController::init() {
             threeBody.setEdgeMode(ThreeBody::EdgeMode::ANTIGRAV);
             break;
         case Mode::CHAOTIC3: // All different masses
+            Hardware::hw.display.text("CHAOTIC 1L1M1S", Display::TEXTLINE_2);
             bodies[0].mass = 100;
             bodies[0].position = Vector<2>(0, 0);
             bodies[0].velocity = Vector<2>(0, 0);
@@ -157,19 +167,19 @@ void ThreeBodyController::updateDamp() {
 
 void ThreeBodyController::process() {
     threeBody.process();
-    Hardware::hw.cvOutputPins[0]->analogWrite(threeBody.getOutput(0)*totalGain);
-    Hardware::hw.cvOutputPins[1]->analogWrite(threeBody.getOutput(1)*totalGain);
+    Hardware::hw.cvOutputPins[1]->analogWrite(threeBody.getOutput(0)*totalGain);
+    Hardware::hw.cvOutputPins[7]->analogWrite(threeBody.getOutput(1)*totalGain);
     Hardware::hw.cvOutputPins[2]->analogWrite(threeBody.getOutput(2)*totalGain);
-    Hardware::hw.cvOutputPins[3]->analogWrite(threeBody.getOutput(3)*totalGain);
-    Hardware::hw.cvOutputPins[4]->analogWrite(threeBody.getOutput(4)*totalGain);
+    Hardware::hw.cvOutputPins[6]->analogWrite(threeBody.getOutput(3)*totalGain);
+    Hardware::hw.cvOutputPins[3]->analogWrite(threeBody.getOutput(4)*totalGain);
     Hardware::hw.cvOutputPins[5]->analogWrite(threeBody.getOutput(5)*totalGain);
 
-    Hardware::hw.cvOutputPins[6]->analogWrite(threeBody.getOutput(oscBody*2)*totalGain);
-    Hardware::hw.cvOutputPins[7]->analogWrite(threeBody.getOutput(oscBody*2+1)*totalGain);
-    oscBody++;
-    if(oscBody >= 3) {
-        oscBody = 0;
-    }
+    // Hardware::hw.cvOutputPins[6]->analogWrite(threeBody.getOutput(oscBody*2)*totalGain);
+    // Hardware::hw.cvOutputPins[7]->analogWrite(threeBody.getOutput(oscBody*2+1)*totalGain);
+    // oscBody++;
+    // if(oscBody >= 3) {
+    //     oscBody = 0;
+    // }
 }
 
 void ThreeBodyController::printBodies() {

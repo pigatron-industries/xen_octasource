@@ -19,6 +19,8 @@ class HalvorsenAttractor : public ContinuousSystemN<3> {
             speedMult = 1;
         }
 
+        const char* getName() { return "HALVORSEN"; }
+
         void system() {
             delta[X] = -a*pos[X] - 4*pos[Y] - 4*pos[Z] - pos[Y]*pos[Y];
             delta[Y] = -a*pos[Y] - 4*pos[Z] - 4*pos[X] - pos[Z]*pos[Z];

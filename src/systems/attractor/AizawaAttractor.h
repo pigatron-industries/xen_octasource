@@ -20,6 +20,8 @@ class AizawaAttractor : public ContinuousSystemN<3> {
             speedMult = 1;
         }
 
+        const char* getName() { return "AIZAWA"; }
+
         void system() {
             delta[X] = pos[X]*(pos[Z]-b) - d*pos[Y];
             delta[Y] = d*pos[X] + pos[Y]*(pos[Z]-b);

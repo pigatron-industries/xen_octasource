@@ -167,8 +167,8 @@ Inputs:
 * **AMP**: Amplitude of the strange attractor.
 
 Outputs:
-* **OUTPUTS 1,2,3**: X, Y and Z co-ordinates of the strange attractor.
-* **OUTPUTS 4,5,6**: X, Y and Z co-ordinates of the same strange attractor with slighly different starting position.
+* **OUTPUTS 2,3,4**: X, Y and Z co-ordinates of the strange attractor.
+* **OUTPUTS 8,7,6**: X, Y and Z co-ordinates of the same strange attractor with slighly different starting position.
 * **TRIG**: Gate, triggers on when Z axis goes above 0 and off below 0.
 
 Submodes:
@@ -217,9 +217,9 @@ Inputs:
 * **AMP**: Amplitude of the outputs.
 
 Outputs:
-* **OUTPUTS 1,2**: X, Y position of planet 1.
-* **OUTPUTS 3,4**: X, Y position of planet 2.
-* **OUTPUTS 5,6**: X, Y position of planet 3.
+* **OUTPUTS 2,8**: X, Y position of planet 1.
+* **OUTPUTS 3,7**: X, Y position of planet 2.
+* **OUTPUTS 4,6**: X, Y position of planet 3.
 * **TRIG**: 
 
 Submodes:

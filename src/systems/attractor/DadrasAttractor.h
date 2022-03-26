@@ -20,6 +20,8 @@ class DadrasAttractor : public ContinuousSystemN<3> {
             speedMult = 1;
         }
 
+        const char* getName() { return "DADRAS"; }
+
         void system() {
             delta[X] = pos[Y] - a*pos[X] + b*pos[Y]*pos[Z];
             delta[Y] = c*pos[Y] - pos[X]*pos[Z] + pos[Z];

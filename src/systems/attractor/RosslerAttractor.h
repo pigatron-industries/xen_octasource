@@ -19,6 +19,8 @@ class RosslerAttractor : public ContinuousSystemN<3> {
             speedMult = 2;
         }
 
+        const char* getName() { return "ROSSLER"; }
+
         void system() {
             delta[X] = -(pos[Y]+pos[Z]);
             delta[Y] = pos[X] + a*pos[Y];

@@ -19,6 +19,8 @@ class RabinovichFabrikantAttractor : public ContinuousSystemN<3> {
             speedMult = 2;
         }
 
+        const char* getName() { return "RABINOVICH"; }
+
         void system() {
             delta[X] = pos[Y]*(pos[Z]-1+pos[X]*pos[X]) + b*pos[X];
             delta[Y] = pos[X]*(3*pos[Z]+1-pos[X]*pos[X]) + b*pos[Y];

@@ -19,6 +19,8 @@ class LorenzAttractor : public ContinuousSystemN<3> {
             speedMult = 1;
         }
 
+        const char* getName() { return "LORENZ"; }
+
         void system() {
             delta[0] = a*(pos[Y]-pos[X]);
             delta[1] = pos[X]*(c-pos[Z]) - pos[Y];

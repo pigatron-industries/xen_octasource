@@ -11,13 +11,21 @@ void AttractorController::init(float sampleRate) {
 
 void AttractorController::init() {
     Serial.println("Attractor");
-    Hardware::hw.display.title("ATTRACTOR");
+    Hardware::hw.display.text("ATTRACTOR");
+    Hardware::hw.display.text(attractors1[mode.value]->getName(), Display::TEXTLINE_2);
 }
 
 void AttractorController::update() {
     updateRate();
     updateAmp();
     Hardware::hw.updateOutputLeds();
+    
+    // RangeScale scale = RangeScale(-5, 5, 0, 32);
+    // float x = Hardware::hw.cvOutputPins[1]->getAnalogValue();
+    // float y = Hardware::hw.cvOutputPins[2]->getAnalogValue();
+    // float z = Hardware::hw.cvOutputPins[3]->getAnalogValue();
+    // Hardware::hw.display.drawPixelTrail(pixelTrail1, Pixel(scale.convert(x), scale.convert(y)));
+    // Hardware::hw.display.drawPixelTrail(pixelTrail2, Pixel(32+scale.convert(x), scale.convert(z)));
 }
 
 void AttractorController::updateRate() {
@@ -39,14 +47,14 @@ void AttractorController::updateAmp() {
 void AttractorController::process() {
     ContinuousSystem* attractor = attractors1[mode.value];
     attractor->process();
-    Hardware::hw.cvOutputPins[0]->analogWrite(attractor->getOutput(X)*amp);
-    Hardware::hw.cvOutputPins[1]->analogWrite(attractor->getOutput(Y)*amp);
-    Hardware::hw.cvOutputPins[2]->analogWrite(attractor->getOutput(Z)*amp);
+    Hardware::hw.cvOutputPins[1]->analogWrite(attractor->getOutput(X)*amp);
+    Hardware::hw.cvOutputPins[2]->analogWrite(attractor->getOutput(Y)*amp);
+    Hardware::hw.cvOutputPins[3]->analogWrite(attractor->getOutput(Z)*amp);
 
     attractor = attractors2[mode.value];
     attractor->process();
-    Hardware::hw.cvOutputPins[3]->analogWrite(attractor->getOutput(X)*amp);
-    Hardware::hw.cvOutputPins[4]->analogWrite(attractor->getOutput(Y)*amp);
+    Hardware::hw.cvOutputPins[7]->analogWrite(attractor->getOutput(X)*amp);
+    Hardware::hw.cvOutputPins[6]->analogWrite(attractor->getOutput(Y)*amp);
     Hardware::hw.cvOutputPins[5]->analogWrite(attractor->getOutput(Z)*amp);
 
     Hardware::hw.gateOutPin.digitalWrite(attractor->getOutput(Z) > 0);
