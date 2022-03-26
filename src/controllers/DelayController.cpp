@@ -26,17 +26,22 @@ void DelayController::update() {
         }
     }
 
+    value = Hardware::hw.syncCvPin.analogRead();
+    for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
+        delays[i].write(value);
+    }
+
     Hardware::hw.updateOutputLeds();
 }
 
 void DelayController::process() {
-    bool tick = clockDivider.tick();
-    if(tick) {
-        value = Hardware::hw.syncCvPin.analogRead();
-        for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
-            delays[i].write(value);
-        }
-    }
+    //  bool tick = clockDivider.tick();
+    //  if(tick) {
+    //     value = Hardware::hw.syncCvPin.analogRead();
+    //     for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
+    //         delays[i].write(value);
+    //     }
+    //  }
 
     for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
         filters[i].process(value);
@@ -44,11 +49,11 @@ void DelayController::process() {
 
     switch(mode.value) {
         case Mode::DELAY:
-            if(tick) {
+            //if(tick) {
                 for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
                     Hardware::hw.cvOutputPins[i]->analogWrite(delays[i].read());
                 }
-            }
+            //}
             break;
         case Mode::SLEW:
             for(int i = 0; i < OUTPUT_CV_COUNT; i++) {

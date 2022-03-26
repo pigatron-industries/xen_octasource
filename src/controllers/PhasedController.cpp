@@ -69,6 +69,7 @@ void PhasedController::updateWave() {
                 waveSelector.select(3);
             }
         }
+        Hardware::hw.display.drawWaveShape(&waveSelector, 0, 10, 32, 20, 2);
     }
 }
 
