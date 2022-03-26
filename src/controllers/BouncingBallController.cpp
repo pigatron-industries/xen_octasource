@@ -44,8 +44,8 @@ void BouncingBallController::update() {
 }
 
 void BouncingBallController::updateRate() {
-    if(controls.expRateCvInput.update()) {
-        float rateValue = controls.expRateCvInput.getValue();
+    if(expRateCvInput.update()) {
+        float rateValue = expRateCvInput.getValue();
         for(int i = 0; i < 4; i++) {
             bouncingBalls[i].setSpeed(rateValue);
         }

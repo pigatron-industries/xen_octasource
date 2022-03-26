@@ -17,7 +17,8 @@ class FilterController : public Controller {
         virtual void process();
 
     private:
-        LinearInput<AnalogInputSumPinT> filterCvInput = LinearInput<AnalogInputSumPinT>(Hardware::hw.waveSumPin, -5, 5, 0, 100);
+        ExpInput<AnalogInputSumPinT> expRateCvInput = ExpInput<AnalogInputSumPinT>(Hardware::hw.rateSumPin, 1);
+        ExpInput<AnalogInputSumPinT> filterCvInput = ExpInput<AnalogInputSumPinT>(Hardware::hw.waveSumPin, 10);
         #if defined(OCTASOURCE_MKII)
             LinearInput<AnalogInputSumPinT> resonanceCvInput = LinearInput<AnalogInputSumPinT>(Hardware::hw.phaseSumPin, -5, 5, 0, 1);
         #endif
@@ -36,7 +37,7 @@ class FilterController : public Controller {
 
         float ampValue;
 
-        void updateRateBipolar();
+        void updateRate();
         void updateFilterFrequency();
         void updateFilterResonance();
         void updateAmp();

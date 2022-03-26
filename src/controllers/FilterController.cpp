@@ -18,16 +18,16 @@ void FilterController::init() {
 }
 
 void FilterController::update() {
-    updateRateBipolar();
+    updateRate();
     updateFilterFrequency();
     updateFilterResonance();
     updateAmp();
     Hardware::hw.updateOutputLeds();
 }
 
-void FilterController::updateRateBipolar() {
-    if(controls.bipolarRateCvInput.update()) {
-        float rateValue = controls.bipolarRateCvInput.getValue();
+void FilterController::updateRate() {
+    if(expRateCvInput.update()) {
+        float rateValue = expRateCvInput.getValue();
         sineOscillator.setFrequency(rateValue);
         triangleOscillator.setFrequency(rateValue);
         sawOscillator.setFrequency(rateValue);
