@@ -66,7 +66,6 @@ class ClockController : public Controller {
 
         void tick();
         void setClockDivisorLength(int channel, int divisor, int length);
-        void updateOutputLeds();
         
 };
 

@@ -68,3 +68,20 @@ void Hardware::updateOutputLeds() {
         }
     #endif
 }
+
+void Hardware::updateOutputLeds(Colour negative, Colour positive) {
+    #if defined(OCTASOURCE_MKII)
+        for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
+            float value = Hardware::hw.cvOutputPins[i]->getAnalogValue();
+            if(value > 0) {
+                Hardware::hw.outputRedLeds[i]->analogWrite(value * positive.red * 0.1);
+                Hardware::hw.outputGreenLeds[i]->analogWrite(value * positive.green * 0.1);
+                Hardware::hw.outputBlueLeds[i]->analogWrite(value * positive.blue * 0.1);
+            } else {
+                Hardware::hw.outputRedLeds[i]->analogWrite(value * negative.red * 0.1);
+                Hardware::hw.outputGreenLeds[i]->analogWrite(value * negative.green * 0.1);
+                Hardware::hw.outputBlueLeds[i]->analogWrite(value * negative.blue * 0.1);
+            }
+        }
+    #endif
+}

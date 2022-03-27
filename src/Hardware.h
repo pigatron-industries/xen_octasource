@@ -9,6 +9,7 @@
 #include <eurorack_dac8164.h>
 #include "lib/io/AnalogInputPinSum.h"
 #include "display/Display.h"
+#include "Colour.h"
 #include "hwconfig.h"
 
 #define MEMPOOL_SIZE 48*1024
@@ -20,6 +21,7 @@ class Hardware {
 
         void clearOutputLeds();
         void updateOutputLeds();
+        void updateOutputLeds(Colour negative, Colour positive);
 
         // Memory pool
         static float memPoolBuffer[MEMPOOL_SIZE];

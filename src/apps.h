@@ -2,6 +2,7 @@
 #include "controllers/FrequencyController.h"
 #include "controllers/FilterController.h"
 #include "controllers/ClockController.h"
+#include "controllers/ClockMultiplierController.h"
 #include "controllers/EnvelopeController.h"
 #include "controllers/BouncingBallController.h"
 #include "controllers/AttractorController.h"
@@ -16,6 +17,7 @@ PhasedController, \
 FrequencyController, \
 FilterController, \
 ClockController, \
+ClockMultiplierController, \
 EnvelopeController, \
 BouncingBallController, \
 AttractorController, \
