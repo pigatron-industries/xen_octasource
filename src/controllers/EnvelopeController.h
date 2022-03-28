@@ -40,6 +40,8 @@ class EnvelopeController : public Controller {
         #if defined(OCTASOURCE_MKII)
             LinearInput<AnalogInputSumPinT> lengthCvInput = LinearInput<AnalogInputSumPinT>(Hardware::hw.phaseSumPin, -5, 5, 0, 8.99);
         #endif
+
+        GateInput<> rangeInput = GateInput<>(Hardware::hw.rangeSwitchPin, false);
         
         float amp;
         int length;

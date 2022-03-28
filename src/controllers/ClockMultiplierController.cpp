@@ -19,7 +19,19 @@ void ClockMultiplierController::update() {
         }
     }
 
-    Hardware::hw.updateOutputLeds();
+    if(rangeInput.update()) {
+        if(rangeInput.getValue()) {
+            for(int i = 0; i < 8; i++) {
+                triggerOutputs[i].setZeroVoltage(-5);
+            }
+        } else {
+            for(int i = 0; i < 8; i++) {
+                triggerOutputs[i].setZeroVoltage(0);
+            }
+        }
+    }
+
+    Hardware::hw.updateOutputLeds(Colour(0, 0, 0), Colour(0, 1, 0));
 }
 
 void ClockMultiplierController::process() {

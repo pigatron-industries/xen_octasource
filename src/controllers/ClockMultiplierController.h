@@ -32,6 +32,8 @@ class ClockMultiplierController : public Controller {
             AnalogTriggerOutput<AnalogOutputDeviceT>(*Hardware::hw.cvOutputPins[7])
         };
 
+        GateInput<> rangeInput = GateInput<>(Hardware::hw.rangeSwitchPin, false);
+
         Clock clocks[9];
 
         void syncClocks();

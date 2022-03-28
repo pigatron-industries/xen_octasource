@@ -46,6 +46,7 @@ class Hardware {
             AnalogInput(phaseCvPin, A7)
             AnalogInput(syncCvPin, A2)
             AnalogInput(modeCvPin, A9)
+            DigitalInput(rangeSwitchPin, RANGE_SWITCH_PIN, true);
             DigitalOutput(gateOutPin, GATE_OUTPUT_PIN);
 
             AnalogInputSumPin<> waveSumPin = AnalogInputSumPin<>(wavePotPin, waveCvPin);

@@ -52,7 +52,8 @@ void EnvelopeController::update() {
         }
     }
 
-    Hardware::hw.updateOutputLeds();
+    rangeInput.update();
+    Hardware::hw.updateOutputLeds(Colour(0, 0, 0), Colour(0, 1, 0));
 }
 
 void EnvelopeController::updateAttackReleaseTime() {
@@ -84,6 +85,9 @@ void EnvelopeController::updateAmp() {
 void EnvelopeController::process() {
     for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
         float value = envelopes[i].process();
+        if(rangeInput.getValue()) {
+            value = (value * 2) - 1;
+        }
         Hardware::hw.cvOutputPins[i]->analogWrite(value*amp);
     }
 }

@@ -57,6 +57,8 @@ class ClockController : public Controller {
             AnalogGateOutput<AnalogOutputDeviceT>(*Hardware::hw.cvOutputPins[7])
         };
 
+        GateInput<> rangeInput = GateInput<>(Hardware::hw.rangeSwitchPin, false);
+
         DistortedClock<TwoLineFunction, 32> clock;
         DistortedClock<SmoothStepFunction, 32> smoothClock;
         ClockDivider clockDividers[8];

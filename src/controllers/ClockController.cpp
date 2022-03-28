@@ -107,6 +107,18 @@ void ClockController::update() {
         }
     }
 
+    if(rangeInput.update()) {
+        if(rangeInput.getValue()) {
+            for(int i = 0; i < 8; i++) {
+                gateOutputs[i].setZeroVoltage(-5);
+            }
+        } else {
+            for(int i = 0; i < 8; i++) {
+                gateOutputs[i].setZeroVoltage(0);
+            }
+        }
+    }
+
 #if defined(OCTASOURCE_MKII)
     if(distortionXCvInput.update() || distortionYCvInput.update() || lengthInput.update()) {
 #else
@@ -131,7 +143,7 @@ void ClockController::update() {
         clock.externalTick();
     }
 
-    Hardware::hw.updateOutputLeds();
+    Hardware::hw.updateOutputLeds(Colour(0, 0, 0), Colour(0, 1, 0));
 }
 
 void ClockController::process() {

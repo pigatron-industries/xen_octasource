@@ -16,6 +16,7 @@
     #define ENCODER_PIN1 3
     #define ENCODER_PIN2 4
     #define GATE_OUTPUT_PIN 5
+    #define RANGE_SWITCH_PIN 6
 #endif
 
 #define SDB_PIN 7
