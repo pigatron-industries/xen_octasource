@@ -11,10 +11,10 @@
  * Not 1V/oct
  */
 template<class T = AnalogInputPin<NativeDevice>>
-class BipolarExpInput : public AbstractInput<T> {
+class BipolarExpInput : public AbstractAnalogInput<T> {
     public:
         BipolarExpInput(T& input) : 
-            AbstractInput<T>(input) {}
+            AbstractAnalogInput<T>(input) {}
 
         float getValue() { 
             float voltage = this->getStableVoltage();
