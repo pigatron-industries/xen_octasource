@@ -51,6 +51,10 @@ class Vector {
             return Vector(*this) -= other;
         }
 
+        const Vector operator-() const {
+            return Vector(*this) *= -1;
+        }
+
         Vector& operator*=(float rhs) { 
             for(int i = 0; i < N; i++) {
                 val[i] *= rhs;
