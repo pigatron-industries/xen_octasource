@@ -5,17 +5,17 @@
 
 class ForceGravity : public Force {
     public:
-        ForceGravity(Vector<2> force = Vector<2>(0, -9.8)) : Force() {
+        ForceGravity(Vector<2> acceleration = Vector<2>(0, -9.8)) : Force() {
             this->acceleration = acceleration;
         }
-        inline virtual void apply(Body& body);
+        inline virtual void apply(Body* body);
 
     private:
         Vector<2> acceleration;
 };
 
-void ForceGravity::apply(Body& body) {
-    body.applyAcceleration(acceleration);
+void ForceGravity::apply(Body* body) {
+    body->applyAcceleration(acceleration);
 }
 
 #endif

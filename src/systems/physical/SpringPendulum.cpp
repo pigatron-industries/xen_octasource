@@ -1,5 +1,12 @@
 #include "SpringPendulum.h"
 
+SpringPendulum::SpringPendulum() {
+    physics.addBody(&fixedBody);
+    physics.addBody(&body);
+    physics.addConstraint(&spring);
+    physics.addForce(&gravity);
+}
+
 void SpringPendulum::init(float sampleRate) {
     ContinuousSystemN::init(sampleRate);
     pos[X] = 0;
@@ -9,20 +16,16 @@ void SpringPendulum::init(float sampleRate) {
     offset[X] = 0;
     offset[Y] = 0;
     speedMult = 1;
+    setInitialConditions(Vector<2>(0, -3), Vector<2>(0.01, 0.5));
+}
 
-    //body.mass = 1;
-
-    //Vector<2> forceGravity = Vector<2>(0, -g * body.mass);
+void SpringPendulum::setInitialConditions(Vector<2> bodyPosition, Vector<2> bodyVelocity) {
+    body.setPosition(bodyPosition);
+    body.setVelocity(bodyVelocity);
 }
 
 void SpringPendulum::process() {
-
-    // float springLength = body.position.length();
-    // float stretch = spring.restLength - springLength;
-    // Vector<2> forceSpring = (body.position/springLength) * stretch * -spring.stiffness;
-
-
-
-    pos[X] = 0;
-    pos[Y] = 0;
+    physics.update(dt);
+    pos[X] = body.getPosition()[X];
+    pos[Y] = body.getPosition()[Y];
 }

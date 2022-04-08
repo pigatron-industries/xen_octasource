@@ -1,19 +1,12 @@
 #ifndef ThreeBody_h
 #define ThreeBody_h
 
-#include "../ContinuousSystem.h"
 #include <eurorack.h>
+#include "../ContinuousSystem.h"
+#include "engine/Body.h"
 
 #define BODIES 3
 #define G 1
-
-class Body {
-    public:
-        float mass = 1;
-        Vector<2> position = Vector<2>(0, 0);
-        Vector<2> velocity = Vector<2>(0, 0);
-        Vector<2> acceleration = Vector<2>(0, 0);
-};
 
 class ThreeBody : public ContinuousSystemN<6> {
     public:
@@ -50,8 +43,8 @@ class ThreeBody : public ContinuousSystemN<6> {
         EdgeMode edgeMode;
 
         void calculateAcceleration(int i);
-        Vector<2> calculateCentreOfMass(const Array<Body, BODIES>& bodies);
-        Vector<2> calculateMomentum(const Array<Body, BODIES>& bodies);
+        Vector<2> calculateCentreOfMass(Array<Body, BODIES>& bodies);
+        Vector<2> calculateMomentum(Array<Body, BODIES>& bodies);
         void limitBodies();
         void doDriftCorrection();
         void applyAntiGrav(int body);

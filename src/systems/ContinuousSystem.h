@@ -40,6 +40,9 @@ class ContinuousSystemN : public ContinuousSystem {
         void setPosition(Vector<N> position) { pos = position; }
         void changePosition(Vector<N> change) { pos += change; }
 
+        void setOffset(Vector<N> offset) { this->offset = offset; }
+        void setScale(Vector<N> scale) { this->mult = scale; }
+
         float getOutput(int i) { return (pos[i]+offset.val[i])*mult.val[i]; }
 
         void process() {

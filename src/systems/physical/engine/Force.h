@@ -5,7 +5,7 @@
 
 class Force {
     public:
-        virtual void apply(Body& body) = 0;
+        virtual void apply(Body* body) = 0;
 };
 
 #endif

@@ -6,7 +6,7 @@
 #include "controllers/EnvelopeController.h"
 #include "controllers/BouncingBallController.h"
 #include "controllers/AttractorController.h"
-#include "controllers/DoublePendulumController.h"
+#include "controllers/PendulumController.h"
 #include "controllers/ThreeBodyController.h"
 #include "controllers/RandomController.h"
 #include "controllers/DelayController.h"
@@ -21,7 +21,7 @@ ClockMultiplierController, \
 EnvelopeController, \
 BouncingBallController, \
 AttractorController, \
-DoublePendulumController, \
+PendulumController, \
 ThreeBodyController, \
 RandomController, \
 DelayController, \

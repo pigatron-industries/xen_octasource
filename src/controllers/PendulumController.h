@@ -4,13 +4,18 @@
 #include "../Controller.h"
 #include "../Hardware.h"
 #include "systems/physical/DoublePendulum.h"
+#include "systems/physical/SpringPendulum.h"
 #include <eurorack_dsp.h>
 
 #define SAMPLE_RATE_DIVISOR 2
 
-class DoublePendulumController : public Controller {
+class PendulumController : public Controller {
     public:
-        DoublePendulumController() : Controller(0) {}
+        enum Mode {
+            SPRING_PENDULUM,
+            DOUBLE_PENDULUM
+        };
+        PendulumController() : Controller(Mode::DOUBLE_PENDULUM) {}
         virtual void init(float sampleRate);
         virtual void init();
         virtual void update();
@@ -25,6 +30,7 @@ class DoublePendulumController : public Controller {
         #endif
 
         DoublePendulum doublePendulum;
+        SpringPendulum springPendulums[4];
         ClockDivider clockDivider = ClockDivider(SAMPLE_RATE_DIVISOR);
 
         float amp;

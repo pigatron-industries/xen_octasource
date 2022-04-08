@@ -1,6 +1,7 @@
 #ifndef Physics_h
 #define Physics_h
 
+#include <eurorack.h>
 #include "Body.h"
 #include "Constraint.h"
 #include "Force.h"
@@ -10,26 +11,27 @@ template<int B, int C, int F>
 class PhysicalSystem {
     public:
         void update(float dt);
+        void addBody(Body* body) { bodies.add(body); }
+        void addConstraint(Constraint* constraint) { constraints.add(constraint); }
+        void addForce(Force* force) { forces.add(force); }
 
     private:
-        Body bodies[B];
-        Constraint* constraints[C];
-        Force* forces[F];
-    
-        Vector<2> forceGravity;
+        Array<Body*, B> bodies;
+        Array<Constraint*, C> constraints;
+        Array<Force*, F> forces;
 };
 
 template<int B, int C, int F>
 void PhysicalSystem<B, C, F>::update(float dt) {
-    for(Constraint* constraint : constraints) {
-        constraint->apply();
+    for(int i = 0; i < constraints.size(); i++) {
+        constraints[i]->apply();
     }
 
-    for(Body& body : bodies) {
-        for(Force* force : forces) {
-            forces->apply(body);
+    for(int i = 0; i < bodies.size(); i++) {
+        for(int j = 0; j < forces.size(); j++) {
+            forces[j]->apply(bodies[i]);
         }
-        body.updatePosition(dt);
+        bodies[i]->updatePosition(dt);
     }
 }
 

@@ -24,15 +24,15 @@ void ThreeBodyController::init() {
     switch(mode.value) {
         case Mode::STABLE1: // Massive star with opposite planets of equal mass
             Hardware::hw.display.text("STABLE ORBIT", Display::TEXTLINE_2);
-            bodies[0].mass = 100;
-            bodies[0].position = Vector<2>(0, 0);
-            bodies[0].velocity = Vector<2>(0, 0);
-            bodies[1].mass = 1;
-            bodies[1].position = Vector<2>(0, 4);
-            bodies[1].velocity = Vector<2>(5, 0);
-            bodies[2].mass = 1;
-            bodies[2].position = Vector<2>(0, -3);
-            bodies[2].velocity = Vector<2>(-4, 0);
+            bodies[0].setMass(100);
+            bodies[0].setPosition(Vector<2>(0, 0));
+            bodies[0].setVelocity(Vector<2>(0, 0));
+            bodies[1].setMass(1);
+            bodies[1].setPosition(Vector<2>(0, 4));
+            bodies[1].setVelocity(Vector<2>(5, 0));
+            bodies[2].setMass(1);
+            bodies[2].setPosition(Vector<2>(0, -3));
+            bodies[2].setVelocity(Vector<2>(-4, 0));
             threeBody.setDriftCorrection(true);
             threeBody.setEdgeMode(ThreeBody::EdgeMode::NONE);
             break;
@@ -50,29 +50,29 @@ void ThreeBodyController::init() {
             break;
         case Mode::BROUCKE_A2: // Broucke Stable
             Hardware::hw.display.text("BROUCKE STABLE", Display::TEXTLINE_2);
-            bodies[0].mass = 4;
-            bodies[0].position = Vector<2>(0.336130095, 0) * 4;
-            bodies[0].velocity = Vector<2>(0, 1.532431537);
-            bodies[1].mass = 4;
-            bodies[1].position = Vector<2>(0.7699893804, 0) * 4;
-            bodies[1].velocity = Vector<2>(0, -0.6287350978);
-            bodies[2].mass = 4;
-            bodies[2].position = Vector<2>(-1.1061194753, 0) * 4;
-            bodies[2].velocity = Vector<2>(0, -0.9036964391);
+            bodies[0].setMass(4);
+            bodies[0].setPosition(Vector<2>(0.336130095, 0) * 4);
+            bodies[0].setVelocity(Vector<2>(0, 1.532431537));
+            bodies[1].setMass(4);
+            bodies[1].setPosition(Vector<2>(0.7699893804, 0) * 4);
+            bodies[1].setVelocity(Vector<2>(0, -0.6287350978));
+            bodies[2].setMass(4);
+            bodies[2].setPosition(Vector<2>(-1.1061194753, 0) * 4);
+            bodies[2].setVelocity(Vector<2>(0, -0.9036964391));
             threeBody.setDriftCorrection(true);
             threeBody.setEdgeMode(ThreeBody::EdgeMode::NONE);
             break;
         case Mode::BROUCKE_ASYMETRICAL: // Stable state with 3 equal masses, found accidentally from CHAOTIC_BOUNCE1
             Hardware::hw.display.text("BROUCKE ASYM", Display::TEXTLINE_2);
-            bodies[0].mass = 4;
-            bodies[0].position = Vector<2>(-2.855484,-0.099324);
-            bodies[0].velocity = Vector<2>(-0.14822,-0.47005);
-            bodies[1].mass = 4;
-            bodies[1].position = Vector<2>(-1.785072,0.406224);
-            bodies[1].velocity = Vector<2>(-1.47620,1.02377);
-            bodies[2].mass = 4;
-            bodies[2].position = Vector<2>(4.640556,-0.306904);
-            bodies[2].velocity = Vector<2>(-0.20557,1.39997);
+            bodies[0].setMass(4);
+            bodies[0].setPosition(Vector<2>(-2.855484,-0.099324));
+            bodies[0].setVelocity(Vector<2>(-0.14822,-0.47005));
+            bodies[1].setMass(4);
+            bodies[1].setPosition(Vector<2>(-1.785072,0.406224));
+            bodies[1].setVelocity(Vector<2>(-1.47620,1.02377));
+            bodies[2].setMass(4);
+            bodies[2].setPosition(Vector<2>(4.640556,-0.306904));
+            bodies[2].setVelocity(Vector<2>(-0.20557,1.39997));
             threeBody.setDriftCorrection(true);
             threeBody.setEdgeMode(ThreeBody::EdgeMode::NONE);
             break;
@@ -96,29 +96,29 @@ void ThreeBodyController::init() {
             break;
         case Mode::CHAOTIC2: // Large mass with 2 small masses
             Hardware::hw.display.text("CHAOTIC 1L2S", Display::TEXTLINE_2);
-            bodies[0].mass = 100;
-            bodies[0].position = Vector<2>(0, 0);
-            bodies[0].velocity = Vector<2>(0, 0);
-            bodies[1].mass = 1;
-            bodies[1].position = Vector<2>(0, 4);
-            bodies[1].velocity = Vector<2>(5, 0);
-            bodies[2].mass = 1;
-            bodies[2].position = Vector<2>(0, -4);
-            bodies[2].velocity = Vector<2>(-4.9, 0);
+            bodies[0].setMass(100);
+            bodies[0].setPosition(Vector<2>(0, 0));
+            bodies[0].setVelocity(Vector<2>(0, 0));
+            bodies[1].setMass(1);
+            bodies[1].setPosition(Vector<2>(0, 4));
+            bodies[1].setVelocity(Vector<2>(5, 0));
+            bodies[2].setMass(1);
+            bodies[2].setPosition(Vector<2>(0, -4));
+            bodies[2].setVelocity(Vector<2>(-4.9, 0));
             threeBody.setDriftCorrection(false);
             threeBody.setEdgeMode(ThreeBody::EdgeMode::ANTIGRAV);
             break;
         case Mode::CHAOTIC3: // All different masses
             Hardware::hw.display.text("CHAOTIC 1L1M1S", Display::TEXTLINE_2);
-            bodies[0].mass = 100;
-            bodies[0].position = Vector<2>(0, 0);
-            bodies[0].velocity = Vector<2>(0, 0);
-            bodies[1].mass = 10;
-            bodies[1].position = Vector<2>(0, 4);
-            bodies[1].velocity = Vector<2>(5, 0);
-            bodies[2].mass = 1;
-            bodies[2].position = Vector<2>(0, -4);
-            bodies[2].velocity = Vector<2>(-5, 0);
+            bodies[0].setMass(100);
+            bodies[0].setPosition(Vector<2>(0, 0));
+            bodies[0].setVelocity(Vector<2>(0, 0));
+            bodies[1].setMass(10);
+            bodies[1].setPosition(Vector<2>(0, 4));
+            bodies[1].setVelocity(Vector<2>(5, 0));
+            bodies[2].setMass(1);
+            bodies[2].setPosition(Vector<2>(0, -4));
+            bodies[2].setVelocity(Vector<2>(-5, 0));
             threeBody.setDriftCorrection(false);
             threeBody.setEdgeMode(ThreeBody::EdgeMode::ANTIGRAV);
             break;
@@ -191,6 +191,6 @@ void ThreeBodyController::printBodies() {
 }
 
 void ThreeBodyController::printBody(Body body) {
-    print(body.position);
-    print(body.velocity);
+    print(body.getPosition());
+    print(body.getVelocity());
 }

@@ -10,6 +10,7 @@ class ConstraintSpring : public Constraint {
                 this->restLength = restLength;
                 this->stiffness = stiffness;
         }
+        void setStiffness(float stiffness) { this->stiffness = stiffness; }
         virtual void apply();
     
     private:
