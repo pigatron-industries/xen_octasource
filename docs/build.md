@@ -5,9 +5,9 @@ order: 3
 
 ## Base Board
 
-![Base Board](images/octasource_mkii_baseboard_brd.drawio.png)
-
 1. Solder surface mount components onto base board. The components highlighted in red above do NOT need to be soldered.
+
+    [![Base Board](images/octasource_mkii_baseboard_brd.drawio.png)](images/octasource_mkii_baseboard_brd.drawio.png)
 
 2. Solder the power header (male header pins).
 
@@ -21,7 +21,7 @@ order: 3
 
 1. Solder surface mount components on the back of the control board. Do NOT solder the components highlighted in red below.
 
-    ![Control Board](images/octasource_mkii_controls_brd_bottom.drawio.png)
+    [![Control Board](images/octasource_mkii_controls_brd_bottom.drawio.png)](images/octasource_mkii_controls_brd_bottom.drawio.png)
 
 2. Solder the female header rows. Headers marked in red above do not need to be soldered.
 
