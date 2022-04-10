@@ -25,7 +25,7 @@ order: 3
 
 2. Solder the female header rows. Headers marked in red above do not need to be soldered.
 
-3. Place the potentiometers, rotary encoder, jacks and switch onto the board but do not solder them yet.
+3. Place the potentiometers, rotary encoder, jacks and switch onto the board but do not solder them yet. Also place the RGB LEDs, the longest pin goes on the outside.
 
 4. Place the front panel over the controls so they all fit through the holes, and secure them to the panel.
 
