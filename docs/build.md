@@ -3,15 +3,15 @@ order: 3
 ---
 # Build Guide
 
-1. Solder surface mount components onto base board. The components highlighted in red do NOT need to be soldered.
+- Solder surface mount components onto base board. The components highlighted in red do NOT need to be soldered.
 
 ![Base Board](images/octasource_mkii_baseboard_brd.drawio.png)
 
-2. Solder the power header (male header pins).
+- Solder the power header (male header pins).
 
-3. Solder the teensy header (female header). The 4 inner pins only need to be soldered if using a Teensy 4.0, solder the full 24 pin header on the outer rows, this will allow easy expansion to Teensy 4.1 if required later.
+- Solder the teensy header (female header). The 4 inner pins only need to be soldered if using a Teensy 4.0, solder the full 24 pin header on the outer rows, this will allow easy expansion to Teensy 4.1 if required later.
 
-4. Solder the through hole voltage regulator.
+- Solder the through hole voltage regulator.
 
-5. Solder the male header pins on the opposite side of the board. Headers marked in red above do not need to be soldered.
+- Solder the male header pins on the opposite side of the board. Headers marked in red above do not need to be soldered.
 
