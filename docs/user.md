@@ -3,7 +3,7 @@ order: 2
 ---
 # User Manual
 
-{% include img.html src="images/octosource_panel.png" %}
+{% include img.html src="images/octosource_panel.png" height="640" %}
 
 ## Modes
 
