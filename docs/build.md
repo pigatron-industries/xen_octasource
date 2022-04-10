@@ -3,9 +3,11 @@ order: 3
 ---
 # Build Guide
 
-- Solder surface mount components onto base board. The components highlighted in red do NOT need to be soldered.
+## Base Board
 
 ![Base Board](images/octasource_mkii_baseboard_brd.drawio.png)
+
+- Solder surface mount components onto base board. The components highlighted in red above do NOT need to be soldered.
 
 - Solder the power header (male header pins).
 
