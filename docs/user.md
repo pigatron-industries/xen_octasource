@@ -3,6 +3,8 @@ order: 2
 ---
 # User Manual
 
+{% include img.html src="images/octasource_panel.png" %}
+
 ## Modes
 
 Change the mode by holding down the encoder switch and turning clockwise or anticlockwise.
@@ -117,6 +119,7 @@ Inputs:
 * **WAVE**: Attack time of envelope.
 * **RATE**: Decay time of envelope.
 * **PHASE**: Length: Select the number of outputs to use for envelopes. Can use from 2 to 8 outputs.
+* **AMP**: Amplitude of envelope.
 
 Outputs:
 * **OUTPUTS 1-8**: The envelope output. Depending on Length setting not all outputs may be used.
