@@ -16,15 +16,18 @@ void PendulumController::init() {
     switch(mode.value) {
         case Mode::SPRING_PENDULUM:
             Hardware::hw.display.text("SPRING", Display::TEXTLINE_2);
-            springPendulums[0].setInitialConditions(Vector<2>(0, -3), Vector<2>(0.1, 2));
-            springPendulums[0].setOffset(Vector<2>(0, 3.3));
-            springPendulums[0].setScale(Vector<2>(1, 2) * 4);
+            springPendulums[0].setInitialConditions(Vector<2>(-2.5, 0), Vector<2>(0, 0));
+            springPendulums[0].setOffset(Vector<2>(0, 2.5));
+            springPendulums[0].setScale(Vector<2>(1.5, 1.5) * 1);
+
             springPendulums[1].setInitialConditions(Vector<2>(0, -3), Vector<2>(0.2, 4));
             springPendulums[1].setOffset(Vector<2>(0, 3.3));
             springPendulums[1].setScale(Vector<2>(1, 2) * 2);
+
             springPendulums[2].setInitialConditions(Vector<2>(0, -3), Vector<2>(0.3, 6));
             springPendulums[2].setOffset(Vector<2>(0, 3.3));
             springPendulums[2].setScale(Vector<2>(1, 2) * 1);
+
             springPendulums[3].setInitialConditions(Vector<2>(0, -3), Vector<2>(0.4, 8));
             springPendulums[3].setOffset(Vector<2>(0, 3.3));
             springPendulums[3].setScale(Vector<2>(1, 2) * 1);
@@ -59,6 +62,13 @@ void PendulumController::updateAmp() {
 }
 
 void PendulumController::updateParams() {
+    if(stiffnessCvInput.update()) {
+        float stiffnesssCvValue = stiffnessCvInput.getValue();
+        for(SpringPendulum& springPendulum : springPendulums) {
+            springPendulum.setSpringStiffness(stiffnessCvInput.getValue());
+        }
+    }
+
     if(param1CvInput.update()) {
         doublePendulum.setParam(0, param1CvInput.getValue());
     }

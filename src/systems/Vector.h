@@ -37,7 +37,7 @@ class Vector {
         }
 
         const Vector operator+(const Vector& other) const {
-            return Tuple(*this) += other;
+            return Vector(*this) += other;
         }
 
         Vector& operator-=(const Vector& rhs) { 

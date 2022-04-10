@@ -29,6 +29,8 @@ class PendulumController : public Controller {
             LinearInput<AnalogInputSumPinT> param2CvInput = LinearInput<AnalogInputSumPinT>(Hardware::hw.phaseSumPin, -5, 5, 0.1, 0.9);
         #endif
 
+        ExpInput<AnalogInputSumPinT> stiffnessCvInput = ExpInput<AnalogInputSumPinT>(Hardware::hw.waveSumPin, 250, 2.2);
+
         DoublePendulum doublePendulum;
         SpringPendulum springPendulums[4];
         ClockDivider clockDivider = ClockDivider(SAMPLE_RATE_DIVISOR);
