@@ -5,6 +5,9 @@ order: 2
 
 {% include img.html src="images/octosource_panel.png" height="640" %}
 
+* Apply an input CV applies an offset to the knob ranges. If knobs are at 12 o'clock then a -5V/+5V CV will be the same range as the knobs. Applying an offset will also allow the knob range to go higher or lower than normal.
+* Changing the range switch for most modes will just switch the output voltage range from -5V/+5V to 0V/10V. Some modes, such as clock and envelope modes will remain at 0V when idle, regardless of range switch position, but will alter the maximum voltage when triggered.
+
 ## Modes
 
 Change the mode by holding down the encoder switch and turning clockwise or anticlockwise.
