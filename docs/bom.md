@@ -2,6 +2,8 @@
 order: 4
 ---
 
+# Bill of Materials
+
 | Component                      | Footprint | Quantity | Notes
 | ---                            | ---       | ---      | ---
 | Resistor 0R                    | 0603      | 6        |
@@ -39,3 +41,4 @@ order: 4
 | SPDT ON-ON Dailywell Sub-mini Toggle Switch | TH | 1 |
 | OLED Display 0.49" I2C SSD1306 |           | 1        |
 | Teensy 4.0 / Teensy 4.1        |           | 1        |
+| Knobs                          |           | 5        |

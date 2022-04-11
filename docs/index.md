@@ -6,15 +6,15 @@ order: 1
 A Eurorack synthesiser module with 8 control voltage outputs.
 
 ## Features
-* Uses [PJRC Teensy 4.0](https://www.pjrc.com/teensy-4-0/) Microcontroller.
-* Requires a +12V/0V/-12V bipolar power supply.
-* Output voltage range -5V to 5V.
-* Various modes for controlling output votages.
+* 8 Analog control voltge outputs with various modes for generating.
+* Output voltage range switchable between -5V to 5V and 0V to 10V.
+* Extra trigger output.
 * CV inputs for controllable parameters.
-* Trigger or sync input.
-* Trigger output.
+* Uses a Teensy microcontroller + open source code can easily be modified.
 
 ## Documentation
 
 * [User Manual](user.md)
+* [Build Guide](build.md)
+* [Bill of Materials](bom.md)
 * [Development History](history.md)
