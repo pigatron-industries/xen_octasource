@@ -5,7 +5,7 @@ order: 4
 # Bill of Materials
 
 | Component                      | Footprint | Quantity | Notes
-| ---                            | ---       | ---      | ---
+| :---                           | :---      | :---     | :---
 | Resistor 0R                    | 0603      | 6        |
 | Resistor 1k                    | 0603      | 9        |
 | Resistor 2k                    | 0603      | 3        |
