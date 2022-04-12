@@ -39,8 +39,8 @@ void FrequencyController::update() {
 }
 
 void FrequencyController::updateRate() {
-    if(controls.bipolarRateCvInput.update()) {
-       float rateValue = controls.bipolarRateCvInput.getValue();
+    if(rateCvInput.update()) {
+       float rateValue = rateCvInput.getValue();
        setRate(rateValue);
     }
 }

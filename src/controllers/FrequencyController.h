@@ -41,6 +41,8 @@ class FrequencyController : public Controller {
             WaveOscillator<WaveSelector<Sine, Triangle, Saw, Pulse>&>(waveSelector)
         };
 
+        ExpInput<AnalogInputSumPinT> rateCvInput = ExpInput<AnalogInputSumPinT>(Hardware::hw.rateSumPin, 10);
+
         float ampValue = 0;
 };
 
