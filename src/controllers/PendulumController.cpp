@@ -65,7 +65,7 @@ void PendulumController::updateParams() {
     if(stiffnessCvInput.update()) {
         float stiffnesssCvValue = stiffnessCvInput.getValue();
         for(SpringPendulum& springPendulum : springPendulums) {
-            springPendulum.setSpringStiffness(stiffnessCvInput.getValue());
+            springPendulum.setSpringStiffness(stiffnesssCvValue);
         }
     }
 
