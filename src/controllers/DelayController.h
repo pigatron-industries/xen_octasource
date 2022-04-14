@@ -8,7 +8,8 @@
 
 using namespace eurorack;
 
-#define DELAYBUFFER_SIZE ((MEMPOOL_SIZE/8)-1)
+#define OUTPUTS 8
+#define DELAYBUFFER_SIZE ((MEMPOOL_SIZE/OUTPUTS)-1)
 #define SAMPLERATE_DIVIDER 8
 
 class DelayController : public Controller {

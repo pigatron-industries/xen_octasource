@@ -40,8 +40,8 @@ void FrequencyController::update() {
 
 void FrequencyController::updateRate() {
     if(rateCvInput.update()) {
-       float rateValue = rateCvInput.getValue();
-       setRate(rateValue);
+        float rateValue = rateCvInput.getValue();
+        setRate(rateValue);
     }
 }
 

@@ -30,26 +30,26 @@ void DelayController::update() {
         for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
             float time = timeCvInput.getValue();
             filters[i].setFrequency(1/((i+1)*time));
-            delays[i].setDelay((float)DELAYBUFFER_SIZE/8*(i+1)*time);
+            delays[i].setDelay((float)DELAYBUFFER_SIZE/OUTPUTS*(i+1)*time);
         }
     }
 
-    value = Hardware::hw.syncCvPin.analogRead();
-    for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
-        delays[i].write(value);
-    }
+    // value = Hardware::hw.syncCvPin.analogRead();
+    // for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
+    //     delays[i].write(value);
+    // }
 
     Hardware::hw.updateOutputLeds();
 }
 
 void DelayController::process() {
-    //  bool tick = clockDivider.tick();
-    //  if(tick) {
-    //     value = Hardware::hw.syncCvPin.analogRead();
-    //     for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
-    //         delays[i].write(value);
-    //     }
-    //  }
+     bool tick = clockDivider.tick();
+     if(tick) {
+        value = Hardware::hw.syncCvPin.analogRead();
+        for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
+            delays[i].write(value);
+        }
+     }
 
     for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
         filters[i].process(value);
