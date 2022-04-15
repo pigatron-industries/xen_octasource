@@ -12,6 +12,10 @@ void PhasedController::init(float sampleRate) {
 void PhasedController::init() {
     Serial.println("Phase");
     Hardware::hw.display.text("PHASE");
+    resetPhases();
+}
+
+void PhasedController::resetPhases() {
     for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
         oscillators[i].setPhase(i*0.125);
     }
@@ -89,6 +93,9 @@ void PhasedController::updatePhase() {
 void PhasedController::updateSync() {
     if(syncInput.update() && syncInput.isTriggeredOn()) {
         clock.externalTick();
+    }
+    if(hardSyncInput.update() && hardSyncInput.isTriggeredOn()) {
+        resetPhases();
     }
 }
 

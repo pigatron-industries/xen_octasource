@@ -35,6 +35,7 @@ class PhasedController : public Controller {
         void updateWave();
         void updatePhase();
         void updateSync();
+        void resetPhases();
 
         void setFrequency(float frequency);
 
@@ -54,6 +55,7 @@ class PhasedController : public Controller {
         ClockDivider clockDivider = ClockDivider(SAMPLERATE_DIVIDER);
 
         AnalogGateInput<AnalogInputPinT> syncInput = AnalogGateInput<AnalogInputPinT>(Hardware::hw.syncCvPin);
+        AnalogGateInput<AnalogInputPinT> hardSyncInput = AnalogGateInput<AnalogInputPinT>(Hardware::hw.modeCvPin);
         BipolarExpInput<AnalogInputSumPinT> bipolarRateCvInput = BipolarExpInput<AnalogInputSumPinT>(Hardware::hw.rateSumPin);
         LinearInput<AnalogInputSumPinT> syncMultCvInput = LinearInput<AnalogInputSumPinT>(Hardware::hw.rateSumPin, -5, 5, -8.9, 8.9);
         ExpInput<AnalogInputSumPinT> expRateCvInput = ExpInput<AnalogInputSumPinT>(Hardware::hw.rateSumPin);

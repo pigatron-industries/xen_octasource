@@ -17,9 +17,10 @@ Change the mode by holding down the encoder switch and turning clockwise or anti
 Each output wave is the same frequency but phase shifted by 45 degrees.
 
 Inputs:
-* **SYNC**: 
-* **WAVE**: The waveform generated for all outputs. Sine, Triangle, Saw or Pulse.
-* **RATE**: Bipolar frequency control. The wave will be 'stopped' at the top position and moving clockwise will increase frequency. Moving anti-clockwise will decrease the frequency into the negative, which will cause the phase shifted waves to rotate in the opposite direction.
+* **SYNC**: Soft Sync - If a clock pulse is detected then synchronises the frequency of the output waveforms with the clock pulse.
+* **MODE**: Hard Sync - A clock pulse on this input will hard reset the waves back to their original phases. 
+* **WAVE**: Waveform - The waveform generated for all outputs. Sine, Triangle, Saw or Pulse.
+* **RATE**: Bipolar frequency control. The wave will be 'stopped' at the top position and moving clockwise will increase frequency. Moving anti-clockwise will decrease the frequency into the negative, which will cause the phase shifted waves to rotate in the opposite direction. If a clock pulse is detected on the **SYNC** input then this acts as a frequency multiplier instead.
 * **PHASE**: The phase difference between waves. Full clockwise will give a 1/8 phase difference so all 8 outputs give a full 360 degrees with equal spacing.
 * **AMP**: Amplitude of the wave on all outputs.
 
