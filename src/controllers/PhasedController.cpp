@@ -42,8 +42,11 @@ void PhasedController::updateRate() {
     } else {
         if(clock.getState() == Clock::State::CLK_EXTERNAL) {
             float externalFrequency = clock.getFrequency();
-            if(externalFrequency != syncFrequency) {
-                setFrequency(clock.getFrequency());
+            if(externalFrequency != syncFrequency || syncMultCvInput.update()) {
+                syncFrequency = externalFrequency;
+                float mult = syncMultCvInput.getValue();
+                float multFrequency = mult < 0 ? externalFrequency * (int(mult-0.5)) : externalFrequency * (int(mult+0.5));
+                setFrequency(multFrequency);
             }
         }
     }
@@ -90,7 +93,6 @@ void PhasedController::updateSync() {
 }
 
 void PhasedController::setFrequency(float frequency) {
-    syncFrequency = frequency;
     for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
         oscillators[i].setFrequency(frequency);
     }

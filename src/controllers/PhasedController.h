@@ -55,6 +55,7 @@ class PhasedController : public Controller {
 
         AnalogGateInput<AnalogInputPinT> syncInput = AnalogGateInput<AnalogInputPinT>(Hardware::hw.syncCvPin);
         BipolarExpInput<AnalogInputSumPinT> bipolarRateCvInput = BipolarExpInput<AnalogInputSumPinT>(Hardware::hw.rateSumPin);
+        LinearInput<AnalogInputSumPinT> syncMultCvInput = LinearInput<AnalogInputSumPinT>(Hardware::hw.rateSumPin, -5, 5, -8.9, 8.9);
         ExpInput<AnalogInputSumPinT> expRateCvInput = ExpInput<AnalogInputSumPinT>(Hardware::hw.rateSumPin);
         LinearInput<AnalogInputSumPinT> waveCvInput = LinearInput<AnalogInputSumPinT>(Hardware::hw.waveSumPin, -5, 5, 0, 5);
         LinearInput<AnalogInputSumPinT> ampCvInput = LinearInput<AnalogInputSumPinT>(Hardware::hw.ampSumPin, -5, 5, 0, 5);
