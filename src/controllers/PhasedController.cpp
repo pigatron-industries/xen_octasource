@@ -5,6 +5,7 @@ void PhasedController::init(float sampleRate) {
     for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
         oscillators[i].init(sampleRate);
     }
+    clock.init(sampleRate/SAMPLERATE_DIVIDER);
     init();
 }
 
@@ -17,47 +18,46 @@ void PhasedController::init() {
 }
 
 void PhasedController::update() {
-    switch (mode.value) {
-        case Mode::BIPOLAR_LFO:
-            updateRateBipolar();
-            break;
-        case Mode::EXPONENTIAL_VCO:
-            updateRateExponential();
-            break;
-    }
+    updateRate();
     updateAmp();
     updateWave();
     updatePhase();
     Hardware::hw.updateOutputLeds();
 }
 
-void PhasedController::updateRateBipolar() {
-    if(controls.bipolarRateCvInput.update()) {
-        float rateValue = controls.bipolarRateCvInput.getValue();
-        for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
-            oscillators[i].setFrequency(rateValue);
+void PhasedController::updateRate() {
+    if(clock.getState() != Clock::State::CLK_EXTERNAL) {
+        switch (mode.value) {
+            case Mode::BIPOLAR_LFO:
+                if(bipolarRateCvInput.update()) {
+                    setFrequency(bipolarRateCvInput.getValue());
+                }
+                break;
+            case Mode::EXPONENTIAL_VCO:
+                if(expRateCvInput.update()) {
+                    setFrequency(expRateCvInput.getValue());
+                }
+                break;
         }
-    }
-}
-
-void PhasedController::updateRateExponential() {
-    if(controls.expRateCvInput.update()) {
-        float rateValue = controls.expRateCvInput.getValue();
-        for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
-            oscillators[i].setFrequency(rateValue);
+    } else {
+        if(clock.getState() == Clock::State::CLK_EXTERNAL) {
+            float externalFrequency = clock.getFrequency();
+            if(externalFrequency != syncFrequency) {
+                setFrequency(clock.getFrequency());
+            }
         }
     }
 }
 
 void PhasedController::updateAmp() {
-    if(controls.ampCvInput.update()) {
-        ampValue = controls.ampCvInput.getValue();
+    if(ampCvInput.update()) {
+        ampValue = ampCvInput.getValue();
     }
 }
 
 void PhasedController::updateWave() {
-    if(controls.waveCvInput.update()) {
-        float waveValue = controls.waveCvInput.getValue();
+    if(waveCvInput.update()) {
+        float waveValue = waveCvInput.getValue();
         for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
             if(waveValue < 1) {
                 waveSelector.select(0);
@@ -83,8 +83,25 @@ void PhasedController::updatePhase() {
     // }
 }
 
+void PhasedController::updateSync() {
+    if(syncInput.update() && syncInput.isTriggeredOn()) {
+        clock.externalTick();
+    }
+}
+
+void PhasedController::setFrequency(float frequency) {
+    syncFrequency = frequency;
+    for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
+        oscillators[i].setFrequency(frequency);
+    }
+}
+
 void PhasedController::process() {
     for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
         Hardware::hw.cvOutputPins[i]->analogWrite(oscillators[i].process() * ampValue);
+    }
+    if(clockDivider.tick()) {
+        updateSync();
+        clock.process();
     }
 }

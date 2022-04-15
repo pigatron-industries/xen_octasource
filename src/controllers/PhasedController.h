@@ -14,6 +14,8 @@ using namespace eurorack;
     #define PHASED_LAST_MODE Mode::BIPOLAR_LFO
 #endif
 
+#define SAMPLERATE_DIVIDER 8
+
 class PhasedController : public Controller {
     public:
         enum Mode {
@@ -29,11 +31,12 @@ class PhasedController : public Controller {
 
     private:
         void updateRate();
-        void updateRateBipolar();
-        void updateRateExponential();
         void updateAmp();
         void updateWave();
         void updatePhase();
+        void updateSync();
+
+        void setFrequency(float frequency);
 
         WaveSelector<Sine, Triangle, Saw, Pulse> waveSelector;
         WaveOscillator<WaveSelector<Sine, Triangle, Saw, Pulse>&> oscillators[OUTPUT_CV_COUNT] = {
@@ -47,7 +50,17 @@ class PhasedController : public Controller {
             WaveOscillator<WaveSelector<Sine, Triangle, Saw, Pulse>&>(waveSelector)
         };
 
+        Clock clock;
+        ClockDivider clockDivider = ClockDivider(SAMPLERATE_DIVIDER);
+
+        AnalogGateInput<AnalogInputPinT> syncInput = AnalogGateInput<AnalogInputPinT>(Hardware::hw.syncCvPin);
+        BipolarExpInput<AnalogInputSumPinT> bipolarRateCvInput = BipolarExpInput<AnalogInputSumPinT>(Hardware::hw.rateSumPin);
+        ExpInput<AnalogInputSumPinT> expRateCvInput = ExpInput<AnalogInputSumPinT>(Hardware::hw.rateSumPin);
+        LinearInput<AnalogInputSumPinT> waveCvInput = LinearInput<AnalogInputSumPinT>(Hardware::hw.waveSumPin, -5, 5, 0, 5);
+        LinearInput<AnalogInputSumPinT> ampCvInput = LinearInput<AnalogInputSumPinT>(Hardware::hw.ampSumPin, -5, 5, 0, 5);
+
         float ampValue = 0;
+        float syncFrequency;
 };
 
 #endif
