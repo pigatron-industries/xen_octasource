@@ -19,6 +19,9 @@ void FrequencyController::init() {
         case Mode::EXP:
             Hardware::hw.display.text("EXPONENTIAL", Display::TEXTLINE_2);
             break;
+        case Mode::POLYRHYTHM:
+            Hardware::hw.display.text("POLYRHYTHM", Display::TEXTLINE_2);
+            break;
         case Mode::INTERVAL:
             Hardware::hw.display.text("INTERVAL", Display::TEXTLINE_2);
             break;
@@ -29,6 +32,10 @@ void FrequencyController::init() {
             Hardware::hw.display.text("PLANETARY", Display::TEXTLINE_2);
             break;
     }
+    for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
+        oscillators[i].setPhase(0);
+    }
+    setRate(rateCvInput.getValue());
 }
 
 void FrequencyController::update() {
@@ -48,14 +55,34 @@ void FrequencyController::updateRate() {
 void FrequencyController::setRate(float baseFrequency) {
     switch (mode.value) {
         case Mode::LINEAR:
-            for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
-                oscillators[i].setFrequency(baseFrequency/(i+1));
-            }
+            oscillators[0].setFrequency(baseFrequency);
+            oscillators[1].setFrequency(baseFrequency/2);
+            oscillators[2].setFrequency(baseFrequency/3);
+            oscillators[3].setFrequency(baseFrequency/4);
+            oscillators[4].setFrequency(baseFrequency/5);
+            oscillators[5].setFrequency(baseFrequency/6);
+            oscillators[6].setFrequency(baseFrequency/7);
+            oscillators[7].setFrequency(baseFrequency/8);
             break;
         case Mode::EXP:
-            for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
-                oscillators[i].setFrequency(baseFrequency/powf(2, i));
-            }
+            oscillators[0].setFrequency(baseFrequency);
+            oscillators[1].setFrequency(baseFrequency/2);
+            oscillators[2].setFrequency(baseFrequency/4);
+            oscillators[3].setFrequency(baseFrequency/8);
+            oscillators[4].setFrequency(baseFrequency/16);
+            oscillators[5].setFrequency(baseFrequency/32);
+            oscillators[6].setFrequency(baseFrequency/64);
+            oscillators[7].setFrequency(baseFrequency/128);
+            break;
+        case Mode::POLYRHYTHM:
+            oscillators[0].setFrequency(baseFrequency*8/8);
+            oscillators[1].setFrequency(baseFrequency*7/8);
+            oscillators[2].setFrequency(baseFrequency*6/8);
+            oscillators[3].setFrequency(baseFrequency*5/8);
+            oscillators[4].setFrequency(baseFrequency*4/8);
+            oscillators[5].setFrequency(baseFrequency*3/8);
+            oscillators[6].setFrequency(baseFrequency*2/8);
+            oscillators[7].setFrequency(baseFrequency*1/8);
             break;
         case Mode::INTERVAL:
             oscillators[0].setFrequency(baseFrequency);
