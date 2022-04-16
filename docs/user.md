@@ -26,7 +26,7 @@ Inputs:
 
 Outputs:
 * **OUTPUTS 1-8**: The phase shifted wave forms.
-* **TRIG**: Outputs a trigger for each cycle, the same frequency as the waves.
+* **TRIG**: Outputs a trigger for each cycle of the waves.
 
 Example of 8 phase shifted sine waves
 
@@ -39,15 +39,15 @@ Example of 8 phase shifted sine waves
 The frequencies of each output are different but related to each other by a frequency division.
 
 Inputs:
-* **SYNC**: 
-* **WAVE**: The waveform generated for all outputs. Sine, Triangle, Saw or Pulse.
-* **RATE**: Base frequency of outputs.
+* **SYNC**: Soft Sync - If a clock pulse is detected then synchronises the frequency of the output waveforms with the clock pulse.
+* **WAVE**: Waveform - The waveform generated for all outputs. Sine, Triangle, Saw or Pulse.
+* **RATE**: Base frequency of outputs. If a clock pulse is detected on the **SYNC** input then this acts as a frequency multiplier/divider instead. Clockwise multiplies, anti-clockwise divides.
 * **PHASE**: 
 * **AMP**: Amplitude of the wave on all outputs.
 
 Outputs:
 * **OUTPUTS 1-8**: Waveforms with frequency relationships dependent upon the selected submode.
-* **TRIG**: Outputs a trigger for each cycle, the same frequency as the waves.
+* **TRIG**: Outputs a trigger for each cycle of base frequency wave.
 
 Submode frequency divisions:
 1. Whole numbers: 1 / 2 / 3 / 4 / 5 / 6 / 7 / 8

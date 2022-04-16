@@ -6,6 +6,7 @@ void FrequencyController::init(float sampleRate) {
         oscillators[i].init(sampleRate);
         oscillators[i].setFrequency(1);
     }
+    clock.init(sampleRate/SAMPLERATE_DIVIDER);
     init();
 }
 
@@ -46,9 +47,19 @@ void FrequencyController::update() {
 }
 
 void FrequencyController::updateRate() {
-    if(rateCvInput.update()) {
-        float rateValue = rateCvInput.getValue();
-        setRate(rateValue);
+    if(clock.getState() != Clock::State::CLK_EXTERNAL) {
+        if(rateCvInput.update()) {
+            float frequency = rateCvInput.getValue();
+            setRate(frequency);
+        }
+    } else if(clock.getState() == Clock::State::CLK_EXTERNAL) {
+        float externalFrequency = clock.getFrequency();
+        if(externalFrequency != syncFrequency || syncMultCvInput.update()) {
+            syncFrequency = externalFrequency;
+            int multInputValue = syncMultCvInput.getIntValue();
+            float mult = multInputValue >= 0 ? multInputValue+1 : 1/float(-multInputValue);
+            setRate(syncFrequency * mult);
+        }
     }
 }
 
@@ -118,14 +129,14 @@ void FrequencyController::setRate(float baseFrequency) {
 }
 
 void FrequencyController::updateAmp() {
-    if(controls.ampCvInput.update()) {
-        ampValue = controls.ampCvInput.getValue();
+    if(ampCvInput.update()) {
+        ampValue = ampCvInput.getValue();
     }
 }
 
 void FrequencyController::updateWave() {
-    if(controls.waveCvInput.update()) {
-        float waveValue = controls.waveCvInput.getValue();
+    if(waveCvInput.update()) {
+        float waveValue = waveCvInput.getValue();
         for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
             if(waveValue < 1) {
                 waveSelector.select(0);
@@ -141,8 +152,21 @@ void FrequencyController::updateWave() {
     }
 }
 
+void FrequencyController::updateSync() {
+    if(syncInput.update() && syncInput.isTriggeredOn()) {
+        clock.externalTick();
+    }
+    // if(hardSyncInput.update() && hardSyncInput.isTriggeredOn()) {
+    //     resetPhases();
+    // }
+}
+
 void FrequencyController::process() {
     for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
         Hardware::hw.cvOutputPins[i]->analogWrite(oscillators[i].process() * ampValue);
+    }
+    if(clockDivider.tick()) {
+        updateSync();
+        clock.process();
     }
 }

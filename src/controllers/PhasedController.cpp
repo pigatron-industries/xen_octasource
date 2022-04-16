@@ -43,15 +43,12 @@ void PhasedController::updateRate() {
                 }
                 break;
         }
-    } else {
-        if(clock.getState() == Clock::State::CLK_EXTERNAL) {
-            float externalFrequency = clock.getFrequency();
-            if(externalFrequency != syncFrequency || syncMultCvInput.update()) {
-                syncFrequency = externalFrequency;
-                float mult = syncMultCvInput.getValue();
-                float multFrequency = mult < 0 ? externalFrequency * (int(mult-0.5)) : externalFrequency * (int(mult+0.5));
-                setFrequency(multFrequency);
-            }
+    } else if(clock.getState() == Clock::State::CLK_EXTERNAL) {
+        float externalFrequency = clock.getFrequency();
+        if(externalFrequency != syncFrequency || syncMultCvInput.update()) {
+            syncFrequency = externalFrequency;
+            int mult = syncMultCvInput.getIntValue();
+            setFrequency(syncFrequency * mult);
         }
     }
 }

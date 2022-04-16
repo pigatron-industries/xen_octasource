@@ -7,6 +7,8 @@
 
 using namespace eurorack;
 
+#define SAMPLERATE_DIVIDER 8
+
 class FrequencyController : public Controller {
     public:
         enum Mode {
@@ -29,6 +31,7 @@ class FrequencyController : public Controller {
         void updateRate();
         void updateAmp();
         void updateWave();
+        void updateSync();
 
         WaveSelector<Sine, Triangle, Saw, Pulse> waveSelector;
         WaveOscillator<WaveSelector<Sine, Triangle, Saw, Pulse>&> oscillators[OUTPUT_CV_COUNT] = {
@@ -42,9 +45,18 @@ class FrequencyController : public Controller {
             WaveOscillator<WaveSelector<Sine, Triangle, Saw, Pulse>&>(waveSelector)
         };
 
+        Clock clock;
+        ClockDivider clockDivider = ClockDivider(SAMPLERATE_DIVIDER);
+
+        AnalogGateInput<AnalogInputPinT> syncInput = AnalogGateInput<AnalogInputPinT>(Hardware::hw.syncCvPin);
+        AnalogGateInput<AnalogInputPinT> hardSyncInput = AnalogGateInput<AnalogInputPinT>(Hardware::hw.modeCvPin);
         ExpInput<AnalogInputSumPinT> rateCvInput = ExpInput<AnalogInputSumPinT>(Hardware::hw.rateSumPin, 10);
+        IntegerInput<AnalogInputSumPinT> syncMultCvInput = IntegerInput<AnalogInputSumPinT>(Hardware::hw.rateSumPin, -5.0, 5.0, -8, 8);
+        LinearInput<AnalogInputSumPinT> ampCvInput = LinearInput<AnalogInputSumPinT>(Hardware::hw.ampSumPin, -5, 5, 0, 5);
+        LinearInput<AnalogInputSumPinT> waveCvInput = LinearInput<AnalogInputSumPinT>(Hardware::hw.waveSumPin, -5, 5, 0, 5);
 
         float ampValue = 0;
+        float syncFrequency;
 };
 
 #endif
