@@ -139,7 +139,7 @@ void ClockController::update() {
         Hardware::hw.display.drawWaveShape(&smoothClock.getFunction(), 0, 17, 64, 16, 1, false);
     }
 
-    if(controls.syncInput.update() && controls.syncInput.isTriggeredOn()) {
+    if(syncInput.update() && syncInput.isTriggeredOn()) {
         clock.externalTick();
     }
 
