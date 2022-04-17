@@ -3,6 +3,8 @@ order: 1
 ---
 # OctoSource
 
+{% include img.html src="images/octosource_panel.png" height="640" class="floatright" %}
+
 A Eurorack synthesiser module with 8 control voltage outputs.
 
 ## Features
