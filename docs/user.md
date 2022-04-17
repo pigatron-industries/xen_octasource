@@ -114,7 +114,23 @@ How altering clock distortion X and Y values can produce different types of shuf
 
 ---
 
-### 5. Sequential Envelope
+### 5. Clock Multiplier
+
+A clock source providing various multiplications of an external or internal clock.
+
+Inputs:
+* **SYNC**: External clock, an external clock signal should be autodetected and used instead of internal clock.
+* **WAVE**: 
+* **RATE**: Rate of internally generated clock. If a clock pulse is detected on the **SYNC** input then this acts as a frequency multiplier/divider instead. Clockwise multiplies, anti-clockwise divides.
+* **PHASE**: 
+
+Outputs:
+* **OUTPUTS 1-8**: Multiplied clock signals.
+* **TRIG**: The internal clock, or external clock if one is plugged in.
+
+---
+
+### 6. Sequential Envelope
 
 Rotating sequential envelope, where each trigger signal triggers the envelope on the next output, rotating through all outputs.
 
@@ -137,7 +153,7 @@ Submodes:
 
 ---
 
-### 6. Bouncing Ball
+### 7. Bouncing Ball
 
 A ball dropped from a height, bounces off the 0V line, according the laws of gravity.
 
@@ -162,7 +178,7 @@ Submodes:
 
 ---
 
-### 7. Strange Attractor
+### 8. Strange Attractor
 
 Various 3 dimensional strange attractors with threee outputs, one for each axis.
 
@@ -194,7 +210,7 @@ Submodes:
 
 ---
 
-### 8. Double Pendulum
+### 9. Double Pendulum
 
 A 2 dimensional double pendulum simulation.
 
@@ -212,7 +228,7 @@ Outputs:
 
 ---
 
-### 9. Three Body Simulation
+### 10. Three Body Simulation
 
 A 2 dimensional simulation of three planetary bodies in various orbits.
 
@@ -243,7 +259,7 @@ Submodes:
 
 ---
 
-### 10. Random
+### 11. Random
 
 Stepped random voltage and trigger outputs.
 
