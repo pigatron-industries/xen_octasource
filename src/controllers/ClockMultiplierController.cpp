@@ -15,29 +15,39 @@ void ClockMultiplierController::init() {
 
 void ClockMultiplierController::update() {
     updateRate();
+    updateRotation();
     updateRange();
     Hardware::hw.updateOutputLeds(Colour(0, 0, 0), Colour(0, 1, 0));
 }
 
-void ClockMultiplierController::updateRate() {
+void ClockMultiplierController::updateRate(bool force) {
     if(mainClock.getState() != Clock::State::CLK_EXTERNAL) {
-        if(rateCvInput.update()) {
-            setRate(rateCvInput.getValue());
+        if(rateCvInput.update() || force) {
+            setRates(rateCvInput.getValue());
         }
     } else if(mainClock.getState() == Clock::State::CLK_EXTERNAL) {
         float externalFrequency = mainClock.getFrequency();
-        if(externalFrequency != syncFrequency || syncMultCvInput.update()) {
+        if(externalFrequency != syncFrequency || syncMultCvInput.update() || force) {
             syncFrequency = externalFrequency;
             int multInputValue = syncMultCvInput.getIntValue();
             float mult = multInputValue >= 0 ? multInputValue+1 : 1/float(-multInputValue);
-            setRate(syncFrequency * mult);
+            setRates(syncFrequency * mult);
         }
     }
 }
 
-void ClockMultiplierController::setRate(float frequency) {
-    for(int i = 0; i < 9; i++) {
-        clocks[i].setFrequency(frequency*(i+1));
+void ClockMultiplierController::setRates(float frequency) {
+    clocks[0].setFrequency(frequency);
+    for(int i = 1; i < 9; i++) {
+        int mutliplier = ((i+rotation)%8)+1;
+        clocks[i].setFrequency(frequency*mutliplier);
+    }
+}
+
+void ClockMultiplierController::updateRotation() {
+    if(rotateInput.update()) {
+        rotation = rotateInput.getIntValue();
+        updateRate(true);
     }
 }
 

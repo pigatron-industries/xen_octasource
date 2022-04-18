@@ -9,7 +9,11 @@ using namespace eurorack;
 
 class ClockMultiplierController : public Controller {
     public:
-        ClockMultiplierController() : Controller() {}
+        enum Mode {
+            NORMAL
+        };
+
+        ClockMultiplierController() : Controller(Mode::NORMAL) {}
         virtual void init(float sampleRate);
         virtual void init();
         virtual void update();
@@ -19,10 +23,10 @@ class ClockMultiplierController : public Controller {
         AnalogGateInput<AnalogInputPinT> syncInput = AnalogGateInput<AnalogInputPinT>(Hardware::hw.syncCvPin);
         LinearInput<AnalogInputSumPinT> rateCvInput = LinearInput<AnalogInputSumPinT>(Hardware::hw.rateSumPin, -5, 5, 0, 1);
         IntegerInput<AnalogInputSumPinT> syncMultCvInput = IntegerInput<AnalogInputSumPinT>(Hardware::hw.rateSumPin, -5.0, 5.0, -7, 7);
-        LinearInput<AnalogInputSumPinT> lengthInput = LinearInput<AnalogInputSumPinT>(Hardware::hw.ampSumPin, -5, 5, 4.1, 32.9);
-        LinearInput<AnalogInputSumPinT> distortionXCvInput = LinearInput<AnalogInputSumPinT>(Hardware::hw.waveSumPin, -5, 5, 0, 1);
+        //LinearInput<AnalogInputSumPinT> lengthInput = LinearInput<AnalogInputSumPinT>(Hardware::hw.ampSumPin, -5, 5, 4.1, 32.9);
+        IntegerInput<AnalogInputSumPinT> rotateInput = IntegerInput<AnalogInputSumPinT>(Hardware::hw.waveSumPin, -5, 5, 0, 8);
         #if defined(OCTASOURCE_MKII)
-            LinearInput<AnalogInputSumPinT> distortionYCvInput = LinearInput<AnalogInputSumPinT>(Hardware::hw.phaseSumPin, -5, 5, 0, 1);
+            //LinearInput<AnalogInputSumPinT> distortionYCvInput = LinearInput<AnalogInputSumPinT>(Hardware::hw.phaseSumPin, -5, 5, 0, 1);
             GateInput<> rangeInput = GateInput<>(Hardware::hw.rangeSwitchPin, false);
         #endif
 
@@ -43,9 +47,11 @@ class ClockMultiplierController : public Controller {
         ClockDivider clockDivider = ClockDivider(SAMPLERATE_DIVIDER);
 
         float syncFrequency;
+        int rotation = 0;
 
-        void updateRate();
-        void setRate(float frequency);
+        void updateRate(bool force = false);
+        void updateRotation();
+        void setRates(float frequency);
         void updateRange();
         void updateSync();
         void syncClocks();
