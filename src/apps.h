@@ -9,6 +9,7 @@
 #include "controllers/PendulumController.h"
 #include "controllers/ThreeBodyController.h"
 #include "controllers/RandomController.h"
+#include "controllers/QuantizerController.h"
 #include "controllers/DelayController.h"
 #include "controllers/VoltageReferenceController.h"
 
@@ -24,5 +25,6 @@ AttractorController, \
 PendulumController, \
 ThreeBodyController, \
 RandomController, \
+QuantizerController, \
 DelayController, \
 VoltageReferenceController
