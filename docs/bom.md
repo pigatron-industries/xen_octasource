@@ -34,11 +34,11 @@ order: 4
 | Male Header 24x1               | TH        | 5        | Any length header that can be cut will do
 | Male Header 2x5                | TH        | 1        | Power header
 | Male Header 2x5                | SM        | 1        | Only needed if using Teensy 4.0
-| RGB LED                        | TH        | 8        |
-| Potentiometer 100k             | TH        | 4        |
-| Rotary Encoder                 | TH        | 1        |
-| Thonkicon Jack                 | TH        | 15       |
-| SPDT ON-ON Dailywell Sub-mini Toggle Switch | TH | 1 |
+| RGB LED 5mm Common Anode       | TH        | 8        | [Dialight 521-8559F](https://www.mouser.co.uk/ProductDetail/Dialight/521-8559F?qs=vmHwEFxEFR%2FyCJVY9sdZTA%3D%3D&countrycode=GB&currencycode=GBP)
+| Potentiometer B100k            | TH        | 4        | [Alpha 9mm - Vertical](https://www.thonk.co.uk/shop/alpha-9mm-pots-vertical-t18/)
+| Rotary Encoder                 | TH        | 1        | [Bourns PEC11R-4220K-S0024](https://www.mouser.co.uk/ProductDetail/Bourns/PEC11R-4220K-S0024?qs=Zq5ylnUbLm4cJP8MzrocUw%3D%3D)
+| 3.5mm Jack Socket              | TH        | 15       | [Thonkiconn 3.5mm Jack PJ398SM](https://www.thonk.co.uk/shop/thonkiconn/)
+| DPDT ON-ON Toggle Switch       | TH        | 1        | [Dailywell Sub-miniature](https://www.thonk.co.uk/shop/sub-mini-toggle-switches/)
 | OLED Display 0.49" I2C SSD1306 |           | 1        |
 | Teensy 4.0 / Teensy 4.1        |           | 1        |
 | Knobs                          |           | 5        |
