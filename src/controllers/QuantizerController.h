@@ -17,6 +17,7 @@ class QuantizerController : public Controller {
 
     private:
         AnalogGateInput<AnalogInputPinT> syncInput = AnalogGateInput<AnalogInputPinT>(Hardware::hw.syncCvPin);
+        TriggerOutput<DigitalOutputDeviceT> triggerOutput = TriggerOutput<DigitalOutputDeviceT>(Hardware::hw.gateOutPin, 20000);
 
         Scale scale = Scale(12);
         PitchQuantizer pitchQuantizer = PitchQuantizer(scale);

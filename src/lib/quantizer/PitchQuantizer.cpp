@@ -1,18 +1,36 @@
 #include "PitchQuantizer.h"
 
-float PitchQuantizer::quantize(float value) {
-    int octave = floorf(value);
-    float prevValue = octave;
+bool PitchQuantizer::quantize(float value) {
+    int octave = scale->findOctave(value);
+    Note prevNote = scale->getNote(octave, 0);
+    Note nextNote;
+
     for(int i = 1; i <= scale->getNotes(); i++) {
-        float nextValue = getNoteValue(octave, i);
-        if(nextValue > value) {
-            return ((nextValue - value) < (value - prevValue)) ? nextValue : prevValue;
+        nextNote = scale->getNote(octave, i);
+        if(scale->isEnabled(nextNote)) {
+            if(nextNote.value > value) {
+                return setNote(getClosestNote(value, prevNote, nextNote));
+            }
+            prevNote = nextNote;
         }
-        prevValue = nextValue;
     }
-    return prevValue;
+    
+    nextNote = scale->getNote(octave+1, 0);
+    return setNote(getClosestNote(value, prevNote, nextNote));
 }
 
-float PitchQuantizer::getNoteValue(int octave, int note) {
-    return scale->getNoteValue(octave, note);
+Note& PitchQuantizer::getClosestNote(float value, Note& prevNote, Note& nextNote) {
+    if((nextNote.value - value) < (value - prevNote.value)) {
+        return nextNote;
+    } else {
+        return prevNote;
+    }
+}
+
+bool PitchQuantizer::setNote(Note& note) {
+    if(this->note.note != note.note || this->note.octave != note.octave) {
+        this->note = note;
+        return true;
+    }
+    return false;
 }

@@ -7,13 +7,16 @@ class PitchQuantizer {
     public:
         PitchQuantizer(Scale& scale) { this->scale = &scale; }
         void setScale(Scale& scale) { this->scale = &scale; }
-        float quantize(float value);
-        float getNoteValue(int octave, int note);
+        bool quantize(float value);
 
+        Note& getNote() { return note; }
 
     private:
         Scale* scale;
+        Note note;
         
+        bool setNote(Note& note);
+        Note& getClosestNote(float value, Note& prevNote, Note& nextNote);
 };
 
 #endif
