@@ -39,6 +39,6 @@ order: 4
 | Rotary Encoder                 | TH        | 1        | [Bourns PEC11R-4220K-S0024](https://www.mouser.co.uk/ProductDetail/Bourns/PEC11R-4220K-S0024?qs=Zq5ylnUbLm4cJP8MzrocUw%3D%3D)
 | 3.5mm Jack Socket              | TH        | 15       | [Thonkiconn 3.5mm Jack PJ398SM](https://www.thonk.co.uk/shop/thonkiconn/)
 | DPDT ON-ON Toggle Switch       | TH        | 1        | [Dailywell Sub-miniature](https://www.thonk.co.uk/shop/sub-mini-toggle-switches/)
-| OLED Display 0.49" I2C SSD1306 |           | 1        |
+| OLED 0.49" 64x32 I2C SSD1306   |           | 1        | [0.49" 64x32 I2C SSD1306](https://www.buydisplay.com/i2c-white-0-49-inch-oled-display-module-64x32-arduino-raspberry-pi)
 | Teensy 4.0 / Teensy 4.1        |           | 1        |
 | Knobs                          |           | 5        |
