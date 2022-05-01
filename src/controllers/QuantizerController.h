@@ -2,7 +2,7 @@
 #define QuantizerController_h
 
 #include "Controller.h"
-#include "lib/quantizer/PitchQuantizer.h"
+#include <quantizer/PitchQuantizer.h>
 
 using namespace eurorack;
 
@@ -19,8 +19,8 @@ class QuantizerController : public Controller {
         AnalogGateInput<AnalogInputPinT> syncInput = AnalogGateInput<AnalogInputPinT>(Hardware::hw.syncCvPin);
         TriggerOutput<DigitalOutputDeviceT> triggerOutput = TriggerOutput<DigitalOutputDeviceT>(Hardware::hw.gateOutPin, 20000);
 
-        Scale scale = Scale(12);
-        PitchQuantizer pitchQuantizer = PitchQuantizer(scale);
+        Tuning tuning = Tuning(12);
+        PitchQuantizer pitchQuantizer = PitchQuantizer(tuning);
 
         float quantizedValue = 0;
 

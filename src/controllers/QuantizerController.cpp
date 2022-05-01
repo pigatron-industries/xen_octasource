@@ -3,11 +3,7 @@
 void QuantizerController::init(float sampleRate) {
     Controller::init(sampleRate);
     init();
-    scale.enable(3);
-    scale.enable(5);
-    scale.enable(7);
-    scale.enable(10);
-    
+    tuning.enable({3, 5, 7, 10});
 }
 
 void QuantizerController::init() {
@@ -16,15 +12,6 @@ void QuantizerController::init() {
 }
 
 void QuantizerController::update() {
-    // if(syncInput.update()) {
-    //     if(syncInput.isTriggeredOn()) {
-    //         float value = Hardware::hw.modeCvPin.analogRead();
-    //         if(pitchQuantizer.quantize(value)) {
-    //             triggerOutput.trigger();
-    //         }
-    //     }
-    // }
-
     triggerOutput.update();
     Hardware::hw.updateOutputLeds();
 }
