@@ -20,6 +20,7 @@ class QuantizerController : public Controller {
         TriggerOutput<DigitalOutputDeviceT> triggerOutput = TriggerOutput<DigitalOutputDeviceT>(Hardware::hw.gateOutPin, 20000);
 
         Tuning tuning = Tuning(12);
+        ScaleDef scale = ScaleDef({0, 2, 4, 5, 7, 9, 10});
         PitchQuantizer pitchQuantizer = PitchQuantizer(tuning);
 
         float quantizedValue = 0;
