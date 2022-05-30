@@ -2041,7 +2041,7 @@ grid 5 mm, outline 2.5 x 7.5 mm</description>
 <part name="SUPPLY26" library="supply" deviceset="GND" device="">
 <attribute name="SPICEPREFIX" value="G"/>
 </part>
-<part name="U1" library="ic_digital" deviceset="74AHCT1G125" device="&quot;"/>
+<part name="U1" library="ic_digital" deviceset="74AHCT1G125" device="&quot;" value="74AHCT1G125"/>
 <part name="SUPPLY27" library="supply" deviceset="GND" device="">
 <attribute name="SPICEPREFIX" value="G"/>
 </part>

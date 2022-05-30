@@ -3,6 +3,10 @@ order: 5
 ---
 # Development History
 
+### MKII
+
+{% include img.html src="images/octasource_mkii.jpg" height=400 %}
+
 ### MKI Prototype
 
 Used a [MikroElektronika PIXI Click](https://www.mikroe.com/pixi-click) for all inputs and outputs.
