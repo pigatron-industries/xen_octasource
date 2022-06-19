@@ -4,6 +4,7 @@
 #include "controllers/ClockController.h"
 #include "controllers/ClockMultiplierController.h"
 #include "controllers/EnvelopeController.h"
+#include "controllers/BurstController.h"
 #include "controllers/BouncingBallController.h"
 #include "controllers/AttractorController.h"
 #include "controllers/PendulumController.h"
@@ -20,6 +21,7 @@ FilterController, \
 ClockController, \
 ClockMultiplierController, \
 EnvelopeController, \
+BurstController, \
 BouncingBallController, \
 AttractorController, \
 PendulumController, \
