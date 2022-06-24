@@ -23,6 +23,7 @@ void BurstController::update() {
         burstRateInput.update();
         burstLengthInput.update();
         bursts[nextOutput].start(burstRateInput.getValue(), burstLengthInput.getValue());
+        triggerOutputs[nextOutput].trigger();
         nextOutput++;
         if(nextOutput >= outputs) {
             nextOutput = 0;
