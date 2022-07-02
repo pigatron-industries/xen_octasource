@@ -1,7 +1,7 @@
 #ifndef Body_h
 #define Body_h
 
-#include "../../Vector.h"
+#include "../../../Vector.h"
 
 class Body {
     public:

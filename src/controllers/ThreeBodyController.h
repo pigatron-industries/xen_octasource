@@ -3,7 +3,7 @@
 
 #include "../Controller.h"
 #include "../Hardware.h"
-#include "systems/physical/ThreeBody.h"
+#include "systems/differential/physical/ThreeBody.h"
 
 class ThreeBodyController : public Controller {
     public:

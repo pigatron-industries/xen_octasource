@@ -1,7 +1,7 @@
 #ifndef ContinuousSystem_h
 #define ContinuousSystem_h
 
-#include "Vector.h"
+#include "../Vector.h"
 
 class ContinuousSystem {
     public: 

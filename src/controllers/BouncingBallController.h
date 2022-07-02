@@ -3,7 +3,7 @@
 
 #include "../Controller.h"
 #include "../Hardware.h"
-#include "systems/physical/BouncingBall.h"
+#include "systems/differential/physical/BouncingBall.h"
 
 class BouncingBallController : public Controller {
     public:

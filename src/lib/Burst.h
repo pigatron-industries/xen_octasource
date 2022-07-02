@@ -22,11 +22,9 @@ class Burst {
             counter = 0;
             active = true;
             if(slope < 0) {
-                slopeGenerator.getShape().setStartValue(1);
-                slopeGenerator.getShape().setEndValue(1+slope);
+                slopeGenerator.getShape().setStartEndValue(1, 1+slope);
             } else {
-                slopeGenerator.getShape().setStartValue(1-slope);
-                slopeGenerator.getShape().setEndValue(1);
+                slopeGenerator.getShape().setStartEndValue(1-slope, 1);
             }
             oscillator.setFrequency(frequency);
             oscillator.setPhase(0);

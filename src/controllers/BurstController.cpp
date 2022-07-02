@@ -21,7 +21,6 @@ void BurstController::init(float sampleRate) {
 
 void BurstController::init() {
     Serial.println("Burst");
-    Serial.println(shapes.getSize());
     Hardware::hw.display.text("BURST");
 
     outputs = mode.value + 1;
