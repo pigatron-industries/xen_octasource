@@ -20,6 +20,11 @@ void MainController::init() {
     Hardware::hw.init();
     AbstractMainController::init();
 
+    this->shortPress = &MainController::incrementMode;
+    this->clockWise = &MainController::incrementValue;
+    this->antiClockWise = &MainController::decrementValue;
+    this->initOnModeSelect = false;
+
     encoder.getEncoderButton().update();
     if(encoder.getEncoderButton().held()) {
         doCalibration();

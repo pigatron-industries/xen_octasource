@@ -2,28 +2,66 @@
 
 void BurstController::init(float sampleRate) {
     for(int i = 0; i < outputs; i++) {
-        bursts[i].clock.init(sampleRate);
+        bursts[i].init(sampleRate);
     }
+
+    parameters[Parameter::BURST_OUTPUTS].last = OUTPUT_CV_COUNT-1;
+    parameters[Parameter::BURST_SHAPE].last = shapes.getSize()-1;
+
+    std::get<0>(shapes.getObjects()).setWidth(0.5);
+    std::get<1>(shapes.getObjects()).setPeakPosition(0.5);
+    std::get<2>(shapes.getObjects()).setPeakPosition(0);
+    std::get<3>(shapes.getObjects()).setPeakPosition(1);
+
+    shapes.select(0);
+
     init();
 }
 
 void BurstController::init() {
     Serial.println("Burst");
+    Serial.println(shapes.getSize());
     Hardware::hw.display.text("BURST");
 
     outputs = mode.value + 1;
-    char line2[11];
-    snprintf_P(line2, sizeof(line2), PSTR("OUTPUTS: %d"), outputs);
-    Hardware::hw.display.text(line2, Display::TEXTLINE_2);
-    outputs = mode.value + 1;
+
+    page.setLabel(1, "OUTPUTS:");
+    page.setLabel(2, "SHAPE:");
+    page.setLabel(3, "LENGTH:");
+    page.setValue(1, outputs);
+    page.setValue(2, parameters[Parameter::BURST_SHAPE].value);
+    page.selectLine(parameters.getSelectedIndex()+1);
+}
+
+int BurstController::cycleMode(int amount) {
+    parameters.cycle(amount);
+    page.selectLine(parameters.getSelectedIndex()+1);
+    return parameters.getSelectedIndex(); 
+}
+
+void BurstController::cycleValue(int amount) {
+    parameters.getSelected().cycle(amount);
+    switch(parameters.getSelectedIndex()) {
+        case Parameter::BURST_OUTPUTS:
+            outputs = parameters[Parameter::BURST_OUTPUTS].value + 1;
+            page.setValue(1, outputs);
+            break;
+        case Parameter::BURST_SHAPE:
+            shapes.select(parameters[Parameter::BURST_SHAPE].value);
+            page.setValue(2, parameters[Parameter::BURST_SHAPE].value);
+            break;
+    }
 }
 
 void BurstController::update() {
+    if(burstLengthInput.update()) {
+        burstLength = burstLengthInput.getValue();
+        page.setValue(3, burstLength);
+    }
+
     if(triggerInput.update() && triggerInput.isTriggeredOn()) {
         burstRateInput.update();
-        burstLengthInput.update();
-        bursts[nextOutput].start(burstRateInput.getValue(), burstLengthInput.getValue());
-        triggerOutputs[nextOutput].trigger();
+        bursts[nextOutput].start(burstRateInput.getValue(), burstLength);
         nextOutput++;
         if(nextOutput >= outputs) {
             nextOutput = 0;
@@ -35,9 +73,6 @@ void BurstController::update() {
 
 void BurstController::process() {
     for(int i = 0; i < outputs; i++) {
-        triggerOutputs[i].update();
-        if(bursts[i].process()) {
-            triggerOutputs[i].trigger();
-        }
+        Hardware::hw.cvOutputPins[i]->analogWrite(bursts[i].process() * 5);
     }
 }

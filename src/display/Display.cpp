@@ -15,13 +15,18 @@ void Display::update() {
     u8g2.sendBuffer();
 }
 
-void Display::text(const char* text, uint8_t x) {
-    u8g2.setFont(u8g2_font_5x7_mf);
+void Display::text(const char* text, uint8_t x, uint8_t y, uint8_t w) {
+    u8g2.setFont(DISPLAY_FONT);
     u8g2.setDrawColor(0);
-    u8g2.drawBox(0, x, 64, 7);
+    u8g2.drawBox(y, x, w, DISPLAY_FONT_HEIGHT);
     u8g2.setDrawColor(1);
-    u8g2.drawStr(0, x+6, text);
+    u8g2.drawStr(y, x+DISPLAY_FONT_HEIGHT-1, text);
     u8g2.sendBuffer();
+}
+
+void Display::text(int num, uint8_t x, uint8_t y, uint8_t w) {
+    snprintf_P(buffer, sizeof(buffer), PSTR("%d"), num);
+    text(buffer, x, y, w);
 }
 
 void Display::drawWaveShape(WaveShape* waveShape, uint8_t x, uint8_t y, uint8_t width, uint8_t height, uint8_t n, bool bipolar) {
