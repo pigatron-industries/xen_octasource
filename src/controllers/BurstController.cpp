@@ -4,6 +4,7 @@ void BurstController::init(float sampleRate) {
     for(int i = 0; i < outputs; i++) {
         bursts[i].init(sampleRate);
     }
+    externalClock.init(sampleRate);
 
     parameters[Parameter::BURST_OUTPUTS].last = OUTPUT_CV_COUNT-1;
     parameters[Parameter::BURST_SHAPE].last = shapes.getSize()-1;
@@ -25,9 +26,9 @@ void BurstController::init() {
 
     outputs = mode.value + 1;
 
-    page.setLabel(1, "OUTPUTS:");
-    page.setLabel(2, "SHAPE:");
-    page.setLabel(3, "LENGTH:");
+    page.setLabel(1, "OUT:");
+    page.setLabel(2, "SHP:");
+    page.setLabel(3, "LEN:");
     page.setValue(1, outputs);
     page.setValue(2, parameters[Parameter::BURST_SHAPE].value);
     page.selectLine(parameters.getSelectedIndex()+1);
@@ -54,15 +55,40 @@ void BurstController::cycleValue(int amount) {
 }
 
 void BurstController::update() {
+    if(syncInput.update() && syncInput.isTriggeredOn()) {
+        externalClock.externalTick();
+        if(!sync && externalClock.getState() == Clock::State::CLK_EXTERNAL) {
+            Hardware::hw.display.text("SYNC", Display::TEXTLINE_1, DISPLAY_FONT_WIDTH*9);
+            sync = true;
+        }
+    }
+
+    if(sync && externalClock.getState() == Clock::State::CLK_INTERNAL) {
+        sync = false;
+        Hardware::hw.display.text("    ", Display::TEXTLINE_1, DISPLAY_FONT_WIDTH*9);
+    }
+
     if(burstLengthInput.update()) {
         burstLength = burstLengthInput.getValue();
         page.setValue(3, burstLength);
     }
 
     if(triggerInput.update() && triggerInput.isTriggeredOn()) {
-        burstRateInput.update();
         slopeInput.update();
-        bursts[nextOutput].start(burstRateInput.getValue(), burstLength, slopeInput.getValue());
+        float burstRate;
+        if(sync) {
+            burstRateMultInput.update();
+            int burstRateMult = burstRateMultInput.getIntValue();
+            if(burstRateMult >= 0) {
+                burstRate = externalClock.getFrequency() * (burstRateMult+1);
+            } else {
+                burstRate = externalClock.getFrequency() / fabsf(burstRateMult);
+            }
+        } else {
+            burstRateInput.update();
+            burstRate = burstRateInput.getValue();
+        }
+        bursts[nextOutput].start(burstRate, burstLength, slopeInput.getValue());
         nextOutput++;
         if(nextOutput >= outputs) {
             nextOutput = 0;
@@ -73,6 +99,7 @@ void BurstController::update() {
 }
 
 void BurstController::process() {
+    externalClock.process();
     for(int i = 0; i < outputs; i++) {
         Hardware::hw.cvOutputPins[i]->analogWrite(bursts[i].process() * 5);
     }

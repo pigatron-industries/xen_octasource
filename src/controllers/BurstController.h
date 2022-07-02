@@ -28,7 +28,9 @@ class BurstController : public ParameterizedController<2> {
         ParameterPage page;
 
         AnalogGateInput<AnalogInputPinT> triggerInput = AnalogGateInput<AnalogInputPinT>(Hardware::hw.syncCvPin);
+        AnalogGateInput<AnalogInputPinT> syncInput = AnalogGateInput<AnalogInputPinT>(Hardware::hw.modeCvPin);
         LinearInput<AnalogInputSumPinT> burstRateInput = LinearInput<AnalogInputSumPinT>(Hardware::hw.rateSumPin, -5, 5, 1, 30);
+        IntegerInput<AnalogInputSumPinT> burstRateMultInput = IntegerInput<AnalogInputSumPinT>(Hardware::hw.rateSumPin, -5, 5, -8, 7);
         IntegerInput<AnalogInputSumPinT> pulseWidthInput = IntegerInput<AnalogInputSumPinT>(Hardware::hw.waveSumPin, -5, 5, 0, 8);
         IntegerInput<AnalogInputSumPinT> burstLengthInput = IntegerInput<AnalogInputSumPinT>(Hardware::hw.phaseSumPin, -5, 5, 1, 30);
         LinearInput<AnalogInputSumPinT> slopeInput = LinearInput<AnalogInputSumPinT>(Hardware::hw.ampSumPin, -5, 5, -1, 1);
@@ -46,9 +48,12 @@ class BurstController : public ParameterizedController<2> {
             Burst<WaveShapesT&>(shapes)
         };
 
+        Clock externalClock;
+
         int burstLength = 2;
         int outputs = 8;
         int nextOutput = 0;
+        bool sync = false;
         
 };
 

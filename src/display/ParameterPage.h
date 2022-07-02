@@ -15,7 +15,7 @@ class ParameterPage {
         int selectedLine = -1;
 
         int labelStart = 1;
-        int valueStart = 10;
+        int valueStart = 6;
         
 };
 
