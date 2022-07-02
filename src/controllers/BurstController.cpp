@@ -61,7 +61,8 @@ void BurstController::update() {
 
     if(triggerInput.update() && triggerInput.isTriggeredOn()) {
         burstRateInput.update();
-        bursts[nextOutput].start(burstRateInput.getValue(), burstLength);
+        slopeInput.update();
+        bursts[nextOutput].start(burstRateInput.getValue(), burstLength, slopeInput.getValue());
         nextOutput++;
         if(nextOutput >= outputs) {
             nextOutput = 0;

@@ -31,7 +31,7 @@ class BurstController : public ParameterizedController<2> {
         LinearInput<AnalogInputSumPinT> burstRateInput = LinearInput<AnalogInputSumPinT>(Hardware::hw.rateSumPin, -5, 5, 1, 30);
         IntegerInput<AnalogInputSumPinT> pulseWidthInput = IntegerInput<AnalogInputSumPinT>(Hardware::hw.waveSumPin, -5, 5, 0, 8);
         IntegerInput<AnalogInputSumPinT> burstLengthInput = IntegerInput<AnalogInputSumPinT>(Hardware::hw.phaseSumPin, -5, 5, 1, 30);
-        IntegerInput<AnalogInputSumPinT> slopeInput = IntegerInput<AnalogInputSumPinT>(Hardware::hw.ampSumPin, -5, 5, 1, 30);
+        LinearInput<AnalogInputSumPinT> slopeInput = LinearInput<AnalogInputSumPinT>(Hardware::hw.ampSumPin, -5, 5, -1, 1);
    
         typedef WaveSelector<Pulse, AsymmetricalTriangle, AsymmetricalTriangle, AsymmetricalTriangle> WaveShapesT;
         WaveShapesT shapes;
