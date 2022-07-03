@@ -6,6 +6,7 @@
 #include "controllers/EnvelopeController.h"
 #include "controllers/BurstController.h"
 #include "controllers/BouncingBallController.h"
+#include "controllers/TrochoidController.h"
 #include "controllers/AttractorController.h"
 #include "controllers/PendulumController.h"
 #include "controllers/ThreeBodyController.h"
@@ -23,6 +24,7 @@ ClockMultiplierController, \
 EnvelopeController, \
 BurstController, \
 BouncingBallController, \
+TrochoidController, \
 AttractorController, \
 PendulumController, \
 ThreeBodyController, \
