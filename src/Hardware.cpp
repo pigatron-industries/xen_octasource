@@ -1,4 +1,5 @@
 #include "Hardware.h"
+#include "lib/io/AnalogPinCalibration.h"
 
 Hardware Hardware::hw = Hardware();
 
@@ -20,16 +21,19 @@ void Hardware::init() {
         dac8164b.setDeferredOutput(true);
         display.init();
 
+        for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
+            cvOutputPins[i]->loadCalibration();
+        }
         for(int i = 0; i < 16; i++) {
             encoderLeds[i]->analogWrite(0);
         }
-        for(int i = 0; i < 8; i++) {
+        for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
             outputRedLeds[i]->analogWrite(0);
         }
-        for(int i = 0; i < 8; i++) {
+        for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
             outputBlueLeds[i]->analogWrite(0);
         }
-        for(int i = 0; i < 8; i++) {
+        for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
             outputGreenLeds[i]->analogWrite(0);
         }
     #endif

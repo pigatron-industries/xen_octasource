@@ -1,5 +1,7 @@
 #include "controllers/PhasedController.h"
 #include "controllers/FrequencyController.h"
+//#include "controllers/FrequencySpreadController.h"
+//#include "controllers/VoltageSpreadController.h"
 #include "controllers/FilterController.h"
 #include "controllers/ClockController.h"
 #include "controllers/ClockMultiplierController.h"
@@ -13,7 +15,7 @@
 #include "controllers/RandomController.h"
 #include "controllers/QuantizerController.h"
 #include "controllers/DelayController.h"
-#include "controllers/VoltageReferenceController.h"
+#include "controllers/CalibrationController.h"
 
 #define CONTROLLERS \
 PhasedController, \
@@ -31,4 +33,4 @@ ThreeBodyController, \
 RandomController, \
 QuantizerController, \
 DelayController, \
-VoltageReferenceController
+CalibrationController
