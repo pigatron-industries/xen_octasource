@@ -42,6 +42,7 @@ class ParametricSystemN : public ParametricSystem {
     public:
         ParametricSystemN() {}
         float getOutput(int i) { return pos[i]; }
+        Vector<2>& getOutput() { return pos; }
 
     protected:
         Vector<2> pos;

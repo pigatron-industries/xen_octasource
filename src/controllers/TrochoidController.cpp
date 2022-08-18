@@ -9,13 +9,6 @@ void TrochoidController::init() {
     Serial.println("Trochoid");
     Hardware::hw.display.text("TROCHOID");
     hypotrochoid.init(sampleRate);
-
-    // switch(mode.value) {
-    //     case Mode::HYPOTROCHOID:
-    //         Hardware::hw.display.text("HYPOTROCHOID", Display::TEXTLINE_2);
-    //         break;
-    // }
-
     updateParams();
 }
 
@@ -46,13 +39,9 @@ void TrochoidController::updateParams() {
 }
 
 void TrochoidController::process() {
-    //if(clockDivider.tick()) {
-        //switch(mode.value) {
-        //case Mode::HYPOTROCHOID:
-            hypotrochoid.process();
-            Hardware::hw.cvOutputPins[0]->analogWrite(hypotrochoid.getOutput(X));
-            Hardware::hw.cvOutputPins[1]->analogWrite(hypotrochoid.getOutput(Y));
-            // break;
-        //}
-    //}
+    hypotrochoid.process();
+    Vector<2>& output = hypotrochoid.getOutput();
+    Hardware::hw.cvOutputPins[0]->analogWrite(output[X]);
+    Hardware::hw.cvOutputPins[1]->analogWrite(output[Y]);
+    Hardware::hw.cvOutputPins[2]->analogWrite(output.length());
 }
