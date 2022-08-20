@@ -10,12 +10,11 @@ void ClockMultiplierController::init(float sampleRate) {
 }
 
 void ClockMultiplierController::init() {
-    Hardware::hw.display.text("CLOCK MULT");
+    Hardware::hw.display.textLine("CLOCK MULT");
 }
 
 void ClockMultiplierController::update() {
     updateRate();
-    updateRotation();
     updateRange();
     Hardware::hw.updateOutputLeds(Colour(0, 0, 0), Colour(0, 1, 0));
 }
@@ -41,13 +40,6 @@ void ClockMultiplierController::setRates(float frequency) {
     for(int i = 1; i < 9; i++) {
         int mutliplier = ((i+rotation)%8)+1;
         clocks[i].setFrequency(frequency*mutliplier);
-    }
-}
-
-void ClockMultiplierController::updateRotation() {
-    if(rotateInput.update()) {
-        rotation = rotateInput.getIntValue();
-        updateRate(true);
     }
 }
 

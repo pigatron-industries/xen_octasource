@@ -7,7 +7,7 @@ void PendulumController::init(float sampleRate) {
 
 void PendulumController::init() {
     Serial.println("Pendulum");
-    Hardware::hw.display.text("PENDULUM");
+    Hardware::hw.display.textLine("PENDULUM");
     doublePendulum.init(sampleRate / SAMPLE_RATE_DIVISOR);
     for(SpringPendulum& springPendulum : springPendulums) {
         springPendulum.init(sampleRate / SAMPLE_RATE_DIVISOR);
@@ -15,7 +15,7 @@ void PendulumController::init() {
 
     switch(mode.value) {
         case Mode::SPRING_PENDULUM:
-            Hardware::hw.display.text("SPRING", Display::TEXTLINE_2);
+            Hardware::hw.display.textLine("SPRING", OLEDDisplay::TEXTLINE_2);
             springPendulums[0].setInitialConditions(Vector<2>(-2.5, 0), Vector<2>(0, 0));
             springPendulums[0].setOffset(Vector<2>(0, 2.5));
             springPendulums[0].setScale(Vector<2>(1.5, 1.5) * 1);
@@ -33,7 +33,7 @@ void PendulumController::init() {
             springPendulums[3].setScale(Vector<2>(1, 2) * 1);
             break;
         case Mode::DOUBLE_PENDULUM:
-            Hardware::hw.display.text("DOUBLE", Display::TEXTLINE_2);
+            Hardware::hw.display.textLine("DOUBLE", OLEDDisplay::TEXTLINE_2);
             break;
     }
 }

@@ -14,13 +14,13 @@ void DelayController::init(float sampleRate) {
 
 void DelayController::init() {
     Serial.println("Delay");
-    Hardware::hw.display.text("DELAY");
+    Hardware::hw.display.textLine("DELAY");
     switch(mode.value) {
         case Mode::DELAY:
-            Hardware::hw.display.text("DELAY", Display::TEXTLINE_2);
+            Hardware::hw.display.textLine("DELAY", OLEDDisplay::TEXTLINE_2);
             break;
         case Mode::SLEW:
-            Hardware::hw.display.text("SLEW", Display::TEXTLINE_2);
+            Hardware::hw.display.textLine("SLEW", OLEDDisplay::TEXTLINE_2);
             break;
     }
 }

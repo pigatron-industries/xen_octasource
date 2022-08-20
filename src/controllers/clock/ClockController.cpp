@@ -12,14 +12,14 @@ void ClockController::init(float sampleRate) {
 
 void ClockController::init() {
     Serial.println("Clock");
-    Hardware::hw.display.text("CLOCK");
+    Hardware::hw.display.textLine("CLOCK");
     for(int i = 0; i < 8; i++) {
         clockDividers[i].reset();
     }
 
     switch(mode.value) {
         case Preset::INTEGER:
-            Hardware::hw.display.text("INTEGER", Display::TEXTLINE_2);
+            Hardware::hw.display.textLine("INTEGER", OLEDDisplay::TEXTLINE_2);
             setClockDivisorLength(0, 2, 1);
             setClockDivisorLength(1, 3, 2);
             setClockDivisorLength(2, 4, 3);
@@ -30,7 +30,7 @@ void ClockController::init() {
             setClockDivisorLength(7, 9, 8);
             break;
         case Preset::EVEN:
-            Hardware::hw.display.text("EVEN", Display::TEXTLINE_2);
+            Hardware::hw.display.textLine("EVEN", OLEDDisplay::TEXTLINE_2);
             setClockDivisorLength(0, 2,  1);
             setClockDivisorLength(1, 4,  2);
             setClockDivisorLength(2, 6,  3);
@@ -41,7 +41,7 @@ void ClockController::init() {
             setClockDivisorLength(7, 16, 8);
             break;
         case Preset::ODD:
-            Hardware::hw.display.text("ODD", Display::TEXTLINE_2);
+            Hardware::hw.display.textLine("ODD", OLEDDisplay::TEXTLINE_2);
             setClockDivisorLength(0, 3,  1);
             setClockDivisorLength(1, 5,  2);
             setClockDivisorLength(2, 7,  3);
@@ -52,7 +52,7 @@ void ClockController::init() {
             setClockDivisorLength(7, 17, 8);
             break;
         case Preset::POWER2:
-            Hardware::hw.display.text("POWER2", Display::TEXTLINE_2);
+            Hardware::hw.display.textLine("POWER2", OLEDDisplay::TEXTLINE_2);
             setClockDivisorLength(0, 2, 1);
             setClockDivisorLength(1, 4, 2);
             setClockDivisorLength(2, 8, 4);
@@ -63,7 +63,7 @@ void ClockController::init() {
             setClockDivisorLength(7, 256, 128);
             break;
         case Preset::PRIME:
-            Hardware::hw.display.text("PRIME", Display::TEXTLINE_2);
+            Hardware::hw.display.textLine("PRIME", OLEDDisplay::TEXTLINE_2);
             setClockDivisorLength(0, 2,  1);
             setClockDivisorLength(1, 3,  2);
             setClockDivisorLength(2, 5,  3);
@@ -74,7 +74,7 @@ void ClockController::init() {
             setClockDivisorLength(7, 19, 17);
             break;
         case Preset::FIBONACCI:
-            Hardware::hw.display.text("FIBONACCI", Display::TEXTLINE_2);
+            Hardware::hw.display.textLine("FIBONACCI", OLEDDisplay::TEXTLINE_2);
             setClockDivisorLength(0, 2,  1);
             setClockDivisorLength(1, 3,  2);
             setClockDivisorLength(2, 5,  3);
@@ -85,7 +85,7 @@ void ClockController::init() {
             setClockDivisorLength(7, 55, 34);
             break;
         case Preset::PPQN24:
-            Hardware::hw.display.text("PPQN24", Display::TEXTLINE_2);
+            Hardware::hw.display.textLine("PPQN24", OLEDDisplay::TEXTLINE_2);
             setClockDivisorLength(0, 3,  1);
             setClockDivisorLength(1, 6,  3);
             setClockDivisorLength(2, 8,  4);

@@ -11,8 +11,8 @@ void AttractorController::init(float sampleRate) {
 
 void AttractorController::init() {
     Serial.println("Attractor");
-    Hardware::hw.display.text("ATTRACTOR");
-    Hardware::hw.display.text(attractors1[mode.value]->getName(), Display::TEXTLINE_2);
+    //Hardware::hw.display.text("ATTRACTOR");
+    Hardware::hw.display.textLine(attractors1[mode.value]->getName(), OLEDDisplay::TEXTLINE_2);
 }
 
 void AttractorController::update() {

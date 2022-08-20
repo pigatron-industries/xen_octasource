@@ -7,7 +7,7 @@ void CalibrationController::init(float sampleRate) {
 
 void CalibrationController::init() {
     Serial.println("Calibration");
-    Hardware::hw.display.text("CALIBRATION");
+    Hardware::hw.display.textLine("CALIBRATION");
 
     page.setLabel(1, "OUTP:");
     page.setValue(1, parameters.getSelectedIndex());

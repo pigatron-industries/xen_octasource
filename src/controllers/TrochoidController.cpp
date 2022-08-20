@@ -7,7 +7,7 @@ void TrochoidController::init(float sampleRate) {
 
 void TrochoidController::init() {
     Serial.println("Trochoid");
-    Hardware::hw.display.text("TROCHOID");
+    Hardware::hw.display.textLine("TROCHOID");
     hypotrochoid.init(sampleRate);
     updateParams();
 }

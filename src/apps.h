@@ -3,8 +3,8 @@
 //#include "controllers/FrequencySpreadController.h"
 //#include "controllers/VoltageSpreadController.h"
 #include "controllers/FilterController.h"
-#include "controllers/ClockController.h"
-#include "controllers/ClockMultiplierController.h"
+#include "controllers/clock/ClockController.h"
+#include "controllers/clock/ClockMultiplierController.h"
 #include "controllers/EnvelopeController.h"
 #include "controllers/BurstController.h"
 #include "controllers/BouncingBallController.h"
@@ -13,7 +13,7 @@
 #include "controllers/PendulumController.h"
 #include "controllers/ThreeBodyController.h"
 #include "controllers/RandomController.h"
-#include "controllers/QuantizerController.h"
+#include "controllers/sequencequantizer/SequenceQuantizerController.h"
 #include "controllers/DelayController.h"
 #include "controllers/CalibrationController.h"
 
@@ -31,6 +31,6 @@ AttractorController, \
 PendulumController, \
 ThreeBodyController, \
 RandomController, \
-QuantizerController, \
+SequenceQuantizerController, \
 DelayController, \
 CalibrationController

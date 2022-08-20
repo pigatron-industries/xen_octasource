@@ -1,21 +1,40 @@
-#include "Display.h"
+#include "OLEDDisplay.h"
 #include <eurorack.h>
 
-void Display::init() {
+void OLEDDisplay::init() {
     u8g2.begin();
     u8g2.clearBuffer();	
     u8g2.sendBuffer();
+    u8g2.setFont(DISPLAY_FONT);
+    u8g2.setDrawColor(1);
 }
 
-void Display::clear() {
+void OLEDDisplay::clear() {
     u8g2.clearBuffer();
 }
 
-void Display::update() {
+void OLEDDisplay::update() {
     u8g2.sendBuffer();
 }
 
-void Display::text(const char* text, uint8_t x, uint8_t y, uint8_t w) {
+        
+void OLEDDisplay::text(const char* text, uint8_t x, uint8_t y) {
+    u8g2.drawStr(y, x, text);
+    u8g2.sendBuffer();
+}
+
+void OLEDDisplay::fillRectangle(int x, int y, int w, int h, int color) {
+    //TODO
+}
+
+void OLEDDisplay::drawRectangle(int x, int y, int w, int h, int color) {
+    //TODO
+}
+
+
+
+// Deprecated
+void OLEDDisplay::textLine(const char* text, uint8_t x, uint8_t y, uint8_t w) {
     u8g2.setFont(DISPLAY_FONT);
     u8g2.setDrawColor(0);
     u8g2.drawBox(y, x, w, DISPLAY_FONT_HEIGHT);
@@ -24,12 +43,13 @@ void Display::text(const char* text, uint8_t x, uint8_t y, uint8_t w) {
     u8g2.sendBuffer();
 }
 
-void Display::text(int num, uint8_t x, uint8_t y, uint8_t w) {
+// Deprecated
+void OLEDDisplay::textLine(int num, uint8_t x, uint8_t y, uint8_t w) {
     snprintf_P(buffer, sizeof(buffer), PSTR("%d"), num);
-    text(buffer, x, y, w);
+    textLine(buffer, x, y, w);
 }
 
-void Display::drawWaveShape(WaveShape* waveShape, uint8_t x, uint8_t y, uint8_t width, uint8_t height, uint8_t n, bool bipolar) {
+void OLEDDisplay::drawWaveShape(WaveShape* waveShape, uint8_t x, uint8_t y, uint8_t width, uint8_t height, uint8_t n, bool bipolar) {
     u8g2.setDrawColor(0);
     u8g2.drawBox(x, y, width*n, height);
     u8g2.setDrawColor(1);

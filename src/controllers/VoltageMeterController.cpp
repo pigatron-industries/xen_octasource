@@ -7,7 +7,7 @@ void VoltageMeterController::init(float sampleRate) {
 
 void VoltageMeterController::init() {
     Serial.println("Voltage Meter");
-    Hardware::hw.display.text("METER");
+    Hardware::hw.display.textLine("METER");
 }
 
 void VoltageMeterController::update() {

@@ -12,25 +12,25 @@ void FrequencyController::init(float sampleRate) {
 
 void FrequencyController::init() {
     Serial.println("Frequency");
-    Hardware::hw.display.text("FREQUENCY");
+    Hardware::hw.display.textLine("FREQUENCY");
     switch(mode.value) {
         case Mode::LINEAR:
-            Hardware::hw.display.text("LINEAR", Display::TEXTLINE_2);
+            Hardware::hw.display.textLine("LINEAR", OLEDDisplay::TEXTLINE_2);
             break;
         case Mode::EXP:
-            Hardware::hw.display.text("EXPONENTIAL", Display::TEXTLINE_2);
+            Hardware::hw.display.textLine("EXPONENTIAL", OLEDDisplay::TEXTLINE_2);
             break;
         case Mode::POLYRHYTHM:
-            Hardware::hw.display.text("POLYRHYTHM", Display::TEXTLINE_2);
+            Hardware::hw.display.textLine("POLYRHYTHM", OLEDDisplay::TEXTLINE_2);
             break;
         case Mode::INTERVAL:
-            Hardware::hw.display.text("INTERVAL", Display::TEXTLINE_2);
+            Hardware::hw.display.textLine("INTERVAL", OLEDDisplay::TEXTLINE_2);
             break;
         case Mode::UNCORRELATED:
-            Hardware::hw.display.text("UNCORRELATED", Display::TEXTLINE_2);
+            Hardware::hw.display.textLine("UNCORRELATED", OLEDDisplay::TEXTLINE_2);
             break;
         case Mode::PLANETARY:
-            Hardware::hw.display.text("PLANETARY", Display::TEXTLINE_2);
+            Hardware::hw.display.textLine("PLANETARY", OLEDDisplay::TEXTLINE_2);
             break;
     }
     for(int i = 0; i < OUTPUT_CV_COUNT; i++) {

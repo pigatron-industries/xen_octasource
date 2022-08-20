@@ -7,16 +7,16 @@ void BouncingBallController::init(float sampleRate) {
 
 void BouncingBallController::init() {
     Serial.println("Bouncing Ball");
-    Hardware::hw.display.text("BOUNCE");
+    Hardware::hw.display.textLine("BOUNCE");
     switch(mode.value) {
         case Mode::BOUNCE:
-            Hardware::hw.display.text("BOUNCE", Display::TEXTLINE_2);
+            Hardware::hw.display.textLine("BOUNCE", OLEDDisplay::TEXTLINE_2);
             break;
         case Mode::TRIGGERS:
-            Hardware::hw.display.text("TRIGGERS", Display::TEXTLINE_2);
+            Hardware::hw.display.textLine("TRIGGERS", OLEDDisplay::TEXTLINE_2);
             break;
         case Mode::ROTATE:
-            Hardware::hw.display.text("ROTATE", Display::TEXTLINE_2);
+            Hardware::hw.display.textLine("ROTATE", OLEDDisplay::TEXTLINE_2);
             break;
     }
     for(int i = 0; i < 4; i++) {

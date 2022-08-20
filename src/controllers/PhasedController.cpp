@@ -11,7 +11,7 @@ void PhasedController::init(float sampleRate) {
 
 void PhasedController::init() {
     Serial.println("Phase");
-    Hardware::hw.display.text("PHASE");
+    Hardware::hw.display.textLine("PHASE");
     resetPhases();
 }
 

@@ -24,7 +24,7 @@ class ClockMultiplierController : public Controller {
         LinearInput<AnalogInputSumPinT> rateCvInput = LinearInput<AnalogInputSumPinT>(Hardware::hw.rateSumPin, -5, 5, 0, 1);
         IntegerInput<AnalogInputSumPinT> syncMultCvInput = IntegerInput<AnalogInputSumPinT>(Hardware::hw.rateSumPin, -5.0, 5.0, -7, 7);
         //LinearInput<AnalogInputSumPinT> lengthInput = LinearInput<AnalogInputSumPinT>(Hardware::hw.ampSumPin, -5, 5, 4.1, 32.9);
-        IntegerInput<AnalogInputSumPinT> rotateInput = IntegerInput<AnalogInputSumPinT>(Hardware::hw.waveSumPin, -5, 5, 0, 8);
+        //IntegerInput<AnalogInputSumPinT> rotateInput = IntegerInput<AnalogInputSumPinT>(Hardware::hw.waveSumPin, -5, 5, 0, 8);
         #if defined(OCTASOURCE_MKII)
             //LinearInput<AnalogInputSumPinT> distortionYCvInput = LinearInput<AnalogInputSumPinT>(Hardware::hw.phaseSumPin, -5, 5, 0, 1);
             GateInput<> rangeInput = GateInput<>(Hardware::hw.rangeSwitchPin, false);
