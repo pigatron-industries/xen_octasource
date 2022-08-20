@@ -24,6 +24,13 @@ void SequenceQuantizerController::update() {
     Hardware::hw.updateOutputLeds();
 }
 
+void SequenceQuantizerController::process() {
+    ClockedController::process();
+    for(int i = 0; i < 4; i++) {
+        triggerOutputs[i].update();
+    }
+}
+
 void SequenceQuantizerController::onClock() {
     triggerOutput.trigger();
 
@@ -32,11 +39,17 @@ void SequenceQuantizerController::onClock() {
         position = 0;
     }
 
-    //sequence.values[position] = smooth(sequence.values[position], Hardware::hw.modeCvPin.analogRead(), dejaVuInput.getValue());
-
-    if(random(0, 100) < dejaVuInput.getValue()) {
-        sequence.values[position] = Hardware::hw.modeCvPin.analogRead();
+    for(int i = 0; i < 4; i++) {
+        if(random(0, 100) < dejaVuInput.getValue()) {
+            sequence[i].values[position] = Hardware::hw.modeCvPin.analogRead();
+        }
+        if(random(0, 100) < dejaVuInput.getValue()) {
+            sequence[i].triggers[position] = random(0, 2);
+        }
+        
+        Hardware::hw.cvOutputPins[i]->analogWrite(sequence[i].values[position]);
+        if(sequence[i].triggers[position]) {
+            triggerOutputs[i].trigger();
+        }
     }
-    
-    Hardware::hw.cvOutputPins[0]->analogWrite(sequence.values[position]);
 }

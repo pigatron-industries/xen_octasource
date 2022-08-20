@@ -20,6 +20,7 @@ class SequenceQuantizerController : public ClockedController {
         virtual void init(float sampleRate);
         virtual void init();
         virtual void update();
+        virtual void process();
         virtual void onClock();
 
     private:
@@ -31,9 +32,16 @@ class SequenceQuantizerController : public ClockedController {
             IntegerInput<AnalogInputSumPinT> lengthInput = IntegerInput<AnalogInputSumPinT>(Hardware::hw.phaseSumPin, -5, 5, 2, 32);
         #endif
 
+        AnalogTriggerOutput<AnalogOutputDeviceT> triggerOutputs[4] = {
+            AnalogTriggerOutput<AnalogOutputDeviceT>(*Hardware::hw.cvOutputPins[4]),
+            AnalogTriggerOutput<AnalogOutputDeviceT>(*Hardware::hw.cvOutputPins[5]),
+            AnalogTriggerOutput<AnalogOutputDeviceT>(*Hardware::hw.cvOutputPins[6]),
+            AnalogTriggerOutput<AnalogOutputDeviceT>(*Hardware::hw.cvOutputPins[7])
+        };
+
         SequenceQuantizerDisplay display;
 
-        Sequence sequence;
+        Sequence sequence[4];
         uint16_t position = 0;
 
 };
