@@ -17,17 +17,21 @@ void OLEDDisplay::update() {
     u8g2.sendBuffer();
 }
 
+void OLEDDisplay::setTextColour(uint16_t colour) {
+    u8g2.setDrawColor(colour);
+}
         
 void OLEDDisplay::text(const char* text, uint8_t x, uint8_t y) {
-    u8g2.drawStr(y, x, text);
+    u8g2.drawStr(x, y+DISPLAY_FONT_HEIGHT-1, text);
     u8g2.sendBuffer();
 }
 
-void OLEDDisplay::fillRectangle(int x, int y, int w, int h, int color) {
-    //TODO
+void OLEDDisplay::fillRectangle(int x, int y, int w, int h, int colour) {
+    u8g2.setDrawColor(colour);
+    u8g2.drawBox(x, y, w, h);
 }
 
-void OLEDDisplay::drawRectangle(int x, int y, int w, int h, int color) {
+void OLEDDisplay::drawRectangle(int x, int y, int w, int h, int colour) {
     //TODO
 }
 

@@ -2,6 +2,7 @@
 #define SequenceQuantizerController_h
 
 #include "../ClockedController.h"
+#include "SequenceQuantizerDisplay.h"
 
 using namespace eurorack;
 
@@ -24,11 +25,13 @@ class SequenceQuantizerController : public ClockedController {
     private:
         TriggerOutput<DigitalOutputDeviceT> triggerOutput = TriggerOutput<DigitalOutputDeviceT>(Hardware::hw.gateOutPin, 20000);
 
-        LinearInput<AnalogInputSumPinT> dejaVuInput = LinearInput<AnalogInputSumPinT>(Hardware::hw.waveSumPin, -5, 5, 0, 1);
+        LinearInput<AnalogInputSumPinT> dejaVuInput = LinearInput<AnalogInputSumPinT>(Hardware::hw.waveSumPin, -5, 5, 0, 100);
         // LinearInput<AnalogInputSumPinT> ampInput = LinearInput<AnalogInputSumPinT>(Hardware::hw.ampSumPin, -5, 5, 0, 1);
         #if defined(OCTASOURCE_MKII)
             IntegerInput<AnalogInputSumPinT> lengthInput = IntegerInput<AnalogInputSumPinT>(Hardware::hw.phaseSumPin, -5, 5, 2, 32);
         #endif
+
+        SequenceQuantizerDisplay display;
 
         Sequence sequence;
         uint16_t position = 0;

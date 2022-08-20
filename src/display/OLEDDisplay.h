@@ -17,6 +17,9 @@ using namespace eurorack;
 #define DISPLAY_FONT_HEIGHT 7
 #define DISPLAY_FONT_WIDTH 5
 
+#define OLED_BLACK 0
+#define OLED_WHITE 1
+
 class OLEDDisplay : public GraphicsContext {
     public:
         static const uint16_t WIDTH = DISPLAY_WIDTH;
@@ -38,14 +41,14 @@ class OLEDDisplay : public GraphicsContext {
         uint16_t getFontWidth(uint8_t font) { return DISPLAY_FONT_WIDTH; }
 
         // colours
-        void setTextColour(uint16_t colour) {}
+        void setTextColour(uint16_t colour);
 
         // text
         void text(const char* text, uint8_t x = 0, uint8_t y = 0);
 
         // shapes
-        void fillRectangle(int x, int y, int w, int h, int color);
-        void drawRectangle(int x, int y, int w, int h, int color);
+        void fillRectangle(int x, int y, int w, int h, int colour);
+        void drawRectangle(int x, int y, int w, int h, int colour);
 
 
 
