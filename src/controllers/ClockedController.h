@@ -8,17 +8,17 @@ using namespace eurorack;
 
 #define SAMPLERATE_DIVIDER 8
 
-class ClockedController : public Controller {
+class ClockedController {
     public:
 
-        ClockedController(): Controller() {}
+        ClockedController() {}
         virtual void init(float sampleRate);
         virtual void init();
         virtual void update();
         virtual void process();
         virtual void onClock() = 0;
 
-    private:
+    protected:
         AnalogGateInput<AnalogInputPinT> syncInput = AnalogGateInput<AnalogInputPinT>(Hardware::hw.syncCvPin);
         LinearInput<AnalogInputSumPinT> rateCvInput = LinearInput<AnalogInputSumPinT>(Hardware::hw.rateSumPin, -5, 5, 0, 10);
         IntegerInput<AnalogInputSumPinT> syncMultCvInput = IntegerInput<AnalogInputSumPinT>(Hardware::hw.rateSumPin, -5.0, 5.0, -7, 7);
@@ -28,7 +28,7 @@ class ClockedController : public Controller {
 
         float syncFrequency;
 
-        void updateRate(bool force = false);
+        bool updateRate(bool force = false);
         void updateSync();
 };
 

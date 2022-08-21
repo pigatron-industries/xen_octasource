@@ -14,9 +14,9 @@ class Sequence {
         bool triggers[MAX_SEQUENCE_LENGTH];
 };
 
-class SequenceQuantizerController : public ClockedController {
+class SequenceQuantizerController : public Controller, public ClockedController {
     public:
-        SequenceQuantizerController() : ClockedController() {}
+        SequenceQuantizerController() : Controller(), ClockedController() {}
         virtual void init(float sampleRate);
         virtual void init();
         virtual void update();

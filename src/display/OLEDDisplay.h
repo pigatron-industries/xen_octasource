@@ -25,6 +25,11 @@ class OLEDDisplay : public GraphicsContext {
         static const uint16_t WIDTH = DISPLAY_WIDTH;
         static const uint16_t HEIGHT = DISPLAY_HEIGHT;
 
+        static const uint16_t DEF_COLOUR_TEXT = OLED_WHITE;
+        static const uint16_t DEF_COLOUR_BACK = OLED_BLACK;
+        static const uint16_t DEF_COLOUR_FOCUS_TEXT = OLED_BLACK;
+        static const uint16_t DEF_COLOUR_FOCUS_BACK = OLED_WHITE;
+
         OLEDDisplay() {}
         void init();
 

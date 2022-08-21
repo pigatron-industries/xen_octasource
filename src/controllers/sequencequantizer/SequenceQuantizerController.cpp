@@ -2,6 +2,7 @@
 
 void SequenceQuantizerController::init(float sampleRate) {
     ClockedController::init(sampleRate);
+    Controller::init(sampleRate);
     display.init();
     init();
 }

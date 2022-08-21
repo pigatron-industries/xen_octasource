@@ -16,7 +16,7 @@ class SequenceQuantizerDisplay {
         FocusManager<OLEDDisplay> focusManager;
 
         VerticalContainer<OLEDDisplay, 2> page;
-        TextComponent<OLEDDisplay> title = TextComponent<OLEDDisplay>(OLEDDisplay::WIDTH, "SEQUANTIZER", 2, OLED_WHITE);
+        TextComponent<OLEDDisplay> title = TextComponent<OLEDDisplay>(OLEDDisplay::WIDTH, "SEQUANTIZER", 2);
         FieldComponent<OLEDDisplay> lengthField = FieldComponent<OLEDDisplay>(OLEDDisplay::WIDTH, 40, "LENGTH:");
 };
 

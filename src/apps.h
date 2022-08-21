@@ -4,7 +4,7 @@
 //#include "controllers/VoltageSpreadController.h"
 #include "controllers/FilterController.h"
 #include "controllers/clock/ClockController.h"
-#include "controllers/clock/ClockMultiplierController.h"
+// #include "controllers/clock/ClockMultiplierController.h"
 #include "controllers/EnvelopeController.h"
 #include "controllers/BurstController.h"
 #include "controllers/BouncingBallController.h"
@@ -22,7 +22,6 @@ PhasedController, \
 FrequencyController, \
 FilterController, \
 ClockController, \
-ClockMultiplierController, \
 EnvelopeController, \
 BurstController, \
 BouncingBallController, \
