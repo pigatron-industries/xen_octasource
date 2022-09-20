@@ -1,6 +1,22 @@
 #include "ClockController.h"
 #include "common/Controls.h"
 
+void ClockController::load() {
+    Config::config.load(config);
+    for(int i = 0; i < 8; i++) {
+        parameters[i].last = 30;
+        if(config.data.check != 0) { 
+            config.data.clock[i] = 15; // default = 15 = /1
+        }
+        parameters[i].value = config.data.clock[i];
+    }
+}
+
+void ClockController::save() {
+    config.data.check = 0;
+    Config::config.save(config);
+}
+
 void ClockController::init(float sampleRate) {
     ClockedController::init(sampleRate);
     display.init();
@@ -12,10 +28,7 @@ void ClockController::init(float sampleRate) {
     }
 
     for(int i = 0; i < 8; i++) {
-        parameters[i].last = 30;
-        parameters[i].value = 15; //  15 = /1
-        channelSetting[i] = 15;
-        display.setClock(i, true, 1);
+        updateClock(i);
     }
 
     init();
@@ -38,7 +51,16 @@ int ClockController::cycleMode(int amount) {
 void ClockController::cycleValue(int amount) {
     uint8_t output = parameters.getSelectedIndex();
     uint8_t value = parameters.getSelected().cycle(amount);
-    channelSetting[output] = value;
+    config.data.clock[output] = value;
+    if(isMultiplier(output)) {
+        display.setClock(output, false, getMultiplier(output));
+    } else {
+        display.setClock(output, true, getDivider(output));
+    }
+    save();
+}
+
+void ClockController::updateClock(uint8_t output) {
     if(isMultiplier(output)) {
         display.setClock(output, false, getMultiplier(output));
     } else {
@@ -105,17 +127,17 @@ void ClockController::syncClocks() {
 }
 
 bool ClockController::isMultiplier(int channel) {
-    return channelSetting[channel] < 15;
+    return config.data.clock[channel] < 15;
 }
 
 bool ClockController::isDivider(int channel) {
-    return channelSetting[channel] > 15;
+    return config.data.clock[channel] > 15;
 }
 
 uint8_t ClockController::getMultiplier(int channel) {
-    return 16 - channelSetting[channel];
+    return 16 - config.data.clock[channel];
 }
 
 uint8_t ClockController::getDivider(int channel) {
-    return channelSetting[channel] - 14;
+    return config.data.clock[channel] - 14;
 }

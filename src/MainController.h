@@ -20,9 +20,6 @@ private:
     float sampleRate;
 
     void controllerInit();
-    void doCalibration();
-    void loadCalibration();
-    void displayVoltage(float voltage);
 
     IntervalTimer interruptTimer;
     static MainController* mainController;

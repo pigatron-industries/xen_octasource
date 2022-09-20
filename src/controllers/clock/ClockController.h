@@ -22,6 +22,8 @@ class ClockController : public ParameterizedController<8>, public ClockedControl
         };
 
         ClockController() : ParameterizedController(), ClockedController() {}
+        virtual void load();
+        virtual void save();
         virtual void init(float sampleRate);
         virtual void init();
         virtual int cycleMode(int amount);
@@ -31,6 +33,12 @@ class ClockController : public ParameterizedController<8>, public ClockedControl
         virtual void onClock();
 
     private:
+        struct ClockParameters {
+            uint8_t check = 0;
+            uint8_t clock[8];
+        };
+        ConfigField<ClockParameters> config;
+
         ClockDisplay display;
 
         LinearInput<AnalogInputSumPinT> lengthInput = LinearInput<AnalogInputSumPinT>(Hardware::hw.ampSumPin, -5, 5, 4.1, 32.9);
@@ -53,12 +61,13 @@ class ClockController : public ParameterizedController<8>, public ClockedControl
 
         GateInput<> rangeInput = GateInput<>(Hardware::hw.rangeSwitchPin, false);
 
-        uint8_t channelSetting[8];
+        // uint8_t channelSetting[8];
     
         ClockDivider clockDividers[15];
         Clock clockMultipliers[15];
 
         void updateMultiplierRates();
+        void updateClock(uint8_t output);
         void syncClocks();
         
         bool isMultiplier(int channel);
