@@ -27,6 +27,7 @@ bool ClockedController::updateRate(bool force) {
             return true;
         }
     }
+    return false;
 }
 
 void ClockedController::updateSync() {

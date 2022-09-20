@@ -6,10 +6,15 @@ void ClockController::init(float sampleRate) {
     display.init();
     display.focusClock(0);
 
-    for(int i = 0; i < 8; i++) {
+    for(int i = 0; i < 15; i++) {
         clockMultipliers[i].init(sampleRate);
+        clockDividers[i].setDivisor(i+2);
+    }
+
+    for(int i = 0; i < 8; i++) {
         parameters[i].last = 30;
-        parameters[i].value = 15; //15 = /1
+        parameters[i].value = 15; //  15 = /1
+        channelSetting[i] = 15;
         display.setClock(i, true, 1);
     }
 
@@ -19,7 +24,7 @@ void ClockController::init(float sampleRate) {
 void ClockController::init() {
     Serial.println("Clock");
     display.render();
-    for(int i = 0; i < 8; i++) {
+    for(int i = 0; i < 15; i++) {
         clockDividers[i].reset();
     }
 }
@@ -32,18 +37,12 @@ int ClockController::cycleMode(int amount) {
 
 void ClockController::cycleValue(int amount) {
     uint8_t output = parameters.getSelectedIndex();
-    parameters.getSelected().cycle(amount);
-
-    if(parameters.getSelected().value < 15) {
-        uint8_t multiplier = 16-parameters.getSelected().value;
-        multipliers[output] = multiplier;
-        updateMultiplierRates();
-        display.setClock(output, false, multiplier);
+    uint8_t value = parameters.getSelected().cycle(amount);
+    channelSetting[output] = value;
+    if(isMultiplier(output)) {
+        display.setClock(output, false, getMultiplier(output));
     } else {
-        uint8_t divisor = parameters.getSelected().value-14;
-        multipliers[output] = 0;
-        clockDividers[output].setDivisor(divisor);
-        display.setClock(output, true, divisor);
+        display.setClock(output, true, getDivider(output));
     }
 }
 
@@ -60,10 +59,8 @@ void ClockController::update() {
 }
 
 void ClockController::updateMultiplierRates() {
-    for(int i = 0; i < 8; i++) {
-        if(multipliers[i] > 0) {
-            clockMultipliers[i].setFrequency(clock.getFrequency() * multipliers[i]);
-        }
+    for(int i = 0; i < 15; i++) {
+        clockMultipliers[i].setFrequency(clock.getFrequency() * (i+2));
     }
 }
 
@@ -72,7 +69,7 @@ void ClockController::process() {
     triggerOutput.update();
 
     for(int i = 0; i < 8; i++) {
-        if(multipliers[i] > 0 && clockMultipliers[i].process()) {
+        if(isMultiplier(i) && clockMultipliers[getMultiplier(i)-2].process()) {
             triggerOutputs[i].trigger();
         }
         triggerOutputs[i].update();
@@ -82,18 +79,43 @@ void ClockController::process() {
 void ClockController::onClock() {
     syncClocks();
     triggerOutput.trigger();
+
+    for(int i = 0; i < 15; i++) {
+        clockDividers[i].tick();
+    }
+
     for(int i = 0; i < 8; i++) {
-        if(multipliers[i] == 0 && clockDividers[i].tick()) {
+        if(isDivider(i) && clockDividers[getDivider(i)-2].getTrigger()) {
             triggerOutputs[i].trigger();
         }
+        if(!isDivider(i)) {
+            triggerOutputs[i].trigger();
+        }
+    }
+
+    for(int i = 0; i < 15; i++) {
+        clockDividers[i].getAndResetTrigger();
     }
 }
 
 void ClockController::syncClocks() {
-    for(int i = 0; i < 8; i++) {
+    for(int i = 0; i < 16; i++) {
         clockMultipliers[i].reset();
-        if(multipliers[i] > 0) {
-            triggerOutputs[i].trigger();
-        }
     }
+}
+
+bool ClockController::isMultiplier(int channel) {
+    return channelSetting[channel] < 15;
+}
+
+bool ClockController::isDivider(int channel) {
+    return channelSetting[channel] > 15;
+}
+
+uint8_t ClockController::getMultiplier(int channel) {
+    return 16 - channelSetting[channel];
+}
+
+uint8_t ClockController::getDivider(int channel) {
+    return channelSetting[channel] - 14;
 }

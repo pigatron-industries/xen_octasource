@@ -17,7 +17,7 @@ class ClockDisplay {
         FocusManager<OLEDDisplay> focusManager;
 
         VerticalContainer<OLEDDisplay, 3> page;
-        TextComponent<OLEDDisplay> title = TextComponent<OLEDDisplay>(OLEDDisplay::WIDTH, "TEST", 2);
+        TextComponent<OLEDDisplay> title = TextComponent<OLEDDisplay>(OLEDDisplay::WIDTH, "CLOCK", 2);
 
         HorizontalContainer<OLEDDisplay, 4> clockRow1;
         HorizontalContainer<OLEDDisplay, 4> clockRow2;
