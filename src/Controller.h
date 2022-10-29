@@ -7,7 +7,7 @@
 
 class Controller : public AbstractController {
     public:
-        Controller(int lastMode = 0) : mode(0, lastMode) {}
+        Controller(int lastMode = 0) : AbstractController(lastMode) {}
         virtual void init(float sampleRate) { this->sampleRate = sampleRate; }
         virtual void init() {};
         virtual void update() = 0;
@@ -16,7 +16,6 @@ class Controller : public AbstractController {
     
     protected: 
         float sampleRate = 0;
-        CycleEnum<int> mode;
         Controls& controls = Controls::controls;
 };
 
