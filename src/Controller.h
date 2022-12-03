@@ -9,9 +9,18 @@ class Controller : public AbstractController {
     public:
         Controller(int lastMode = 0) : AbstractController(lastMode) {}
         virtual void init(float sampleRate) { this->sampleRate = sampleRate; }
-        void init() {}; //TODO
-        void load() {}; //TODO
-        void save() {};
+        void init() {}
+        void load() { 
+            Config::config.load(config); 
+            if(config.data.check == 0 && config.data.mode <= mode.last) {
+                mode.value = config.data.mode; 
+            }
+        }
+        void save() { 
+            config.data.check = 0;
+            config.data.mode = mode.value;
+            Config::config.save(config);
+        }
         void update() = 0;
         virtual void process() = 0;
         float getSampleRate() { return sampleRate; }
@@ -19,6 +28,12 @@ class Controller : public AbstractController {
     protected: 
         float sampleRate = 0;
         Controls& controls = Controls::controls;
+
+        struct SaveMode {
+            uint8_t check = 0;
+            uint8_t mode;
+        };
+        ConfigField<SaveMode> config;
 };
 
 
@@ -75,6 +90,7 @@ int ParameterizedController<N>::cycleMode(int amount) {
 template<int N>
 void ParameterizedController<N>::cycleValue(int amount) {
     parameters.getSelected().cycle(amount);
+    save();
 }
 
 
