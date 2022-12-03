@@ -4,23 +4,12 @@
 #define MAX_CLOCK_VALUE 30
 #define DEFAULT_CLOCK_VALUE 15  // 15 = "/1" or unison
 
-void ClockController::load() {
-    Config::config.load(config);
-    for(int i = 0; i < 8; i++) {
-        parameters[i].last = MAX_CLOCK_VALUE;
-        if(config.data.check != 0 || config.data.clock[i] > MAX_CLOCK_VALUE) { 
-            config.data.clock[i] = DEFAULT_CLOCK_VALUE; 
-        }
-        parameters[i].value = config.data.clock[i];
-    }
-}
-
-void ClockController::save() {
-    config.data.check = 0;
-    Config::config.save(config);
-}
 
 void ClockController::init(float sampleRate) {
+    for(int i = 0; i < 8; i++) {
+        this->configParam(i, DEFAULT_CLOCK_VALUE, MAX_CLOCK_VALUE);
+    }
+
     ClockedController::init(sampleRate);
     display.init();
     display.focusClock(0);
@@ -130,17 +119,17 @@ void ClockController::syncClocks() {
 }
 
 bool ClockController::isMultiplier(int channel) {
-    return config.data.clock[channel] < 15;
+    return parameters[channel].value < 15;
 }
 
 bool ClockController::isDivider(int channel) {
-    return config.data.clock[channel] > 15;
+    return parameters[channel].value > 15;
 }
 
 uint8_t ClockController::getMultiplier(int channel) {
-    return 16 - config.data.clock[channel];
+    return 16 - parameters[channel].value;
 }
 
 uint8_t ClockController::getDivider(int channel) {
-    return config.data.clock[channel] - 14;
+    return parameters[channel].value - 14;
 }

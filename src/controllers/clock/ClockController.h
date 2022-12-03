@@ -22,8 +22,6 @@ class ClockController : public ParameterizedController<8>, public ClockedControl
         };
 
         ClockController() : ParameterizedController(), ClockedController() {}
-        virtual void load();
-        virtual void save();
         virtual void init(float sampleRate);
         virtual void init();
         virtual int cycleMode(int amount);
