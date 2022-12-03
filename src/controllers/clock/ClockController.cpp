@@ -1,12 +1,15 @@
 #include "ClockController.h"
 #include "common/Controls.h"
 
+#define MAX_CLOCK_VALUE 30
+#define DEFAULT_CLOCK_VALUE 15  // 15 = "/1" or unison
+
 void ClockController::load() {
     Config::config.load(config);
     for(int i = 0; i < 8; i++) {
-        parameters[i].last = 30;
-        if(config.data.check != 0) { 
-            config.data.clock[i] = 15; // default = 15 = /1
+        parameters[i].last = MAX_CLOCK_VALUE;
+        if(config.data.check != 0 || config.data.clock[i] > MAX_CLOCK_VALUE) { 
+            config.data.clock[i] = DEFAULT_CLOCK_VALUE; 
         }
         parameters[i].value = config.data.clock[i];
     }
