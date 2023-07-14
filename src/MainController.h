@@ -8,7 +8,7 @@
 #include "Hardware.h"
 #include "apps.h"
 
-class MainController : AbstractMainController<Controller, CONTROLLERS> {
+class MainController : SingleEncoderController<Controller, CONTROLLERS> {
 
 public:
     MainController(float sampleRate);
