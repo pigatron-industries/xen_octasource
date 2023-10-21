@@ -2,4 +2,4 @@
 
 A Eurorack synthesiser module with 8 control voltage outputs.
 
-[Documentation](https://pigatron-industries.github.io/octosource/)
+[Documentation](https://pigatron-industries.github.io/xen_octasource/)
