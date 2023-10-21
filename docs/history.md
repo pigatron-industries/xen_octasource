@@ -5,7 +5,7 @@ order: 5
 
 ### MKII
 
-{% include img.html src="images/octasource_mkii.jpg" height=400 %}
+{% include img.html src="images/octosource_mkii.jpg" height=400 %}
 
 ### MKI Prototype
 
