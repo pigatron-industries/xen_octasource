@@ -30,6 +30,7 @@ order: 4
 | TL074PW                        | TSSOP-14  | 2        |
 | DAC8164                        | TSSOP-16  | 2        |
 | IS32FL3738                     | TSSOP-28  | 1        |
+| LM4040-5V Voltage Ref          | SOT-23    | 1        |
 | 74AHCT1G125                    | SOT-25-5  | 1        |
 | Regulator LD2981 3.3V          | SOT-89    | 1        | Can be omitted and use 3.3V from Teensy using jumper
 | Regulator R-78E5.0-0.5 5V      | TH        | 1        |
