@@ -1,6 +1,9 @@
 #include "AttractorController.h"
 
 void AttractorController::init(float sampleRate) {
+    Controller::init(sampleRate);
+    configParam(Parameter::ATTRACTOR1, 0, attractors1.getSize()-1);
+    configParam(Parameter::ATTRACTOR2, 0, attractors2.getSize()-1);
     for(size_t i = 0; i < attractors1.getSize(); i++) {
         attractors1[i]->init(sampleRate);
         attractors2[i]->init(sampleRate);
@@ -12,7 +15,8 @@ void AttractorController::init(float sampleRate) {
 void AttractorController::init() {
     Serial.println("Attractor");
     //Hardware::hw.display.text("ATTRACTOR");
-    Hardware::hw.display.textLine(attractors1[mode.value]->getName(), OLEDDisplay::TEXTLINE_2);
+    uint8_t selectedAttractor = parameters[Parameter::ATTRACTOR1].value;
+    Hardware::hw.display.textLine(attractors1[selectedAttractor]->getName(), OLEDDisplay::TEXTLINE_2);
 }
 
 void AttractorController::update() {
@@ -45,13 +49,15 @@ void AttractorController::updateAmp() {
 }
 
 void AttractorController::process() {
-    ContinuousSystem* attractor = attractors1[mode.value];
+    uint8_t selectedAttractor1 = parameters[Parameter::ATTRACTOR1].value;
+    ContinuousSystem* attractor = attractors1[selectedAttractor1];
     attractor->process();
     Hardware::hw.cvOutputPins[1]->analogWrite(attractor->getOutput(X)*amp);
     Hardware::hw.cvOutputPins[2]->analogWrite(attractor->getOutput(Y)*amp);
     Hardware::hw.cvOutputPins[3]->analogWrite(attractor->getOutput(Z)*amp);
 
-    attractor = attractors2[mode.value];
+    uint8_t selectedAttractor2 = parameters[Parameter::ATTRACTOR2].value;
+    attractor = attractors2[selectedAttractor2];
     attractor->process();
     Hardware::hw.cvOutputPins[7]->analogWrite(attractor->getOutput(X)*amp);
     Hardware::hw.cvOutputPins[6]->analogWrite(attractor->getOutput(Y)*amp);

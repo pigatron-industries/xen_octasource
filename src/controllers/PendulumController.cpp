@@ -13,7 +13,7 @@ void PendulumController::init() {
         springPendulum.init(sampleRate / SAMPLE_RATE_DIVISOR);
     }
 
-    switch(mode.value) {
+    switch(parameters[Parameter::MODE].value) {
         case Mode::SPRING_PENDULUM:
             Hardware::hw.display.textLine("SPRING", OLEDDisplay::TEXTLINE_2);
             springPendulums[0].setInitialConditions(Vector<2>(-2.5, 0), Vector<2>(0, 0));
@@ -82,7 +82,7 @@ void PendulumController::updateParams() {
 
 void PendulumController::process() {
     if(clockDivider.tick()) {
-        switch(mode.value) {
+        switch(parameters[Parameter::MODE].value) {
         case Mode::SPRING_PENDULUM:
             for(SpringPendulum& springPendulum : springPendulums) {
                 springPendulum.process();

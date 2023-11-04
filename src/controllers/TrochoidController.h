@@ -8,18 +8,22 @@
 
 #define SAMPLE_RATE_DIVISOR 2
 
-class TrochoidController : public Controller {
+class TrochoidController : public ParameterizedController<1> {
     public:
-        enum Mode {
-            HYPOTROCHOID
-        };
-        TrochoidController() : Controller(Mode::HYPOTROCHOID) {}
+        TrochoidController() : ParameterizedController() {}
         virtual void init(float sampleRate);
         virtual void init();
         virtual void update();
         virtual void process();
 
     private:
+        enum Parameter {
+            MODE
+        };
+        enum Mode {
+            HYPOTROCHOID
+        };
+
         ExpInput<AnalogInputSumPinT> expRateCvInput = ExpInput<AnalogInputSumPinT>(Hardware::hw.rateSumPin, 10);
         LinearInput<AnalogInputSumPinT> largeRadiusInput = LinearInput<AnalogInputSumPinT>(Hardware::hw.ampSumPin, -5, 5, 0, 4);
         LinearInput<AnalogInputSumPinT> smallRadiusInput = LinearInput<AnalogInputSumPinT>(Hardware::hw.waveSumPin, -5, 5, 0.05, 4);

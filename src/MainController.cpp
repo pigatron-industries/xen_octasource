@@ -11,7 +11,7 @@
 
 MainController* MainController::mainController = nullptr;
 
-MainController::MainController(float sampleRate) : AbstractMainController(Hardware::hw.encoder) {
+MainController::MainController(float sampleRate) : SingleEncoderController(Hardware::hw.encoder) {
     MainController::mainController = this;
     this->sampleRate = sampleRate;
 }
@@ -19,10 +19,6 @@ MainController::MainController(float sampleRate) : AbstractMainController(Hardwa
 void MainController::init() {
     Hardware::hw.init();
     AbstractMainController::init();
-
-    this->shortPress = &MainController::incrementMode;
-    this->clockWise = &MainController::incrementValue;
-    this->antiClockWise = &MainController::decrementValue;
     this->initOnModeSelect = false;
 
     encoder.getEncoderButton().update();
@@ -33,7 +29,7 @@ void MainController::init() {
 
 void MainController::controllerInit() {
     interruptTimer.end();
-    saveMode();
+    saveState();
 
     #if defined(OCTASOURCE_MKII)
         for(int i = 0; i < 16; i++) {

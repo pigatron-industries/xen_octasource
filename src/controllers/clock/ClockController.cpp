@@ -34,7 +34,7 @@ void ClockController::init() {
     }
 }
 
-int ClockController::cycleMode(int amount) {
+int ClockController::cycleParameter(int amount) {
     parameters.cycle(amount);
     display.focusClock(parameters.getSelectedIndex());
     return parameters.getSelectedIndex(); 

@@ -1,6 +1,9 @@
 #include "BurstController.h"
 
 void BurstController::init(float sampleRate) {
+    configParam(Parameter::BURST_OUTPUTS, 0, 8);
+    configParam(Parameter::BURST_SHAPE, 0, shapes.getSize()-1);
+
     for(int i = 0; i < outputs; i++) {
         bursts[i].init(sampleRate);
     }
@@ -23,7 +26,7 @@ void BurstController::init() {
     Serial.println("Burst");
     Hardware::hw.display.textLine("BURST");
 
-    outputs = mode.value + 1;
+    outputs = parameters[Parameter::BURST_OUTPUTS].value + 1;
 
     page.setLabel(1, "OUT:");
     page.setLabel(2, "SHP:");
@@ -33,7 +36,7 @@ void BurstController::init() {
     page.selectLine(parameters.getSelectedIndex()+1);
 }
 
-int BurstController::cycleMode(int amount) {
+int BurstController::cycleParameter(int amount) {
     parameters.cycle(amount);
     page.selectLine(parameters.getSelectedIndex()+1);
     return parameters.getSelectedIndex(); 

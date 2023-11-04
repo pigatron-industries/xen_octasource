@@ -9,19 +9,19 @@ using namespace eurorack;
 
 #define SAMPLERATE_DIVIDER 8
 
-class VoltageSpreadController : public Controller {
+class VoltageSpreadController : public ParameterizedController<1> {
     public:
-        enum Mode {
-            EXP
-        };
-
-        VoltageSpreadController() : Controller(Mode::EXP) {}
+        VoltageSpreadController() : ParameterizedController() {}
         virtual void init(float sampleRate);
         virtual void init();
         virtual void update();
         virtual void process();
 
     protected:
+        enum Mode {
+            EXP
+        };
+
         AnalogGateInput<AnalogInputPinT> syncInput = AnalogGateInput<AnalogInputPinT>(Hardware::hw.syncCvPin);
         LinearInput<AnalogInputSumPinT> spreadCvInput = LinearInput<AnalogInputSumPinT>(Hardware::hw.rateSumPin, -5, 5, 0, 1);
 

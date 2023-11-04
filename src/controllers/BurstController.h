@@ -16,7 +16,7 @@ class BurstController : public ParameterizedController<2> {
         virtual void init();
         virtual void update();
         virtual void process();
-        virtual int cycleMode(int amount);
+        virtual int cycleParameter(int amount);
         virtual void cycleValue(int amount);
 
     private:

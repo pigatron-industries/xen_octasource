@@ -15,7 +15,7 @@ class CalibrationController : public ParameterizedController<8> {
         CalibrationController() : ParameterizedController() {}
         virtual void init(float sampleRate);
         virtual void init();
-        virtual int cycleMode(int amount);
+        virtual int cycleParameter(int amount);
         virtual void cycleValue(int amount);
         virtual void update();
         virtual void process();

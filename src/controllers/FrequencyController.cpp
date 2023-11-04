@@ -13,7 +13,7 @@ void FrequencyController::init(float sampleRate) {
 void FrequencyController::init() {
     Serial.println("Frequency");
     Hardware::hw.display.textLine("FREQUENCY");
-    switch(mode.value) {
+    switch(parameters[Parameter::MODE].value) {
         case Mode::LINEAR:
             Hardware::hw.display.textLine("LINEAR", OLEDDisplay::TEXTLINE_2);
             break;
@@ -64,7 +64,7 @@ void FrequencyController::updateRate() {
 }
 
 void FrequencyController::setRate(float baseFrequency) {
-    switch (mode.value) {
+    switch (parameters[Parameter::MODE].value) {
         case Mode::LINEAR:
             oscillators[0].setFrequency(baseFrequency);
             oscillators[1].setFrequency(baseFrequency/2);

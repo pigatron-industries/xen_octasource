@@ -18,15 +18,20 @@
 #include "display/PixelTrail.h"
 #include <eurorack.h>
 
-class AttractorController : public Controller {
+class AttractorController : public ParameterizedController<2> {
     public:
-        AttractorController() : Controller(attractors1.getSize()-1) {}
+        AttractorController() : ParameterizedController() {}
         virtual void init(float sampleRate);
         virtual void init();
         virtual void update();
         virtual void process();
 
     private:
+        enum Parameter {
+            ATTRACTOR1,
+            ATTRACTOR2
+        };
+
         ExpInput<AnalogInputSumPinT> expRateCvInput = ExpInput<AnalogInputSumPinT>(Hardware::hw.rateSumPin, 1);
         LinearInput<AnalogInputSumPinT> ampCvInput = LinearInput<AnalogInputSumPinT>(Hardware::hw.ampSumPin, -5, 5, 0, 1);
         //LinearInput<AnalogInputSumPinT> cCvInput = LinearInput<AnalogInputSumPinT>(Hardware::hw.waveSumPin, -5, 5, 0, 5);

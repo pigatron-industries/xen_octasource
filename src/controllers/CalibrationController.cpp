@@ -16,7 +16,7 @@ void CalibrationController::init() {
     startCalibrate();
 }
 
-int CalibrationController::cycleMode(int amount) {
+int CalibrationController::cycleParameter(int amount) {
     saveCalibration();
     parameters.cycle(amount);
     startCalibrate();

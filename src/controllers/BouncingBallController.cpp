@@ -2,13 +2,14 @@
 
 void BouncingBallController::init(float sampleRate) {
     Controller::init(sampleRate);
+    configParam(Parameter::MODE, 0, Mode::ROTATE-1);
     init();
 }
 
 void BouncingBallController::init() {
     Serial.println("Bouncing Ball");
     Hardware::hw.display.textLine("BOUNCE");
-    switch(mode.value) {
+    switch(parameters[Parameter::MODE].value) {
         case Mode::BOUNCE:
             Hardware::hw.display.textLine("BOUNCE", OLEDDisplay::TEXTLINE_2);
             break;
@@ -78,7 +79,7 @@ void BouncingBallController::process() {
         bouncingBalls[i].process();
     }
 
-    switch(mode.value) {
+    switch(parameters[Parameter::MODE].value) {
         case Mode::BOUNCE:
             for(int i = 0; i < 4; i++) {
                 Hardware::hw.cvOutputPins[i*2]->analogWrite(bouncingBalls[i].getOutput(X)*amp);

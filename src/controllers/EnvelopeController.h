@@ -8,20 +8,23 @@ using namespace eurorack;
 
 #define ATTRACTOR_COUNT 12
 
-class EnvelopeController : public Controller {
+class EnvelopeController : public ParameterizedController<1> {
     public:
-        enum Mode {
-            LATCHED,
-            GATED
-        };
-
-        EnvelopeController() : Controller(Mode::GATED) {}
+        EnvelopeController() : ParameterizedController() {}
         virtual void init(float sampleRate);
         virtual void init();
         virtual void update();
         virtual void process();
 
     private:
+        enum Parameter {
+            MODE
+        };
+        enum Mode {
+            LATCHED,
+            GATED
+        };
+
         Envelope<WaveSequence<2, Line>> envelopeShape;
 
         EnvelopePlayer<Envelope<WaveSequence<2, Line>>&> envelopes[OUTPUT_CV_COUNT] = {

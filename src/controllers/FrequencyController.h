@@ -9,8 +9,18 @@ using namespace eurorack;
 
 #define SAMPLERATE_DIVIDER 8
 
-class FrequencyController : public Controller {
+class FrequencyController : public ParameterizedController<1> {
     public:
+        FrequencyController() : ParameterizedController() {}
+        virtual void init(float sampleRate);
+        virtual void init();
+        virtual void update();
+        virtual void process();
+
+    protected:
+        enum Parameter {
+            MODE
+        };
         enum Mode {
             LINEAR,
             EXP,
@@ -20,13 +30,6 @@ class FrequencyController : public Controller {
             PLANETARY
         };
 
-        FrequencyController() : Controller(Mode::PLANETARY) {}
-        virtual void init(float sampleRate);
-        virtual void init();
-        virtual void update();
-        virtual void process();
-
-    protected:
         void setRate(float baseFrequency);
         void updateRate();
         void updateAmp();

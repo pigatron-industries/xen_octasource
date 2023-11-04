@@ -5,8 +5,18 @@
 #include "../Hardware.h"
 #include "systems/differential/physical/ThreeBody.h"
 
-class ThreeBodyController : public Controller {
+class ThreeBodyController : public ParameterizedController<1> {
     public:
+        ThreeBodyController() : ParameterizedController() {}
+        virtual void init(float sampleRate);
+        virtual void init();
+        virtual void update();
+        virtual void process();
+
+    private:
+        enum Parameter {
+            MODE
+        };
         enum Mode {
             STABLE1,
             FIGURE8_STABLE_V1A,
@@ -20,13 +30,6 @@ class ThreeBodyController : public Controller {
             CHAOTIC3
         };
 
-        ThreeBodyController() : Controller(Mode::CHAOTIC3) {}
-        virtual void init(float sampleRate);
-        virtual void init();
-        virtual void update();
-        virtual void process();
-
-    private:
         ExpInput<AnalogInputSumPinT> expRateCvInput = ExpInput<AnalogInputSumPinT>(Hardware::hw.rateSumPin, 2);
         LinearInput<AnalogInputSumPinT> ampCvInput = LinearInput<AnalogInputSumPinT>(Hardware::hw.ampSumPin, -5, 5, 0, 1);
         LinearInput<AnalogInputSumPinT> sizeCvInput = LinearInput<AnalogInputSumPinT>(Hardware::hw.waveSumPin, -5, 5, 0.1, 1);

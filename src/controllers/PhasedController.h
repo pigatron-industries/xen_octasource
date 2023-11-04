@@ -16,20 +16,23 @@ using namespace eurorack;
 
 #define SAMPLERATE_DIVIDER 8
 
-class PhasedController : public Controller {
+class PhasedController : public ParameterizedController<1> {
     public:
-        enum Mode {
-            BIPOLAR_LFO,
-            EXPONENTIAL_VCO
-        };
-
-        PhasedController() : Controller(PHASED_LAST_MODE) {}
+        PhasedController() : ParameterizedController() {}
         virtual void init(float sampleRate);
         virtual void init();
         virtual void update();
         virtual void process();
 
     private:
+        enum Parameter {
+            MODE
+        };
+        enum Mode {
+            BIPOLAR_LFO,
+            EXPONENTIAL_VCO
+        };
+
         void updateRate();
         void updateAmp();
         void updateWave();

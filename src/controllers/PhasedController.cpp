@@ -31,7 +31,7 @@ void PhasedController::update() {
 
 void PhasedController::updateRate() {
     if(clock.getState() != Clock::State::CLK_EXTERNAL) {
-        switch (mode.value) {
+        switch (parameters[Parameter::MODE].value) {
             case Mode::BIPOLAR_LFO:
                 if(bipolarRateCvInput.update()) {
                     setFrequency(bipolarRateCvInput.getValue());

@@ -7,7 +7,7 @@
 
 class RandomController : public Controller {
     public:
-        RandomController() : Controller(0) {}
+        RandomController() : Controller() {}
         virtual void init(float sampleRate);
         virtual void init();
         virtual void update();

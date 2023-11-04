@@ -21,7 +21,7 @@ void EnvelopeController::init(float sampleRate) {
 void EnvelopeController::init() {
     Serial.println("Sequential Envelope");
     Hardware::hw.display.textLine("ENVELOPE");
-    switch(mode.value) {
+    switch(parameters[Parameter::MODE].value) {
         case Mode::LATCHED:
             Hardware::hw.display.textLine("LATCHED", OLEDDisplay::TEXTLINE_2);
             break;
@@ -47,7 +47,7 @@ void EnvelopeController::update() {
                 envelopeIndex = 0;
             }
             envelopes[envelopeIndex].setGate(true);
-        } else if (mode.value == Mode::GATED) {
+        } else if (parameters[Parameter::MODE].value == Mode::GATED) {
             envelopes[envelopeIndex].setGate(false);
         }
     }

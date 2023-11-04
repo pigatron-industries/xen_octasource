@@ -9,19 +9,23 @@
 
 #define SAMPLE_RATE_DIVISOR 2
 
-class PendulumController : public Controller {
+class PendulumController : public ParameterizedController<1> {
     public:
-        enum Mode {
-            SPRING_PENDULUM,
-            DOUBLE_PENDULUM
-        };
-        PendulumController() : Controller(Mode::DOUBLE_PENDULUM) {}
+        PendulumController() : ParameterizedController() {}
         virtual void init(float sampleRate);
         virtual void init();
         virtual void update();
         virtual void process();
 
     private:
+        enum Parameter {
+            MODE
+        };
+        enum Mode {
+            SPRING_PENDULUM,
+            DOUBLE_PENDULUM
+        };
+
         ExpInput<AnalogInputSumPinT> expRateCvInput = ExpInput<AnalogInputSumPinT>(Hardware::hw.rateSumPin, 1);
         LinearInput<AnalogInputSumPinT> ampCvInput = LinearInput<AnalogInputSumPinT>(Hardware::hw.ampSumPin, -5, 5, 0, 1);
         LinearInput<AnalogInputSumPinT> param1CvInput = LinearInput<AnalogInputSumPinT>(Hardware::hw.waveSumPin, -5, 5, 0.1, 1);

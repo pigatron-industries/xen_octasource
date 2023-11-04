@@ -21,7 +21,7 @@ void ThreeBodyController::init() {
      */
 
     Array<Body, 3> bodies;
-    switch(mode.value) {
+    switch(parameters[Parameter::MODE].value) {
         case Mode::STABLE1: // Massive star with opposite planets of equal mass
             Hardware::hw.display.textLine("STABLE ORBIT", OLEDDisplay::TEXTLINE_2);
             bodies[0].setMass(100);

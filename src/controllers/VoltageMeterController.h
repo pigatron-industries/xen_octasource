@@ -7,7 +7,7 @@
 class VoltageMeterController : public Controller {
     public:
 
-        VoltageMeterController() : Controller(0) {}
+        VoltageMeterController() : Controller() {}
         virtual void init(float sampleRate);
         virtual void init();
         virtual void update();

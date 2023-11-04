@@ -5,20 +5,24 @@
 #include "../Hardware.h"
 #include "systems/differential/physical/BouncingBall.h"
 
-class BouncingBallController : public Controller {
+class BouncingBallController : public ParameterizedController<1> {
     public:
-        enum Mode {
-            BOUNCE,
-            TRIGGERS,
-            ROTATE
-        };
-        BouncingBallController() : Controller(Mode::ROTATE) {}
+        BouncingBallController() : ParameterizedController() {}
         virtual void init(float sampleRate);
         virtual void init();
         virtual void update();
         virtual void process();
 
     private:
+        enum Parameter {
+            MODE
+        };
+        enum Mode {
+            BOUNCE,
+            TRIGGERS,
+            ROTATE
+        };
+
         ExpInput<AnalogInputSumPinT> expRateCvInput = ExpInput<AnalogInputSumPinT>(Hardware::hw.rateSumPin, 1);
         LinearInput<AnalogInputSumPinT> ampCvInput = LinearInput<AnalogInputSumPinT>(Hardware::hw.ampSumPin, -5, 5, 0, 1);
         LinearInput<AnalogInputSumPinT> dampCvInput = LinearInput<AnalogInputSumPinT>(Hardware::hw.waveSumPin, -5, 5, 0.5, 1);

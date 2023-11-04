@@ -7,19 +7,22 @@
 
 using namespace eurorack;
 
-class FrequencySpreadController : public Controller {
+class FrequencySpreadController : public ParameterizedController<1> {
     public:
-        enum Mode {
-            EXP
-        };
-
-        FrequencySpreadController() : Controller(Mode::EXP) {}
+        FrequencySpreadController() : ParameterizedController() {}
         virtual void init(float sampleRate);
         virtual void init();
         virtual void update();
         virtual void process();
 
     protected:
+        enum Parameter {
+            MODE
+        };
+        enum Mode {
+            EXP
+        };
+        
         void setRate(float baseFrequency, float spread);
         void updateRate();
         void updateAmp();

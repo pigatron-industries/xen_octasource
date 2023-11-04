@@ -15,7 +15,7 @@ void DelayController::init(float sampleRate) {
 void DelayController::init() {
     Serial.println("Delay");
     Hardware::hw.display.textLine("DELAY");
-    switch(mode.value) {
+    switch(parameters[Parameter::MODE].value) {
         case Mode::DELAY:
             Hardware::hw.display.textLine("DELAY", OLEDDisplay::TEXTLINE_2);
             break;
@@ -55,7 +55,7 @@ void DelayController::process() {
         filters[i].process(value);
     }
 
-    switch(mode.value) {
+    switch(parameters[Parameter::MODE].value) {
         case Mode::DELAY:
             //if(tick) {
                 for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
