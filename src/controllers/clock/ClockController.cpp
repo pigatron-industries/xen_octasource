@@ -3,6 +3,7 @@
 
 #define MAX_CLOCK_VALUE 30
 #define DEFAULT_CLOCK_VALUE 15  // 15 = "/1" or unison
+#define LOWEST_MULTIPLIER_DIVIDER 2
 
 
 void ClockController::init(float sampleRate) {
@@ -83,7 +84,8 @@ void ClockController::process() {
     triggerOutput.update();
 
     for(int i = 0; i < 8; i++) {
-        if(isMultiplier(i) && clockMultipliers[getMultiplier(i)-2].process()) {
+        uint8_t multiplierIndex = getMultiplier(i) - LOWEST_MULTIPLIER_DIVIDER;
+        if(isMultiplier(i) && clockMultipliers[multiplierIndex].process()) {
             triggerOutputs[i].trigger();
         }
         triggerOutputs[i].update();
@@ -94,12 +96,13 @@ void ClockController::onClock() {
     syncClocks();
     triggerOutput.trigger();
 
-    for(int i = 0; i < 15; i++) {
+    for(int i = 0; i < NUM_DIVIDERS; i++) {
         clockDividers[i].tick();
     }
 
     for(int i = 0; i < 8; i++) {
-        if(isDivider(i) && clockDividers[getDivider(i)-2].getTrigger()) {
+        uint8_t dividerIndex = getDivider(i) - LOWEST_MULTIPLIER_DIVIDER;
+        if(isDivider(i) && clockDividers[dividerIndex].getTrigger()) {
             triggerOutputs[i].trigger();
         }
         if(!isDivider(i)) {
@@ -107,29 +110,32 @@ void ClockController::onClock() {
         }
     }
 
-    for(int i = 0; i < 15; i++) {
+    for(int i = 0; i < NUM_DIVIDERS; i++) {
         clockDividers[i].getAndResetTrigger();
     }
 }
 
 void ClockController::syncClocks() {
-    for(int i = 0; i < 16; i++) {
+    for(int i = 0; i < NUM_MULTIPLIERS; i++) {
         clockMultipliers[i].reset();
     }
 }
 
 bool ClockController::isMultiplier(int channel) {
-    return parameters[channel].value < 15;
+    return parameters[channel].value < NUM_MULTIPLIERS;
 }
 
 bool ClockController::isDivider(int channel) {
-    return parameters[channel].value > 15;
+    return parameters[channel].value > NUM_MULTIPLIERS;
 }
 
 uint8_t ClockController::getMultiplier(int channel) {
-    return 16 - parameters[channel].value;
+    return NUM_MULTIPLIERS + 1 - parameters[channel].value;
 }
 
 uint8_t ClockController::getDivider(int channel) {
-    return parameters[channel].value - 14;
+    return parameters[channel].value - NUM_MULTIPLIERS - 1;
 }
+
+//  0   1   2   3   4   5   6    7   8   9   10  11  12  13  14  15  16  17  18  19  20  21  22  23  24  25  26  27  28  29 30
+// *16 *15 *14 *13 *12 *11 *10  *9  *8  *7  *6  *5  *4  *3  *2   1  /2  /3  /4  /5  /6  /7  /8  /9  /10 /11 /12 /13 /14 /15 /16

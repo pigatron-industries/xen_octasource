@@ -6,6 +6,9 @@
 #include "ClockDisplay.h"
 #include <eurorack_dsp.h>
 
+#define NUM_DIVIDERS 15
+#define NUM_MULTIPLIERS 15
+
 using namespace eurorack;
 
 class ClockController : public ParameterizedController<8>, public ClockedController {
@@ -61,8 +64,8 @@ class ClockController : public ParameterizedController<8>, public ClockedControl
 
         // uint8_t channelSetting[8];
     
-        ClockDivider clockDividers[15];
-        Clock clockMultipliers[15];
+        ClockDivider clockDividers[NUM_DIVIDERS];
+        Clock clockMultipliers[NUM_MULTIPLIERS];
 
         void updateMultiplierRates();
         void updateClock(uint8_t output);
