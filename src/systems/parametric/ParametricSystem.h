@@ -10,7 +10,7 @@ class ParametricSystem {
             this->sampleRate = sampleRate;
             sampleTime = 1/sampleRate;
             phase = 0;
-        };
+        }
 
         void setFrequency(float frequency) {
             increment = sampleTime * frequency;

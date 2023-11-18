@@ -9,11 +9,11 @@ class ContinuousSystem {
             this->sampleRate = sampleRate;
             sampleRateRecip = 1/sampleRate;
             setSpeed(speed);
-        };
-        virtual const char* getName() { return ""; };
+        }
+        virtual const char* getName() { return ""; }
         virtual void process() = 0;
         virtual float getOutput(int i) = 0;
-        virtual void setParam(int i, float value) {};
+        virtual void setParam(int i, float value) {}
         void setSpeed(float speed) { this->speed = speed; dt = sampleRateRecip*speedMult*speed; }
     protected:
         float sampleRate, sampleRateRecip;
@@ -49,7 +49,7 @@ class ContinuousSystemN : public ContinuousSystem {
             system();
             pos += delta * dt;
             limit();
-        };
+        }
 
         void limit() {
             if(pos[X] > limits[X]) {
