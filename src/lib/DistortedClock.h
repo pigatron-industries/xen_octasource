@@ -3,14 +3,16 @@
 
 #include <eurorack_dsp.h>
 
+#define DISTORTION_TICKS_MAX 16
+
 namespace eurorack {
 
-    template<class F, int N>
+    template<class F>
     class DistortedClock : public Clock {
         public:
             DistortedClock() { calculatePhaseIncrements(); }
             F& getFunction() { return distortionFunction; }
-            void setLength(int length) { this->length = length; phaseDivision = 1.0/length; }
+            void setLength(int ticksMax) { this->ticksMax = ticksMax; phaseDivision = 1.0/ticksMax; }
             void calculatePhaseIncrements();
 
         protected:
@@ -18,34 +20,34 @@ namespace eurorack {
 
         private:
             int currentTick = -1;
-            int length = N;
-            float phaseMaxs[N];
+            int ticksMax = DISTORTION_TICKS_MAX;
+            float phaseMaxs[DISTORTION_TICKS_MAX];
             F distortionFunction;
 
-            float phaseDivision = 1.0/N;
+            float phaseDivision = 1.0/ticksMax;
     };
 
-    template<class F, int N>
-    inline bool DistortedClock<F, N>::processInternal() {
+    template<class F>
+    inline bool DistortedClock<F>::processInternal() {
         bool ticked = Clock::processInternal();
         if(ticked) {
             currentTick++;
-            currentTick %= length;
+            currentTick %= ticksMax;
             setPhaseMax(phaseMaxs[currentTick]);
         }
         return ticked;
     }
 
-    template<class F, int N>
-    inline void DistortedClock<F, N>::calculatePhaseIncrements() {
+    template<class F>
+    inline void DistortedClock<F>::calculatePhaseIncrements() {
         float phase = 0;
         float distortedPhase = 0;
 
-        for(int i = 0; i < length; i++) {
+        for(int i = 0; i < ticksMax; i++) {
             float nextPhase = phase + phaseDivision;
             float nextDistortedPhase = distortionFunction.get(nextPhase);
 
-            phaseMaxs[i] = (nextDistortedPhase - distortedPhase)*length;
+            phaseMaxs[i] = (nextDistortedPhase - distortedPhase) * ticksMax;
 
             phase = nextPhase;
             distortedPhase = nextDistortedPhase;

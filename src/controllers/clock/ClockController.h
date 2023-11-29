@@ -8,6 +8,7 @@
 
 #define NUM_DIVIDERS 15
 #define NUM_MULTIPLIERS 15
+#define MULIPLIER_BASE 16
 
 using namespace eurorack;
 

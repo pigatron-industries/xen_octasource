@@ -2,6 +2,7 @@
 #define ClockedController_h
 
 #include "Controller.h"
+#include "lib/DistortedClock.h"
 #include <eurorack_dsp.h>
 
 using namespace eurorack;
@@ -23,7 +24,7 @@ class ClockedController {
         ExpInput<AnalogInputSumPinT> rateCvInput = ExpInput<AnalogInputSumPinT>(Hardware::hw.rateSumPin, 1, 2);
         IntegerInput<AnalogInputSumPinT> syncMultCvInput = IntegerInput<AnalogInputSumPinT>(Hardware::hw.rateSumPin, -5.0, 5.0, -7, 7);
 
-        Clock clock;
+        DistortedClock<TwoLineFunction> clock;
         ClockDivider syncDivider = ClockDivider(SAMPLERATE_DIVIDER);
 
         float syncFrequency;
