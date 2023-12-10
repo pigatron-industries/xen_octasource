@@ -14,8 +14,7 @@ void ClockController::init(float sampleRate) {
     ClockedController::init(sampleRate);
     display.init();
     display.focusClock(0);
-
-    clock.setLength(2); // TODO: make configurable
+    clock.setLength(2);
 
     for(int i = 0; i < 15; i++) {
         clockMultipliers[i].init(sampleRate);
@@ -81,6 +80,11 @@ void ClockController::update() {
     if(distortionXCvInput.update()) {
         clock.getFunction().setMidPoint(distortionXCvInput.getValue(), 0.5);
         clock.calculatePhaseIncrements();
+    }
+
+    if(lengthInput.update()) {
+        Serial.println(lengthInput.getIntValue());
+        clock.setLength(lengthInput.getIntValue());
     }
 
     Hardware::hw.updateOutputLeds(Colour(0, 0, 0), Colour(0, 1, 0));
