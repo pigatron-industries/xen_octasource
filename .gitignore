@@ -45,3 +45,6 @@ Thumbs.db
 .clang_complete
 .gcc-flags.json
 .vscode
+
+# python
+__pycache__/
