@@ -2,6 +2,7 @@
 
 void FrequencyController::init(float sampleRate) {
     Controller::init(sampleRate);
+    configParam(Parameter::MODE, 0, Mode::PLANETARY-1);
     for(int i = 0; i < OUTPUT_CV_COUNT; i++) {
         oscillators[i].init(sampleRate);
         oscillators[i].setFrequency(1);

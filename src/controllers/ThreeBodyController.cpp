@@ -3,6 +3,7 @@
 
 void ThreeBodyController::init(float sampleRate) {
     Controller::init(sampleRate);
+    configParam(Parameter::MODE, 0, Mode::CHAOTIC3-1);
     init();
 }
 

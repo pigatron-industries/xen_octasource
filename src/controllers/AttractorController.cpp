@@ -14,9 +14,23 @@ void AttractorController::init(float sampleRate) {
 
 void AttractorController::init() {
     Serial.println("Attractor");
-    //Hardware::hw.display.text("ATTRACTOR");
-    uint8_t selectedAttractor = parameters[Parameter::ATTRACTOR1].value;
-    Hardware::hw.display.textLine(attractors1[selectedAttractor]->getName(), OLEDDisplay::TEXTLINE_2);
+    Hardware::hw.display.text("ATTRACTOR");
+    uint8_t selectedAttractor1 = parameters[Parameter::ATTRACTOR1].value;
+    Hardware::hw.display.textLine(attractors1[selectedAttractor1]->getName(), OLEDDisplay::TEXTLINE_2);
+    uint8_t selectedAttractor2 = parameters[Parameter::ATTRACTOR2].value;
+    Hardware::hw.display.textLine(attractors2[selectedAttractor2]->getName(), OLEDDisplay::TEXTLINE_3);
+}
+
+void AttractorController::cycleValue(int amount) {
+    Serial.println(parameters.getSelectedIndex());
+    uint8_t value = parameters.getSelected().cycle(amount);
+
+    uint8_t selectedAttractor1 = parameters[Parameter::ATTRACTOR1].value;
+    Hardware::hw.display.textLine(attractors1[selectedAttractor1]->getName(), OLEDDisplay::TEXTLINE_2);
+    uint8_t selectedAttractor2 = parameters[Parameter::ATTRACTOR2].value;
+    Hardware::hw.display.textLine(attractors2[selectedAttractor2]->getName(), OLEDDisplay::TEXTLINE_3);
+
+    save();
 }
 
 void AttractorController::update() {

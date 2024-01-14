@@ -25,6 +25,8 @@ class ParameterizedController : public Controller, public AbstractParameterizedC
     public:
         void load() { AbstractParameterizedController<N>::load(); }
         void save() { AbstractParameterizedController<N>::save(); }
+        int cycleParameter(int amount) { return AbstractParameterizedController<N>::cycleParameter(amount); }
+        void cycleValue(int amount) { AbstractParameterizedController<N>::cycleValue(amount); init(); }
 };
 
 #endif

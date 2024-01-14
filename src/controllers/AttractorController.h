@@ -23,6 +23,7 @@ class AttractorController : public ParameterizedController<2> {
         AttractorController() : ParameterizedController() {}
         virtual void init(float sampleRate);
         virtual void init();
+        virtual void cycleValue(int amount);
         virtual void update();
         virtual void process();
 

@@ -54,6 +54,7 @@ void BurstController::cycleValue(int amount) {
             page.setValue(2, parameters[Parameter::BURST_SHAPE].value);
             break;
     }
+    save();
 }
 
 void BurstController::update() {

@@ -10,6 +10,7 @@ class BouncingBallController : public ParameterizedController<1> {
         BouncingBallController() : ParameterizedController() {}
         virtual void init(float sampleRate);
         virtual void init();
+        virtual void cycleValue(int amount);
         virtual void update();
         virtual void process();
 
@@ -18,8 +19,9 @@ class BouncingBallController : public ParameterizedController<1> {
             MODE
         };
         enum Mode {
-            BOUNCE,
-            TRIGGERS,
+            BOUNCE_STEPPED,
+            BOUNCE_TRIGGERS,
+            STEPPED_TRIGGERS,
             ROTATE
         };
 
@@ -31,10 +33,10 @@ class BouncingBallController : public ParameterizedController<1> {
         #endif
 
         AnalogTriggerOutput<AnalogOutputDeviceT> triggerOutputs[4] = {
-            AnalogTriggerOutput<AnalogOutputDeviceT>(*Hardware::hw.cvOutputPins[0], 20000),
-            AnalogTriggerOutput<AnalogOutputDeviceT>(*Hardware::hw.cvOutputPins[2], 20000),
-            AnalogTriggerOutput<AnalogOutputDeviceT>(*Hardware::hw.cvOutputPins[4], 20000),
-            AnalogTriggerOutput<AnalogOutputDeviceT>(*Hardware::hw.cvOutputPins[6], 20000)
+            AnalogTriggerOutput<AnalogOutputDeviceT>(*Hardware::hw.cvOutputPins[1], 20000),
+            AnalogTriggerOutput<AnalogOutputDeviceT>(*Hardware::hw.cvOutputPins[3], 20000),
+            AnalogTriggerOutput<AnalogOutputDeviceT>(*Hardware::hw.cvOutputPins[5], 20000),
+            AnalogTriggerOutput<AnalogOutputDeviceT>(*Hardware::hw.cvOutputPins[7], 20000)
         };
 
         BouncingBall bouncingBalls[4] = {
@@ -48,6 +50,7 @@ class BouncingBallController : public ParameterizedController<1> {
 
         float amp;
         
+        void setMode(uint8_t mode);
         void updateRate();
         void updateAmp();
         void updateDamp();
