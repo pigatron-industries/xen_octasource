@@ -1,7 +1,7 @@
 #ifndef SequenceQuantizerController_h
 #define SequenceQuantizerController_h
 
-#include "../ClockedController.h"
+#include "../clock/ClockedController.h"
 #include "SequenceQuantizerDisplay.h"
 
 using namespace eurorack;

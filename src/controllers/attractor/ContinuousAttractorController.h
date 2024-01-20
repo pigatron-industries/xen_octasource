@@ -1,26 +1,26 @@
-#ifndef AttractorController_h
-#define AttractorController_h
+#ifndef ContinuousAttractorController_h
+#define ContinuousAttractorController_h
 
-#include "../Controller.h"
-#include "../Hardware.h"
-#include "systems/differential/attractor/LorenzAttractor.h"
-#include "systems/differential/attractor/Lorenz83Attractor.h"
-#include "systems/differential/attractor/ThomasAttractor.h"
-#include "systems/differential/attractor/AizawaAttractor.h"
-#include "systems/differential/attractor/DadrasAttractor.h"
-#include "systems/differential/attractor/ChenAttractor.h"
-#include "systems/differential/attractor/RosslerAttractor.h"
-#include "systems/differential/attractor/HalvorsenAttractor.h"
-#include "systems/differential/attractor/ChuaMultiScrollAttractor.h"
-#include "systems/differential/attractor/RabinovichFabrikantAttractor.h"
-#include "systems/differential/attractor/ThreeScrollUnifiedAttractor.h"
-#include "systems/differential/attractor/FourWingAttractor.h"
+#include "Controller.h"
+#include "Hardware.h"
+#include "systems/continuous/attractor/LorenzAttractor.h"
+#include "systems/continuous/attractor/Lorenz83Attractor.h"
+#include "systems/continuous/attractor/ThomasAttractor.h"
+#include "systems/continuous/attractor/AizawaAttractor.h"
+#include "systems/continuous/attractor/DadrasAttractor.h"
+#include "systems/continuous/attractor/ChenAttractor.h"
+#include "systems/continuous/attractor/RosslerAttractor.h"
+#include "systems/continuous/attractor/HalvorsenAttractor.h"
+#include "systems/continuous/attractor/ChuaMultiScrollAttractor.h"
+#include "systems/continuous/attractor/RabinovichFabrikantAttractor.h"
+#include "systems/continuous/attractor/ThreeScrollUnifiedAttractor.h"
+#include "systems/continuous/attractor/FourWingAttractor.h"
 #include "display/PixelTrail.h"
 #include <eurorack.h>
 
-class AttractorController : public ParameterizedController<2> {
+class ContinuousAttractorController : public ParameterizedController<2> {
     public:
-        AttractorController() : ParameterizedController() {}
+        ContinuousAttractorController() : ParameterizedController() {}
         virtual void init(float sampleRate);
         virtual void init();
         virtual void cycleValue(int amount);

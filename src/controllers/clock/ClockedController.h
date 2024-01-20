@@ -12,7 +12,8 @@ using namespace eurorack;
 class ClockedController {
     public:
 
-        ClockedController() {}
+        ClockedController(float mid = 1, float base = 2) :
+            rateCvInput(Hardware::hw.rateSumPin, mid, base) {}
         virtual void init(float sampleRate);
         virtual void init();
         virtual void update();
@@ -20,9 +21,9 @@ class ClockedController {
         virtual void onClock() = 0;
 
     protected:
-        AnalogGateInput<AnalogInputPinT> syncInput = AnalogGateInput<AnalogInputPinT>(Hardware::hw.syncCvPin);
-        ExpInput<AnalogInputSumPinT> rateCvInput = ExpInput<AnalogInputSumPinT>(Hardware::hw.rateSumPin, 1, 2);
+        ExpInput<AnalogInputSumPinT> rateCvInput;
         IntegerInput<AnalogInputSumPinT> syncMultCvInput = IntegerInput<AnalogInputSumPinT>(Hardware::hw.rateSumPin, -5.0, 5.0, -7, 7);
+        AnalogGateInput<AnalogInputPinT> syncInput = AnalogGateInput<AnalogInputPinT>(Hardware::hw.syncCvPin);
 
         DistortedClock<TwoLineFunction> clock;
         ClockDivider syncDivider = ClockDivider(SAMPLERATE_DIVIDER);

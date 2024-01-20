@@ -7,11 +7,12 @@
 // #include "controllers/clock/ClockMultiplierController.h"
 #include "controllers/EnvelopeController.h"
 #include "controllers/BurstController.h"
-#include "controllers/BouncingBallController.h"
+#include "controllers/physical/BouncingBallController.h"
+#include "controllers/physical/PendulumController.h"
+#include "controllers/physical/ThreeBodyController.h"
+#include "controllers/attractor/ContinuousAttractorController.h"
+#include "controllers/attractor/DiscreteAttractorController.h"
 #include "controllers/TrochoidController.h"
-#include "controllers/AttractorController.h"
-#include "controllers/PendulumController.h"
-#include "controllers/ThreeBodyController.h"
 #include "controllers/RandomController.h"
 #include "controllers/sequencequantizer/SequenceQuantizerController.h"
 #include "controllers/DelayController.h"
@@ -26,7 +27,8 @@ EnvelopeController, \
 BurstController, \
 BouncingBallController, \
 TrochoidController, \
-AttractorController, \
+ContinuousAttractorController, \
+DiscreteAttractorController, \
 PendulumController, \
 ThreeBodyController, \
 RandomController, \

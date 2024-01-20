@@ -1,10 +1,10 @@
-#ifndef DoublePendulumController_h
-#define DoublePendulumController_h
+#ifndef PendulumController_h
+#define PendulumController_h
 
-#include "../Controller.h"
-#include "../Hardware.h"
-#include "systems/differential/physical/DoublePendulum.h"
-#include "systems/differential/physical/SpringPendulum.h"
+#include "Controller.h"
+#include "Hardware.h"
+#include "systems/continuous/physical/DoublePendulum.h"
+#include "systems/continuous/physical/SpringPendulum.h"
 #include <eurorack_dsp.h>
 
 #define SAMPLE_RATE_DIVISOR 2

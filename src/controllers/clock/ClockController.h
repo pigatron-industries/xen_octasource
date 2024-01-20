@@ -2,11 +2,11 @@
 #define ClockController_h
 
 #include "Controller.h"
-#include "controllers/ClockedController.h"
+#include "ClockedController.h"
 #include "ClockDisplay.h"
 #include <eurorack_dsp.h>
 
-#define NUM_DIVIDERS 15
+#define NUM_DIVIDERS 64
 #define NUM_MULTIPLIERS 15
 #define MULIPLIER_BASE 16
 

@@ -1,6 +1,7 @@
 #include "ClockedController.h"
 
 void ClockedController::init(float sampleRate) {
+    Serial.println("ClockedController::init");
     clock.init(sampleRate);
 }
 

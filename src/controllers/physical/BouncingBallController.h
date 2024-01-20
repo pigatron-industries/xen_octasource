@@ -1,9 +1,9 @@
 #ifndef BouncingBallController_h
 #define BouncingBallController_h
 
-#include "../Controller.h"
-#include "../Hardware.h"
-#include "systems/differential/physical/BouncingBall.h"
+#include "Controller.h"
+#include "Hardware.h"
+#include "systems/continuous/physical/BouncingBall.h"
 
 class BouncingBallController : public ParameterizedController<1> {
     public:

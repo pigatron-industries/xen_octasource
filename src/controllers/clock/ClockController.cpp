@@ -44,7 +44,7 @@ int ClockController::cycleParameter(int amount) {
 
 void ClockController::cycleValue(int amount) {
     uint8_t output = parameters.getSelectedIndex();
-    uint8_t value = parameters.getSelected().cycle(amount);
+    uint8_t value = parameters.getSelected().cycle(amount);  // TODO allow cycling through limited set of values (e.g. lock to powers of 2, or even numbers)
     config.data.clock[output] = value;
     if(isMultiplier(output)) {
         Serial.println("muliplier");

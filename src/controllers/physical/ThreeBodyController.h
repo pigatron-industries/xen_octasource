@@ -1,9 +1,9 @@
 #ifndef ThreeBodyController_h
 #define ThreeBodyController_h
 
-#include "../Controller.h"
-#include "../Hardware.h"
-#include "systems/differential/physical/ThreeBody.h"
+#include "Controller.h"
+#include "Hardware.h"
+#include "systems/continuous/physical/ThreeBody.h"
 
 class ThreeBodyController : public ParameterizedController<1> {
     public:
