@@ -17,21 +17,19 @@ class Lorenz83Attractor : public ContinuousSystemN<3> {
             offset[Y] = -0.25;
             offset[Z] = -0.25;
             speedMult = 1;
+            initParams(
+                {0.95, 7.91, 4.83, 4.66}, 
+                {0.95, 7.91, 4.83, 4.66}
+            );
         }
 
         const char* getName() { return "LORENZ83"; }
 
         void system() {
-            delta[X] = - a*pos[X] - pos[Y]*pos[Y] - pos[Z]*pos[Z] + a*f;
-            delta[Y] = - pos[Y] + pos[X]*pos[Y] - b*pos[X]*pos[Z] + g;
-            delta[Z] = - pos[Z] + b*pos[X]*pos[Y] + pos[X]*pos[Z];
+            delta[X] = - PA*pos[X] - pos[Y]*pos[Y] - pos[Z]*pos[Z] + PA*PC;
+            delta[Y] = - pos[Y] + pos[X]*pos[Y] - PB*pos[X]*pos[Z] + PD;
+            delta[Z] = - pos[Z] + PB*pos[X]*pos[Y] + pos[X]*pos[Z];
         }
-
-    private:
-        float a = 0.95;
-        float b = 7.91;
-        float f = 4.83;
-        float g = 4.66;
 };
 
 #endif

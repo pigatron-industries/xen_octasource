@@ -57,6 +57,7 @@ class DiscreteSystemN : public DiscreteSystem {
         void setScale(Vector<N> scale) { this->mult = scale; }
 
         float getOutput(int i) { return (pos[i]+offset.val[i])*mult.val[i]; }
+        Vector<N> getPos() { return (pos+offset)*mult; }
 
         void process() {
             system();

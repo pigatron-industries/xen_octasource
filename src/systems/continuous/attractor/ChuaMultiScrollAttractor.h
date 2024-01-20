@@ -19,25 +19,20 @@ class ChuaMultiScrollAttractor : public ContinuousSystemN<3> {
             offset[Z] = 0;
             speedMult = 2;
             limits[X] = 20;
+            initParams(
+                {1.3, 0.11, 0, 10.82, 14.286}, 
+                {1.3, 0.11, 0, 10.82, 14.286}
+            );
         }
 
         const char* getName() { return "MULTI SCROLL"; }
 
         void system() {
-            float h = -b*sinf((M_PI*pos[X])/(2*a) + d);
-            delta[X] = alpha*(pos[Y]-h);
+            float h = -PB*sinf((M_PI*pos[X])/(2*PA) + PC);
+            delta[X] = PD*(pos[Y]-h);
             delta[Y] = pos[X] - pos[Y] + pos[Z];
-            delta[Z] = -beta*pos[Y];
+            delta[Z] = -PE*pos[Y];
         }
-
-
-    private:
-        float alpha = 10.82;
-        float beta = 14.286;
-        float a = 1.3;
-        float b = 0.11;
-        float c = 7;
-        float d = 0;
 };
 
 #endif

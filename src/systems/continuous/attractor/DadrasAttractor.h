@@ -18,22 +18,19 @@ class DadrasAttractor : public ContinuousSystemN<3> {
             offset[Y] = 0;
             offset[Z] = 0;
             speedMult = 1;
+            initParams(
+                {3, 2.7, 1.7, 2, 9}, 
+                {3, 2.7, 1.7, 2, 9}
+            );
         }
 
         const char* getName() { return "DADRAS"; }
 
         void system() {
-            delta[X] = pos[Y] - a*pos[X] + b*pos[Y]*pos[Z];
-            delta[Y] = c*pos[Y] - pos[X]*pos[Z] + pos[Z];
-            delta[Z] = d*pos[X]*pos[Y] - e*pos[Z];
+            delta[X] = pos[Y] - PA*pos[X] + PB*pos[Y]*pos[Z];
+            delta[Y] = PC*pos[Y] - pos[X]*pos[Z] + pos[Z];
+            delta[Z] = PD*pos[X]*pos[Y] - PE*pos[Z];
         }
-
-    private:
-        float a = 3;
-        float b = 2.7;
-        float c = 1.7;
-        float d = 2;
-        float e = 9;
 };
 
 #endif

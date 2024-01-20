@@ -18,20 +18,20 @@ class ThomasAttractor : public ContinuousSystemN<3> {
             offset[Y] = -1.5;
             offset[Z] = -1.5;
             speedMult = 4;
+            initParams(
+                {0.208186}, 
+                {0.208186}
+            );
         }
 
         const char* getName() { return "THOMAS"; }
 
         void system() {
-            delta[X] = sinf(pos[Y])-b*pos[X];
-            delta[Y] = sinf(pos[Z])-b*pos[Y];
-            delta[Z] = sinf(pos[X])-b*pos[Z];
+            delta[X] = sinf(pos[Y])-PB*pos[X];
+            delta[Y] = sinf(pos[Z])-PB*pos[Y];
+            delta[Z] = sinf(pos[X])-PB*pos[Z];
         }
 
-        void setB(float b) { this->b = b; }
-
-    private:
-        float b = 0.208186;
 };
 
 #endif

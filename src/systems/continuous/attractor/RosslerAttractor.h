@@ -17,20 +17,19 @@ class RosslerAttractor : public ContinuousSystemN<3> {
             offset[Y] = 1.5;
             offset[Z] = -11;
             speedMult = 2;
+            initParams(
+                {0.2, 0.2, 5.7}, 
+                {0.2, 0.2, 5.7}
+            );
         }
 
         const char* getName() { return "ROSSLER"; }
 
         void system() {
             delta[X] = -(pos[Y]+pos[Z]);
-            delta[Y] = pos[X] + a*pos[Y];
-            delta[Z] = b + pos[Z]*(pos[X]-c);
+            delta[Y] = pos[X] + PA*pos[Y];
+            delta[Z] = PB + pos[Z]*(pos[X]-PC);
         }
-
-    private:
-        float a = 0.2;
-        float b = 0.2;
-        float c = 5.7;
 };
 
 #endif

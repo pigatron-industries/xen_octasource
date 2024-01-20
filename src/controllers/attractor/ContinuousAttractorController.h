@@ -35,7 +35,9 @@ class ContinuousAttractorController : public ParameterizedController<2> {
 
         ExpInput<AnalogInputSumPinT> expRateCvInput = ExpInput<AnalogInputSumPinT>(Hardware::hw.rateSumPin, 1);
         LinearInput<AnalogInputSumPinT> ampCvInput = LinearInput<AnalogInputSumPinT>(Hardware::hw.ampSumPin, -5, 5, 0, 1);
-        //LinearInput<AnalogInputSumPinT> cCvInput = LinearInput<AnalogInputSumPinT>(Hardware::hw.waveSumPin, -5, 5, 0, 5);
+        LinearInput<AnalogInputSumPinT> paramsCvInput = LinearInput<AnalogInputSumPinT>(Hardware::hw.waveSumPin, -5, 5, 0, 1);
+        LinearInput<AnalogInputSumPinT> rotateCvInput = LinearInput<AnalogInputSumPinT>(Hardware::hw.phaseSumPin, -5, 5, -M_PI, M_PI);
+
 
         TypeSelector<ContinuousSystemN<3>, 
                         LorenzAttractor, 
@@ -65,12 +67,15 @@ class ContinuousAttractorController : public ParameterizedController<2> {
                         FourWingAttractor> attractors2;
 
         float amp;
+        float rotation;
 
         PixelTrail<100> pixelTrail1;
         PixelTrail<100> pixelTrail2;
         
         void updateRate();
         void updateAmp();
+        void updateParams();
+        void updateRotation();
 };
 
 #endif

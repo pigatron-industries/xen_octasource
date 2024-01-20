@@ -15,20 +15,20 @@ void ContinuousAttractorController::init(float sampleRate) {
 void ContinuousAttractorController::init() {
     Serial.println("Continuous Attractor");
     Hardware::hw.display.text("C ATTRACTOR");
-    uint8_t selectedAttractor1 = parameters[Parameter::ATTRACTOR1].value;
-    Hardware::hw.display.textLine(attractors1[selectedAttractor1]->getName(), OLEDDisplay::TEXTLINE_2);
-    uint8_t selectedAttractor2 = parameters[Parameter::ATTRACTOR2].value;
-    Hardware::hw.display.textLine(attractors2[selectedAttractor2]->getName(), OLEDDisplay::TEXTLINE_3);
+    attractors1.select(parameters[Parameter::ATTRACTOR1].value);
+    Hardware::hw.display.textLine(attractors1.getSelected()->getName(), OLEDDisplay::TEXTLINE_2);
+    attractors2.select(parameters[Parameter::ATTRACTOR2].value);
+    Hardware::hw.display.textLine(attractors2.getSelected()->getName(), OLEDDisplay::TEXTLINE_3);
 }
 
 void ContinuousAttractorController::cycleValue(int amount) {
     Serial.println(parameters.getSelectedIndex());
-    uint8_t value = parameters.getSelected().cycle(amount);
+    parameters.getSelected().cycle(amount);
 
-    uint8_t selectedAttractor1 = parameters[Parameter::ATTRACTOR1].value;
-    Hardware::hw.display.textLine(attractors1[selectedAttractor1]->getName(), OLEDDisplay::TEXTLINE_2);
-    uint8_t selectedAttractor2 = parameters[Parameter::ATTRACTOR2].value;
-    Hardware::hw.display.textLine(attractors2[selectedAttractor2]->getName(), OLEDDisplay::TEXTLINE_3);
+    attractors1.select(parameters[Parameter::ATTRACTOR1].value);
+    Hardware::hw.display.textLine(attractors1.getSelected()->getName(), OLEDDisplay::TEXTLINE_2);
+    attractors2.select(parameters[Parameter::ATTRACTOR2].value);
+    Hardware::hw.display.textLine(attractors2.getSelected()->getName(), OLEDDisplay::TEXTLINE_3);
 
     save();
 }
@@ -36,6 +36,8 @@ void ContinuousAttractorController::cycleValue(int amount) {
 void ContinuousAttractorController::update() {
     updateRate();
     updateAmp();
+    updateParams();
+    updateRotation();
     Hardware::hw.updateOutputLeds();
     
     // RangeScale scale = RangeScale(-5, 5, 0, 32);
@@ -62,16 +64,33 @@ void ContinuousAttractorController::updateAmp() {
     }
 }
 
-void ContinuousAttractorController::process() {
-    uint8_t selectedAttractor1 = parameters[Parameter::ATTRACTOR1].value;
-    ContinuousSystem* attractor = attractors1[selectedAttractor1];
-    attractor->process();
-    Hardware::hw.cvOutputPins[0]->analogWrite(attractor->getOutput(X)*amp);
-    Hardware::hw.cvOutputPins[1]->analogWrite(attractor->getOutput(Y)*amp);
-    Hardware::hw.cvOutputPins[2]->analogWrite(attractor->getOutput(Z)*amp);
+void ContinuousAttractorController::updateParams() {
+    if(paramsCvInput.update()) {
+        attractors1.getSelected()->setInterpolation(paramsCvInput.getValue());
+    }
+}
 
-    uint8_t selectedAttractor2 = parameters[Parameter::ATTRACTOR2].value;
-    attractor = attractors2[selectedAttractor2];
+void ContinuousAttractorController::updateRotation() {
+    if (rotateCvInput.update()) {
+        rotation = rotateCvInput.getValue();
+    }
+}
+
+void ContinuousAttractorController::process() {
+    ContinuousSystemN<3>* attractor = attractors1.getSelected();
+    attractor->process();
+    Vector<3> output = attractor->getPos();
+    
+    Hardware::hw.cvOutputPins[0]->analogWrite(output[X]*amp);
+    Hardware::hw.cvOutputPins[1]->analogWrite(output[Y]*amp);
+    Hardware::hw.cvOutputPins[2]->analogWrite(output[Z]*amp);
+
+    Vector<2> rotated = rotate3dAndFlatten(output, 45*M_PI/180, -35*M_PI/180);
+    Vector<2> rotated2d = rotate2d(rotated, rotation);
+    Hardware::hw.cvOutputPins[3]->analogWrite(rotated2d[X]*amp);
+    Hardware::hw.cvOutputPins[4]->analogWrite(rotated2d[Y]*amp);
+
+    attractor = attractors2.getSelected();
     attractor->process();
     Hardware::hw.cvOutputPins[5]->analogWrite(attractor->getOutput(X)*amp);
     Hardware::hw.cvOutputPins[6]->analogWrite(attractor->getOutput(Y)*amp);

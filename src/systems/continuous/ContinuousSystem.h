@@ -2,6 +2,14 @@
 #define ContinuousSystem_h
 
 #include "../Vector.h"
+#include "lib/interpolationutil.h"
+
+#define PA params[0]
+#define PB params[1]
+#define PC params[2]
+#define PD params[3]
+#define PE params[4]
+#define PF params[5]
 
 class ContinuousSystem {
     public: 
@@ -13,13 +21,30 @@ class ContinuousSystem {
         virtual const char* getName() { return ""; }
         virtual void process() = 0;
         virtual float getOutput(int i) = 0;
-        virtual void setParam(int i, float value) {}
-        void setSpeed(float speed) { this->speed = speed; dt = sampleRateRecip*speedMult*speed; }
+        void setParam(int i, float value) {
+            params[i] = value;
+        }
+        void setInterpolation(float value) {
+            params = interpolator.interpolate(value);
+        }
+        void setSpeed(float speed) { 
+            this->speed = speed; 
+            dt = sampleRateRecip*speedMult*speed; 
+        }
+
     protected:
         float sampleRate, sampleRateRecip;
         float dt;
         float speed = 1;
         float speedMult = 1;
+
+        ArrayInterpolator<10> interpolator;
+        Array<float, 10> params;
+
+        void initParams(std::initializer_list<float> list1, std::initializer_list<float> list2) {
+            interpolator.init(list1, list2);
+            setInterpolation(0);
+        }
 };
 
 template<int N>
@@ -44,6 +69,7 @@ class ContinuousSystemN : public ContinuousSystem {
         void setScale(Vector<N> scale) { this->mult = scale; }
 
         float getOutput(int i) { return (pos[i]+offset.val[i])*mult.val[i]; }
+        Vector<N> getPos() { return (pos+offset)*mult; }
 
         void process() {
             system();

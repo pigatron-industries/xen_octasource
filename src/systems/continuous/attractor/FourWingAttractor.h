@@ -17,20 +17,20 @@ class FourWingAttractor : public ContinuousSystemN<3> {
             offset[Y] = 0;
             offset[Z] = 0;
             speedMult = 4;
+            initParams(
+                {0.2, 0.01, -0.4}, 
+                {0.2, 0.01, -0.4}
+            );
         }
 
         const char* getName() { return "FOUR WING"; }
 
         void system() {
-            delta[X] = a*pos[X] + pos[Y]*pos[Z];
-            delta[Y] = b*pos[X] + c*pos[Y] - pos[X]*pos[Z];
+            delta[X] = PA*pos[X] + pos[Y]*pos[Z];
+            delta[Y] = PB*pos[X] + PC*pos[Y] - pos[X]*pos[Z];
             delta[Z] = - pos[Z] - pos[X]*pos[Y];
         }
 
-    private:
-        float a = 0.2;
-        float b = 0.01;
-        float c = -0.4;
 };
 
 #endif

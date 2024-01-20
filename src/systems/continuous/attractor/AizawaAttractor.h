@@ -18,23 +18,20 @@ class AizawaAttractor : public ContinuousSystemN<3> {
             offset[Y] = 0;
             offset[Z] = -0.75;
             speedMult = 1;
+            initParams(
+                {0.95, 0.7, 0.6, 3.5, 0.25, 0.1}, 
+                {0.95, 0.7, 0.6, 3.5, 0.25, 0.1}
+            );
         }
 
         const char* getName() { return "AIZAWA"; }
 
         void system() {
-            delta[X] = pos[X]*(pos[Z]-b) - d*pos[Y];
-            delta[Y] = d*pos[X] + pos[Y]*(pos[Z]-b);
-            delta[Z] = c + a*pos[Z] - (pos[Z]*pos[Z]*pos[Z]/3) - (pos[X]*pos[X]+pos[Y]*pos[Y])*(1+e*pos[Z]) + f*pos[Z]*pos[X]*pos[X]*pos[X];
+            delta[X] = pos[X]*(pos[Z]-PB) - PD*pos[Y];
+            delta[Y] = PD*pos[X] + pos[Y]*(pos[Z]-PB);
+            delta[Z] = PC + PA*pos[Z] - (pos[Z]*pos[Z]*pos[Z]/3) - (pos[X]*pos[X]+pos[Y]*pos[Y])*(1+PE*pos[Z]) + PF*pos[Z]*pos[X]*pos[X]*pos[X];
         }
 
-    private:
-        float a = 0.95;
-        float b = 0.7;
-        float c = 0.6;
-        float d = 3.5;
-        float e = 0.25;
-        float f = 0.1;
 };
 
 #endif

@@ -66,6 +66,17 @@ class Vector {
             return Vector(*this) *= other;
         }
 
+        Vector& operator*=(const Vector& rhs) { 
+            for(int i = 0; i < N; i++) {
+                val[i] *= rhs.val[i];
+            }
+            return *this;
+        }
+
+        const Vector operator*(const Vector& other) const {
+            return Vector(*this) *= other;
+        }
+
         Vector& operator/=(float rhs) { 
             for(int i = 0; i < N; i++) {
                 val[i] /= rhs;
@@ -88,10 +99,23 @@ class Vector {
         float val[N];
 };
 
-inline Vector<2> rotate(Vector<2> vector, float radians) {
+inline Vector<2> rotate2d(Vector<2> vector, float radians) {
     Vector<2> rotated;
-    rotated[X] = vector[X]*cosf(radians) + vector[Y]*sinf(radians);
-    rotated[Y] = vector[X]*sinf(radians) + vector[Y]*cosf(radians);
+    float sin1 = sinf(radians);
+    float cos1 = cosf(radians);
+    rotated[X] = vector[X]*cos1 - vector[Y]*sin1;
+    rotated[Y] = vector[X]*sin1 + vector[Y]*cos1;
+    return rotated;
+}
+
+inline Vector<2> rotate3dAndFlatten(Vector<3> vector, float radians1, float radians2) {
+    Vector<2> rotated;
+    float sin1 = sinf(radians1);
+    float cos1 = cosf(radians1);
+    float sin2 = sinf(radians2);
+    float cos2 = cosf(radians2);
+    rotated[X] = vector[X]*cos1 - vector[Y]*sin1;
+    rotated[Y] = vector[X]*sin2*sin1 + vector[Y]*sin2*cos1 + vector[Z]*cos2;
     return rotated;
 }
 

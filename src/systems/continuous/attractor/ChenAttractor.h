@@ -18,20 +18,20 @@ class ChenAttractor : public ContinuousSystemN<3> {
             offset[Y] = 0;
             offset[Z] = -9.5;
             speedMult = 1.5; //Breaks if it goes too fast
+            initParams(
+                {5, -10, -0.38}, 
+                {5, -10, -0.38}
+            );
         }
 
         const char* getName() { return "CHEN"; }
 
         void system() {
-            delta[X] = a*pos[X] - pos[Y]*pos[Z];
-            delta[Y] = b*pos[Y] + pos[X]*pos[Z];
-            delta[Z] = c*pos[Z] + pos[X]*pos[Y]/3;
+            delta[X] = PA*pos[X] - pos[Y]*pos[Z];
+            delta[Y] = PB*pos[Y] + pos[X]*pos[Z];
+            delta[Z] = PC*pos[Z] + pos[X]*pos[Y]/3;
         }
 
-    private:
-        float a = 5;
-        float b = -10;
-        float c = -0.38;
 };
 
 #endif

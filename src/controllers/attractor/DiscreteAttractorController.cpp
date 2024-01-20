@@ -46,9 +46,10 @@ void DiscreteAttractorController::process() {
 }
 
 void DiscreteAttractorController::onClock() {
-    DiscreteSystem* attractor = attractors1.getSelected();
+    DiscreteSystemN<2>* attractor = attractors1.getSelected();
     attractor->process();
+    Vector<2> output = attractor->getPos();
 
-    Hardware::hw.cvOutputPins[0]->analogWrite(attractor->getOutput(X)*amp);
-    Hardware::hw.cvOutputPins[1]->analogWrite(attractor->getOutput(Y)*amp);
+    Hardware::hw.cvOutputPins[0]->analogWrite(output[X]*amp);
+    Hardware::hw.cvOutputPins[1]->analogWrite(output[Y]*amp);
 }
