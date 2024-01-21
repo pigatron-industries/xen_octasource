@@ -15,6 +15,8 @@
 #include "systems/continuous/attractor/RabinovichFabrikantAttractor.h"
 #include "systems/continuous/attractor/ThreeScrollUnifiedAttractor.h"
 #include "systems/continuous/attractor/FourWingAttractor.h"
+#include "systems/continuous/attractor/HadleyAttractor.h"
+#include "systems/continuous/attractor/NoseHooverAttractor.h"
 #include "display/PixelTrail.h"
 #include <eurorack.h>
 
@@ -51,7 +53,9 @@ class ContinuousAttractorController : public ParameterizedController<2> {
                         ChuaMultiScrollAttractor, 
                         RabinovichFabrikantAttractor, 
                         ThreeScrollUnifiedAttractor, 
-                        FourWingAttractor> attractors1;
+                        FourWingAttractor,
+                        HadleyAttractor,
+                        NoseHooverAttractor> attractors1;
         TypeSelector<ContinuousSystemN<3>, 
                         LorenzAttractor, 
                         Lorenz83Attractor, 
@@ -64,7 +68,9 @@ class ContinuousAttractorController : public ParameterizedController<2> {
                         ChuaMultiScrollAttractor, 
                         RabinovichFabrikantAttractor, 
                         ThreeScrollUnifiedAttractor, 
-                        FourWingAttractor> attractors2;
+                        FourWingAttractor,
+                        HadleyAttractor,
+                        NoseHooverAttractor> attractors2;
 
         float amp;
         float rotation;

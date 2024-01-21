@@ -23,8 +23,8 @@ class TinkerbellMap : public DiscreteSystemN<2> {
         const char* getName() { return "TINKERBELL"; }
 
         void system() {
-            float x = pos[X]*pos[X] - pos[Y]*pos[Y] + A*pos[X] + B*pos[Y];
-            float y = 2*pos[X]*pos[Y] + C*pos[X] + D*pos[Y];
+            float x = pos[X]*pos[X] - pos[Y]*pos[Y] + PA*pos[X] + PB*pos[Y];
+            float y = 2*pos[X]*pos[Y] + PC*pos[X] + PD*pos[Y];
             pos[X] = x;
             pos[Y] = y;
         }

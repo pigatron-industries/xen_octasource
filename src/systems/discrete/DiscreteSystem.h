@@ -5,12 +5,16 @@
 #include "lib/interpolationutil.h"
 #include <eurorack.h>
 
-#define A params[0]
-#define B params[1]
-#define C params[2]
-#define D params[3]
-#define E params[4]
-#define F params[5]
+#define PA params[0]
+#define PB params[1]
+#define PC params[2]
+#define PD params[3]
+#define PE params[4]
+#define PF params[5]
+
+#define PX pos[X]
+#define PY pos[Y]
+#define PZ pos[Z]
 
 class DiscreteSystem {
     public: 
@@ -18,20 +22,31 @@ class DiscreteSystem {
         virtual const char* getName() { return ""; }
         virtual void process() = 0;
         virtual float getOutput(int i) = 0;
+        virtual void setPreset(int preset) {}
+        virtual void setParams(float value) {
+            if(presets > 0) {
+                int newPreset = (int)(value*presets);
+                if(preset != newPreset) {
+                    preset = newPreset;
+                    setPreset(newPreset);
+                }
+            } else {
+                params = interpolator.interpolate(value);
+            }
+        }
         void setParam(int i, float value) {
             params[i] = value;
-        }
-        void setInterpolation(float value) {
-            params = interpolator.interpolate(value);
         }
 
     protected:
         ArrayInterpolator<10> interpolator;
         Array<float, 10> params;
+        int presets = 0;
+        int preset = 0;
 
         void initParams(std::initializer_list<float> list1, std::initializer_list<float> list2) {
             interpolator.init(list1, list2);
-            setInterpolation(0);
+            params = interpolator.interpolate(0);
         }
 };
 
@@ -64,12 +79,15 @@ class DiscreteSystemN : public DiscreteSystem {
             limit();
         }
 
-        void limit() {
+        bool limit() {
             if(pos[X] > limits[X]) {
                 pos[X] = limits[X];
+                return true;
             } else if(pos[X] < -limits[X]) {
                 pos[X] = -limits[X];
+                return true;
             }
+            return false;
         }
 
     protected:

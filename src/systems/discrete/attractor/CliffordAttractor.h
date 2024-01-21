@@ -23,8 +23,8 @@ class CliffordAttractor : public DiscreteSystemN<2> {
         const char* getName() { return "CLIFFORD"; }
 
         void system() {
-            float x = sin(A*pos[Y]) + C*cos(A*pos[X]);
-            float y = sin(B*pos[X]) + D*cos(B*pos[Y]);
+            float x = sin(PA*pos[Y]) + PC*cos(PA*pos[X]);
+            float y = sin(PB*pos[X]) + PD*cos(PB*pos[Y]);
             pos[X] = x;
             pos[Y] = y;
         }

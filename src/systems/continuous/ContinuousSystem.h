@@ -24,7 +24,7 @@ class ContinuousSystem {
         void setParam(int i, float value) {
             params[i] = value;
         }
-        void setInterpolation(float value) {
+        virtual void setParams(float value) {
             params = interpolator.interpolate(value);
         }
         void setSpeed(float speed) { 
@@ -43,7 +43,7 @@ class ContinuousSystem {
 
         void initParams(std::initializer_list<float> list1, std::initializer_list<float> list2) {
             interpolator.init(list1, list2);
-            setInterpolation(0);
+            setParams(0);
         }
 };
 
@@ -77,12 +77,15 @@ class ContinuousSystemN : public ContinuousSystem {
             limit();
         }
 
-        void limit() {
+        bool limit() {
             if(pos[X] > limits[X]) {
                 pos[X] = limits[X];
+                return true;
             } else if(pos[X] < -limits[X]) {
                 pos[X] = -limits[X];
+                return true;
             }
+            return false;
         }
 
     protected:

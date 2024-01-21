@@ -25,8 +25,8 @@ class JoshiBlackmoreMap : public DiscreteSystemN<2> {
 
         void system() {
             float c = powf(M_E, - pos[X]*pos[X] - pos[Y]*pos[Y]);
-            float x = A * c * (pos[X] * cos(B) - pos[Y] * sin(B));
-            float y = A * c * (pos[X] * sin(B) + pos[Y] * cos(B));
+            float x = PA * c * (pos[X] * cos(PB) - pos[Y] * sin(PB));
+            float y = PA * c * (pos[X] * sin(PB) + pos[Y] * cos(PB));
             pos[X] = x;
             pos[Y] = y;
         }

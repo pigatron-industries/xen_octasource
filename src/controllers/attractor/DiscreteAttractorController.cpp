@@ -34,14 +34,15 @@ void DiscreteAttractorController::update() {
         amp = ampCvInput.getValue();
     }
 
-    if(interpolationCvInput.update()) {
-        attractors1.getSelected()->setInterpolation(interpolationCvInput.getValue());
+    if(paramsCvInput.update()) {
+        attractors1.getSelected()->setParams(paramsCvInput.getValue());
     }
 
     Hardware::hw.updateOutputLeds();
 }
 
 void DiscreteAttractorController::process() {
+    triggerOutput.update();
     ClockedController::process();
 }
 
@@ -52,4 +53,5 @@ void DiscreteAttractorController::onClock() {
 
     Hardware::hw.cvOutputPins[0]->analogWrite(output[X]*amp);
     Hardware::hw.cvOutputPins[1]->analogWrite(output[Y]*amp);
+    triggerOutput.trigger();
 }

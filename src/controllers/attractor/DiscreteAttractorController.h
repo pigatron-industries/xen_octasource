@@ -4,6 +4,8 @@
 #include "Controller.h"
 #include "../clock/ClockedController.h"
 #include "systems/discrete/attractor/CliffordAttractor.h"
+#include "systems/discrete/attractor/MartinAttractor.h"
+#include "systems/discrete/attractor/HopalongAttractor.h"
 #include "systems/discrete/attractor/TinkerbellMap.h"
 #include "systems/discrete/attractor/JoshiBlackmoreMap.h"
 
@@ -28,12 +30,15 @@ class DiscreteAttractorController : public ParameterizedController<1>, public Cl
 
     private:
         LinearInput<AnalogInputSumPinT> ampCvInput = LinearInput<AnalogInputSumPinT>(Hardware::hw.ampSumPin, -5, 5, 0, 1);
-        LinearInput<AnalogInputSumPinT> interpolationCvInput = LinearInput<AnalogInputSumPinT>(Hardware::hw.waveSumPin, -5, 5, 0, 1);
+        LinearInput<AnalogInputSumPinT> paramsCvInput = LinearInput<AnalogInputSumPinT>(Hardware::hw.waveSumPin, -5, 5, 0, 1);
 
+        TriggerOutput<DigitalOutputDeviceT> triggerOutput = TriggerOutput<DigitalOutputDeviceT>(Hardware::hw.gateOutPin, 20000);
 
         TypeSelector<DiscreteSystemN<2>, 
                         CliffordAttractor,
+                        MartinAttractor,
                         TinkerbellMap,
+                        HopalongAttractor,
                         JoshiBlackmoreMap> attractors1;
 
         float amp;

@@ -66,7 +66,7 @@ void ContinuousAttractorController::updateAmp() {
 
 void ContinuousAttractorController::updateParams() {
     if(paramsCvInput.update()) {
-        attractors1.getSelected()->setInterpolation(paramsCvInput.getValue());
+        attractors1.getSelected()->setParams(paramsCvInput.getValue());
     }
 }
 

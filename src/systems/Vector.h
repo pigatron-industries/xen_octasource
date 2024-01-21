@@ -25,6 +25,21 @@ class Vector {
             val[1] = y;
             val[2] = z;
         }
+        Vector(std::initializer_list<float> list) {
+            int i = 0;
+            for(float f : list) {
+                val[i] = f;
+                i++;
+            }
+        }
+
+        void operator=(std::initializer_list<float> list) {
+            int i = 0;
+            for(float f : list) {
+                val[i] = f;
+                i++;
+            }
+        }
 
         float& operator[](int i) { return val[i]; }
         const float& operator[](int i) const { return val[i]; }
