@@ -8,6 +8,7 @@
 #include "systems/discrete/attractor/HopalongAttractor.h"
 #include "systems/discrete/attractor/TinkerbellMap.h"
 #include "systems/discrete/attractor/JoshiBlackmoreMap.h"
+#include "systems/discrete/attractor/MetzAttractor.h"
 
 using namespace eurorack;
 
@@ -39,7 +40,8 @@ class DiscreteAttractorController : public ParameterizedController<1>, public Cl
                         MartinAttractor,
                         TinkerbellMap,
                         HopalongAttractor,
-                        JoshiBlackmoreMap> attractors1;
+                        JoshiBlackmoreMap,
+                        MetzAttractor> attractors1;
 
         float amp;
 };
