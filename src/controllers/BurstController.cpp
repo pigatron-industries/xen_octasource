@@ -60,13 +60,13 @@ void BurstController::cycleValue(int amount) {
 void BurstController::update() {
     if(syncInput.update() && syncInput.isTriggeredOn()) {
         externalClock.externalTick();
-        if(!sync && externalClock.getState() == Clock::State::CLK_EXTERNAL) {
+        if(!sync && externalClock.getState() == InternalExternalClock::State::CLK_EXTERNAL) {
             Hardware::hw.display.textLine("SYNC", OLEDDisplay::TEXTLINE_1, DISPLAY_FONT_WIDTH*9);
             sync = true;
         }
     }
 
-    if(sync && externalClock.getState() == Clock::State::CLK_INTERNAL) {
+    if(sync && externalClock.getState() == InternalExternalClock::State::CLK_INTERNAL) {
         sync = false;
         Hardware::hw.display.textLine("    ", OLEDDisplay::TEXTLINE_1, DISPLAY_FONT_WIDTH*9);
     }

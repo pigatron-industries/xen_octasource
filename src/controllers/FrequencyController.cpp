@@ -48,12 +48,12 @@ void FrequencyController::update() {
 }
 
 void FrequencyController::updateRate() {
-    if(clock.getState() != Clock::State::CLK_EXTERNAL) {
+    if(clock.getState() != InternalExternalClock::State::CLK_EXTERNAL) {
         if(rateCvInput.update()) {
             float frequency = rateCvInput.getValue();
             setRate(frequency);
         }
-    } else if(clock.getState() == Clock::State::CLK_EXTERNAL) {
+    } else if(clock.getState() == InternalExternalClock::State::CLK_EXTERNAL) {
         float externalFrequency = clock.getFrequency();
         if(externalFrequency != syncFrequency || syncMultCvInput.update()) {
             syncFrequency = externalFrequency;

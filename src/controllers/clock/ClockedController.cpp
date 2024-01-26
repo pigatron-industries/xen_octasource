@@ -13,18 +13,18 @@ void ClockedController::update() {
 }
 
 bool ClockedController::updateRate(bool force) {
-    if(clock.getState() != Clock::State::CLK_EXTERNAL) {
+    if(clock.getState() != InternalExternalClock::State::CLK_EXTERNAL) {
         if(rateCvInput.update() || force) {
             clock.setFrequency(rateCvInput.getValue());
             return true;
         }
-    } else if(clock.getState() == Clock::State::CLK_EXTERNAL) {
+    } else if(clock.getState() == InternalExternalClock::State::CLK_EXTERNAL) {
         float externalFrequency = clock.getFrequency();
         if(externalFrequency != syncFrequency || syncMultCvInput.update() || force) {
             syncFrequency = externalFrequency;
             int multInputValue = syncMultCvInput.getIntValue();
             float mult = multInputValue >= 0 ? multInputValue+1 : 1/float(-multInputValue);
-            clock.setFrequency(syncFrequency * mult);
+            // clock.setFrequency(syncFrequency * mult);
             return true;
         }
     }

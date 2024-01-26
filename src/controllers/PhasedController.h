@@ -54,7 +54,7 @@ class PhasedController : public ParameterizedController<1> {
             WaveOscillator<WaveSelector<Sine, Triangle, Saw, Pulse>&>(waveSelector)
         };
 
-        Clock clock;
+        InternalExternalClock clock;
         ClockDivider clockDivider = ClockDivider(SAMPLERATE_DIVIDER);
 
         AnalogGateInput<AnalogInputPinT> syncInput = AnalogGateInput<AnalogInputPinT>(Hardware::hw.syncCvPin);

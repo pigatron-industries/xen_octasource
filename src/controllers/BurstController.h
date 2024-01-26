@@ -48,7 +48,7 @@ class BurstController : public ParameterizedController<2> {
             Burst<WaveShapesT&>(shapes)
         };
 
-        Clock externalClock;
+        InternalExternalClock externalClock;
 
         int burstLength = 2;
         int outputs = 8;

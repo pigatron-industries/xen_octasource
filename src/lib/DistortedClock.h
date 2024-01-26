@@ -8,7 +8,7 @@
 namespace eurorack {
 
     template<class F>
-    class DistortedClock : public Clock {
+    class DistortedClock : public InternalExternalClock {
         public:
             DistortedClock() { calculatePhaseIncrements(); }
             F& getFunction() { return distortionFunction; }
@@ -29,7 +29,7 @@ namespace eurorack {
 
     template<class F>
     inline bool DistortedClock<F>::processInternal() {
-        bool ticked = Clock::processInternal();
+        bool ticked = InternalExternalClock::processInternal();
         if(ticked) {
             currentTick++;
             currentTick %= ticksMax;

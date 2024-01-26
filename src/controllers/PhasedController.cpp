@@ -30,7 +30,7 @@ void PhasedController::update() {
 }
 
 void PhasedController::updateRate() {
-    if(clock.getState() != Clock::State::CLK_EXTERNAL) {
+    if(clock.getState() != InternalExternalClock::State::CLK_EXTERNAL) {
         switch (parameters[Parameter::MODE].value) {
             case Mode::BIPOLAR_LFO:
                 if(bipolarRateCvInput.update()) {
@@ -43,7 +43,7 @@ void PhasedController::updateRate() {
                 }
                 break;
         }
-    } else if(clock.getState() == Clock::State::CLK_EXTERNAL) {
+    } else if(clock.getState() == InternalExternalClock::State::CLK_EXTERNAL) {
         float externalFrequency = clock.getFrequency();
         if(externalFrequency != syncFrequency || syncMultCvInput.update()) {
             syncFrequency = externalFrequency;
