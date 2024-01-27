@@ -9,6 +9,7 @@
 #include "systems/discrete/attractor/TinkerbellMap.h"
 #include "systems/discrete/attractor/JoshiBlackmoreMap.h"
 #include "systems/discrete/attractor/MetzAttractor.h"
+#include "systems/discrete/attractor/MultifoldHenonAttractor.h"
 
 using namespace eurorack;
 
@@ -41,7 +42,8 @@ class DiscreteAttractorController : public ParameterizedController<1>, public Cl
                         TinkerbellMap,
                         HopalongAttractor,
                         JoshiBlackmoreMap,
-                        MetzAttractor> attractors1;
+                        MetzAttractor,
+                        MultifoldHenonAttractor> attractors1;
 
         float amp;
 };
