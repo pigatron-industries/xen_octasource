@@ -16,7 +16,7 @@ void ThreeBodyController::init() {
 
 
     /**
-     * Initial conditionas taken from 
+     * Initial conditions taken from 
      * https://observablehq.com/@rreusser/periodic-planar-three-body-orbits
      * http://three-body.ipb.ac.rs/
      * To increase size without affecting pattern, multiply mass and initial position by the same amount
@@ -107,7 +107,7 @@ void ThreeBodyController::init() {
             bodies[2].setMass(1);
             bodies[2].setPosition(Vector<2>(0, -4));
             bodies[2].setVelocity(Vector<2>(-4.9, 0));
-            threeBody.setDriftCorrection(false);
+            threeBody.setDriftCorrection(true);
             threeBody.setEdgeMode(ThreeBody::EdgeMode::ANTIGRAV);
             break;
         case Mode::CHAOTIC3: // All different masses
@@ -178,18 +178,11 @@ void ThreeBodyController::process() {
     Hardware::hw.cvOutputPins[5]->analogWrite(threeBody.getOutput(5)*totalGain);
     ClockedController::process();
 
-    // Hardware::hw.cvOutputPins[6]->analogWrite(threeBody.getOutput(oscBody*2)*totalGain);
-    // Hardware::hw.cvOutputPins[7]->analogWrite(threeBody.getOutput(oscBody*2+1)*totalGain);
-    // oscBody++;
-    // oscBody %= 3;
-    // if(oscBody >= 3) {
-    //     oscBody = 0;
-    // }
+    Hardware::hw.cvOutputPins[6]->analogWrite(threeBody.getOutput(oscBody*2)*totalGain);
+    Hardware::hw.cvOutputPins[7]->analogWrite(threeBody.getOutput(oscBody*2+1)*totalGain);
 }
 
 void ThreeBodyController::onClock() {
-    Hardware::hw.cvOutputPins[6]->analogWrite(threeBody.getOutput(oscBody*2)*totalGain);
-    Hardware::hw.cvOutputPins[7]->analogWrite(threeBody.getOutput(oscBody*2+1)*totalGain);
     oscBody++;
     oscBody %= 3;
 }

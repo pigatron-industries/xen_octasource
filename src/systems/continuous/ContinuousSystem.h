@@ -11,6 +11,14 @@
 #define PE params[4]
 #define PF params[5]
 
+#define PX pos[X]
+#define PY pos[Y]
+#define PZ pos[Z]
+
+#define DX delta[X]
+#define DY delta[Y]
+#define DZ delta[Z]
+
 class ContinuousSystem {
     public: 
         virtual void init(float sampleRate) {

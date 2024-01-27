@@ -5,6 +5,8 @@
 #include "Hardware.h"
 #include "systems/continuous/attractor/LorenzAttractor.h"
 #include "systems/continuous/attractor/Lorenz83Attractor.h"
+#include "systems/continuous/attractor/LorenzMod1Attractor.h"
+#include "systems/continuous/attractor/LorenzMod2Attractor.h"
 #include "systems/continuous/attractor/ThomasAttractor.h"
 #include "systems/continuous/attractor/AizawaAttractor.h"
 #include "systems/continuous/attractor/DadrasAttractor.h"
@@ -44,6 +46,8 @@ class ContinuousAttractorController : public ParameterizedController<2> {
         TypeSelector<ContinuousSystemN<3>, 
                         LorenzAttractor, 
                         Lorenz83Attractor, 
+                        LorenzMod1Attractor,
+                        LorenzMod2Attractor,
                         ThomasAttractor, 
                         AizawaAttractor, 
                         DadrasAttractor, 
@@ -59,6 +63,8 @@ class ContinuousAttractorController : public ParameterizedController<2> {
         TypeSelector<ContinuousSystemN<3>, 
                         LorenzAttractor, 
                         Lorenz83Attractor, 
+                        LorenzMod1Attractor,
+                        LorenzMod2Attractor,
                         ThomasAttractor, 
                         AizawaAttractor, 
                         DadrasAttractor, 
