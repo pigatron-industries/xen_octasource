@@ -3,6 +3,7 @@
 
 void ThreeBodyController::init(float sampleRate) {
     Controller::init(sampleRate);
+    ClockedController::init(sampleRate);
     configParam(Parameter::MODE, 0, Mode::CHAOTIC3-1);
     init();
 }
@@ -129,6 +130,7 @@ void ThreeBodyController::init() {
 }
 
 void ThreeBodyController::update() {
+    clock.setFrequency(200);
     updateRate();
     updateAmp();
     updateSize();
@@ -168,19 +170,28 @@ void ThreeBodyController::updateDamp() {
 
 void ThreeBodyController::process() {
     threeBody.process();
-    Hardware::hw.cvOutputPins[1]->analogWrite(threeBody.getOutput(0)*totalGain);
-    Hardware::hw.cvOutputPins[7]->analogWrite(threeBody.getOutput(1)*totalGain);
+    Hardware::hw.cvOutputPins[0]->analogWrite(threeBody.getOutput(0)*totalGain);
+    Hardware::hw.cvOutputPins[1]->analogWrite(threeBody.getOutput(1)*totalGain);
     Hardware::hw.cvOutputPins[2]->analogWrite(threeBody.getOutput(2)*totalGain);
-    Hardware::hw.cvOutputPins[6]->analogWrite(threeBody.getOutput(3)*totalGain);
-    Hardware::hw.cvOutputPins[3]->analogWrite(threeBody.getOutput(4)*totalGain);
+    Hardware::hw.cvOutputPins[3]->analogWrite(threeBody.getOutput(3)*totalGain);
+    Hardware::hw.cvOutputPins[4]->analogWrite(threeBody.getOutput(4)*totalGain);
     Hardware::hw.cvOutputPins[5]->analogWrite(threeBody.getOutput(5)*totalGain);
+    ClockedController::process();
 
     // Hardware::hw.cvOutputPins[6]->analogWrite(threeBody.getOutput(oscBody*2)*totalGain);
     // Hardware::hw.cvOutputPins[7]->analogWrite(threeBody.getOutput(oscBody*2+1)*totalGain);
     // oscBody++;
+    // oscBody %= 3;
     // if(oscBody >= 3) {
     //     oscBody = 0;
     // }
+}
+
+void ThreeBodyController::onClock() {
+    Hardware::hw.cvOutputPins[6]->analogWrite(threeBody.getOutput(oscBody*2)*totalGain);
+    Hardware::hw.cvOutputPins[7]->analogWrite(threeBody.getOutput(oscBody*2+1)*totalGain);
+    oscBody++;
+    oscBody %= 3;
 }
 
 void ThreeBodyController::printBodies() {

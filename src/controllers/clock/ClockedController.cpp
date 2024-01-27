@@ -19,14 +19,15 @@ bool ClockedController::updateRate(bool force) {
             return true;
         }
     } else if(clock.getState() == InternalExternalClock::State::CLK_EXTERNAL) {
-        float externalFrequency = clock.getFrequency();
-        if(externalFrequency != syncFrequency || syncMultCvInput.update() || force) {
-            syncFrequency = externalFrequency;
-            int multInputValue = syncMultCvInput.getIntValue();
-            float mult = multInputValue >= 0 ? multInputValue+1 : 1/float(-multInputValue);
-            // clock.setFrequency(syncFrequency * mult);
-            return true;
-        }
+        //TODO set multiply / divide for external clock
+        // float externalFrequency = clock.getFrequency();
+        // if(externalFrequency != syncFrequency || syncMultCvInput.update() || force) {
+        //     syncFrequency = externalFrequency;
+        //     int multInputValue = syncMultCvInput.getIntValue();
+        //     float mult = multInputValue >= 0 ? multInputValue+1 : 1/float(-multInputValue);
+        //     clock.setFrequency(syncFrequency * mult);
+        //     return true;
+        // }
     }
     return false;
 }

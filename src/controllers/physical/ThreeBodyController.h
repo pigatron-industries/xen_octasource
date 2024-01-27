@@ -3,15 +3,17 @@
 
 #include "Controller.h"
 #include "Hardware.h"
+#include "controllers/clock/ClockedController.h"
 #include "systems/continuous/physical/ThreeBody.h"
 
-class ThreeBodyController : public ParameterizedController<1> {
+class ThreeBodyController : public ParameterizedController<1>, public ClockedController {
     public:
-        ThreeBodyController() : ParameterizedController() {}
+        ThreeBodyController() : ParameterizedController(), ClockedController() {}
         virtual void init(float sampleRate);
         virtual void init();
         virtual void update();
         virtual void process();
+        virtual void onClock();
 
     private:
         enum Parameter {
