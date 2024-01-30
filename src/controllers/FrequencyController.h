@@ -54,6 +54,7 @@ class FrequencyController : public ParameterizedController<1> {
         AnalogGateInput<AnalogInputPinT> syncInput = AnalogGateInput<AnalogInputPinT>(Hardware::hw.syncCvPin);
         AnalogGateInput<AnalogInputPinT> hardSyncInput = AnalogGateInput<AnalogInputPinT>(Hardware::hw.modeCvPin);
         ExpInput<AnalogInputSumPinT> rateCvInput = ExpInput<AnalogInputSumPinT>(Hardware::hw.rateSumPin, 10);
+        // ExpInput<AnalogInputSumPinT> rateCvInput = ExpInput<AnalogInputSumPinT>(Hardware::hw.rateSumPin);
         IntegerInput<AnalogInputSumPinT> syncMultCvInput = IntegerInput<AnalogInputSumPinT>(Hardware::hw.rateSumPin, -5.0, 5.0, -7, 7);
         LinearInput<AnalogInputSumPinT> ampCvInput = LinearInput<AnalogInputSumPinT>(Hardware::hw.ampSumPin, -5, 5, 0, 5);
         LinearInput<AnalogInputSumPinT> waveCvInput = LinearInput<AnalogInputSumPinT>(Hardware::hw.waveSumPin, -5, 5, 0, 5);
