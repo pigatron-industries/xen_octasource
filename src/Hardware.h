@@ -12,7 +12,7 @@
 #include "Colour.h"
 #include "hwconfig.h"
 
-#define MEMPOOL_SIZE 48*1024*4
+#define MEMPOOL_SIZE 48*1024*sizeof(float)
 
 class Hardware {
     public:

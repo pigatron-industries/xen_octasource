@@ -11,6 +11,7 @@
 #include "controllers/physical/ThreeBodyController.h"
 #include "controllers/attractor/ContinuousAttractorController.h"
 #include "controllers/attractor/DiscreteAttractorController.h"
+#include "controllers/FourierCircleController.h"
 #include "controllers/TrochoidController.h"
 #include "controllers/RandomController.h"
 #include "controllers/ShapeController.h"
@@ -26,6 +27,7 @@ ClockController, \
 EnvelopeController, \
 BurstController, \
 BouncingBallController, \
+FourierCircleController, \
 TrochoidController, \
 ContinuousAttractorController, \
 DiscreteAttractorController, \
@@ -34,5 +36,6 @@ ThreeBodyController, \
 ShapeController, \
 RandomController, \
 SequenceQuantizerController, \
-DelayController, \
 CalibrationController
+
+// DelayController, \
