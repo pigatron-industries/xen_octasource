@@ -3,12 +3,9 @@
 
 void DoublePendulum::init(float sampleRate) {
     ContinuousSystemN::init(sampleRate);
-    pos[X] = 0;
-    pos[Y] = 0;
-    mult[X] = 1;
-    mult[Y] = -1;
-    offset[X] = 0;
-    offset[Y] = 0;
+    pos = {0, 0, 0, 0};
+    mult = {1, -1, 1, -1};
+    offset = {0, 0, 0, 0};
     speedMult = 1;
 
     p1.mass = 2;

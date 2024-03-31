@@ -12,7 +12,7 @@
 #include "Colour.h"
 #include "hwconfig.h"
 
-#define MEMPOOL_SIZE 48*1024
+#define MEMPOOL_SIZE 48*1024*4
 
 class Hardware {
     public:
@@ -24,8 +24,8 @@ class Hardware {
         void updateOutputLeds(Colour negative, Colour positive);
 
         // Memory pool
-        static float memPoolBuffer[MEMPOOL_SIZE];
-        MemPool<float> memPool = MemPool<float>(Hardware::memPoolBuffer, MEMPOOL_SIZE);
+        static unsigned char memPoolBuffer[MEMPOOL_SIZE];
+        MemPool<> memPool = MemPool<>(Hardware::memPoolBuffer, MEMPOOL_SIZE);
 
         // Direct connections
         RotaryEncoderButton encoder = RotaryEncoderButton(ENCODER_PIN1, ENCODER_PIN2, ENCODER_BTN_PIN);

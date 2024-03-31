@@ -3,7 +3,7 @@
 
 Hardware Hardware::hw = Hardware();
 
-float Hardware::memPoolBuffer[MEMPOOL_SIZE];
+unsigned char Hardware::memPoolBuffer[MEMPOOL_SIZE];
 
 void Hardware::init() {
     NativeDevice::instance.init();

@@ -2,6 +2,8 @@
 
 void PendulumController::init(float sampleRate) {
     Controller::init(sampleRate);
+    ClockedController::init(sampleRate);
+    configParam(Parameter::MODE, 0, Mode::DOUBLE_PENDULUM);
     init();
 }
 
@@ -39,6 +41,7 @@ void PendulumController::init() {
 }
 
 void PendulumController::update() {
+    clock.setFrequency(200);
     updateRate();
     updateAmp();
     updateParams();
@@ -80,6 +83,10 @@ void PendulumController::updateParams() {
     #endif
 }
 
+void PendulumController::onClock() {
+    clockCounter = (clockCounter + 1) % 2;
+}
+
 void PendulumController::process() {
     if(clockDivider.tick()) {
         switch(parameters[Parameter::MODE].value) {
@@ -98,10 +105,14 @@ void PendulumController::process() {
             break;
         case Mode::DOUBLE_PENDULUM:
             doublePendulum.process();
-            Hardware::hw.cvOutputPins[0]->analogWrite(doublePendulum.getOutput(X)*amp);
-            Hardware::hw.cvOutputPins[1]->analogWrite(doublePendulum.getOutput(Y)*amp);
-            Hardware::hw.cvOutputPins[2]->analogWrite(doublePendulum.getOutput(Z)*amp);
-            Hardware::hw.cvOutputPins[3]->analogWrite(doublePendulum.getOutput(W)*amp);
+            Hardware::hw.cvOutputPins[0]->analogWrite(doublePendulum.getOutput(0)*amp);
+            Hardware::hw.cvOutputPins[1]->analogWrite(doublePendulum.getOutput(1)*amp);
+            Hardware::hw.cvOutputPins[2]->analogWrite(doublePendulum.getOutput(2)*amp);
+            Hardware::hw.cvOutputPins[3]->analogWrite(doublePendulum.getOutput(3)*amp);
+
+            ClockedController::process();
+            Hardware::hw.cvOutputPins[6]->analogWrite(doublePendulum.getOutput(clockCounter == 0 ? 0 : 2)*amp);
+            Hardware::hw.cvOutputPins[7]->analogWrite(doublePendulum.getOutput(clockCounter == 0 ? 1 : 3)*amp);
             break;
         }
     }

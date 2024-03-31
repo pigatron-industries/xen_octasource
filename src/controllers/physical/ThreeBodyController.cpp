@@ -4,7 +4,7 @@
 void ThreeBodyController::init(float sampleRate) {
     Controller::init(sampleRate);
     ClockedController::init(sampleRate);
-    configParam(Parameter::MODE, 0, Mode::CHAOTIC3-1);
+    configParam(Parameter::MODE, 0, Mode::CHAOTIC3);
     init();
 }
 

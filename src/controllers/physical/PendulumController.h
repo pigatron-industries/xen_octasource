@@ -3,19 +3,21 @@
 
 #include "Controller.h"
 #include "Hardware.h"
+#include "controllers/clock/ClockedController.h"
 #include "systems/continuous/physical/DoublePendulum.h"
 #include "systems/continuous/physical/SpringPendulum.h"
 #include <eurorack_dsp.h>
 
 #define SAMPLE_RATE_DIVISOR 2
 
-class PendulumController : public ParameterizedController<1> {
+class PendulumController : public ParameterizedController<1>, public ClockedController {
     public:
         PendulumController() : ParameterizedController() {}
         virtual void init(float sampleRate);
         virtual void init();
         virtual void update();
         virtual void process();
+        virtual void onClock();
 
     private:
         enum Parameter {
@@ -38,6 +40,7 @@ class PendulumController : public ParameterizedController<1> {
         DoublePendulum doublePendulum;
         SpringPendulum springPendulums[4];
         ClockDivider clockDivider = ClockDivider(SAMPLE_RATE_DIVISOR);
+        int8_t clockCounter = 0;
 
         float amp;
         
