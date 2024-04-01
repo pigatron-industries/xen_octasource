@@ -13,12 +13,10 @@ void ClockDisplay::init() {
     clockRow2.addComponent(&clockFields[5]);
     clockRow2.addComponent(&clockFields[6]);
     clockRow2.addComponent(&clockFields[7]);
+    page.addComponent(&lengthField);
 
     page.setContext(&Hardware::hw.display);
     page.layout();
-
-    clockFields[0].setValue(2);
-    clockFields[1].setValue(2);
 }
 
 void ClockDisplay::render() {
@@ -34,5 +32,10 @@ void ClockDisplay::focusClock(uint8_t output) {
 void ClockDisplay::setClock(uint8_t output, bool divide, uint8_t value) {
     clockFields[output].setFormat(divide ? "/%d" : "x%d");
     clockFields[output].setValue(value);
+    Hardware::hw.display.update();
+}
+
+void ClockDisplay::setLength(uint8_t length) {
+    lengthField.setValue(length);
     Hardware::hw.display.update();
 }

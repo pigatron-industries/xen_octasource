@@ -73,26 +73,23 @@ void ClockController::update() {
         updateMultiplierRates();
     }
 
-    for(int i = 0; i < 8; i++) {
-        triggerOutputs[i].update();
-    }
-
     if(distortionXCvInput.update()) {
         clock.getFunction().setMidPoint(distortionXCvInput.getValue(), 0.5);
         clock.calculatePhaseIncrements();
     }
 
     if(lengthInput.update()) {
-        Serial.println(lengthInput.getIntValue());
         clock.setLength(lengthInput.getIntValue());
+        updateMultiplierRates();
+        display.setLength(lengthInput.getIntValue());
     }
 
     Hardware::hw.updateOutputLeds(Colour(0, 0, 0), Colour(0, 1, 0));
 }
 
 void ClockController::updateMultiplierRates() {
-    for(int i = 0; i < 15; i++) {
-        clockMultipliers[i].setFrequency((clock.getFrequency()/MULIPLIER_BASE) * (i+2));
+    for(int i = 0; i < NUM_MULTIPLIERS; i++) {
+        clockMultipliers[i].setFrequency((clock.getFrequency()/clock.getLength()) * (i+2));
     }
 }
 
@@ -100,10 +97,17 @@ void ClockController::process() {
     ClockedController::process();
     triggerOutput.update();
 
+    Array<bool, NUM_MULTIPLIERS> triggers;
+    for(int i = 0; i < NUM_MULTIPLIERS; i++) {
+        triggers.add(clockMultipliers[i].process());
+    }
+
     for(int i = 0; i < 8; i++) {
-        uint8_t multiplierIndex = getMultiplier(i) - LOWEST_MULTIPLIER_DIVIDER;
-        if(isMultiplier(i) && clockMultipliers[multiplierIndex].process()) {
-            triggerOutputs[i].trigger();
+        if(isMultiplier(i)) {
+            uint8_t multiplierIndex = getMultiplier(i) - LOWEST_MULTIPLIER_DIVIDER;
+            if(triggers[multiplierIndex]) {
+                triggerOutputs[i].trigger();
+            }
         }
         triggerOutputs[i].update();
     }
@@ -122,7 +126,10 @@ void ClockController::onClock() {
         if(isDivider(i) && clockDividers[dividerIndex].getTrigger()) {
             triggerOutputs[i].trigger();
         }
-        if(!isDivider(i)) {
+        if(!isDivider(i) && !isMultiplier(i)) {
+            triggerOutputs[i].trigger();
+        }
+        if(isMultiplier(i) && clock.getCurrentTick() == 0) {
             triggerOutputs[i].trigger();
         }
     }
@@ -133,8 +140,10 @@ void ClockController::onClock() {
 }
 
 void ClockController::syncClocks() {
-    for(int i = 0; i < NUM_MULTIPLIERS; i++) {
-        clockMultipliers[i].reset();
+    if(clock.getCurrentTick() == 0) {
+        for(int i = 0; i < NUM_MULTIPLIERS; i++) {
+            clockMultipliers[i].reset();
+        }
     }
 }
 

@@ -43,7 +43,7 @@ class ClockController : public ParameterizedController<8>, public ClockedControl
 
         ClockDisplay display;
 
-        IntegerInput<AnalogInputSumPinT> lengthInput = IntegerInput<AnalogInputSumPinT>(Hardware::hw.ampSumPin, -5, 5, 2, 16);
+        IntegerInput<AnalogInputSumPinT> lengthInput = IntegerInput<AnalogInputSumPinT>(Hardware::hw.ampSumPin, -5, 5, 1, 16);
         LinearInput<AnalogInputSumPinT> distortionXCvInput = LinearInput<AnalogInputSumPinT>(Hardware::hw.waveSumPin, -5, 5, 0, 1);
         #if defined(OCTASOURCE_MKII)
             LinearInput<AnalogInputSumPinT> distortionYCvInput = LinearInput<AnalogInputSumPinT>(Hardware::hw.phaseSumPin, -5, 5, 0, 1);
@@ -67,6 +67,7 @@ class ClockController : public ParameterizedController<8>, public ClockedControl
     
         ClockDivider clockDividers[NUM_DIVIDERS];
         Clock clockMultipliers[NUM_MULTIPLIERS];
+        int8_t syncCounter = 0;
 
         void updateMultiplierRates();
         void updateClock(uint8_t output);

@@ -13,6 +13,8 @@ namespace eurorack {
             DistortedClock() { calculatePhaseIncrements(); }
             F& getFunction() { return distortionFunction; }
             void setLength(int ticksMax) { this->ticksMax = ticksMax; phaseDivision = 1.0/ticksMax; }
+            int getLength() { return ticksMax; }
+            int getCurrentTick() { return currentTick; }
             void calculatePhaseIncrements();
 
         protected:
