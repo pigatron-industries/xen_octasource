@@ -77,12 +77,15 @@ void FourierCircleController::process() {
         fourierCircles.process();
         Array<CircleState, MAX_CIRCLES>& output = fourierCircles.getState();
 
-        Hardware::hw.cvOutputPins[0]->analogWrite(output[1].pos[X]);
-        Hardware::hw.cvOutputPins[1]->analogWrite(output[1].pos[Y]);
-        Hardware::hw.cvOutputPins[2]->analogWrite(output[2].pos[X]);
-        Hardware::hw.cvOutputPins[3]->analogWrite(output[2].pos[Y]);
-        Hardware::hw.cvOutputPins[4]->analogWrite(0); // distance from centre
-        Hardware::hw.cvOutputPins[5]->analogWrite(0); // angle
+        CircleState& lastCircle = output[fourierCircles.getNumCircles()-1];
+        Hardware::hw.cvOutputPins[0]->analogWrite(lastCircle.pos[X]);
+        Hardware::hw.cvOutputPins[1]->analogWrite(lastCircle.pos[Y]);
+        Hardware::hw.cvOutputPins[2]->analogWrite(lastCircle.pos.length());
+        Hardware::hw.cvOutputPins[3]->analogWrite(angle2d(lastCircle.pos));
+        Hardware::hw.cvOutputPins[4]->analogWrite(lastCircle.speed*0.1);
+        Hardware::hw.cvOutputPins[5]->analogWrite(0); 
+
+        // Serial.println(lastCircle.speed);
 
         Hardware::hw.cvOutputPins[6]->analogWrite(output[clockCount].pos[X]);
         Hardware::hw.cvOutputPins[7]->analogWrite(output[clockCount].pos[Y]);

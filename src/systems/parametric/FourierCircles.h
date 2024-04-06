@@ -18,6 +18,7 @@ class CircleState {
         float angleIncrement = 0;
         float angle = 0;
 
+        float speed = 0;
         Vector<2> pos;
 };
 
@@ -26,6 +27,7 @@ class FourierCircles : public ParametricSystemN<2> {
     public:
         FourierCircles() {}
         void init(float sampleRate, int numCircles = 5);
+        int8_t getNumCircles() { return circles.size(); }
         void setFrequency(float frequency) { this->frequency = frequency; calcCoefficients(); }
         void setCircleRadiusFrequency(int index, float radius, float frequency);
 
@@ -88,8 +90,11 @@ inline void FourierCircles::system() {
     Vector<2> centre = {0, 0};
     for (int i = 0; i < circles.size(); i++) {
         CircleState& circle = circles[i];
-        circle.pos[X] = centre[X] + circle.radius * cosf(circle.angle);
-        circle.pos[Y] = centre[Y] + circle.radius * sinf(circle.angle);
+        Vector<2> newpos;
+        newpos[X] = centre[X] + circle.radius * cosf(circle.angle);
+        newpos[Y] = centre[Y] + circle.radius * sinf(circle.angle);
+        circle.speed = ((newpos - circle.pos).length()) / (frequency*sampleTime);
+        circle.pos = newpos;
         circle.angle += circle.angleIncrement;
         if (circle.angle > 2 * M_PI) {
             circle.angle -= 2 * M_PI;

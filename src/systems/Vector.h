@@ -114,6 +114,12 @@ class Vector {
         float val[N];
 };
 
+
+inline float angle2d(Vector<2> vector) {
+    return atan2f(vector[Y], vector[X]);
+}
+
+
 inline Vector<2> rotate2d(Vector<2> vector, float radians) {
     Vector<2> rotated;
     float sin1 = sinf(radians);

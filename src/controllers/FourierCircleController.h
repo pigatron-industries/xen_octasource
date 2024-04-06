@@ -24,7 +24,6 @@ class FourierCircleController : public ParameterizedController<1>, public Clocke
             MODE
         };
         enum Mode {
-            INC_FREQUENCY_DEC_AMPLITUDE,
             RANDOM
         };
 
