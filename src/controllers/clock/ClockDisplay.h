@@ -11,8 +11,11 @@ class ClockDisplay {
         void render();
 
         void focusClock(uint8_t output);
+        void focusPause();
         void setClock(uint8_t output, bool divide, uint8_t value);
         void setLength(uint8_t length);
+        void setPause(bool pause);
+        void setSource(uint8_t source);
 
     private:
         FocusManager<OLEDDisplay> focusManager;
@@ -32,7 +35,10 @@ class ClockDisplay {
             FieldComponent<OLEDDisplay>(OLEDDisplay::WIDTH/4, 0, ""),
             FieldComponent<OLEDDisplay>(OLEDDisplay::WIDTH/4, 0, "")
         };
-        FieldComponent<OLEDDisplay> lengthField = FieldComponent<OLEDDisplay>(OLEDDisplay::WIDTH, OLEDDisplay::WIDTH/2, "LENGTH");
+        HorizontalContainer<OLEDDisplay, 3> clockRow3;
+        FieldComponent<OLEDDisplay> lengthField = FieldComponent<OLEDDisplay>(OLEDDisplay::WIDTH/3, 0);
+        FieldComponent<OLEDDisplay> pauseField = FieldComponent<OLEDDisplay>(OLEDDisplay::WIDTH/3, 0);
+        FieldComponent<OLEDDisplay> sourceField = FieldComponent<OLEDDisplay>(OLEDDisplay::WIDTH/3, 0);
 };
 
 #endif

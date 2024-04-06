@@ -10,6 +10,7 @@ void ClockController::init(float sampleRate) {
     for(int i = 0; i < 8; i++) {
         this->configParam(i, DEFAULT_CLOCK_VALUE, MAX_CLOCK_VALUE);
     }
+    this->configParam(Parameters::PAUSE, (uint8_t)State::RUN, (uint8_t)State::PAUSE);
 
     ClockedController::init(sampleRate);
     display.init();
@@ -38,24 +39,39 @@ void ClockController::init() {
 
 int ClockController::cycleParameter(int amount) {
     parameters.cycle(amount);
-    display.focusClock(parameters.getSelectedIndex());
+    Serial.println(parameters.getSelectedIndex());
+    switch(parameters.getSelectedIndex()) {
+        case Parameters::PAUSE:
+            display.focusPause();
+            break;
+        default:
+            display.focusClock(parameters.getSelectedIndex());
+    }
     return parameters.getSelectedIndex(); 
 }
 
 void ClockController::cycleValue(int amount) {
-    uint8_t output = parameters.getSelectedIndex();
+    uint8_t parameter = parameters.getSelectedIndex();
     uint8_t value = parameters.getSelected().cycle(amount);  // TODO allow cycling through limited set of values (e.g. lock to powers of 2, or even numbers)
-    config.data.clock[output] = value;
-    if(isMultiplier(output)) {
-        Serial.println("muliplier");
-        Serial.println(value);
-        Serial.println(getMultiplier(output));
-        display.setClock(output, false, getMultiplier(output));
-    } else {
-        Serial.println("divider");
-        Serial.println(value);
-        Serial.println(getDivider(output));
-        display.setClock(output, true, getDivider(output));
+
+    switch (parameter) {
+        case Parameters::PAUSE:
+            clock.reset();
+            display.setPause(value == (uint8_t)State::PAUSE);
+            break;
+        default:
+            config.data.clock[parameter] = value;
+            if(isMultiplier(parameter)) {
+                Serial.println("muliplier");
+                Serial.println(value);
+                Serial.println(getMultiplier(parameter));
+                display.setClock(parameter, false, getMultiplier(parameter));
+            } else {
+                Serial.println("divider");
+                Serial.println(value);
+                Serial.println(getDivider(parameter));
+                display.setClock(parameter, true, getDivider(parameter));
+            }
     }
     save();
 }
@@ -84,6 +100,7 @@ void ClockController::update() {
         display.setLength(lengthInput.getIntValue());
     }
 
+    display.setSource(clock.getState() == InternalExternalClock::State::CLK_INTERNAL ? 0 : 1);
     Hardware::hw.updateOutputLeds(Colour(0, 0, 0), Colour(0, 1, 0));
 }
 
@@ -114,6 +131,10 @@ void ClockController::process() {
 }
 
 void ClockController::onClock() {
+    if(clock.getState() == InternalExternalClock::State::CLK_INTERNAL && parameters[Parameters::PAUSE].value == (uint8_t)State::PAUSE) {
+        return;
+    }
+
     syncClocks();
     triggerOutput.trigger();
 

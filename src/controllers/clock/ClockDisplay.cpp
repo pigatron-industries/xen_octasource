@@ -13,7 +13,10 @@ void ClockDisplay::init() {
     clockRow2.addComponent(&clockFields[5]);
     clockRow2.addComponent(&clockFields[6]);
     clockRow2.addComponent(&clockFields[7]);
-    page.addComponent(&lengthField);
+    page.addComponent(&clockRow3);
+    clockRow3.addComponent(&lengthField);
+    clockRow3.addComponent(&pauseField);
+    clockRow3.addComponent(&sourceField);
 
     page.setContext(&Hardware::hw.display);
     page.layout();
@@ -29,6 +32,10 @@ void ClockDisplay::focusClock(uint8_t output) {
     focusManager.setFocus(&clockFields[output]);
 }
 
+void ClockDisplay::focusPause() {
+    focusManager.setFocus(&pauseField);
+}
+
 void ClockDisplay::setClock(uint8_t output, bool divide, uint8_t value) {
     clockFields[output].setFormat(divide ? "/%d" : "x%d");
     clockFields[output].setValue(value);
@@ -37,5 +44,15 @@ void ClockDisplay::setClock(uint8_t output, bool divide, uint8_t value) {
 
 void ClockDisplay::setLength(uint8_t length) {
     lengthField.setValue(length);
+    Hardware::hw.display.update();
+}
+
+void ClockDisplay::setPause(bool pause) {
+    pauseField.setValue(pause ? "--" : ">>");
+    Hardware::hw.display.update();
+}
+
+void ClockDisplay::setSource(uint8_t source) {
+    sourceField.setValue(source == 0 ? "INT" : "EXT");
     Hardware::hw.display.update();
 }

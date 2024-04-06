@@ -12,7 +12,7 @@
 
 using namespace eurorack;
 
-class ClockController : public ParameterizedController<8>, public ClockedController {
+class ClockController : public ParameterizedController<9>, public ClockedController {
     public:
         enum Parameters {
             CLOCK1,
@@ -22,7 +22,13 @@ class ClockController : public ParameterizedController<8>, public ClockedControl
             CLOCK5,
             CLOCK6,
             CLOCK7,
-            CLOCK8
+            CLOCK8,
+            PAUSE
+        };
+
+        enum class State {
+            RUN,
+            PAUSE
         };
 
         ClockController() : ParameterizedController(), ClockedController() {}
