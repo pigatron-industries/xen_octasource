@@ -28,11 +28,13 @@ class FourierCircleController : public ParameterizedController<1>, public Clocke
         };
 
         ExpInput<AnalogInputSumPinT> expRateCvInput = ExpInput<AnalogInputSumPinT>(Hardware::hw.rateSumPin, 1, 2.5);
-        LinearInput<AnalogInputSumPinT> mainRadiusInput = LinearInput<AnalogInputSumPinT>(Hardware::hw.ampSumPin, -5, 5, 0, 4);
+        LinearInput<AnalogInputSumPinT> ampInput = LinearInput<AnalogInputSumPinT>(Hardware::hw.ampSumPin, -5, 5, 0, 1);
 
         FourierCircles fourierCircles;
         ClockDivider clockDivider = ClockDivider(SAMPLE_RATE_DIVISOR);
         uint8_t clockCount = 0;
+
+        float ampValue = 0;
         
         void updateRate();
         void updateParams();

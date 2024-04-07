@@ -8,8 +8,6 @@ order: 2
 * Apply an input CV applies an offset to the knob ranges. If knobs are at 12 o'clock then a -5V/+5V CV will be the same range as the knobs. Applying an offset will also allow the knob range to go higher or lower than normal.
 * Changing the range switch for most modes will just switch the output voltage range from -5V/+5V to 0V/10V. Some modes, such as clock and envelope modes will remain at 0V when idle, regardless of range switch position, but will alter the maximum voltage when triggered.
 
-## Modes
-
 Change the mode by holding down the encoder switch and turning clockwise or anticlockwise.
 
 ### 1. Phase Difference
@@ -78,31 +76,25 @@ Outputs:
 
 ---
 
-### 4. Clock Divider
+### 4. Clock Divider / Multiplier
 
-A clock source providing various subdivisions of an external or internal clock.
+A clock source providing various subdivisions and multiplications of an external or internal clock.
 If using internal clock, a clock distortion can be added to create different types of shuffle effects.
+
+Each output can be set individually using the left encoder. Push the encoder to change the output and rotate to set the division or multiplication.
 
 Inputs:
 * **SYNC**: External clock, an external clock signal should be autodetected and used instead of internal clock.
 * **WAVE**: Clock Distortion X Axis. Only applies to internal clock.
-* **RATE**: Rate of internally generated clock.
+* **RATE**: Rate of internally generated clock. If external clock is supplied then sets the multiplier or divider of that clock signal.
 * **PHASE**: Clock Distortion Y Axis. Only applies to internal clock.
+* **AMP**: The number of clock pulses the distortion is applied over.
 
 Outputs:
 * **OUTPUTS 1-8**: Divided clock signals.
 * **TRIG**: The internal clock, or external clock if one is plugged in.
 
-Submodes:
-1. Integer Divisions: 1, 2, 3, 4, 5, 6, 7, 8
-2. Even Divisions: 2, 4, 6, 8, 10, 12, 14, 16
-3. Odd Divisions: 3, 5, 7, 9, 11, 13, 15, 17
-4. Powers of 2: 2, 4, 8, 16, 32, 64, 128, 256
-5. Prime Number Divisions: 2, 3, 5, 7, 11, 13, 17, 19
-6. Fibonacci Sequence: 2, 3, 5, 8, 13, 21, 34, 55
-7. Divisions based on 24 PPQN: 3, 6, 8, 12, 24, 32, 48, 96
-
-The gate length of output gates will be based on the division of the previous output, allowing it to be used as accent CVs ans well as triggers.
+The gate length of output gates will be based on the division of the previous output, allowing it to be used as accent CVs as well as triggers.
 
 Clock divider outputs example
 
@@ -114,21 +106,6 @@ How altering clock distortion X and Y values can produce different types of shuf
 
 ---
 
-### 5. Clock Multiplier
-
-A clock source providing various multiplications of an external or internal clock.
-
-Inputs:
-* **SYNC**: External clock, an external clock signal should be autodetected and used instead of internal clock.
-* **WAVE**: 
-* **RATE**: Rate of internally generated clock. If a clock pulse is detected on the **SYNC** input then this acts as a frequency multiplier/divider instead. Clockwise multiplies, anti-clockwise divides.
-* **PHASE**: 
-
-Outputs:
-* **OUTPUTS 1-8**: Multiplied clock signals.
-* **TRIG**: The internal clock, or external clock if one is plugged in.
-
----
 
 ### 6. Sequential Envelope
 
@@ -180,7 +157,7 @@ Submodes:
 
 ### 8. Strange Attractor
 
-Various 3 dimensional strange attractors with threee outputs, one for each axis.
+Various 3 dimensional strange attractors with three outputs, one for each axis.
 
 Inputs:
 * **SYNC**: 

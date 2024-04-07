@@ -56,9 +56,9 @@ void FourierCircleController::updateRate() {
 }
 
 void FourierCircleController::updateParams() {
-    // if(largeRadiusInput.update() | smallRadiusInput.update()) {
-    //     fourierCircles.setRadiusLargeSmall(largeRadiusInput.getValue(), smallRadiusInput.getValue());
-    // }
+    if(ampInput.update()) {
+        ampValue = ampInput.getValue();
+    }
     
     // if(pointRadiusInput.update()) {
     //     float pointRadius = pointRadiusInput.getValue();
@@ -78,16 +78,16 @@ void FourierCircleController::process() {
         Array<CircleState, MAX_CIRCLES>& output = fourierCircles.getState();
 
         CircleState& lastCircle = output[fourierCircles.getNumCircles()-1];
-        Hardware::hw.cvOutputPins[0]->analogWrite(lastCircle.pos[X]);
-        Hardware::hw.cvOutputPins[1]->analogWrite(lastCircle.pos[Y]);
-        Hardware::hw.cvOutputPins[2]->analogWrite(lastCircle.pos.length());
-        Hardware::hw.cvOutputPins[3]->analogWrite(angle2d(lastCircle.pos));
-        Hardware::hw.cvOutputPins[4]->analogWrite(lastCircle.speed*0.1);
+        Hardware::hw.cvOutputPins[0]->analogWrite(lastCircle.pos[X]*ampValue);
+        Hardware::hw.cvOutputPins[1]->analogWrite(lastCircle.pos[Y]*ampValue);
+        Hardware::hw.cvOutputPins[2]->analogWrite(lastCircle.pos.length()*ampValue);
+        Hardware::hw.cvOutputPins[3]->analogWrite(angle2d(lastCircle.pos)*ampValue);
+        Hardware::hw.cvOutputPins[4]->analogWrite(lastCircle.speed*0.1*ampValue);
         Hardware::hw.cvOutputPins[5]->analogWrite(0); 
 
         // Serial.println(lastCircle.speed);
 
-        Hardware::hw.cvOutputPins[6]->analogWrite(output[clockCount].pos[X]);
-        Hardware::hw.cvOutputPins[7]->analogWrite(output[clockCount].pos[Y]);
+        Hardware::hw.cvOutputPins[6]->analogWrite(output[clockCount].pos[X]*ampValue);
+        Hardware::hw.cvOutputPins[7]->analogWrite(output[clockCount].pos[Y]*ampValue);
     }
 }
