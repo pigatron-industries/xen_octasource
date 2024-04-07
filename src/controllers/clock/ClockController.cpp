@@ -26,6 +26,8 @@ void ClockController::init(float sampleRate) {
         updateClock(i);
     }
 
+    display.setPause(parameters[Parameters::PAUSE].value == (uint8_t)State::PAUSE);
+
     init();
 }
 
