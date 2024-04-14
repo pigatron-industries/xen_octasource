@@ -5,7 +5,7 @@ order: 3
 
 ## Base Board
 
-1. Solder surface mount components onto base board. The components highlighted in red above do NOT need to be soldered.
+1. Solder surface mount components onto base board. The components highlighted in red below do NOT need to be soldered.
 
     {% include img.html src="images/octasource_mkii_baseboard_brd.drawio.png" height=1100 %}
 
