@@ -7,6 +7,14 @@ void FourierCircleController::init(float sampleRate) {
 }
 
 
+void FourierCircleController::init() {
+    Serial.println("Fourier");
+    Hardware::hw.display.textLine("FOURIER");
+    fourierCircles.init(sampleRate/SAMPLE_RATE_DIVISOR, NUM_CIRCLES);
+    randomizeCircles();
+}
+
+
 float randomf(float min, float max) {
     return min + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / (max - min)));
 }
@@ -25,15 +33,6 @@ Array<float, N> randomDivisions(float total) {
         arr[i] *= scale;
     }
     return arr;
-}
-
-
-
-void FourierCircleController::init() {
-    Serial.println("Fourier");
-    Hardware::hw.display.textLine("FOURIER");
-    fourierCircles.init(sampleRate/SAMPLE_RATE_DIVISOR, NUM_CIRCLES);
-    randomizeCircles();
 }
 
 
