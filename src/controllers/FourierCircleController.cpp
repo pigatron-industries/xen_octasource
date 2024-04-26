@@ -13,6 +13,7 @@ float randomf(float min, float max) {
 
 template<int N>
 Array<float, N> randomDivisions(float total) {
+    // Randomly dividion a totla length into N parts in a uniform distribution
     Array<float, N> arr;
     float sum = 0;
     for(int i = 0; i < N; i++) {
@@ -31,15 +32,20 @@ Array<float, N> randomDivisions(float total) {
 void FourierCircleController::init() {
     Serial.println("Fourier");
     Hardware::hw.display.textLine("FOURIER");
-    fourierCircles.init(sampleRate, NUM_CIRCLES);
+    fourierCircles.init(sampleRate/SAMPLE_RATE_DIVISOR, NUM_CIRCLES);
+    randomizeCircles();
+}
 
-    Array<float, NUM_CIRCLES> lengths = randomDivisions<NUM_CIRCLES>(4);
+
+void FourierCircleController::randomizeCircles() {
+    Array<float, NUM_CIRCLES> lengths = randomDivisions<NUM_CIRCLES>(MAX_OUTPUT);
     for (int i = 0; i < NUM_CIRCLES; i++) {
-        fourierCircles.setCircleRadiusFrequency(i, lengths[i], randomf(0.25, 4));
+        fourierCircles.setCircleRadiusFrequency(i, lengths[i], randomf(MIN_CIRCLE_FREQEUENCY, MAX_CIRCLE_FREQUENCY));
     }
 
     updateParams();
 }
+
 
 void FourierCircleController::update() {
     clock.setFrequency(200);
@@ -82,7 +88,7 @@ void FourierCircleController::process() {
         Hardware::hw.cvOutputPins[1]->analogWrite(lastCircle.pos[Y]*ampValue);
         Hardware::hw.cvOutputPins[2]->analogWrite(lastCircle.pos.length()*ampValue);
         Hardware::hw.cvOutputPins[3]->analogWrite(angle2d(lastCircle.pos)*ampValue);
-        Hardware::hw.cvOutputPins[4]->analogWrite(lastCircle.speed*0.1*ampValue);
+        Hardware::hw.cvOutputPins[4]->analogWrite(lastCircle.speed*0.05*ampValue);
         Hardware::hw.cvOutputPins[5]->analogWrite(0); 
 
         // Serial.println(lastCircle.speed);

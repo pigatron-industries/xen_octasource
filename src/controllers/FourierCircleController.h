@@ -7,8 +7,12 @@
 #include "controllers/clock/ClockedController.h"
 #include <eurorack_dsp.h>
 
-#define NUM_CIRCLES 3
-#define SAMPLE_RATE_DIVISOR 2
+#define NUM_CIRCLES 7
+#define MIN_CIRCLE_FREQEUENCY 0.25
+#define MAX_CIRCLE_FREQUENCY 4
+#define MAX_OUTPUT 5
+
+#define SAMPLE_RATE_DIVISOR 4
 
 class FourierCircleController : public ParameterizedController<1>, public ClockedController {
     public:
@@ -36,6 +40,7 @@ class FourierCircleController : public ParameterizedController<1>, public Clocke
 
         float ampValue = 0;
         
+        void randomizeCircles();
         void updateRate();
         void updateParams();
 };

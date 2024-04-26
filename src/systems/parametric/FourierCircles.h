@@ -5,7 +5,7 @@
 #include "ParametricSystem.h"
 #include "math.h"
 
-#define MAX_CIRCLES 5
+#define MAX_CIRCLES 7
 
 class CircleState {
     public:
@@ -14,8 +14,8 @@ class CircleState {
 
         float radius = 1;
         float frequency = 1;
-
         float angleIncrement = 0;
+
         float angle = 0;
 
         float speed = 0;
