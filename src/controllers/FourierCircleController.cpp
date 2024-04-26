@@ -83,15 +83,16 @@ void FourierCircleController::process() {
         fourierCircles.process();
         Array<CircleState, MAX_CIRCLES>& output = fourierCircles.getState();
 
-        CircleState& lastCircle = output[fourierCircles.getNumCircles()-1];
-        Hardware::hw.cvOutputPins[0]->analogWrite(lastCircle.pos[X]*ampValue);
-        Hardware::hw.cvOutputPins[1]->analogWrite(lastCircle.pos[Y]*ampValue);
-        Hardware::hw.cvOutputPins[2]->analogWrite(lastCircle.pos.length()*ampValue);
-        Hardware::hw.cvOutputPins[3]->analogWrite(angle2d(lastCircle.pos)*ampValue);
-        Hardware::hw.cvOutputPins[4]->analogWrite(lastCircle.speed*0.05*ampValue);
-        Hardware::hw.cvOutputPins[5]->analogWrite(0); 
+        CircleState& circle1 = output[fourierCircles.getNumCircles()-1];
+        CircleState& circle2 = output[fourierCircles.getNumCircles()-2];
+        CircleState& circle3 = output[fourierCircles.getNumCircles()-3];
 
-        // Serial.println(lastCircle.speed);
+        Hardware::hw.cvOutputPins[0]->analogWrite(circle1.pos.length()*ampValue);
+        Hardware::hw.cvOutputPins[1]->analogWrite(circle2.pos.length()*ampValue);
+        Hardware::hw.cvOutputPins[2]->analogWrite(circle3.pos.length()*ampValue); 
+        Hardware::hw.cvOutputPins[3]->analogWrite(angle2d(circle1.pos)*ampValue);
+        Hardware::hw.cvOutputPins[4]->analogWrite(circle1.speed*0.05*ampValue);
+        Hardware::hw.cvOutputPins[5]->analogWrite(circle2.speed*0.05*ampValue); 
 
         Hardware::hw.cvOutputPins[6]->analogWrite(output[clockCount].pos[X]*ampValue);
         Hardware::hw.cvOutputPins[7]->analogWrite(output[clockCount].pos[Y]*ampValue);
