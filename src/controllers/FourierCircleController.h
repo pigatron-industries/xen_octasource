@@ -8,8 +8,8 @@
 #include <eurorack_dsp.h>
 
 #define NUM_CIRCLES 7
-#define MIN_CIRCLE_FREQEUENCY 0.25
-#define MAX_CIRCLE_FREQUENCY 4
+#define MIN_CIRCLE_FREQEUENCY 0.125
+#define MAX_CIRCLE_FREQUENCY 8
 #define MAX_OUTPUT 5
 
 #define SAMPLE_RATE_DIVISOR 4
