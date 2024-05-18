@@ -56,8 +56,6 @@ void ThreeBody::process() {
     }
     for(int i = 0; i < BODIES; i++) {
         bodies[i].updatePosition(dt);
-        // bodies[i].velocity += bodies[i].acceleration * dt;
-        // bodies[i].position += bodies[i].velocity * dt;
     }
 
     if(driftCorrection) {
