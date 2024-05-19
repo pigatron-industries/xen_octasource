@@ -20,7 +20,6 @@ class ThreeBody : public ContinuousSystemN<6> {
 
         void init(float sampleRate);
         void setBodies(const Array<Body, BODIES>& bodies);
-        void setParam(int param, float value);
         void setLimit(float limit) { this->limit = limit; };
         void setDriftCorrection(bool driftCorrection) { this->driftCorrection = driftCorrection; };
         void setEdgeMode(EdgeMode edgeMode) { this->edgeMode = edgeMode; };

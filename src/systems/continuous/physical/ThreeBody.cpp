@@ -38,18 +38,6 @@ void ThreeBody::setBodies(const Array<Body, BODIES>& bodies) {
     setOutputs();
 }
 
-void ThreeBody::setParam(int param, float value) {
-    // switch(param) {
-    //     case 0:
-    //         p2.mass = value*2 + 0.2;
-    //         break;
-    //     case 1:
-    //         p1.length = value*4;
-    //         p2.length = 4-value*4;
-    //         break;
-    // }
-}
-
 void ThreeBody::process() {
     for(int i = 0; i < BODIES; i++) {
         calculateAcceleration(i);
