@@ -6,7 +6,7 @@
 #include "ClockDisplay.h"
 #include <eurorack_dsp.h>
 
-#define NUM_DIVIDERS 64
+#define NUM_DIVIDERS 63
 #define NUM_MULTIPLIERS 15
 #define MULIPLIER_BASE 16
 
@@ -65,6 +65,17 @@ class ClockController : public ParameterizedController<9>, public ClockedControl
             AnalogTriggerOutput<AnalogOutputDeviceT>(*Hardware::hw.cvOutputPins[5], 50000),
             AnalogTriggerOutput<AnalogOutputDeviceT>(*Hardware::hw.cvOutputPins[6], 50000),
             AnalogTriggerOutput<AnalogOutputDeviceT>(*Hardware::hw.cvOutputPins[7], 50000)
+        };
+
+        AnalogGateOutput<AnalogOutputDeviceT> gateOutputs[8] = {
+            AnalogGateOutput<AnalogOutputDeviceT>(*Hardware::hw.cvOutputPins[0]),
+            AnalogGateOutput<AnalogOutputDeviceT>(*Hardware::hw.cvOutputPins[1]),
+            AnalogGateOutput<AnalogOutputDeviceT>(*Hardware::hw.cvOutputPins[2]),
+            AnalogGateOutput<AnalogOutputDeviceT>(*Hardware::hw.cvOutputPins[3]),
+            AnalogGateOutput<AnalogOutputDeviceT>(*Hardware::hw.cvOutputPins[4]),
+            AnalogGateOutput<AnalogOutputDeviceT>(*Hardware::hw.cvOutputPins[5]),
+            AnalogGateOutput<AnalogOutputDeviceT>(*Hardware::hw.cvOutputPins[6]),
+            AnalogGateOutput<AnalogOutputDeviceT>(*Hardware::hw.cvOutputPins[7])
         };
 
         GateInput<> rangeInput = GateInput<>(Hardware::hw.rangeSwitchPin, false);

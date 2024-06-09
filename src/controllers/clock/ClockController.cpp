@@ -1,7 +1,7 @@
 #include "ClockController.h"
 #include "common/Controls.h"
 
-#define MAX_CLOCK_VALUE 30
+#define MAX_CLOCK_VALUE NUM_MULTIPLIERS + NUM_DIVIDERS // 15 Multipliers + 15 Dividers
 #define DEFAULT_CLOCK_VALUE 15  // 15 = "/1" or unison
 #define LOWEST_MULTIPLIER_DIVIDER 2
 
@@ -17,8 +17,11 @@ void ClockController::init(float sampleRate) {
     display.focusClock(0);
     clock.setLength(2);
 
-    for(int i = 0; i < 15; i++) {
+    for(int i = 0; i < NUM_MULTIPLIERS; i++) {
         clockMultipliers[i].init(sampleRate);
+    }
+
+    for(int i = 0; i < NUM_DIVIDERS; i++) {
         clockDividers[i].setDivisor(i+2);
     }
 
@@ -34,7 +37,7 @@ void ClockController::init(float sampleRate) {
 void ClockController::init() {
     Serial.println("Clock");
     display.render();
-    for(int i = 0; i < 15; i++) {
+    for(int i = 0; i < NUM_DIVIDERS; i++) {
         clockDividers[i].reset();
     }
 }
@@ -125,10 +128,11 @@ void ClockController::process() {
         if(isMultiplier(i)) {
             uint8_t multiplierIndex = getMultiplier(i) - LOWEST_MULTIPLIER_DIVIDER;
             if(triggers[multiplierIndex]) {
-                triggerOutputs[i].trigger();
+                // triggerOutputs[i].trigger();
+                gateOutputs[i].gate(!gateOutputs[i].getGate());
             }
         }
-        triggerOutputs[i].update();
+        // triggerOutputs[i].update();
     }
 }
 
@@ -147,13 +151,19 @@ void ClockController::onClock() {
     for(int i = 0; i < 8; i++) {
         uint8_t dividerIndex = getDivider(i) - LOWEST_MULTIPLIER_DIVIDER;
         if(isDivider(i) && clockDividers[dividerIndex].getTrigger()) {
-            triggerOutputs[i].trigger();
+            // divider and divider is triggering this clock cycle
+            // triggerOutputs[i].trigger();
+            gateOutputs[i].gate(!gateOutputs[i].getGate());
         }
         if(!isDivider(i) && !isMultiplier(i)) {
-            triggerOutputs[i].trigger();
+            // base clock
+            // triggerOutputs[i].trigger();
+            gateOutputs[i].gate(!gateOutputs[i].getGate());
         }
         if(isMultiplier(i) && clock.getCurrentTick() == 0) {
-            triggerOutputs[i].trigger();
+            // reset multipliers on first tick
+            // triggerOutputs[i].trigger();
+            gateOutputs[i].gate(!gateOutputs[i].getGate());
         }
     }
 
