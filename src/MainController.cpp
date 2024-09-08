@@ -39,6 +39,9 @@ void MainController::controllerInit() {
     #endif
 
     Hardware::hw.display.clear();
+    for (size_t i = 0; i < OUTPUTS; i++) {
+        Hardware::hw.cvOutputPins[0]->analogWrite(0);
+    }
 
     if(controllers.getSelected()->getSampleRate() > 0) {
         controllers.getSelected()->init();
